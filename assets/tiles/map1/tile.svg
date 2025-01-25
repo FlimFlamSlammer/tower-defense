@@ -2,14 +2,14 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="768"
-   height="255.99998"
-   viewBox="0 0 203.20001 67.733331"
+   width="768.00006"
+   height="256"
+   viewBox="0 0 203.20003 67.733335"
    version="1.1"
    id="svg5"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    sodipodi:docname="tile.svg"
-   inkscape:export-filename="tile.svg"
+   inkscape:export-filename="../tiles/map1/tile.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -27,9 +27,9 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="px"
      showgrid="true"
-     inkscape:zoom="2.56"
-     inkscape:cx="551.75781"
-     inkscape:cy="87.890625"
+     inkscape:zoom="1.28"
+     inkscape:cx="435.54687"
+     inkscape:cy="170.3125"
      inkscape:window-width="1920"
      inkscape:window-height="1011"
      inkscape:window-x="0"
@@ -42,8 +42,9 @@
        id="grid2632"
        snapvisiblegridlinesonly="true"
        dotted="false"
-       spacingx="0.26458333"
-       empspacing="8" />
+       spacingx="1.0583334"
+       empspacing="4"
+       spacingy="1.0583334" />
   </sodipodi:namedview>
   <defs
      id="defs2" />
@@ -51,7 +52,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0.27069013,0.27069013)">
+     transform="translate(0.27069013,0.27069084)">
     <rect
        style="fill:#1a1a1a;stroke:#ffffff;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
        id="rect111"
@@ -85,7 +86,23 @@
        id="rect967-6"
        width="67.204163"
        height="67.204163"
-       x="67.727226"
-       y="-0.0061064917" />
+       x="67.727234"
+       y="-0.006102629" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 143.66265,-0.27069013 160.59599,16.662644 v 8.466667 h -8.46667 L 135.19598,8.195977 v -8.46666713 h 8.46667"
+       id="path968" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 185.99599,42.062646 16.93334,16.933334 v 8.466667 h -8.46667 L 177.52932,50.529313 v -8.466667 h 8.46667"
+       id="path968-3" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 194.46265,-0.27068983 177.52932,16.662644 v 8.466667 h 8.46667 L 202.92932,8.1959772 v -8.46666703 h -8.46667"
+       id="path968-3-6" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 152.12932,42.062646 135.19599,58.99598 v 8.466667 h 8.46667 l 16.93333,-16.933334 v -8.466667 h -8.46667"
+       id="path968-3-6-7" />
   </g>
 </svg>

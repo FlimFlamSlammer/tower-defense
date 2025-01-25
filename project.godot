@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="Tower Defense"
+run/main_scene="res://scenes/maps/map1.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[debug]
+
+gdscript/warnings/unused_variable=0
+gdscript/warnings/integer_division=0
 
 [display]
 

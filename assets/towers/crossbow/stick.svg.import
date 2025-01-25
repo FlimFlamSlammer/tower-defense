@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0ygf51v10dav"
-path="res://.godot/imported/tile_enemy.svg-1fd2617f0a61d69939255ce8c96326c0.ctex"
+uid="uid://c4ibb42n6xcku"
+path="res://.godot/imported/stick.svg-f9f988966e514e70756d68ce4f9b84bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/raw/tile_enemy.svg"
-dest_files=["res://.godot/imported/tile_enemy.svg-1fd2617f0a61d69939255ce8c96326c0.ctex"]
+source_file="res://assets/towers/crossbow/stick.svg"
+dest_files=["res://.godot/imported/stick.svg-f9f988966e514e70756d68ce4f9b84bc.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="768"
+   height="255.99998"
+   viewBox="0 0 203.20001 67.733331"
    version="1.1"
    id="svg5"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    sodipodi:docname="tile.svg"
    inkscape:export-filename="../tiles/map1/tile.svg"
-   inkscape:export-xdpi="95.255829"
-   inkscape:export-ydpi="95.255829"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,29 +25,84 @@
      inkscape:pageopacity="0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
-     inkscape:document-units="mm"
-     showgrid="false"
-     inkscape:zoom="1.8331845"
-     inkscape:cx="146.46644"
-     inkscape:cy="169.65014"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="1.28"
+     inkscape:cx="435.54687"
+     inkscape:cy="170.3125"
      inkscape:window-width="1920"
      inkscape:window-height="1011"
      inkscape:window-x="0"
      inkscape:window-y="32"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="layer1"
+     inkscape:lockguides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2632"
+       snapvisiblegridlinesonly="true"
+       dotted="false"
+       spacingx="1.0583334"
+       empspacing="4"
+       spacingy="1.0583334" />
+  </sodipodi:namedview>
   <defs
      id="defs2" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(0.27069013,0.27069013)">
     <rect
-       style="fill:#1a1a1a;stroke:#ffffff;stroke-width:0.52916667;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#1a1a1a;stroke:#ffffff;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
        id="rect111"
-       width="67.73333"
-       height="67.73333"
-       x="-0.0061066309"
-       y="-0.0061066309" />
+       width="67.204163"
+       height="67.204163"
+       x="-0.0061066346"
+       y="-0.0061066346" />
+    <rect
+       style="fill:#1a1a1a;stroke:#ffffff;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
+       id="rect965"
+       width="67.204163"
+       height="67.204163"
+       x="-0.0061066346"
+       y="-0.0061066346" />
+    <rect
+       style="fill:#1a1a1a;stroke:#ffffff;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
+       id="rect967"
+       width="67.204163"
+       height="67.204163"
+       x="-0.0061066346"
+       y="-0.0061066346" />
+    <rect
+       style="fill:#1a1a1a;stroke:#ffffff;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
+       id="rect967-7"
+       width="67.204163"
+       height="67.204163"
+       x="135.46056"
+       y="-0.0061064917" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#1a1a1a;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
+       id="rect967-6"
+       width="67.204163"
+       height="67.204163"
+       x="67.727234"
+       y="-0.006102629" />
+    <path
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;stroke-dasharray:none"
+       d="M 143.66265,-0.27069013 160.59599,16.662644 v 8.466667 h -8.46667 L 135.19598,8.195977 v -8.46666713 h 8.46667"
+       id="path968" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 185.99599,42.062646 16.93334,16.933334 v 8.466667 h -8.46667 L 177.52932,50.529313 v -8.466667 h 8.46667"
+       id="path968-3" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 194.46265,-0.27068983 177.52932,16.662644 v 8.466667 h 8.46667 L 202.92932,8.1959772 v -8.46666703 h -8.46667"
+       id="path968-3-6" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 152.12932,42.062646 135.19599,58.99598 v 8.466667 h 8.46667 l 16.93333,-16.933334 v -8.466667 h -8.46667"
+       id="path968-3-6-7" />
   </g>
 </svg>
