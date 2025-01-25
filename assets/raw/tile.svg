@@ -7,7 +7,7 @@
    viewBox="0 0 203.20001 67.733331"
    version="1.1"
    id="svg5"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
    sodipodi:docname="tile.svg"
    inkscape:export-filename="../tiles/map1/tile.svg"
    inkscape:export-xdpi="96"
@@ -28,12 +28,12 @@
      inkscape:document-units="px"
      showgrid="true"
      inkscape:zoom="1.28"
-     inkscape:cx="435.54687"
-     inkscape:cy="170.3125"
+     inkscape:cx="795.70312"
+     inkscape:cy="108.20312"
      inkscape:window-width="1920"
-     inkscape:window-height="1011"
-     inkscape:window-x="0"
-     inkscape:window-y="32"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      inkscape:lockguides="false">
@@ -44,7 +44,10 @@
        dotted="false"
        spacingx="1.0583334"
        empspacing="4"
-       spacingy="1.0583334" />
+       spacingy="1.0583334"
+       originx="0"
+       originy="0"
+       units="px" />
   </sodipodi:namedview>
   <defs
      id="defs2" />
@@ -82,12 +85,26 @@
        x="135.46056"
        y="-0.0061064917" />
     <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:#1a1a1a;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffffff;fill-opacity:1;stroke:#1a1a1a;stroke-width:0.529167;stroke-dasharray:0, 5.82083;stroke-dashoffset:0;stroke-opacity:1"
        id="rect967-6"
-       width="67.204163"
-       height="67.204163"
-       x="67.727234"
-       y="-0.006102629" />
+       width="67.733337"
+       height="67.733337"
+       x="67.462646"
+       y="-0.27068973" />
+    <rect
+       style="fill:#00ff00;fill-opacity:1;stroke:#1a1a1a;stroke-width:0.529167;stroke-dasharray:0, 5.82083;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect967-6-0"
+       width="67.733337"
+       height="67.733337"
+       x="202.92931"
+       y="-0.2706939" />
+    <rect
+       style="fill:#ff0000;fill-opacity:1;stroke:#1a1a1a;stroke-width:0.529167;stroke-dasharray:0, 5.82083;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect967-6-0-9"
+       width="67.733337"
+       height="67.733337"
+       x="270.66266"
+       y="-0.27068973" />
     <path
        style="fill:#ffffff;stroke:#ffffff;stroke-width:0;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;stroke-dasharray:none"
        d="M 143.66265,-0.27069013 160.59599,16.662644 v 8.466667 h -8.46667 L 135.19598,8.195977 v -8.46666713 h 8.46667"
