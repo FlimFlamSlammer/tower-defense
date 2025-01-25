@@ -2,11 +2,19 @@ extends TileMapLayer
 
 @export var first_tile: Vector2i
 @export var last_tile: Vector2i
+@export var arrow_tile_map: TileMapLayer
 
-var tiles := TileMatrix.new(first_tile, last_tile)
-
+var tiles: TileMatrix
 var start_tile: Vector2i
 var finish_tile: Vector2i
+
+func _ready() -> void:
+	tiles = TileMatrix.new(first_tile, last_tile)
+	var map_data: Dictionary = tiles.load_map(self)
+	start_tile = map_data.start
+	finish_tile = map_data.finish
+	update_paths()
+
 
 func can_place_wall(pos: Vector2i, south: bool) -> bool:
 	var tile := tiles.get_tile(pos) as PathTile
@@ -68,10 +76,9 @@ func update_paths() -> void:
 	for y: int in range(first_tile.y, last_tile.y):
 		for x: int in range(first_tile.x, last_tile.x):
 			var tile := tiles.get_tile(Vector2i(x, y)) as PathTile
-			if not tile:
-				continue
+			if not tile: continue
 
-			tile.reset_pathfinding_data()
+			# tile.reset_pathfinding_data()
 
 	var visited: Dictionary
 	var pq := PriorityQueue.new(
@@ -84,28 +91,49 @@ func update_paths() -> void:
 	visited[finish_tile] = true
 
 	while pq.size():
-		var pos: Vector2i = pq.top()[0]
+		var data = pq.top()
+		pq.pop()
 
-		var tile := tiles.get_tile(pos) as PathTile
+		_push_pathfinding_data(visited, pq, data, Vector2i.UP)
+		_push_pathfinding_data(visited, pq, data, Vector2i.DOWN)
+		_push_pathfinding_data(visited, pq, data, Vector2i.LEFT)
+		_push_pathfinding_data(visited, pq, data, Vector2i.RIGHT)
 
-		_push_pathfinding_data(visited, pq, pq.top(), Vector2i.UP)
 
-		
 func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array, offset: Vector2i) -> void:
 	var new_data: Array = []
 	new_data.resize(3)
 
 	new_data[0] = data[0] + offset
 
-	if visited.has(new_data[0]):
-		return
+	if visited.has(new_data[0]): return
 	
 	var new_tile := tiles.get_tile(new_data[0]) as PathTile
 	if not new_tile:
 		return
+
+	var origin_tile := tiles.get_tile(data[0]) as PathTile
+
+	if (
+		(offset.x < 0 and new_tile.east_wall)
+		or (offset.y < 0 and new_tile.south_wall)
+		or (offset.x > 0 and origin_tile.east_wall)
+		or (offset.y > 0 and origin_tile.south_wall)
+	): return
 
 	new_data[1] = data[1] + new_tile.danger_level
 	new_data[2] = data[2] + 1
 
 	pq.push(new_data)
 	visited[new_data[0]] = true
+
+	new_tile.next_path = data[0]
+	
+	# debug arrows
+	var atlas_coords: Dictionary
+	atlas_coords[Vector2i.LEFT] = Vector2i(0, 0)
+	atlas_coords[Vector2i.DOWN] = Vector2i(1, 0)
+	atlas_coords[Vector2i.RIGHT] = Vector2i(2, 0)
+	atlas_coords[Vector2i.UP] = Vector2i(3, 0)
+
+	arrow_tile_map.set_cell(new_data[0], 0, atlas_coords[offset])

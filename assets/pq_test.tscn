@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccvy57i4ajwdv"]
+
+[ext_resource type="Script" path="res://scripts/pq_test.gd" id="1_f1qk5"]
+
+[node name="PQTest" type="Node"]
+script = ExtResource("1_f1qk5")
