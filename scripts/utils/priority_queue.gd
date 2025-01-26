@@ -20,7 +20,7 @@ func top():
 
 func push(value) -> void:
 	_pq.push_back(value)
-	
+
 	var index: int = _pq.size() - 1
 	var parent_index: int = (index - 1) / 2
 
@@ -28,7 +28,7 @@ func push(value) -> void:
 		var temp = _pq[parent_index]
 		_pq[parent_index] = _pq[index]
 		_pq[index] = temp
-		
+
 		index = parent_index
 		parent_index = (index - 1) / 2
 
