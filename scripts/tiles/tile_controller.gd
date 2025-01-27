@@ -4,16 +4,22 @@ extends TileMapLayer
 @export var last_tile: Vector2i
 @export var arrow_tile_map: TileMapLayer
 
-var tiles: TileMatrix
 var start_tile: Vector2i
 var finish_tile: Vector2i
 
+@onready var tiles := TileMatrix.new(first_tile, last_tile)
+
 func _ready() -> void:
-	tiles = TileMatrix.new(first_tile, last_tile)
 	var map_data: Dictionary = tiles.load_map(self)
 	start_tile = map_data.start
 	finish_tile = map_data.finish
+
 	update_paths()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("click"):
+		var tower: PackedScene = preload("res://scenes/towers/crossbow.tscn")
 
 
 func can_place_wall(pos: Vector2i, south: bool) -> bool:
@@ -71,15 +77,33 @@ func remove_wall(pos: Vector2i, south: bool) -> bool:
 	return true
 
 
+func can_place_tower(pos: Vector2i) -> bool:
+	var tile := tiles.get_tile(pos) as TowerTile
+	return tile and not tile.tower
+
+
+func place_tower(pos: Vector2i, tower: Tower) -> bool:
+	if not can_place_tower(pos):
+		return false
+	
+	var tile := tiles.get_tile(pos) as TowerTile
+	tile.tower = tower
+	tower.modify_tower(true)
+
+	return true
+
+
+func remove_tower(pos: Vector2i) -> bool:
+	var tile := tiles.get_tile(pos) as TowerTile
+	if tile and tile.tower:
+		tile.tower.queue_free()
+		tile.tower = null
+		update_paths()
+		return true
+	return false
+
+
 func update_paths() -> void:
-	# reset pathfinding data
-	for y: int in range(first_tile.y, last_tile.y):
-		for x: int in range(first_tile.x, last_tile.x):
-			var tile := tiles.get_tile(Vector2i(x, y)) as PathTile
-			if not tile: continue
-
-			# tile.reset_pathfinding_data()
-
 	var visited: Dictionary
 	var pq := PriorityQueue.new(
 		func compare(a: Array, b: Array) -> bool:
