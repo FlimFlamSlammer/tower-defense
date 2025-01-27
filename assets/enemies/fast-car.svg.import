@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bts3yqqimgg6b"
-path="res://.godot/imported/fast-car.svg-be49daa4cdcd673e93f677d095b74dca.ctex"
+path="res://.godot/imported/fast-car.svg-a0935bc1ad4426785e3d146762901f13.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemy/fast-car.svg"
-dest_files=["res://.godot/imported/fast-car.svg-be49daa4cdcd673e93f677d095b74dca.ctex"]
+source_file="res://assets/enemies/fast-car.svg"
+dest_files=["res://.godot/imported/fast-car.svg-a0935bc1ad4426785e3d146762901f13.ctex"]
 
 [params]
 

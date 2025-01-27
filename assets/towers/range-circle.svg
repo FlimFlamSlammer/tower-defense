@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="255.99998"
-   height="255.99998"
-   viewBox="0 0 67.733328 67.733329"
+   width="272"
+   height="272"
+   viewBox="0 0 71.966665 71.966666"
    version="1.1"
    id="svg1"
    xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,8 @@
   <defs
      id="defs1" />
   <g
-     id="layer1">
+     id="layer1"
+     transform="translate(2.1166666,2.1166668)">
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke:#9a9a9a;stroke-width:0;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path1"
