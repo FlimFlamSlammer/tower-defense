@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bolphubyb6fu1"]
+
+[ext_resource type="PackedScene" uid="uid://uy78f1v0v425" path="res://scenes/towers/tower.tscn" id="1_kushb"]
+
+[node name="ShootingTower" instance=ExtResource("1_kushb")]
+
+[node name="Pivot" type="Node2D" parent="." index="3"]

@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://l6rhoi3yb5xc"]
+[gd_scene load_steps=7 format=3 uid="uid://l6rhoi3yb5xc"]
 
-[ext_resource type="Script" path="res://scripts/towers/tower.gd" id="1_t3h6e"]
-[ext_resource type="Texture2D" uid="uid://ljp4dn3u2ula" path="res://assets/towers/crossbow/base.svg" id="1_umq8q"]
+[ext_resource type="PackedScene" uid="uid://bolphubyb6fu1" path="res://scenes/towers/shooting_tower.tscn" id="1_tu6oy"]
 [ext_resource type="Texture2D" uid="uid://c4ibb42n6xcku" path="res://assets/towers/crossbow/stick.svg" id="2_pxhyc"]
 [ext_resource type="Texture2D" uid="uid://b2mycprwwctbb" path="res://assets/towers/crossbow/frame.svg" id="3_g528v"]
 
-[sub_resource type="Animation" id="Animation_s5r7u"]
+[sub_resource type="Animation" id="Animation_2l0pa"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -32,7 +31,7 @@ tracks/1/keys = {
 "values": [PackedVector2Array(8, 88, 0, 100, -8, 88)]
 }
 
-[sub_resource type="Animation" id="Animation_g3yxd"]
+[sub_resource type="Animation" id="Animation_ldsdy"]
 resource_name = "fire"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -59,32 +58,23 @@ tracks/1/keys = {
 "values": [PackedVector2Array(8, 88, 0, 100, -8, 88), PackedVector2Array(-8, -32, 0, -32, 8, -32), PackedVector2Array(-8, -32, 0, -32, 8, -32), PackedVector2Array(8, 88, 0, 100, -8, 88)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_713y7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kcqc"]
 _data = {
-"RESET": SubResource("Animation_s5r7u"),
-"fire": SubResource("Animation_g3yxd")
+"RESET": SubResource("Animation_2l0pa"),
+"fire": SubResource("Animation_ldsdy")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5usbx"]
-radius = 128.0
+[node name="Crossbow" instance=ExtResource("1_tu6oy")]
 
-[node name="Crossbow" type="Node2D"]
-script = ExtResource("1_t3h6e")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="CustomAnimations" type="AnimationPlayer" parent="." index="0"]
 libraries = {
-"": SubResource("AnimationLibrary_713y7")
+"": SubResource("AnimationLibrary_2kcqc")
 }
 
-[node name="Base" type="Sprite2D" parent="."]
-texture = ExtResource("1_umq8q")
-
-[node name="Pivot" type="Node2D" parent="."]
-
-[node name="Stick" type="Sprite2D" parent="Pivot"]
+[node name="Stick" type="Sprite2D" parent="Pivot" index="0"]
 texture = ExtResource("2_pxhyc")
 
-[node name="String" type="Line2D" parent="Pivot"]
+[node name="String" type="Line2D" parent="Pivot" index="1"]
 points = PackedVector2Array(-88, -32, 0, 100, 88, -32)
 width = 4.0
 default_color = Color(0.851076, 0.75177, 0.882812, 1)
@@ -92,7 +82,7 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="StringPad" type="Line2D" parent="Pivot"]
+[node name="StringPad" type="Line2D" parent="Pivot" index="2"]
 points = PackedVector2Array(8, 88, 0, 100, -8, 88)
 width = 6.0
 default_color = Color(0.381964, 0.25708, 0.421875, 1)
@@ -100,16 +90,6 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Frame" type="Sprite2D" parent="Pivot"]
+[node name="Frame" type="Sprite2D" parent="Pivot" index="3"]
 position = Vector2(0, -64)
 texture = ExtResource("3_g528v")
-
-[node name="RangeIndicator" type="Node2D" parent="."]
-
-[node name="RangeIndicatorSprite" type="Sprite2D" parent="RangeIndicator"]
-
-[node name="RangeArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
-visible = false
-shape = SubResource("CircleShape2D_5usbx")
