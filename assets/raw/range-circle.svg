@@ -55,10 +55,10 @@
      inkscape:groupmode="layer"
      id="layer1">
     <circle
-       style="fill:#4d4d4d;stroke:#9a9a9a;stroke-width:1.05833;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;fill-opacity:1"
+       style="fill:#4d4d4d;fill-opacity:1;stroke:#9a9a9a;stroke-width:0;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path1"
-       cx="33.858402"
-       cy="33.858391"
-       r="33.337502" />
+       cx="33.866665"
+       cy="33.866665"
+       r="33.866665" />
   </g>
 </svg>
