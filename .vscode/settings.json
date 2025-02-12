@@ -1,3 +1,5 @@
 {
-  "godotTools.editorPath.godot4": "c:\\Users\\DELL\\Desktop\\Godot_v4.3-stable_win64.exe\\Godot_v4.3-stable_win64.exe"
+	"editor.insertSpaces": false,
+	"prettier.tabWidth": 4,
+	"prettier.useTabs": true
 }
