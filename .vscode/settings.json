@@ -1,3 +1,6 @@
 {
-  "godotTools.editorPath.godot4": "/home/lionel/.local/bin/godot"
+    "godotTools.editorPath.godot4": "/home/lionel/.local/bin/godot",
+    "editor.insertSpaces": false,
+    "prettier.tabWidth": 4,
+    "prettier.useTabs": true
 }
