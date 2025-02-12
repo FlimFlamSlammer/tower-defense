@@ -4,9 +4,9 @@ extends Node2D
 signal tower_modified()
 signal update_paths()
 
-enum POSS_TGT_OPTS {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
+enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
-@export var targeting_options: Array[POSS_TGT_OPTS] = [POSS_TGT_OPTS.FIRST, POSS_TGT_OPTS.LAST, POSS_TGT_OPTS.CLOSE, POSS_TGT_OPTS.FAR, POSS_TGT_OPTS.STRONG, POSS_TGT_OPTS.WEAK]
+@export var targeting_options: Array[Targeting] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
 @export var stats: Dictionary = {
 	"range" = 4.0,
 	"damage" = 1.0,
@@ -19,11 +19,14 @@ var targeting: int
 var current_upgrade: Array[int] = [0, 0]
 
 @onready var _range_indicator: Node2D = $RangeIndicator
+@onready var _range_area: Area2D = $RangeArea
 @onready var _upgrades: Node = $Upgrades
+@onready var _custom_animations: AnimationPlayer = $CustomAnimations
+@onready var _base_animations: AnimationPlayer = $BaseAnimations
 
 ## Updates tower visuals and behaviour to match its stats. If param is true, recalculates pathfinding data.
 func modify_tower(p_update_paths: bool) -> void:
-	_range_indicator.scale = Vector2(stats.range, stats.range)
+	_range_indicator.scale = Vector2.ONE * stats.range
 	tower_modified.emit()
 
 	if p_update_paths:
@@ -47,3 +50,27 @@ func upgrade_tower(path: int) -> int:
 	modify_tower(true)
 
 	return upgrade.cost
+
+
+func enemy_in_range(p_range: float) -> bool:
+	_range_area.scale = Vector2.ONE * p_range
+	return _range_area.has_overlapping_areas()
+
+
+func enter_preview_mode() -> void:
+	_base_animations.play("show_range")
+	_base_animations.advance(_base_animations.current_animation_length)
+
+	process_mode = PROCESS_MODE_DISABLED
+	
+
+func set_display_invalid() -> void:
+	modulate = Color(1.0, 0.1, 0.1)
+
+
+func set_display_valid() -> void:
+	modulate = Color(1.0, 1.0, 1.0)
+
+
+func exit_preview_mode() -> void:
+	process_mode = PROCESS_MODE_INHERIT

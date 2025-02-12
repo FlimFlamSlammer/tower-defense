@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://uy78f1v0v425"]
+[gd_scene load_steps=11 format=3 uid="uid://uy78f1v0v425"]
 
+[ext_resource type="Script" path="res://scripts/towers/tower.gd" id="1_0jldc"]
 [ext_resource type="Texture2D" uid="uid://ljp4dn3u2ula" path="res://assets/towers/crossbow/base.svg" id="1_5hrty"]
 [ext_resource type="Texture2D" uid="uid://mygk8i0abyo3" path="res://assets/towers/range-circle.svg" id="2_bemr7"]
 [ext_resource type="Material" uid="uid://b4s2mxmhcjh2v" path="res://materials/outline.tres" id="2_o25nu"]
@@ -135,6 +136,8 @@ _data = {
 radius = 128.0
 
 [node name="Tower" type="Node2D"]
+z_index = 1
+script = ExtResource("1_0jldc")
 
 [node name="BaseAnimations" type="AnimationPlayer" parent="."]
 libraries = {
@@ -142,16 +145,26 @@ libraries = {
 }
 
 [node name="RangeArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
 visible = false
 shape = SubResource("CircleShape2D_vgma8")
+
+[node name="Upgrades" type="Node" parent="."]
+
+[node name="Path0" type="Node" parent="Upgrades"]
+
+[node name="Path1" type="Node" parent="Upgrades"]
 
 [node name="Base" type="Sprite2D" parent="."]
 texture = ExtResource("1_5hrty")
 
 [node name="RangeIndicator" type="Node2D" parent="."]
 visible = false
+z_index = 2
 
 [node name="Scaler" type="Node2D" parent="RangeIndicator"]
 scale = Vector2(0.125, 0.125)

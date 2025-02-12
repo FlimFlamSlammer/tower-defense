@@ -1,3 +1,4 @@
+class_name TileController
 extends TileMapLayer
 
 @export var first_tile: Vector2i
@@ -19,7 +20,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
-		var tower: PackedScene = preload("res://scenes/towers/crossbow.tscn")
+		var tower_scene: PackedScene = preload("res://scenes/towers/crossbow.tscn")
+		var pos: Vector2i = local_to_map(get_local_mouse_position())
+		place_tower(pos, tower_scene)
 
 
 func can_place_wall(pos: Vector2i, south: bool) -> bool:
@@ -82,11 +85,15 @@ func can_place_tower(pos: Vector2i) -> bool:
 	return tile and not tile.tower
 
 
-func place_tower(pos: Vector2i, tower: Tower) -> bool:
+func place_tower(pos: Vector2i, tower_scene: PackedScene) -> bool:
 	if not can_place_tower(pos):
 		return false
 	
 	var tile := tiles.get_tile(pos) as TowerTile
+
+	var tower: Tower = tower_scene.instantiate()
+	tower.position = map_to_local(pos)
+	add_sibling(tower)
 	tile.tower = tower
 	tower.modify_tower(true)
 
@@ -147,6 +154,7 @@ func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array,
 
 	new_data[1] = data[1] + new_tile.danger_level
 	new_data[2] = data[2] + 1
+	new_tile.distance_from_finish = new_data[2]
 
 	pq.push(new_data)
 	visited[new_data[0]] = true

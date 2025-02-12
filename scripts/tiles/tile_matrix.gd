@@ -34,8 +34,8 @@ func load_map(map: TileMapLayer) -> Dictionary:
 		"start" = Vector2i.ZERO,
 		"finish" = Vector2i.ZERO,
 	}
-	for y: int in range(_first_tile.y, _tiles.size() + _first_tile.y):
-		for x: int in range(_first_tile.x, _tiles[0].size() + _first_tile.x):
+	for y in range(_first_tile.y, _tiles.size() + _first_tile.y):
+		for x in range(_first_tile.x, _tiles[0].size() + _first_tile.x):
 			var tile: Tile
 			var tile_type: String = map.get_cell_tile_data(Vector2i(x, y)).get_custom_data("type")
 			match tile_type:
