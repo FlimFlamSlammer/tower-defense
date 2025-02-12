@@ -113,6 +113,8 @@ _data = {
 }
 
 [node name="Crossbow" instance=ExtResource("1_tu6oy")]
+initial_projectile = null
+initial_projectile_offset = Vector2(0, -24)
 
 [node name="CustomAnimations" type="AnimationPlayer" parent="." index="0"]
 libraries = {
