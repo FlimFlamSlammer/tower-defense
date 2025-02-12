@@ -12,11 +12,17 @@ var progress: float
 @onready var tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 
 func _process(delta: float) -> void:
-	var cur_tile_position: Vector2 = tile_controller.map_to_local(cur_tile)
-	var next_tile_position: Vector2 = tile_controller.map_to_local(next_tile)
-
 	progress += speed * delta
 	
+	while progress >= 1:
+		progress -= 1.0
+		cur_tile = next_tile
+		next_tile = (tile_controller.tiles.get_tile(next_tile) as PathTile).next_path
+		
+	var cur_tile_position: Vector2 = tile_controller.map_to_local(cur_tile)
+	var next_tile_position: Vector2 = tile_controller.map_to_local(next_tile)
+	position = lerp(cur_tile_position, next_tile_position, progress)
+
 
 func get_distance_from_finish() -> float:
 	var cur_tile_ref := tile_controller.tiles.get_tile(cur_tile) as PathTile
