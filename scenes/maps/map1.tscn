@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://g5ftce2y2brt"]
+[gd_scene load_steps=9 format=4 uid="uid://g5ftce2y2brt"]
 
 [ext_resource type="Texture2D" uid="uid://dakxh7a0v4e5l" path="res://assets/tiles/map1/tile.svg" id="1_d08bi"]
 [ext_resource type="Script" path="res://scripts/tiles/tile_controller.gd" id="2_5yiy8"]
 [ext_resource type="Texture2D" uid="uid://d8lo4dccj3kb" path="res://assets/tiles/map1/tiles_debug.svg" id="3_sn5yq"]
+[ext_resource type="PackedScene" uid="uid://lvqv7e8j8dut" path="res://scenes/enemies/slow_car.tscn" id="4_km45e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sj0o3"]
 texture = ExtResource("1_d08bi")
@@ -53,3 +54,6 @@ arrow_tile_map = NodePath("../ArrowTileMap")
 modulate = Color(0.451355, 0.893955, 0.996094, 1)
 z_index = -9
 tile_set = SubResource("TileSet_wuhgg")
+
+[node name="Area2D" parent="." instance=ExtResource("4_km45e")]
+position = Vector2(-1430, 648)
