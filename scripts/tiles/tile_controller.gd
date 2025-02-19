@@ -135,7 +135,7 @@ func update_danger_levels() -> void:
 	var towers: Array[Tower] = get_tree().get_nodes_in_group("attacking_towers") as Array[Tower]
 
 	for tower in towers:
-		tower.update_paths()
+		tower.update_danger_levels()
 
 
 func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array, offset: Vector2i) -> void:
