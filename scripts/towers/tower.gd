@@ -22,7 +22,7 @@ var current_upgrade: Array[int] = [0, 0]
 @onready var _range_area: Area2D = $RangeArea
 @onready var _upgrades: Node = $Upgrades
 @onready var _custom_animations: AnimationPlayer = $CustomAnimations
-@onready var _base_animations: AnimationPlayer = $BaseAnimations
+@onready var _range_animations: AnimationPlayer = $RangeAnimation
 
 ## Updates tower visuals and behaviour to match its stats. If param is true, recalculates pathfinding data.
 func modify_tower(p_update_paths: bool) -> void:
@@ -58,8 +58,8 @@ func enemy_in_range(p_range: float) -> bool:
 
 
 func enter_preview_mode() -> void:
-	_base_animations.play("show_range")
-	_base_animations.advance(_base_animations.current_animation_length)
+	_range_animations.play("show_range")
+	_range_animations.advance(_range_animations.current_animation_length)
 
 	process_mode = PROCESS_MODE_DISABLED
 	
@@ -74,3 +74,16 @@ func set_display_valid() -> void:
 
 func exit_preview_mode() -> void:
 	process_mode = PROCESS_MODE_INHERIT
+
+
+func update_danger_levels() -> void:
+	var visited: Dictionary = {}
+	var tiles: Array[Vector2i] = [tile_position]
+
+	while tiles.size():
+		pass
+
+func _get_tile_danger_level(tile: Vector2i) -> float:
+	var dist := tile.distance_to(tile_position)
+	var danger: float = stats.range - dist
+	return clampf(danger, 0.0, 1.0)
