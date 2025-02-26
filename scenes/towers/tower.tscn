@@ -135,11 +135,13 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgma8"]
 radius = 128.0
 
-[node name="Tower" type="Node2D"]
+[node name="Tower" type="Node2D" groups=["tower"]]
 z_index = 1
 script = ExtResource("1_0jldc")
+targeting_options = null
+stats = null
 
-[node name="BaseAnimations" type="AnimationPlayer" parent="."]
+[node name="RangeAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_713y7")
 }
