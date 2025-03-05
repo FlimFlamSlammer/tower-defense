@@ -1,4 +1,4 @@
 [gd_scene format=3 uid="uid://cdwitn5wjgtyg"]
 
-[node name="Timer" type="Timer"]
+[node name="SpawnerSubprocessor" type="Timer"]
 autostart = true
