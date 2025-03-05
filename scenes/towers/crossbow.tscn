@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://l6rhoi3yb5xc"]
+[gd_scene load_steps=11 format=3 uid="uid://l6rhoi3yb5xc"]
 
 [ext_resource type="PackedScene" uid="uid://bolphubyb6fu1" path="res://scenes/towers/shooting_tower.tscn" id="1_tu6oy"]
 [ext_resource type="Texture2D" uid="uid://c4ibb42n6xcku" path="res://assets/towers/crossbow/stick.svg" id="2_pxhyc"]
@@ -112,11 +112,145 @@ _data = {
 "fire": SubResource("Animation_ldsdy")
 }
 
+[sub_resource type="Animation" id="Animation_s5r7u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RangeIndicator/Scaler/RangeIndicatorSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.313726)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RangeIndicator:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RangeIndicator/Scaler/RangeIndicatorSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_45yah"]
+resource_name = "hide_range"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RangeIndicator:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RangeIndicator/Scaler/RangeIndicatorSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.313726), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RangeIndicator/Scaler/RangeIndicatorSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05)]
+}
+
+[sub_resource type="Animation" id="Animation_i8o17"]
+resource_name = "show_range"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RangeIndicator/Scaler/RangeIndicatorSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.313726)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RangeIndicator:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RangeIndicator/Scaler/RangeIndicatorSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_713y7"]
+_data = {
+"RESET": SubResource("Animation_s5r7u"),
+"hide_range": SubResource("Animation_45yah"),
+"show_range": SubResource("Animation_i8o17")
+}
+
 [node name="Crossbow" groups=["attacking_tower"] instance=ExtResource("1_tu6oy")]
+initial_projectile_offset = null
+targeting_options = null
+stats = null
 
 [node name="CustomAnimations" type="AnimationPlayer" parent="." index="0"]
 libraries = {
 "": SubResource("AnimationLibrary_2kcqc")
+}
+
+[node name="BaseAnimations" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_713y7")
 }
 
 [node name="Stick" type="Sprite2D" parent="Pivot" index="0"]

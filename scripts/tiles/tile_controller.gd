@@ -80,13 +80,8 @@ func remove_wall(pos: Vector2i, south: bool) -> bool:
 	return true
 
 
-func can_place_tower(pos: Vector2i) -> bool:
-	var tile := tiles.get_tile(pos) as TowerTile
-	return tile and not tile.tower
-
-
 func place_tower(pos: Vector2i, tower_scene: PackedScene) -> bool:
-	if not can_place_tower(pos):
+	if not _can_place_tower(pos):
 		return false
 	
 	var tile := tiles.get_tile(pos) as TowerTile
@@ -119,6 +114,9 @@ func update_paths() -> void:
 			return a[1] > b[1]
 	)
 	pq.push([finish_tile, 0, 0])
+	# data format:
+	# [tile, danger level, distance from exit]
+
 	visited[finish_tile] = true
 
 	while pq.size():
@@ -132,10 +130,31 @@ func update_paths() -> void:
 
 
 func update_danger_levels() -> void:
-	var towers: Array[Tower] = get_tree().get_nodes_in_group("attacking_towers") as Array[Tower]
+	# reset current danger levels
+	for x in range(first_tile.x, last_tile.x + 1):
+		for y in range(first_tile.y, last_tile.y + 1):
+			var tile := tiles.get_tile(Vector2i(x, y)) as PathTile
+			if not tile:
+				continue
+			
+			tile.danger_level = 0
+
+	var towers: Array[Tower] = get_tree().get_nodes_in_group(Globals.TowerGroups.ATTACKING) as Array[Tower]
 
 	for tower in towers:
-		tower.update_danger_levels()
+		tower.update_danger_levels(Globals.TowerGroups.ATTACKING)
+
+	towers = get_tree().get_nodes_in_group(Globals.TowerGroups.SETUP) as Array[Tower]
+
+	for tower in towers:
+		tower.update_danger_levels(Globals.TowerGroups.SETUP)
+
+	update_paths()
+
+
+func _can_place_tower(pos: Vector2i) -> bool:
+	var tile := tiles.get_tile(pos) as TowerTile
+	return tile and not tile.tower
 
 
 func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array, offset: Vector2i) -> void:

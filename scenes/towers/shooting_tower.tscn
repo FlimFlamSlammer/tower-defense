@@ -6,7 +6,7 @@
 [node name="ShootingTower" instance=ExtResource("1_kushb")]
 script = ExtResource("2_qdmiu")
 initial_projectile = null
-initial_projectile_offset = Vector2(0, -24)
+initial_projectile_offset = null
 
 [node name="AttackTimer" type="Timer" parent="." index="2"]
 

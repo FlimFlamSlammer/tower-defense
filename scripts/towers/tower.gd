@@ -17,14 +17,26 @@ enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 var tile_position: Vector2i
 var targeting: int
 var current_upgrade: Array[int] = [0, 0]
+var placed: bool = false
 
 @onready var _range_indicator: Node2D = $RangeIndicator
 @onready var _range_area: Area2D = $RangeArea
 @onready var _upgrades: Node = $Upgrades
 @onready var _custom_animations: AnimationPlayer = $CustomAnimations
 @onready var _range_animations: AnimationPlayer = $RangeAnimation
+@onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 
-## Updates tower visuals and behaviour to match its stats. If param is true, recalculates pathfinding data.
+
+func _process(delta: float) -> void:
+	if (not placed):
+		return
+
+
+func _update_danger_levels(group: String) -> void:
+	pass
+
+
+## Updates tower range circle to match its stats. If param is true, recalculates pathfinding data.
 func modify_tower(p_update_paths: bool) -> void:
 	_range_indicator.scale = Vector2.ONE * stats.range
 	tower_modified.emit()
@@ -57,11 +69,9 @@ func enemy_in_range(p_range: float) -> bool:
 	return _range_area.has_overlapping_areas()
 
 
-func enter_preview_mode() -> void:
+func select_to_place() -> void:
 	_range_animations.play("show_range")
 	_range_animations.advance(_range_animations.current_animation_length)
-
-	process_mode = PROCESS_MODE_DISABLED
 	
 
 func set_display_invalid() -> void:
@@ -72,18 +82,7 @@ func set_display_valid() -> void:
 	modulate = Color(1.0, 1.0, 1.0)
 
 
-func exit_preview_mode() -> void:
-	process_mode = PROCESS_MODE_INHERIT
-
-
-func update_danger_levels() -> void:
-	var visited: Dictionary = {}
-	var tiles: Array[Vector2i] = [tile_position]
-
-	while tiles.size():
-		pass
-
-func _get_tile_danger_level(tile: Vector2i) -> float:
+func _get_tile_danger_level_multiplier(tile: Vector2i) -> float:
 	var dist := tile.distance_to(tile_position)
 	var danger: float = stats.range - dist
 	return clampf(danger, 0.0, 1.0)

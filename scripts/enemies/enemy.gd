@@ -3,7 +3,7 @@ extends Area2D
 
 @export var max_health = 5
 @export var health = 5
-@export var speed = 1 ## Speed in tiles per second.
+@export var speed: float = 0.3 ## Speed in tiles per second.
 
 var cur_tile := Vector2i(-1, 2)
 var next_tile := Vector2i(0, 2)
@@ -13,7 +13,7 @@ var progress: float
 
 func _process(delta: float) -> void:
 	progress += speed * delta
-	
+
 	while progress >= 1:
 		progress -= 1.0
 		cur_tile = next_tile
@@ -35,8 +35,7 @@ func get_distance_from_finish() -> float:
 	return cur_tile_dist * (1 - progress) + next_tile_dist * progress
 
 
-
 func _rotate() -> void:
 	var new_rotation: float = Vector2(cur_tile).angle_to_point(next_tile)
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "rotation", new_rotation, 0.2)
+	tween.tween_property(self, "rotation", new_rotation, 0.2 / speed)

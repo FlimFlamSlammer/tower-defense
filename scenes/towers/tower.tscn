@@ -138,8 +138,6 @@ radius = 128.0
 [node name="Tower" type="Node2D" groups=["tower"]]
 z_index = 1
 script = ExtResource("1_0jldc")
-targeting_options = null
-stats = null
 
 [node name="RangeAnimation" type="AnimationPlayer" parent="."]
 libraries = {

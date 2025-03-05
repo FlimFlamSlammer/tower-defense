@@ -7,18 +7,41 @@ extends Tower
 @onready var _pivot: Node2D = $Pivot
 @onready var _attack_timer: Timer = $AttackTimer
 
-func _fire(target: Enemy) -> void:
-	pass
-
-
 func _ready() -> void:
 	stats.projectile = initial_projectile
 	stats.projectile_offset = initial_projectile_offset
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	super(delta)
 	if enemy_in_range(stats.range):
 		point_and_fire(_attack_timer, _fire)
+
+
+func _update_danger_levels(group: String) -> void:
+	var visited: Dictionary = {}
+	var tiles: Array[Vector2i] = [tile_position]
+
+	while tiles.size():
+		var top_tile: Vector2i = tiles.back()
+		tiles.pop_back()
+		var danger_mult: float = _get_tile_danger_level_multiplier(top_tile)
+
+		if (danger_mult == 0.0):
+			continue
+
+		var tile_ref: PathTile = _tile_controller.tiles.get_tile(top_tile)
+		if tile_ref:
+			tile_ref.danger_level = danger_mult * stats.damage * stats.fire_rate
+		
+		tiles.push_back(top_tile + Vector2i(0, 1))
+		tiles.push_back(top_tile + Vector2i(0, -1))
+		tiles.push_back(top_tile + Vector2i(1, 0))
+		tiles.push_back(top_tile + Vector2i(-1, 0))
+
+
+func _fire(target: Enemy) -> void:
+	pass
 
 
 func point_and_fire(timer: Timer, fire: Callable) -> void:
@@ -34,9 +57,9 @@ func point_and_fire(timer: Timer, fire: Callable) -> void:
 func _get_target(p_range: float) -> Enemy:
 	if not enemy_in_range(p_range):
 		return null
-	
+
 	var best_target: Enemy
-	var best_target_value: float = -INF
+	var best_target_value: float = - INF
 
 	var overlapping_areas: Array[Area2D] = _range_area.get_overlapping_areas()
 	for area in overlapping_areas:
@@ -44,15 +67,15 @@ func _get_target(p_range: float) -> Enemy:
 		var enemy_value: float
 		match targeting:
 			Targeting.FIRST:
-				enemy_value = -enemy.get_distance_from_finish()
+				enemy_value = - enemy.get_distance_from_finish()
 			Targeting.LAST:
 				enemy_value = enemy.get_distance_from_finish()
 			Targeting.STRONG:
 				enemy_value = enemy.health
 			Targeting.WEAK:
-				enemy_value = -enemy.health
+				enemy_value = - enemy.health
 			Targeting.CLOSE:
-				enemy_value = -global_position.distance_squared_to(enemy.global_position)
+				enemy_value = - global_position.distance_squared_to(enemy.global_position)
 			Targeting.FAR:
 				enemy_value = global_position.distance_squared_to(enemy.global_position)
 
