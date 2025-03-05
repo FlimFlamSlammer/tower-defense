@@ -3,8 +3,10 @@
 [ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_x1m33"]
 [ext_resource type="Texture2D" uid="uid://bpu5w33lh3n6g" path="res://assets/enemies/slow-car.svg" id="2_l6ml4"]
 
-[node name="Area2D" type="Area2D"]
+[node name="SlowCar" type="Area2D"]
 script = ExtResource("1_x1m33")
+speed = 1.0
 
-[node name="Slow-car" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_l6ml4")
