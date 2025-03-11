@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Tower Defense"
 run/main_scene="res://scenes/maps/map1.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [debug]
@@ -28,8 +28,9 @@ window/stretch/mode="canvas_items"
 
 [global_group]
 
-tower=""
-attacking_tower=""
+start_wave_button=""
+attacking_towers=""
+towers=""
 
 [input]
 
@@ -42,8 +43,3 @@ click={
 [layer_names]
 
 2d_physics/layer_2="Enemy"
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"

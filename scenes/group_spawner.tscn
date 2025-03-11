@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://clb2qbm3nu8pk"]
+
+[ext_resource type="Script" path="res://scripts/enemies/group_spawner.gd" id="1_m16oa"]
+
+[node name="GroupSpawner" type="Timer"]
+autostart = true
+script = ExtResource("1_m16oa")
+
+[connection signal="timeout" from="." to="." method="_spawn_enemy"]

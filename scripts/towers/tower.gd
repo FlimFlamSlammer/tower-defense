@@ -7,7 +7,7 @@ signal update_paths()
 enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
 @export var targeting_options: Array[Targeting] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
-@export var stats: Dictionary = {
+@export var stats: Dictionary[String, Variant] = {
 	"range" = 4.0,
 	"damage" = 1.0,
 	"fire_rate" = 1.0,
@@ -17,7 +17,9 @@ enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 var tile_position: Vector2i
 var targeting: int
 var current_upgrade: Array[int] = [0, 0]
-var placed: bool = false
+var selected: bool = false
+
+var _placed: bool = false
 
 @onready var _range_indicator: Node2D = $RangeIndicator
 @onready var _range_area: Area2D = $RangeArea
@@ -28,12 +30,28 @@ var placed: bool = false
 
 
 func _process(delta: float) -> void:
-	if (not placed):
+	if (not _placed):
 		return
 
 
-func _update_danger_levels(group: String) -> void:
+func update_danger_levels(group: String) -> void:
 	pass
+
+
+func place() -> void:
+	_placed = true
+	modify_tower(true)
+	select()
+
+
+func select() -> void:
+	selected = true
+	_range_animations.play("show_range")
+
+
+func deselect() -> void:
+	selected = false
+	_range_animations.play("hide_range")
 
 
 ## Updates tower range circle to match its stats. If param is true, recalculates pathfinding data.
@@ -44,14 +62,14 @@ func modify_tower(p_update_paths: bool) -> void:
 	if p_update_paths:
 		update_paths.emit()
 
-		
+
 ## Upgrades the tower by one tier on the specified path. Returns the upgrade cost.
 func upgrade_tower(path: int) -> int:
 	var tier: int = current_upgrade[path] + 1
 	var upgrade := _upgrades.get_child(path).get_child(tier) as Upgrade
 
 	if not upgrade:
-		print_debug("T", tier, " upgrade from path ", path, " not found, Skipping...")
+		print_debug("T", tier, " upgrade from path ", path, " not found, skipping...")
 		return 0
 
 	current_upgrade[path] = tier
@@ -72,7 +90,7 @@ func enemy_in_range(p_range: float) -> bool:
 func select_to_place() -> void:
 	_range_animations.play("show_range")
 	_range_animations.advance(_range_animations.current_animation_length)
-	
+
 
 func set_display_invalid() -> void:
 	modulate = Color(1.0, 0.1, 0.1)
@@ -84,5 +102,9 @@ func set_display_valid() -> void:
 
 func _get_tile_danger_level_multiplier(tile: Vector2i) -> float:
 	var dist := tile.distance_to(tile_position)
-	var danger: float = stats.range - dist
-	return clampf(danger, 0.0, 1.0)
+	## Danger value computed using range and distance.
+	var danger: float = ((stats.range - dist - 0.5) * 1.0) + 1.0
+	danger = clampf(danger, 0.0, 1.0)
+	if danger < 1.0 and danger > 0.0:
+		danger = sqrt(danger)
+	return danger

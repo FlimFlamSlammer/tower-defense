@@ -108,8 +108,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2kcqc"]
 _data = {
-"RESET": SubResource("Animation_2l0pa"),
-"fire": SubResource("Animation_ldsdy")
+&"RESET": SubResource("Animation_2l0pa"),
+&"fire": SubResource("Animation_ldsdy")
 }
 
 [sub_resource type="Animation" id="Animation_s5r7u"]
@@ -233,25 +233,31 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_713y7"]
 _data = {
-"RESET": SubResource("Animation_s5r7u"),
-"hide_range": SubResource("Animation_45yah"),
-"show_range": SubResource("Animation_i8o17")
+&"RESET": SubResource("Animation_s5r7u"),
+&"hide_range": SubResource("Animation_45yah"),
+&"show_range": SubResource("Animation_i8o17")
 }
 
-[node name="Crossbow" groups=["attacking_tower"] instance=ExtResource("1_tu6oy")]
-initial_projectile_offset = null
-targeting_options = null
-stats = null
+[node name="Crossbow" groups=["attacking_towers"] instance=ExtResource("1_tu6oy")]
+stats = Dictionary[String, Variant]({
+"damage": 1.0,
+"fire_rate": 1.0,
+"pierce": 1,
+"range": 1.5
+})
 
 [node name="CustomAnimations" type="AnimationPlayer" parent="." index="0"]
 libraries = {
-"": SubResource("AnimationLibrary_2kcqc")
+&"": SubResource("AnimationLibrary_2kcqc")
 }
 
 [node name="BaseAnimations" type="AnimationPlayer" parent="." index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_713y7")
+&"": SubResource("AnimationLibrary_713y7")
 }
+
+[node name="CollisionShape2D" parent="RangeArea" index="0"]
+visible = false
 
 [node name="Stick" type="Sprite2D" parent="Pivot" index="0"]
 texture = ExtResource("2_pxhyc")

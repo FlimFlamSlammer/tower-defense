@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://bolphubyb6fu1"]
 
 [ext_resource type="PackedScene" uid="uid://uy78f1v0v425" path="res://scenes/towers/tower.tscn" id="1_kushb"]
-[ext_resource type="Script" path="res://scripts/towers/shooting_tower.gd" id="2_qdmiu"]
+[ext_resource type="Script" uid="uid://61iiig5kpeat" path="res://scripts/towers/shooting_tower.gd" id="2_qdmiu"]
 
 [node name="ShootingTower" instance=ExtResource("1_kushb")]
 script = ExtResource("2_qdmiu")
 initial_projectile = null
-initial_projectile_offset = null
+initial_projectile_offset = Vector2(0, -24)
 
 [node name="AttackTimer" type="Timer" parent="." index="2"]
 

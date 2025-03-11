@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://uy78f1v0v425"]
 
-[ext_resource type="Script" path="res://scripts/towers/tower.gd" id="1_0jldc"]
+[ext_resource type="Script" uid="uid://b14bl5g2fycmp" path="res://scripts/towers/tower.gd" id="1_0jldc"]
 [ext_resource type="Texture2D" uid="uid://ljp4dn3u2ula" path="res://assets/towers/crossbow/base.svg" id="1_5hrty"]
 [ext_resource type="Texture2D" uid="uid://mygk8i0abyo3" path="res://assets/towers/range-circle.svg" id="2_bemr7"]
 [ext_resource type="Material" uid="uid://b4s2mxmhcjh2v" path="res://materials/outline.tres" id="2_o25nu"]
-[ext_resource type="Script" path="res://scripts/unscaled_outline.gd" id="3_8ghdo"]
+[ext_resource type="Script" uid="uid://b5d6b7nun4ne4" path="res://scripts/unscaled_outline.gd" id="3_8ghdo"]
 
 [sub_resource type="Animation" id="Animation_s5r7u"]
 length = 0.001
@@ -127,21 +127,21 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_713y7"]
 _data = {
-"RESET": SubResource("Animation_s5r7u"),
-"hide_range": SubResource("Animation_45yah"),
-"show_range": SubResource("Animation_i8o17")
+&"RESET": SubResource("Animation_s5r7u"),
+&"hide_range": SubResource("Animation_45yah"),
+&"show_range": SubResource("Animation_i8o17")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgma8"]
-radius = 128.0
+radius = 256.0
 
-[node name="Tower" type="Node2D" groups=["tower"]]
+[node name="Tower" type="Node2D" groups=["towers"]]
 z_index = 1
 script = ExtResource("1_0jldc")
 
 [node name="RangeAnimation" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_713y7")
+&"": SubResource("AnimationLibrary_713y7")
 }
 
 [node name="RangeArea" type="Area2D" parent="."]
@@ -150,7 +150,6 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
-visible = false
 shape = SubResource("CircleShape2D_vgma8")
 
 [node name="Upgrades" type="Node" parent="."]
@@ -167,7 +166,7 @@ visible = false
 z_index = 2
 
 [node name="Scaler" type="Node2D" parent="RangeIndicator"]
-scale = Vector2(0.125, 0.125)
+scale = Vector2(0.25, 0.25)
 
 [node name="RangeIndicatorSprite" type="Sprite2D" parent="RangeIndicator/Scaler"]
 modulate = Color(1, 1, 1, 0.313726)
@@ -176,3 +175,7 @@ texture = ExtResource("2_bemr7")
 script = ExtResource("3_8ghdo")
 thickness = 4.0
 color = Vector4(0.8, 0.8, 0.8, 0.4)
+
+[node name="ClickArea" type="Area2D" parent="."]
+monitoring = false
+monitorable = false

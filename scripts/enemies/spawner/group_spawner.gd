@@ -1,4 +1,4 @@
-class_name SpawnerSubprocessor
+class_name GroupSpawner
 extends Timer
 
 var group: Dictionary
@@ -7,10 +7,14 @@ var _counter: int = 0
 
 func _ready() -> void:
 	wait_time = group.interval
-	
+	start()
+
+
 func _spawn_enemy() -> void:
+	var spawner := get_parent() as Spawner
 	var enemy: Enemy = group.type.instantiate()
-	enemy.cur_tile = get_parent().start_tile
+	enemy.cur_tile = spawner.tile_controller.start_tile
+	enemy.position = spawner.tile_controller.map_to_local(enemy.cur_tile)
 	get_parent().add_sibling(enemy)
 
 	_counter += 1

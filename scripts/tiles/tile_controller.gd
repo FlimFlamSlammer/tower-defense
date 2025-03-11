@@ -40,7 +40,7 @@ func can_place_wall(pos: Vector2i, south: bool) -> bool:
 		if tile.eastWall:
 			return false
 		adjacent = tiles.get_tile(pos + Vector2i(1, 0)) as PathTile
-	
+
 	if not adjacent:
 		return false
 
@@ -83,14 +83,16 @@ func remove_wall(pos: Vector2i, south: bool) -> bool:
 func place_tower(pos: Vector2i, tower_scene: PackedScene) -> bool:
 	if not _can_place_tower(pos):
 		return false
-	
+
 	var tile := tiles.get_tile(pos) as TowerTile
 
 	var tower: Tower = tower_scene.instantiate()
+	tower.tile_position = pos
 	tower.position = map_to_local(pos)
 	add_sibling(tower)
+	tower.tower_modified.connect(update_danger_levels)
 	tile.tower = tower
-	tower.modify_tower(true)
+	tower.place()
 
 	return true
 
@@ -106,7 +108,7 @@ func remove_tower(pos: Vector2i) -> bool:
 
 
 func update_paths() -> void:
-	var visited: Dictionary
+	var visited: Dictionary[Vector2i, bool]
 	var pq := PriorityQueue.new(
 		func compare(a: Array, b: Array) -> bool:
 			if a[1] == b[1]:
@@ -136,17 +138,17 @@ func update_danger_levels() -> void:
 			var tile := tiles.get_tile(Vector2i(x, y)) as PathTile
 			if not tile:
 				continue
-			
+
 			tile.danger_level = 0
 
-	var towers: Array[Tower] = get_tree().get_nodes_in_group(Globals.TowerGroups.ATTACKING) as Array[Tower]
+	var towers: Array[Node] = get_tree().get_nodes_in_group(Globals.TowerGroups.ATTACKING)
 
-	for tower in towers:
+	for tower: Tower in towers:
 		tower.update_danger_levels(Globals.TowerGroups.ATTACKING)
 
-	towers = get_tree().get_nodes_in_group(Globals.TowerGroups.SETUP) as Array[Tower]
+	towers = get_tree().get_nodes_in_group(Globals.TowerGroups.SETUP)
 
-	for tower in towers:
+	for tower: Tower in towers:
 		tower.update_danger_levels(Globals.TowerGroups.SETUP)
 
 	update_paths()
@@ -164,7 +166,7 @@ func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array,
 	new_data[0] = data[0] + offset
 
 	if visited.has(new_data[0]): return
-	
+
 	var new_tile := tiles.get_tile(new_data[0]) as PathTile
 	if not new_tile:
 		return
@@ -186,9 +188,9 @@ func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array,
 	visited[new_data[0]] = true
 
 	new_tile.next_path = data[0]
-	
+
 	# debug arrows
-	var atlas_coords: Dictionary
+	var atlas_coords: Dictionary[Vector2i, Vector2i]
 	atlas_coords[Vector2i.LEFT] = Vector2i(0, 0)
 	atlas_coords[Vector2i.DOWN] = Vector2i(1, 0)
 	atlas_coords[Vector2i.RIGHT] = Vector2i(2, 0)

@@ -18,22 +18,27 @@ func _process(delta: float) -> void:
 		point_and_fire(_attack_timer, _fire)
 
 
-func _update_danger_levels(group: String) -> void:
+func update_danger_levels(group: String) -> void:
 	var visited: Dictionary = {}
 	var tiles: Array[Vector2i] = [tile_position]
 
-	while tiles.size():
+	while not tiles.is_empty():
 		var top_tile: Vector2i = tiles.back()
 		tiles.pop_back()
+
+		if visited.has(top_tile):
+			continue
+		visited[top_tile] = true
+
 		var danger_mult: float = _get_tile_danger_level_multiplier(top_tile)
 
 		if (danger_mult == 0.0):
 			continue
 
-		var tile_ref: PathTile = _tile_controller.tiles.get_tile(top_tile)
+		var tile_ref := _tile_controller.tiles.get_tile(top_tile) as PathTile
 		if tile_ref:
-			tile_ref.danger_level = danger_mult * stats.damage * stats.fire_rate
-		
+			tile_ref.danger_level += danger_mult * stats.damage * stats.fire_rate
+
 		tiles.push_back(top_tile + Vector2i(0, 1))
 		tiles.push_back(top_tile + Vector2i(0, -1))
 		tiles.push_back(top_tile + Vector2i(1, 0))
