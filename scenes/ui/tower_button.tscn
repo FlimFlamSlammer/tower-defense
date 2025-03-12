@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://uiq1di43dds1"]
+
+[ext_resource type="Texture2D" uid="uid://bqwou8lnkysmh" path="res://assets/raw/ui/panel256x.svg" id="1_gbihs"]
+[ext_resource type="Script" uid="uid://r850fqkq2al5" path="res://scripts/ui/tower_button.gd" id="2_h4r6f"]
+[ext_resource type="Texture2D" uid="uid://05bclr4bytv6" path="res://assets/towers/crossbow/preview.svg" id="3_juamh"]
+
+[node name="TowerButton" type="TextureButton"]
+offset_right = 256.0
+offset_bottom = 256.0
+texture_normal = ExtResource("1_gbihs")
+script = ExtResource("2_h4r6f")
+
+[node name="Texture" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 256.0
+offset_bottom = 256.0
+texture = ExtResource("3_juamh")

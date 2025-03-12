@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3ftv6p6r1071"]
+
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/big_font.tres" id="1_8bulm"]
+[ext_resource type="PackedScene" uid="uid://carqx0up3l7mp" path="res://scenes/ui/tower_category.tscn" id="2_astdl"]
+[ext_resource type="PackedScene" uid="uid://uiq1di43dds1" path="res://scenes/ui/tower_button.tscn" id="2_k2ell"]
+[ext_resource type="PackedScene" uid="uid://l6rhoi3yb5xc" path="res://scenes/towers/crossbow.tscn" id="4_00jwl"]
+
+[node name="GUI" type="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 4096.0
+offset_bottom = 31.0
+
+[node name="StartButton" type="Button" parent="HBoxContainer" groups=["start_wave_button"]]
+layout_mode = 2
+theme = ExtResource("1_8bulm")
+text = "Start"
+
+[node name="TowerSelector" type="TabContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -1280.0
+offset_top = -433.0
+offset_right = 1280.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_8bulm")
+tab_alignment = 1
+current_tab = 0
+tab_focus_mode = 1
+
+[node name="Offense" parent="TowerSelector" instance=ExtResource("2_astdl")]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Crossbow" parent="TowerSelector/Offense/Padding/Buttons" index="0" instance=ExtResource("2_k2ell")]
+layout_mode = 2
+tower_scene = ExtResource("4_00jwl")
+
+[node name="Production" parent="TowerSelector" instance=ExtResource("2_astdl")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[editable path="TowerSelector/Offense"]
+[editable path="TowerSelector/Offense/Padding/Buttons/Crossbow"]
+[editable path="TowerSelector/Production"]
