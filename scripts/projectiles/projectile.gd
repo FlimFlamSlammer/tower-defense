@@ -1,13 +1,13 @@
 class_name Projectile
 extends Area2D
 
-@export var speed: float = 100
-@export var damage: float = 1
+@export var speed: float = 7000.0
+@export var damage: float = 1.0
 @export var pierce: int = 1
 
 var movement_dir: float
 
-var _movement_vector := Vector2.UP
+var _movement_vector := Vector2.RIGHT
 var _pierce_used: int = 0
 
 func _ready() -> void:
@@ -15,17 +15,20 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	translate(_movement_vector * delta)
+	translate(speed * _movement_vector * delta)
 
 
 func _on_area_entered(area: Area2D) -> void:
-	var enemy := area as Enemy
-	if not enemy: return
+	if _pierce_used >= pierce:
+		return
 
-	enemy.health -= damage
+	var enemy := area as Enemy
+
+	enemy.hit(damage)
 
 	_pierce_used += 1
 	if _pierce_used >= pierce:
+		hide()
 		queue_free()
 
 

@@ -28,6 +28,12 @@ func _process(delta: float) -> void:
 	position = lerp(cur_tile_position, next_tile_position, progress)
 
 
+func hit(damage: float):
+	health -= damage
+	if health <= 0.0:
+		hide()
+		queue_free()
+
 func get_distance_from_finish() -> float:
 	var cur_tile_ref := tile_controller.tiles.get_tile(cur_tile) as PathTile
 	var next_tile_ref := tile_controller.tiles.get_tile(next_tile) as PathTile

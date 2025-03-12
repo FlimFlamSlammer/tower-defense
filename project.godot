@@ -22,8 +22,8 @@ gdscript/warnings/integer_division=0
 
 [display]
 
-window/size/viewport_width=2048
-window/size/viewport_height=1152
+window/size/viewport_width=4096
+window/size/viewport_height=2304
 window/stretch/mode="canvas_items"
 
 [global_group]
@@ -43,3 +43,7 @@ click={
 [layer_names]
 
 2d_physics/layer_2="Enemy"
+
+[rendering]
+
+anti_aliasing/quality/msaa_2d=1

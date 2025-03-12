@@ -14,17 +14,16 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-	if enemy_in_range(stats.range):
-		point_and_fire(_attack_timer, _fire)
+	attempt_fire(_attack_timer, _fire)
 
 
 func update_danger_levels(group: String) -> void:
 	var visited: Dictionary = {}
-	var tiles: Array[Vector2i] = [tile_position]
+	var to_visit: Array[Vector2i] = [tile_position]
 
-	while not tiles.is_empty():
-		var top_tile: Vector2i = tiles.back()
-		tiles.pop_back()
+	while not to_visit.is_empty():
+		var top_tile: Vector2i = to_visit.back()
+		to_visit.pop_back()
 
 		if visited.has(top_tile):
 			continue
@@ -39,21 +38,23 @@ func update_danger_levels(group: String) -> void:
 		if tile_ref:
 			tile_ref.danger_level += danger_mult * stats.damage * stats.fire_rate
 
-		tiles.push_back(top_tile + Vector2i(0, 1))
-		tiles.push_back(top_tile + Vector2i(0, -1))
-		tiles.push_back(top_tile + Vector2i(1, 0))
-		tiles.push_back(top_tile + Vector2i(-1, 0))
+		to_visit.push_back(top_tile + Vector2i(0, 1))
+		to_visit.push_back(top_tile + Vector2i(0, -1))
+		to_visit.push_back(top_tile + Vector2i(1, 0))
+		to_visit.push_back(top_tile + Vector2i(-1, 0))
 
 
 func _fire(target: Enemy) -> void:
 	pass
 
 
-func point_and_fire(timer: Timer, fire: Callable) -> void:
+func attempt_fire(timer: Timer, fire: Callable) -> void:
 	if not timer.is_stopped(): return
 
 	var target: Enemy = _get_target(stats.range)
-	_pivot.look_at(target.position)
+	if not target: return
+	_pivot.look_at(target.global_position)
+	_custom_animations.stop()
 	_custom_animations.play("fire")
 	fire.call(target)
 	timer.start(1.0 / stats.fire_rate)

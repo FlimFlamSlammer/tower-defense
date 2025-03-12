@@ -7,7 +7,7 @@ signal update_paths()
 enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
 @export var targeting_options: Array[Targeting] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
-@export var stats: Dictionary[String, Variant] = {
+@export var base_stats: Dictionary[String, Variant] = {
 	"range" = 4.0,
 	"damage" = 1.0,
 	"fire_rate" = 1.0,
@@ -19,7 +19,12 @@ var targeting: int
 var current_upgrade: Array[int] = [0, 0]
 var selected: bool = false
 
+var stat_multipliers: Dictionary[String, Dictionary]
+var stat_adders: Dictionary[String, Dictionary]
+
 var _placed: bool = false
+
+@onready var stats: Dictionary[String, Variant] = base_stats
 
 @onready var _range_indicator: Node2D = $RangeIndicator
 @onready var _range_area: Area2D = $RangeArea
@@ -54,8 +59,21 @@ func deselect() -> void:
 	_range_animations.play("hide_range")
 
 
-## Updates tower range circle to match its stats. If param is true, recalculates pathfinding data.
+## Updates tower stats and appearance, taking into account stat modifiers. If param is true, recalculates pathfinding data.
 func modify_tower(p_update_paths: bool) -> void:
+	stats = base_stats
+	for mod in stat_multipliers.values():
+		for key in mod.keys():
+			if not stats.has(key):
+				stats[key] = 0.0
+			stats[key] *= mod[key]
+
+	for mod in stat_adders.values():
+		for key in mod.keys():
+			if not stats.has(key):
+				stats[key] = 0.0
+			stats[key] += mod[key]
+
 	_range_indicator.scale = Vector2.ONE * stats.range
 	tower_modified.emit()
 
@@ -75,7 +93,7 @@ func upgrade_tower(path: int) -> int:
 	current_upgrade[path] = tier
 
 	for stat in upgrade.stats.keys():
-		stats[stat] *= upgrade.stats[stat]
+		base_stats[stat] *= upgrade.stats[stat]
 
 	modify_tower(true)
 

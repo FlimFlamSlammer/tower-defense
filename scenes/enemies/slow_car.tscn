@@ -1,12 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://lvqv7e8j8dut"]
+[gd_scene load_steps=4 format=3 uid="uid://lvqv7e8j8dut"]
 
 [ext_resource type="Script" uid="uid://csa5uq4xgsuff" path="res://scripts/enemies/enemy.gd" id="1_x1m33"]
 [ext_resource type="Texture2D" uid="uid://bpu5w33lh3n6g" path="res://assets/enemies/slow-car.svg" id="2_l6ml4"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrssi"]
+size = Vector2(191, 94)
+
 [node name="SlowCar" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
 script = ExtResource("1_x1m33")
 speed = 1.0
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_l6ml4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_rrssi")
