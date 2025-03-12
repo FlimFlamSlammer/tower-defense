@@ -34,9 +34,9 @@ var _placed: bool = false
 @onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 
 
-func _process(delta: float) -> void:
-	if (not _placed):
-		return
+func _ready() -> void:
+	_range_animations.play("show_range")
+	modulate = Color(1.0, 1.0, 1.0, 0.4)
 
 
 func update_danger_levels(group: String) -> void:
@@ -44,6 +44,7 @@ func update_danger_levels(group: String) -> void:
 
 
 func place() -> void:
+	modulate = Color(1.0, 1.0, 1.0, 1.0)
 	_placed = true
 	modify_tower(true)
 	select()
@@ -111,11 +112,11 @@ func select_to_place() -> void:
 
 
 func set_display_invalid() -> void:
-	modulate = Color(1.0, 0.1, 0.1)
+	modulate = Color(1.0, 0.1, 0.1, 0.4)
 
 
 func set_display_valid() -> void:
-	modulate = Color(1.0, 1.0, 1.0)
+	modulate = Color(1.0, 1.0, 1.0, 0.4)
 
 
 func _get_tile_danger_level_multiplier(tile: Vector2i) -> float:

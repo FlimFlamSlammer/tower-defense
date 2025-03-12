@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3ftv6p6r1071"]
+[gd_scene load_steps=6 format=3 uid="uid://c3ftv6p6r1071"]
 
 [ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/big_font.tres" id="1_8bulm"]
+[ext_resource type="Script" uid="uid://dt80n4vowgof1" path="res://scripts/ui/gui_root.gd" id="1_uktbi"]
 [ext_resource type="PackedScene" uid="uid://carqx0up3l7mp" path="res://scenes/ui/tower_category.tscn" id="2_astdl"]
 [ext_resource type="PackedScene" uid="uid://uiq1di43dds1" path="res://scenes/ui/tower_button.tscn" id="2_k2ell"]
 [ext_resource type="PackedScene" uid="uid://l6rhoi3yb5xc" path="res://scenes/towers/crossbow.tscn" id="4_00jwl"]
 
 [node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_uktbi")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_right = 4096.0
@@ -60,6 +62,8 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_8bulm")
 text = "Towers"
+
+[connection signal="pressed" from="TowerSelectorButton" to="." method="toggle_tower_selector_visibility"]
 
 [editable path="TowerSelector/Offense"]
 [editable path="TowerSelector/Offense/Padding/Buttons/Crossbow"]

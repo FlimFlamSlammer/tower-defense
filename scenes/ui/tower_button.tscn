@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://r850fqkq2al5" path="res://scripts/ui/tower_button.gd" id="2_h4r6f"]
 [ext_resource type="Texture2D" uid="uid://05bclr4bytv6" path="res://assets/towers/crossbow/preview.svg" id="3_juamh"]
 
-[node name="TowerButton" type="TextureButton"]
+[node name="TowerButton" type="TextureButton" groups=["tower_buttons"]]
 offset_right = 256.0
 offset_bottom = 256.0
 texture_normal = ExtResource("1_gbihs")
@@ -14,4 +14,7 @@ script = ExtResource("2_h4r6f")
 layout_mode = 2
 offset_right = 256.0
 offset_bottom = 256.0
+mouse_filter = 2
 texture = ExtResource("3_juamh")
+
+[connection signal="pressed" from="." to="." method="_on_button_pressed"]

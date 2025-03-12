@@ -13,7 +13,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	super(delta)
 	attempt_fire(_attack_timer, _fire)
 
 
@@ -49,7 +48,7 @@ func _fire(target: Enemy) -> void:
 
 
 func attempt_fire(timer: Timer, fire: Callable) -> void:
-	if not timer.is_stopped(): return
+	if not _placed or not timer.is_stopped(): return
 
 	var target: Enemy = _get_target(stats.range)
 	if not target: return

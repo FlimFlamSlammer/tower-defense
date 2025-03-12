@@ -18,13 +18,6 @@ func _ready() -> void:
 	update_paths()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("click"):
-		var tower_scene: PackedScene = preload("res://scenes/towers/crossbow.tscn")
-		var pos: Vector2i = local_to_map(get_local_mouse_position())
-		place_tower(pos, tower_scene)
-
-
 func can_place_wall(pos: Vector2i, south: bool) -> bool:
 	var tile := tiles.get_tile(pos) as PathTile
 
@@ -80,16 +73,14 @@ func remove_wall(pos: Vector2i, south: bool) -> bool:
 	return true
 
 
-func place_tower(pos: Vector2i, tower_scene: PackedScene) -> bool:
+func place_tower(pos: Vector2i, tower: Tower) -> bool:
 	if not _can_place_tower(pos):
 		return false
 
 	var tile := tiles.get_tile(pos) as TowerTile
 
-	var tower: Tower = tower_scene.instantiate()
 	tower.tile_position = pos
 	tower.position = map_to_local(pos)
-	add_sibling(tower)
 	tower.tower_modified.connect(update_danger_levels)
 	tile.tower = tower
 	tower.place()
