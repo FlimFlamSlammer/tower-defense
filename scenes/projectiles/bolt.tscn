@@ -1,14 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://dv52w3ak7nc32"]
+[gd_scene load_steps=3 format=3 uid="uid://dv52w3ak7nc32"]
+
+[ext_resource type="Script" uid="uid://2ob2omvrkre1" path="res://scripts/projectiles/bolt.gd" id="1_0fvi7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ejeda"]
-a = Vector2(0, -112)
-b = Vector2(0, 0)
+b = Vector2(128, 0)
 
 [node name="Bolt" type="Area2D"]
+z_index = 2
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_0fvi7")
+speed = 3500.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+rotation = 1.5708
 scale = Vector2(0.5, 1)
 polygon = PackedVector2Array(0, 120, 4, 72, 4, -72, 0, -120, -4, -72, -4, 72)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_ejeda")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
