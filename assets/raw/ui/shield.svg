@@ -2,16 +2,16 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="793.70081"
+   height="1122.5197"
+   viewBox="0 0 210 296.99999"
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
-   sodipodi:docname="crystal.svg"
-   inkscape:export-filename="..\ui\crystal.svg"
-   inkscape:export-xdpi="80.218788"
-   inkscape:export-ydpi="80.218788"
+   sodipodi:docname="shield.svg"
+   inkscape:export-filename="..\..\ui\shield.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,11 +25,11 @@
      inkscape:pageopacity="0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
-     inkscape:document-units="mm"
+     inkscape:document-units="px"
      showgrid="true"
-     inkscape:zoom="1.3934011"
-     inkscape:cx="61.360652"
-     inkscape:cy="179.05828"
+     inkscape:zoom="2.3982985"
+     inkscape:cx="-1.0424057"
+     inkscape:cy="81.099163"
      inkscape:window-width="1280"
      inkscape:window-height="657"
      inkscape:window-x="-8"
@@ -38,11 +38,11 @@
      inkscape:current-layer="layer1">
     <inkscape:grid
        id="grid1"
-       units="mm"
+       units="px"
        originx="0"
        originy="0"
-       spacingx="0.99999998"
-       spacingy="1"
+       spacingx="0.26458332"
+       spacingy="0.26458332"
        empcolor="#0099e5"
        empopacity="0.30196078"
        color="#0099e5"
@@ -58,9 +58,9 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:#e4c2ff;fill-opacity:1;stroke:none;stroke-width:0.529;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0;stroke-dasharray:none"
-       d="M 0,35.999999 20,75.999998 40.000001,35.999999 20,-3.9999999 Z"
-       id="path2"
+       style="fill:#778088;fill-opacity:1;stroke:#464d51;stroke-width:1.05833332;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 1.0583333,3.1749998 5.291666,-2.1166665 5.2916667,2.1166665 c 0,3.1749996 -2.4694437,7.7611102 -5.2916667,9.5249992 C 3.5277783,10.93611 1.0583333,6.3499994 1.0583333,3.1749998 Z"
+       id="path1"
        sodipodi:nodetypes="ccccc" />
   </g>
 </svg>
