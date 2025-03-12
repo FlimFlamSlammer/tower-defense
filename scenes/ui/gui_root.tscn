@@ -10,6 +10,7 @@
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_right = 4096.0
 offset_bottom = 31.0
+alignment = 1
 
 [node name="StartButton" type="Button" parent="HBoxContainer" groups=["start_wave_button"]]
 layout_mode = 2
@@ -22,10 +23,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -1280.0
-offset_top = -433.0
-offset_right = 1280.0
-offset_bottom = -64.0
+offset_left = -1216.0
+offset_top = -448.0
+offset_right = 1216.0
+offset_bottom = -79.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_8bulm")
@@ -45,6 +46,10 @@ tower_scene = ExtResource("4_00jwl")
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="TowerSelectorButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
 
 [editable path="TowerSelector/Offense"]
 [editable path="TowerSelector/Offense/Padding/Buttons/Crossbow"]
