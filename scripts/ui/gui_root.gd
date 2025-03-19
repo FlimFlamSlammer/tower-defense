@@ -20,10 +20,11 @@ func _ready() -> void:
 	_tower_selector.position = TOWER_SELECTOR_HIDE_POSITION
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_placing:
 		var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
 		selected_tower.position = _tile_controller.map_to_local(pos)
+		selected_tower.modify_tower(false)
 		if _tile_controller._can_place_tower(pos):
 			selected_tower.set_display_valid()
 		else:
@@ -46,7 +47,7 @@ func cancel_tower_placement() -> void:
 
 
 func toggle_tower_selector_visibility() -> void:
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	if is_tower_selector_open:
 		tween.tween_property(_tower_selector, "position", TOWER_SELECTOR_HIDE_POSITION, 0.15).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 		is_tower_selector_open = false

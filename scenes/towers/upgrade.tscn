@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://df1qesprypgk6"]
+
+[ext_resource type="Script" uid="uid://col0ystitn4jb" path="res://scripts/towers/upgrade.gd" id="1_ilmwm"]
+
+[node name="Upgrade" type="Node"]
+script = ExtResource("1_ilmwm")
+description = "Lorem ipsum dolor sit amet"

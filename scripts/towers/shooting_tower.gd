@@ -1,16 +1,8 @@
 class_name ShootingTower
 extends Tower
 
-@export var initial_projectile: PackedScene
-@export var initial_projectile_offset := Vector2.UP * 24
-
-@onready var _pivot: Node2D = $Pivot
+@onready var _pivot: Node2D = $Visual/Pivot
 @onready var _attack_timer: Timer = $AttackTimer
-
-func _ready() -> void:
-	stats.projectile = initial_projectile
-	stats.projectile_offset = initial_projectile_offset
-
 
 func _process(delta: float) -> void:
 	attempt_fire(_attack_timer, _fire)
@@ -53,8 +45,8 @@ func attempt_fire(timer: Timer, fire: Callable) -> void:
 	var target: Enemy = _get_target(stats.range)
 	if not target: return
 	_pivot.look_at(target.global_position)
-	_custom_animations.stop()
-	_custom_animations.play("fire")
+	_animations.stop()
+	_animations.play("fire")
 	fire.call(target)
 	timer.start(1.0 / stats.fire_rate)
 

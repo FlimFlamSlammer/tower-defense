@@ -16,7 +16,7 @@ enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
 var tile_position: Vector2i
 var targeting: int
-var current_upgrade: Array[int] = [0, 0]
+var current_upgrade: Array[int] = [-1, -1]
 var selected: bool = false
 
 var stat_multipliers: Dictionary[String, Dictionary]
@@ -29,7 +29,7 @@ var _placed: bool = false
 @onready var _range_indicator: Node2D = $RangeIndicator
 @onready var _range_area: Area2D = $RangeArea
 @onready var _upgrades: Node = $Upgrades
-@onready var _custom_animations: AnimationPlayer = $CustomAnimations
+@onready var _animations: AnimationPlayer = $Visual/Animations
 @onready var _range_animations: AnimationPlayer = $RangeAnimation
 @onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 
@@ -93,8 +93,11 @@ func upgrade_tower(path: int) -> int:
 
 	current_upgrade[path] = tier
 
-	for stat in upgrade.stats.keys():
-		base_stats[stat] *= upgrade.stats[stat]
+	for stat in upgrade.stat_multipliers.keys():
+		base_stats[stat] *= upgrade.stat_multipliers[stat]
+
+	for stat in upgrade.stat_setters.keys():
+		base_stats[stat] = upgrade.stat_setters[stat]
 
 	modify_tower(true)
 
