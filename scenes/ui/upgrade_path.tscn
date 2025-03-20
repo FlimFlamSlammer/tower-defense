@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4gm6t7577hbt"]
+
+[ext_resource type="Texture2D" uid="uid://t57xpvt76yec" path="res://assets/ui/crystal.svg" id="1_jh4ae"]
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_y32eg"]
+[ext_resource type="StyleBox" uid="uid://i4csefihyled" path="res://resources/panel_on.tres" id="2_uifmr"]
+[ext_resource type="StyleBox" uid="uid://bc4s26ts4ee5t" path="res://resources/panel_off.tres" id="3_fh7fl"]
+
+[node name="UpgradePath" type="PanelContainer"]
+offset_right = 264.0
+offset_bottom = 40.0
+theme = ExtResource("1_y32eg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HFlex" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/HFlex"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+text = "Upgrade name"
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/HFlex"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme_override_constants/icon_max_width = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HFlex/Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -12.0
+offset_right = 43.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="HBox" type="HBoxContainer" parent="MarginContainer/HFlex/Button/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HFlex/Button/MarginContainer/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "500"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HFlex/Button/MarginContainer/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+texture = ExtResource("1_jh4ae")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Indicator" type="VBoxContainer" parent="MarginContainer/HFlex"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="4" type="Panel" parent="MarginContainer/HFlex/Indicator"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_fh7fl")
+
+[node name="3" type="Panel" parent="MarginContainer/HFlex/Indicator"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_fh7fl")
+
+[node name="2" type="Panel" parent="MarginContainer/HFlex/Indicator"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_fh7fl")
+
+[node name="1" type="Panel" parent="MarginContainer/HFlex/Indicator"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("2_uifmr")

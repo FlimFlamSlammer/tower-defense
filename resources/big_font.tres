@@ -1,9 +1,0 @@
-[gd_resource type="Theme" format=3 uid="uid://5os27plblg4t"]
-
-[resource]
-default_font_size = 41
-/fonts/font = null
-MarginContainer/constants/margin_bottom = 24
-MarginContainer/constants/margin_left = 24
-MarginContainer/constants/margin_right = 24
-MarginContainer/constants/margin_top = 24

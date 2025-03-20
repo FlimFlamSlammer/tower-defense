@@ -1,46 +1,63 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3ftv6p6r1071"]
+[gd_scene load_steps=7 format=3 uid="uid://c3ftv6p6r1071"]
 
-[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/big_font.tres" id="1_8bulm"]
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_8bulm"]
 [ext_resource type="Script" uid="uid://dt80n4vowgof1" path="res://scripts/ui/gui_root.gd" id="1_uktbi"]
 [ext_resource type="PackedScene" uid="uid://carqx0up3l7mp" path="res://scenes/ui/tower_category.tscn" id="2_astdl"]
 [ext_resource type="PackedScene" uid="uid://uiq1di43dds1" path="res://scenes/ui/tower_button.tscn" id="2_k2ell"]
+[ext_resource type="StyleBox" uid="uid://baihiuteq2brc" path="res://resources/panel_bg_outline.tres" id="3_lagvo"]
 [ext_resource type="PackedScene" uid="uid://l6rhoi3yb5xc" path="res://scenes/towers/crossbow.tscn" id="4_00jwl"]
 
-[node name="GUI" type="CanvasLayer"]
+[node name="GUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8bulm")
 script = ExtResource("1_uktbi")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 32.0
 offset_right = 4096.0
-offset_bottom = 31.0
+offset_bottom = 97.0
 alignment = 1
 
 [node name="StartButton" type="Button" parent="HBoxContainer" groups=["start_wave_button"]]
+custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
 theme = ExtResource("1_8bulm")
 text = "Start"
 
 [node name="TowerSelector" type="TabContainer" parent="."]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -1216.0
-offset_top = -448.0
+offset_top = -480.0
 offset_right = 1216.0
-offset_bottom = -79.0
+offset_bottom = -155.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_8bulm")
+theme_override_styles/panel = ExtResource("3_lagvo")
 tab_alignment = 1
 current_tab = 0
 tab_focus_mode = 1
 
 [node name="Offense" parent="TowerSelector" instance=ExtResource("2_astdl")]
 layout_mode = 2
+theme = ExtResource("1_8bulm")
 metadata/_tab_index = 0
 
-[node name="Crossbow" parent="TowerSelector/Offense/Padding/Buttons" index="0" instance=ExtResource("2_k2ell")]
+[node name="Buttons" parent="TowerSelector/Offense" index="0"]
+size_flags_horizontal = 0
+
+[node name="TowerSelector_Offense_Padding_Buttons#Crossbow" parent="TowerSelector/Offense/Buttons" index="0" instance=ExtResource("2_k2ell")]
 layout_mode = 2
 tower_scene = ExtResource("4_00jwl")
 
@@ -50,14 +67,16 @@ layout_mode = 2
 metadata/_tab_index = 1
 
 [node name="TowerSelectorButton" type="Button" parent="."]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -128.0
-offset_top = -65.0
+offset_top = -96.0
 offset_right = 128.0
+offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_8bulm")
@@ -66,5 +85,4 @@ text = "Towers"
 [connection signal="pressed" from="TowerSelectorButton" to="." method="toggle_tower_selector_visibility"]
 
 [editable path="TowerSelector/Offense"]
-[editable path="TowerSelector/Offense/Padding/Buttons/Crossbow"]
 [editable path="TowerSelector/Production"]

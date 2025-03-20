@@ -1,0 +1,29 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://5os27plblg4t"]
+
+[ext_resource type="StyleBox" uid="uid://1dxdk7orlgiw" path="res://resources/panel_bg.tres" id="1_7ct1h"]
+[ext_resource type="StyleBox" uid="uid://bmfavrbtvpa8q" path="res://resources/button_hover.tres" id="1_owntx"]
+[ext_resource type="StyleBox" uid="uid://cnq6jgcav4xgl" path="res://resources/panel_1.tres" id="2_886mr"]
+[ext_resource type="StyleBox" uid="uid://c1f5t3fvnlwb1" path="res://resources/button.tres" id="2_aaf3v"]
+[ext_resource type="StyleBox" uid="uid://8dbylqqoju0l" path="res://resources/button_disabled.tres" id="5_owntx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b751m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tekt2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_886mr"]
+
+[resource]
+default_font_size = 41
+/fonts/font = null
+Button/styles/focus = SubResource("StyleBoxEmpty_b751m")
+Button/styles/hover = ExtResource("1_owntx")
+Button/styles/hover_pressed = ExtResource("2_aaf3v")
+Button/styles/normal = ExtResource("2_aaf3v")
+Button/styles/pressed = ExtResource("2_aaf3v")
+Control/styles/panel = ExtResource("1_7ct1h")
+Panel/styles/panel = ExtResource("2_886mr")
+TabBar/styles/tab_selected = SubResource("StyleBoxFlat_tekt2")
+TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_886mr")
+TabContainer/styles/tab_hovered = ExtResource("1_owntx")
+TabContainer/styles/tab_selected = ExtResource("2_aaf3v")
+TabContainer/styles/tab_unselected = ExtResource("5_owntx")

@@ -58,4 +58,8 @@ tile_set = SubResource("TileSet_wuhgg")
 
 [node name="Spawner" parent="." instance=ExtResource("5_x5r6q")]
 
-[node name="UI" parent="." instance=ExtResource("6_ymv7b")]
+[node name="GUILayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="GUI" parent="GUILayer" instance=ExtResource("6_ymv7b")]
+mouse_filter = 2

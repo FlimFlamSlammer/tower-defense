@@ -1,5 +1,5 @@
 class_name TowerButton
-extends TextureButton
+extends Button
 
 signal tower_button_pressed(tower_scene: PackedScene)
 

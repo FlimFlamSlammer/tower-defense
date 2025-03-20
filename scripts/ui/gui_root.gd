@@ -1,7 +1,7 @@
 class_name GUIRoot
-extends CanvasLayer
+extends Control
 
-const TOWER_SELECTOR_POSITION := Vector2(832, 1856)
+const TOWER_SELECTOR_POSITION := Vector2(832, 1824)
 const TOWER_SELECTOR_HIDE_POSITION := Vector2(832, 2400)
 
 var selected_tower: Tower

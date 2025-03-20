@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://carqx0up3l7mp"]
-
-[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/big_font.tres" id="1_pxef3"]
+[gd_scene format=3 uid="uid://carqx0up3l7mp"]
 
 [node name="TowerCategory" type="ScrollContainer"]
 offset_right = 40.0
@@ -8,10 +6,8 @@ offset_bottom = 40.0
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
 
-[node name="Padding" type="MarginContainer" parent="."]
+[node name="Buttons" type="HBoxContainer" parent="."]
 layout_mode = 2
-theme = ExtResource("1_pxef3")
-
-[node name="Buttons" type="HBoxContainer" parent="Padding"]
-layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 24
