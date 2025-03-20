@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2mycprwwctbb"
-path="res://.godot/imported/frame.svg-07533d2e479fc82b3ff958eca2da8917.ctex"
+uid="uid://c4ibb42n6xcku"
+path="res://.godot/imported/stick.svg-49ec61bca450ce805b448dcd7d9a7923.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/towers/crossbow/frame.svg"
-dest_files=["res://.godot/imported/frame.svg-07533d2e479fc82b3ff958eca2da8917.ctex"]
+source_file="res://assets/towers/crossbow/00/stick.svg"
+dest_files=["res://.godot/imported/stick.svg-49ec61bca450ce805b448dcd7d9a7923.ctex"]
 
 [params]
 

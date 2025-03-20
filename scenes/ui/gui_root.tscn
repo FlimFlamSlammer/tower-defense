@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://carqx0up3l7mp" path="res://scenes/ui/tower_category.tscn" id="2_astdl"]
 [ext_resource type="PackedScene" uid="uid://uiq1di43dds1" path="res://scenes/ui/tower_button.tscn" id="2_k2ell"]
 [ext_resource type="StyleBox" uid="uid://baihiuteq2brc" path="res://resources/panel_bg_outline.tres" id="3_lagvo"]
-[ext_resource type="PackedScene" uid="uid://l6rhoi3yb5xc" path="res://scenes/towers/crossbow.tscn" id="4_00jwl"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
