@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bobqmxgwqu106"]
+[gd_scene load_steps=8 format=3 uid="uid://cwwkngo62wdfx"]
 
-[ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_fsfwr"]
-[ext_resource type="Texture2D" uid="uid://c4ibb42n6xcku" path="res://assets/towers/crossbow/00/stick.svg" id="1_nyicp"]
-[ext_resource type="PackedScene" uid="uid://dv52w3ak7nc32" path="res://scenes/projectiles/bolt.tscn" id="2_27tyn"]
-[ext_resource type="Texture2D" uid="uid://b2mycprwwctbb" path="res://assets/towers/crossbow/00/frame.svg" id="2_bi4t6"]
+[ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_repwg"]
+[ext_resource type="PackedScene" uid="uid://1kabel7jn7ti" path="res://scenes/projectiles/sharp_bolt.tscn" id="2_ek13u"]
+[ext_resource type="Texture2D" uid="uid://c4ibb42n6xcku" path="res://assets/towers/crossbow/00/stick.svg" id="3_kh4wy"]
+[ext_resource type="Texture2D" uid="uid://d27mhvdyewyoy" path="res://assets/towers/crossbow/01/Frame.svg" id="4_repwg"]
 
 [sub_resource type="Animation" id="Animation_2l0pa"]
 length = 0.001
@@ -113,12 +113,12 @@ _data = {
 &"fire": SubResource("Animation_ldsdy")
 }
 
-[node name="MutableData" instance=ExtResource("1_fsfwr")]
+[node name="MutableData" instance=ExtResource("1_repwg")]
 stats = Dictionary[String, Variant]({
 "damage": 5.0,
-"fire_rate": 0.8,
-"pierce": 2,
-"projectile": ExtResource("2_27tyn"),
+"fire_rate": 1.0,
+"pierce": 3,
+"projectile": ExtResource("2_ek13u"),
 "range": 2.5
 })
 
@@ -131,13 +131,13 @@ libraries = {
 
 [node name="Stick" type="Sprite2D" parent="Pivot" index="0"]
 rotation = 1.5708
-texture = ExtResource("1_nyicp")
+texture = ExtResource("3_kh4wy")
 
 [node name="Polygon2D" type="Polygon2D" parent="Pivot" index="1"]
 position = Vector2(24, 0)
 rotation = 1.5708
 scale = Vector2(0.5, 1)
-polygon = PackedVector2Array(0, 120, 4, 72, 4, -72, 0, -120, -4, -72, -4, 72)
+polygon = PackedVector2Array(0, 120, 4.00041, 56, 3.99959, -56, 0, -120, -4.00041, -56, -3.99959, 56)
 
 [node name="String" type="Line2D" parent="Pivot" index="2"]
 points = PackedVector2Array(32, -88, -100, 0, 32, 88)
@@ -157,5 +157,4 @@ end_cap_mode = 2
 
 [node name="Frame" type="Sprite2D" parent="Pivot" index="4"]
 position = Vector2(64, 0)
-rotation = 1.5708
-texture = ExtResource("2_bi4t6")
+texture = ExtResource("4_repwg")

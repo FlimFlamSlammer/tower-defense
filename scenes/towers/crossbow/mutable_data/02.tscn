@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4gdgl7awlryc"]
+[gd_scene load_steps=8 format=3 uid="uid://c4gdgl7awlryc"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_3i6hd"]
+[ext_resource type="PackedScene" uid="uid://dv52w3ak7nc32" path="res://scenes/projectiles/bolt.tscn" id="2_lmmje"]
 [ext_resource type="Texture2D" uid="uid://c4ibb42n6xcku" path="res://assets/towers/crossbow/00/stick.svg" id="3_xi135"]
 [ext_resource type="Texture2D" uid="uid://b6se1oiaichxq" path="res://assets/towers/crossbow/02/Frame.svg" id="4_8gxxb"]
 
@@ -113,6 +114,13 @@ _data = {
 }
 
 [node name="MutableData" instance=ExtResource("1_3i6hd")]
+stats = Dictionary[String, Variant]({
+"damage": 3.0,
+"fire_rate": 1.0,
+"pierce": 2,
+"projectile": ExtResource("2_lmmje"),
+"range": 3.5
+})
 
 [node name="Animations" type="AnimationPlayer" parent="." index="0"]
 libraries = {
