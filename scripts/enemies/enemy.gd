@@ -1,6 +1,8 @@
 class_name Enemy
 extends Area2D
 
+signal enemyLeaked(health: float)
+
 @export var max_health = 5
 @export var health = 5
 @export var speed: float = 0.3 ## Speed in tiles per second.
@@ -18,6 +20,7 @@ func _process(delta: float) -> void:
 		progress -= 1.0
 		cur_tile = next_tile
 		if cur_tile == tile_controller.finish_tile:
+			enemyLeaked.emit(health)
 			queue_free()
 			return
 		next_tile = (tile_controller.tiles.get_tile(next_tile) as PathTile).next_path

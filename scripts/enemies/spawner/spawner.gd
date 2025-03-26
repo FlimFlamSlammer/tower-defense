@@ -1,6 +1,8 @@
 class_name Spawner
 extends Node
 
+signal enemySpawned(enemy: Enemy)
+
 @export var wave_data: WaveData
 var wave: int = 0
 

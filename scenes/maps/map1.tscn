@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://g5ftce2y2brt"]
+[gd_scene load_steps=11 format=4 uid="uid://g5ftce2y2brt"]
 
 [ext_resource type="Texture2D" uid="uid://dakxh7a0v4e5l" path="res://assets/tiles/map1/tile.svg" id="1_d08bi"]
+[ext_resource type="Script" uid="uid://d2e1n6bs7jdv" path="res://scripts/game-provider.gd" id="1_tdg3v"]
 [ext_resource type="Script" uid="uid://bp8wugfx6tk0m" path="res://scripts/tiles/tile_controller.gd" id="2_5yiy8"]
 [ext_resource type="Texture2D" uid="uid://d8lo4dccj3kb" path="res://assets/tiles/map1/tiles_debug.svg" id="3_sn5yq"]
 [ext_resource type="PackedScene" uid="uid://brovx3xt83ihl" path="res://scenes/spawner.tscn" id="5_x5r6q"]
@@ -39,6 +40,7 @@ tile_size = Vector2i(256, 256)
 sources/0 = SubResource("TileSetAtlasSource_42hvp")
 
 [node name="Map" type="Node2D"]
+script = ExtResource("1_tdg3v")
 
 [node name="MainTileMap" type="TileMapLayer" parent="." node_paths=PackedStringArray("arrow_tile_map")]
 z_index = -10
@@ -50,13 +52,13 @@ first_tile = Vector2i(-1, -1)
 last_tile = Vector2i(16, 9)
 arrow_tile_map = NodePath("../ArrowTileMap")
 
+[node name="Spawner" parent="MainTileMap" instance=ExtResource("5_x5r6q")]
+
 [node name="ArrowTileMap" type="TileMapLayer" parent="."]
 visible = false
 modulate = Color(0.451355, 0.893955, 0.996094, 1)
 z_index = -9
 tile_set = SubResource("TileSet_wuhgg")
-
-[node name="Spawner" parent="." instance=ExtResource("5_x5r6q")]
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
 layer = 2

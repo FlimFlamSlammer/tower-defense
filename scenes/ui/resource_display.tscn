@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuhjbhic51lxy"]
+
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_pf40v"]
+[ext_resource type="StyleBox" uid="uid://hdrgjylyhusb" path="res://resources/transparent_bg.tres" id="2_3a1rf"]
+[ext_resource type="Texture2D" uid="uid://ddn427qy42yfu" path="res://assets/ui/shield.svg" id="3_3a1rf"]
+[ext_resource type="Script" uid="uid://dqr8xr5fa5m5r" path="res://scripts/ui/resource_display.gd" id="3_gar0h"]
+
+[node name="ResourceDisplay" type="PanelContainer"]
+theme = ExtResource("1_pf40v")
+theme_override_styles/panel = ExtResource("2_3a1rf")
+script = ExtResource("3_gar0h")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_3a1rf")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "100"

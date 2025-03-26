@@ -79,6 +79,7 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 
 	var tile := tiles.get_tile(pos) as TowerTile
 
+	add_child(tower);
 	tower.tile_position = pos
 	tower.position = map_to_local(pos)
 	tower.tower_modified.connect(update_danger_levels)
