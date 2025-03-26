@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b33hih0ab2vnh"]
+[gd_scene load_steps=7 format=3 uid="uid://bobqmxgwqu106"]
 
-[ext_resource type="Script" uid="uid://b5fi56hg3koq3" path="res://scripts/towers/tower_visual.gd" id="1_cd4ld"]
+[ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_fsfwr"]
 [ext_resource type="Texture2D" uid="uid://c4ibb42n6xcku" path="res://assets/towers/crossbow/00/stick.svg" id="1_nyicp"]
-[ext_resource type="PackedScene" uid="uid://dv52w3ak7nc32" path="res://scenes/projectiles/bolt.tscn" id="2_thavm"]
-[ext_resource type="Texture2D" uid="uid://d27mhvdyewyoy" path="res://assets/towers/crossbow/01/Frame.svg" id="4_cd4ld"]
+[ext_resource type="Texture2D" uid="uid://b2mycprwwctbb" path="res://assets/towers/crossbow/00/frame.svg" id="2_bi4t6"]
 
 [sub_resource type="Animation" id="Animation_2l0pa"]
 length = 0.001
@@ -113,31 +112,26 @@ _data = {
 &"fire": SubResource("Animation_ldsdy")
 }
 
-[node name="TowerVisual" type="Node"]
-script = ExtResource("1_cd4ld")
-data = Dictionary[String, Variant]({
-"projectile": ExtResource("2_thavm")
-})
-metadata/_custom_type_script = "uid://b5fi56hg3koq3"
+[node name="MutableData" instance=ExtResource("1_fsfwr")]
 
-[node name="Animations" type="AnimationPlayer" parent="."]
+[node name="Animations" type="AnimationPlayer" parent="." index="0"]
 libraries = {
 &"": SubResource("AnimationLibrary_2kcqc")
 }
 
-[node name="Pivot" type="Node2D" parent="."]
+[node name="Pivot" type="Node2D" parent="." index="1"]
 
-[node name="Stick" type="Sprite2D" parent="Pivot"]
+[node name="Stick" type="Sprite2D" parent="Pivot" index="0"]
 rotation = 1.5708
 texture = ExtResource("1_nyicp")
 
-[node name="Polygon2D" type="Polygon2D" parent="Pivot"]
+[node name="Polygon2D" type="Polygon2D" parent="Pivot" index="1"]
 position = Vector2(24, 0)
 rotation = 1.5708
 scale = Vector2(0.5, 1)
 polygon = PackedVector2Array(0, 120, 4, 72, 4, -72, 0, -120, -4, -72, -4, 72)
 
-[node name="String" type="Line2D" parent="Pivot"]
+[node name="String" type="Line2D" parent="Pivot" index="2"]
 points = PackedVector2Array(32, -88, -100, 0, 32, 88)
 width = 4.0
 default_color = Color(0.851076, 0.75177, 0.882812, 1)
@@ -145,8 +139,7 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="StringPad" type="Line2D" parent="Pivot"]
-visible = false
+[node name="StringPad" type="Line2D" parent="Pivot" index="3"]
 points = PackedVector2Array(-88, -8, -100, 0, -88, 8)
 width = 6.0
 default_color = Color(0.381964, 0.25708, 0.421875, 1)
@@ -154,6 +147,7 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Frame" type="Sprite2D" parent="Pivot"]
+[node name="Frame" type="Sprite2D" parent="Pivot" index="4"]
 position = Vector2(64, 0)
-texture = ExtResource("4_cd4ld")
+rotation = 1.5708
+texture = ExtResource("2_bi4t6")

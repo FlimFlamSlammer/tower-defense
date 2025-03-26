@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cr7vmajdyjqa5"]
-
-[ext_resource type="Script" uid="uid://b5fi56hg3koq3" path="res://scripts/towers/tower_visual.gd" id="1_2bpaw"]
-
-[node name="TowerVisual" type="Node"]
-script = ExtResource("1_2bpaw")

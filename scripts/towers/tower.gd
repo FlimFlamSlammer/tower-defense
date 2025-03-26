@@ -13,6 +13,7 @@ enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 	"fire_rate" = 1.0,
 	"pierce" = 1,
 }
+@export var mutable_data_path: StringName
 
 var tile_position: Vector2i
 var targeting: int
@@ -26,10 +27,11 @@ var _placed: bool = false
 
 @onready var stats: Dictionary[String, Variant] = base_stats
 
+@onready var _mutable_data: MutableData = $MutableData
 @onready var _range_indicator: Node2D = $RangeIndicator
 @onready var _range_area: Area2D = $RangeArea
 @onready var _upgrades: Node = $Upgrades
-@onready var _animations: AnimationPlayer = $Visual/Animations
+@onready var _animations: AnimationPlayer = _mutable_data.get_node("Animations")
 @onready var _range_animations: AnimationPlayer = $RangeAnimation
 @onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 
@@ -62,7 +64,7 @@ func deselect() -> void:
 
 ## Updates tower stats and appearance, taking into account stat modifiers. If param is true, recalculates pathfinding data.
 func modify_tower(p_update_paths: bool) -> void:
-	stats = base_stats
+	stats = _mutable_data.stats
 	for mod in stat_multipliers.values():
 		for key in mod.keys():
 			if not stats.has(key):
@@ -93,13 +95,13 @@ func upgrade_tower(path: int) -> int:
 
 	current_upgrade[path] = tier
 
-	for stat in upgrade.stat_multipliers.keys():
-		base_stats[stat] *= upgrade.stat_multipliers[stat]
+	var mutable_data_scene: PackedScene = load(mutable_data_path + "/" + str(current_upgrade[0]) + str(current_upgrade[1]))
+	var new_mutable_data = mutable_data_scene.instantiate()
+	new_mutable_data.name = _mutable_data.name
 
-	for stat in upgrade.stat_setters.keys():
-		base_stats[stat] = upgrade.stat_setters[stat]
-
-	modify_tower(true)
+	_mutable_data.queue_free()
+	add_child.call_deferred(new_mutable_data)
+	modify_tower.call_deferred(true)
 
 	return upgrade.cost
 

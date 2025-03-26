@@ -179,5 +179,3 @@ color = Vector4(0.8, 0.8, 0.8, 0.4)
 [node name="ClickArea" type="Area2D" parent="."]
 monitoring = false
 monitorable = false
-
-[node name="Visual" type="Node2D" parent="."]

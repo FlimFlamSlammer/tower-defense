@@ -1,7 +1,7 @@
 class_name ShootingTower
 extends Tower
 
-@onready var _pivot: Node2D = $Visual/Pivot
+@onready var _pivot: Node2D = _mutable_data.get_node("Pivot")
 @onready var _attack_timer: Timer = $AttackTimer
 
 func _process(delta: float) -> void:
