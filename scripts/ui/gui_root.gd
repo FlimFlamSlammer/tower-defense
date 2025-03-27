@@ -1,6 +1,8 @@
 class_name GUIRoot
 extends Control
 
+signal towerPlaced(tower: Tower)
+
 const TOWER_SELECTOR_POSITION := Vector2(832, 1824)
 const TOWER_SELECTOR_HIDE_POSITION := Vector2(832, 2400)
 
@@ -39,6 +41,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if is_placing:
 			var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
 			if _tile_controller.place_tower(pos, selected_tower):
+				towerPlaced.emit(selected_tower)
 				is_placing = false
 				toggle_tower_selector_visibility()
 

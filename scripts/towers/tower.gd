@@ -14,6 +14,7 @@ enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 	"pierce" = 1,
 }
 @export var mutable_data_path: StringName
+@export var price: int = 100
 
 var tile_position: Vector2i
 var targeting: int
