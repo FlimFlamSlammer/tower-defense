@@ -28,7 +28,7 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Sharper Bolts" type="Node" parent="Upgrades/Path0" index="1"]
 script = ExtResource("4_tvbwh")
-description = "Bolts fly faster and pierce targets."
+description = "Bolts fly faster and pierce more targets."
 stat_multipliers = Dictionary[String, float]({
 "pierce": 2.0,
 "projectile_speed": 1.2
