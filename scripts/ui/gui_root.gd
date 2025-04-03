@@ -1,14 +1,17 @@
 class_name GUIRoot
 extends Control
 
-signal towerPlaced(tower: Tower)
+signal tower_placed(tower: Tower)
 
-const TOWER_SELECTOR_POSITION := Vector2(832, 1824)
-const TOWER_SELECTOR_HIDE_POSITION := Vector2(832, 2400)
+var _tower_selector_offset_bottom: float
+var _tower_selector_offset_top: float
+var _tower_selector_hidden_offset_bottom: float
+var _tower_selector_hidden_offset_top: float = 100.0
 
 var selected_tower: Tower
 
 var is_placing: bool = false
+var is_selecting: bool = false
 var is_tower_selector_open: bool = false
 
 @onready var _tower_selector: TabContainer = $TowerSelector
@@ -22,7 +25,11 @@ func _ready() -> void:
 	for button: TowerButton in tower_buttons:
 		button.tower_button_pressed.connect(_on_tower_button_pressed)
 
-	_tower_selector.position = TOWER_SELECTOR_HIDE_POSITION
+	_tower_selector_offset_bottom = _tower_selector.offset_bottom
+	_tower_selector_offset_top = _tower_selector.offset_top
+	_tower_selector_hidden_offset_bottom = _tower_selector_hidden_offset_top - _tower_selector_offset_top + _tower_selector_offset_bottom
+	_tower_selector.offset_bottom = _tower_selector_hidden_offset_bottom
+	_tower_selector.offset_top = _tower_selector_hidden_offset_bottom
 
 
 func _process(_delta: float) -> void:
@@ -41,9 +48,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		if is_placing:
 			var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
 			if _tile_controller.place_tower(pos, selected_tower):
-				towerPlaced.emit(selected_tower)
+				tower_placed.emit(selected_tower)
+				selected_tower.tower_clicked.connect(_select_tower)
 				is_placing = false
 				toggle_tower_selector_visibility()
+		elif is_selecting:
+			_clear_selection()
 
 
 func cancel_tower_placement() -> void:
@@ -53,13 +63,26 @@ func cancel_tower_placement() -> void:
 
 
 func toggle_tower_selector_visibility() -> void:
-	var tween: Tween = create_tween()
 	if is_tower_selector_open:
-		tween.tween_property(_tower_selector, "position", TOWER_SELECTOR_HIDE_POSITION, 0.15).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+		Globals.tween_properties(
+			_tower_selector,
+			["offset_bottom", "offset_top"],
+			[_tower_selector_hidden_offset_bottom, _tower_selector_hidden_offset_top],
+			0.15,
+			Tween.EASE_IN,
+			Tween.TRANS_CUBIC
+		)
 		is_tower_selector_open = false
 	else:
 		cancel_tower_placement()
-		tween.tween_property(_tower_selector, "position", TOWER_SELECTOR_POSITION, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+		Globals.tween_properties(
+			_tower_selector,
+			["offset_bottom", "offset_top"],
+			[_tower_selector_offset_bottom, _tower_selector_offset_top],
+			0.25,
+			Tween.EASE_IN_OUT,
+			Tween.TRANS_CUBIC
+		)
 		is_tower_selector_open = true
 
 
@@ -69,3 +92,18 @@ func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
 	selected_tower = tower_scene.instantiate()
 	add_sibling(selected_tower)
 	is_placing = true
+
+
+func _select_tower(tower: Tower) -> void:
+	if is_selecting:
+		_clear_selection()
+
+	is_selecting = true
+	selected_tower.select()
+	selected_tower = tower
+
+
+func _clear_selection() -> void:
+	if selected_tower.selected:
+		selected_tower.deselect()
+	is_selecting = false

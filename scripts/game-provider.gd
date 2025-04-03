@@ -20,6 +20,9 @@ func _ready() -> void:
 			lives -= max(roundi(health), 1)
 		)
 	)
-	gui.towerPlaced.connect(func(tower: Tower):
+	gui.tower_placed.connect(func(tower: Tower):
 		money -= tower.price
 	)
+	
+	money = money # update money display
+	lives = lives # update lives display

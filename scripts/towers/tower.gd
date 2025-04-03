@@ -3,6 +3,7 @@ extends Node2D
 
 signal tower_modified()
 signal update_paths()
+signal tower_clicked(tower: Tower, select: bool)
 
 enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
@@ -50,7 +51,6 @@ func place() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 1.0)
 	_placed = true
 	modify_tower(true)
-	select()
 
 
 func select() -> void:
@@ -133,3 +133,10 @@ func _get_tile_danger_level_multiplier(tile: Vector2i) -> float:
 	if danger < 1.0 and danger > 0.0:
 		danger = sqrt(danger)
 	return danger
+
+
+func _on_tower_clicked() -> void:
+	if selected:
+		tower_clicked.emit(self, false)
+	else:
+		tower_clicked.emit(self, true)
