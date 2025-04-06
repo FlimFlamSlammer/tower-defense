@@ -5,8 +5,8 @@ signal tower_placed(tower: Tower)
 
 const TOWER_SELECTOR_CLOSED_TOP: float = 100.0
 
-var _tower_selector_pos_open: UIPosition = UIPosition.new()
-var _tower_selector_pos_closed: UIPosition = UIPosition.new()
+var _tower_selector_pos_open: ControlPosition = ControlPosition.new()
+var _tower_selector_pos_closed: ControlPosition = ControlPosition.new()
 
 var selected_tower: Tower
 

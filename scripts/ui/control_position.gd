@@ -1,4 +1,4 @@
-class_name UIPosition
+class_name ControlPosition
 extends RefCounted
 
 var _top: float
