@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://co62srhvsut4c"]
+
+[ext_resource type="Script" uid="uid://2ob2omvrkre1" path="res://scripts/projectiles/bolt.gd" id="1_ohsdw"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ejeda"]
+b = Vector2(128, 0)
+
+[node name="Bolt" type="Area2D"]
+z_index = 2
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_ohsdw")
+speed = 3500.0
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.5, 1)
+color = Color(1, 1, 0.72549, 1)
+polygon = PackedVector2Array(0, 120, 4.0007, 96, 3.99931, -96, 0, -120, -4.0007, -96, -3.99931, 96)
+
+[node name="Tip" type="Polygon2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.5, 1)
+color = Color(1, 0.866667, 0.462745, 1)
+polygon = PackedVector2Array(-0.000680558, -94, -6.00059, -82, -6.0007, -96, -0.000897758, -124, 5.9993, -96, 5.99941, -82)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_ejeda")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
