@@ -12,5 +12,4 @@ const TowerGroups: Dictionary = {
 static func tween_properties(object: Object, properties: Array[NodePath], final_vals: Array[Variant], duration: float, ease_type: int, trans_type: int) -> void:
 	for i in range(properties.size()):
 		var tween = object.create_tween()
-		print(properties[i], final_vals[i])
 		tween.tween_property(object, properties[i], final_vals[i], duration).set_ease(ease_type).set_trans(trans_type)
