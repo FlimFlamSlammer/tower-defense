@@ -3,10 +3,10 @@ extends Control
 
 signal tower_placed(tower: Tower)
 
-var _tower_selector_offset_bottom: float
-var _tower_selector_offset_top: float
-var _tower_selector_hidden_offset_bottom: float
-var _tower_selector_hidden_offset_top: float = 100.0
+const TOWER_SELECTOR_CLOSED_TOP: float = 100.0
+
+var _tower_selector_pos_open: UIPosition = UIPosition.new()
+var _tower_selector_pos_closed: UIPosition = UIPosition.new()
 
 var selected_tower: Tower
 
@@ -25,11 +25,11 @@ func _ready() -> void:
 	for button: TowerButton in tower_buttons:
 		button.tower_button_pressed.connect(_on_tower_button_pressed)
 
-	_tower_selector_offset_bottom = _tower_selector.offset_bottom
-	_tower_selector_offset_top = _tower_selector.offset_top
-	_tower_selector_hidden_offset_bottom = _tower_selector_hidden_offset_top - _tower_selector_offset_top + _tower_selector_offset_bottom
-	_tower_selector.offset_bottom = _tower_selector_hidden_offset_bottom
-	_tower_selector.offset_top = _tower_selector_hidden_offset_bottom
+	_tower_selector_pos_open.update_position(_tower_selector)
+	_tower_selector_pos_closed.update_position(_tower_selector)
+	_tower_selector_pos_closed.position.y = 100.0
+
+	_tower_selector_pos_closed.set_node_position(_tower_selector)
 
 
 func _process(_delta: float) -> void:
@@ -64,10 +64,8 @@ func cancel_tower_placement() -> void:
 
 func toggle_tower_selector_visibility() -> void:
 	if is_tower_selector_open:
-		Globals.tween_properties(
+		_tower_selector_pos_closed.tween_node_position(
 			_tower_selector,
-			["offset_bottom", "offset_top"],
-			[_tower_selector_hidden_offset_bottom, _tower_selector_hidden_offset_top],
 			0.15,
 			Tween.EASE_IN,
 			Tween.TRANS_CUBIC
@@ -75,10 +73,8 @@ func toggle_tower_selector_visibility() -> void:
 		is_tower_selector_open = false
 	else:
 		cancel_tower_placement()
-		Globals.tween_properties(
+		_tower_selector_pos_open.tween_node_position(
 			_tower_selector,
-			["offset_bottom", "offset_top"],
-			[_tower_selector_offset_bottom, _tower_selector_offset_top],
 			0.25,
 			Tween.EASE_IN_OUT,
 			Tween.TRANS_CUBIC
@@ -87,7 +83,6 @@ func toggle_tower_selector_visibility() -> void:
 
 
 func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
-	print(tower_scene)
 	toggle_tower_selector_visibility()
 	selected_tower = tower_scene.instantiate()
 	add_sibling(selected_tower)
@@ -107,3 +102,36 @@ func _clear_selection() -> void:
 	if selected_tower.selected:
 		selected_tower.deselect()
 	is_selecting = false
+
+class UIPosition:
+	var _top: float
+	var _bottom: float
+	var _left: float
+	var _right: float
+
+	var position: Vector2:
+		get:
+			return Vector2(_left, _top)
+		set(val):
+			var length: float = _right - _left
+			_right = val.x + length
+			_left = val.x
+
+			length = _bottom - _top
+			_bottom = val.y + length
+			_top = val.y
+
+	func set_node_position(node: Control) -> void:
+		node.offset_top = _top
+		node.offset_bottom = _bottom
+		node.offset_left = _left
+		node.offset_right = _right
+
+	func tween_node_position(node: Control, duration: float, ease_type: int, trans_type: int) -> void:
+		Globals.tween_properties(node, ["offset_top", "offset_bottom", "offset_left", "offset_right"], [_top, _bottom, _left, _right], duration, ease_type, trans_type)
+
+	func update_position(node: Control) -> void:
+		_top = node.offset_top
+		_bottom = node.offset_bottom
+		_left = node.offset_left
+		_right = node.offset_right
