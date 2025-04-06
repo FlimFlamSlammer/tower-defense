@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3ftv6p6r1071"]
+[gd_scene load_steps=11 format=3 uid="uid://c3ftv6p6r1071"]
 
 [ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_8bulm"]
 [ext_resource type="Script" uid="uid://dt80n4vowgof1" path="res://scripts/ui/gui_root.gd" id="1_uktbi"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cuhjbhic51lxy" path="res://scenes/ui/resource_display.tscn" id="3_mcgig"]
 [ext_resource type="PackedScene" uid="uid://l6rhoi3yb5xc" path="res://scenes/towers/crossbow/crossbow.tscn" id="4_00jwl"]
 [ext_resource type="Texture2D" uid="uid://t57xpvt76yec" path="res://assets/ui/crystal.svg" id="4_j5hfe"]
+[ext_resource type="Script" uid="uid://dhf6s7lrolgof" path="res://scripts/ui/closable_menu.gd" id="6_py6rl"]
 [ext_resource type="PackedScene" uid="uid://c4tpi83r71ldm" path="res://scenes/ui/upgrade_menu.tscn" id="9_j5hfe"]
 
 [node name="GUI" type="Control"]
@@ -48,7 +49,7 @@ layout_mode = 2
 [node name="TextureRect" parent="TopBar/MoneyDisplay/MarginContainer/HBoxContainer" index="0"]
 texture = ExtResource("4_j5hfe")
 
-[node name="TowerSelector" type="TabContainer" parent="."]
+[node name="TowerMenu" type="TabContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -66,26 +67,27 @@ theme_override_styles/panel = ExtResource("3_lagvo")
 tab_alignment = 1
 current_tab = 0
 tab_focus_mode = 1
+script = ExtResource("6_py6rl")
 metadata/_edit_use_anchors_ = true
 
-[node name="Offense" parent="TowerSelector" instance=ExtResource("2_astdl")]
+[node name="Offense" parent="TowerMenu" instance=ExtResource("2_astdl")]
 layout_mode = 2
 theme = ExtResource("1_8bulm")
 metadata/_tab_index = 0
 
-[node name="Buttons" parent="TowerSelector/Offense" index="0"]
+[node name="Buttons" parent="TowerMenu/Offense" index="0"]
 size_flags_horizontal = 0
 
-[node name="TowerSelector_Offense_Padding_Buttons#Crossbow" parent="TowerSelector/Offense/Buttons" index="0" instance=ExtResource("2_k2ell")]
+[node name="TowerSelector_Offense_Padding_Buttons#Crossbow" parent="TowerMenu/Offense/Buttons" index="0" instance=ExtResource("2_k2ell")]
 layout_mode = 2
 tower_scene = ExtResource("4_00jwl")
 
-[node name="Production" parent="TowerSelector" instance=ExtResource("2_astdl")]
+[node name="Production" parent="TowerMenu" instance=ExtResource("2_astdl")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="TowerSelectorButton" type="Button" parent="."]
+[node name="TowerMenuButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -113,9 +115,9 @@ offset_bottom = 384.0
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="TowerSelectorButton" to="." method="toggle_tower_selector_visibility"]
+[connection signal="pressed" from="TowerMenuButton" to="." method="_on_tower_menu_button_pressed"]
 
 [editable path="TopBar/LivesDisplay"]
 [editable path="TopBar/MoneyDisplay"]
-[editable path="TowerSelector/Offense"]
-[editable path="TowerSelector/Production"]
+[editable path="TowerMenu/Offense"]
+[editable path="TowerMenu/Production"]

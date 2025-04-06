@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://uy78f1v0v425"]
+[gd_scene load_steps=12 format=3 uid="uid://uy78f1v0v425"]
 
 [ext_resource type="Script" uid="uid://b14bl5g2fycmp" path="res://scripts/towers/tower.gd" id="1_0jldc"]
 [ext_resource type="Texture2D" uid="uid://ljp4dn3u2ula" path="res://assets/towers/crossbow/base.svg" id="1_5hrty"]
 [ext_resource type="Texture2D" uid="uid://mygk8i0abyo3" path="res://assets/towers/range-circle.svg" id="2_bemr7"]
+[ext_resource type="Script" uid="uid://i7sacvxvlug0" path="res://scripts/towers/upgrades.gd" id="2_dc0g6"]
 [ext_resource type="Material" uid="uid://b4s2mxmhcjh2v" path="res://materials/outline.tres" id="2_o25nu"]
 [ext_resource type="Script" uid="uid://b5d6b7nun4ne4" path="res://scripts/unscaled_outline.gd" id="3_8ghdo"]
 
@@ -153,6 +154,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_vgma8")
 
 [node name="Upgrades" type="Node" parent="."]
+script = ExtResource("2_dc0g6")
 
 [node name="Path0" type="Node" parent="Upgrades"]
 
@@ -176,6 +178,12 @@ script = ExtResource("3_8ghdo")
 thickness = 4.0
 color = Vector4(0.8, 0.8, 0.8, 0.4)
 
-[node name="ClickArea" type="Area2D" parent="."]
-monitoring = false
-monitorable = false
+[node name="ClickArea" type="Control" parent="."]
+layout_mode = 3
+offset_left = -104.0
+offset_top = -104.0
+offset_right = 104.0
+offset_bottom = 104.0
+mouse_filter = 2
+
+[connection signal="gui_input" from="ClickArea" to="." method="_on_tower_clicked"]

@@ -3,7 +3,7 @@ extends Node2D
 
 signal tower_modified()
 signal update_paths()
-signal tower_clicked(tower: Tower, select: bool)
+signal tower_clicked(tower: Tower)
 
 enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
@@ -28,14 +28,15 @@ var stat_adders: Dictionary[String, Dictionary]
 var _placed: bool = false
 
 @onready var stats: Dictionary[String, Variant] = base_stats
+@onready var upgrades: Upgrades = $Upgrades
 
 @onready var _mutable_data: MutableData = $MutableData
 @onready var _range_indicator: Node2D = $RangeIndicator
 @onready var _range_area: Area2D = $RangeArea
-@onready var _upgrades: Node = $Upgrades
 @onready var _animations: AnimationPlayer = _mutable_data.get_node("Animations")
 @onready var _range_animations: AnimationPlayer = $RangeAnimation
 @onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
+@onready var _click_area: Control = $ClickArea
 
 
 func _ready() -> void:
@@ -51,6 +52,7 @@ func place() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 1.0)
 	_placed = true
 	modify_tower(true)
+	_click_area.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
 func select() -> void:
@@ -88,7 +90,7 @@ func modify_tower(p_update_paths: bool) -> void:
 ## Upgrades the tower by one tier on the specified path. Returns the upgrade cost.
 func upgrade_tower(path: int) -> int:
 	var tier: int = current_upgrade[path] + 1
-	var upgrade := _upgrades.get_child(path).get_child(tier) as Upgrade
+	var upgrade := upgrades.get_upgrade(path, tier)
 
 	if not upgrade:
 		print_debug("T", tier, " upgrade from path ", path, " not found, skipping...")
@@ -135,8 +137,7 @@ func _get_tile_danger_level_multiplier(tile: Vector2i) -> float:
 	return danger
 
 
-func _on_tower_clicked() -> void:
-	if selected:
-		tower_clicked.emit(self, false)
-	else:
-		tower_clicked.emit(self, true)
+func _on_tower_clicked(event: InputEvent) -> void:
+	if event.is_action_pressed("click"):
+		print("yes")
+		tower_clicked.emit(self)

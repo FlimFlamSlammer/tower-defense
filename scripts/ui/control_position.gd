@@ -6,7 +6,7 @@ var _bottom: float
 var _left: float
 var _right: float
 
-var position: Vector2:
+var position: Vector2: ## Stores the position of the top-left corner of this ControlPosition relative to the anchor point.
 	get:
 		return Vector2(_left, _top)
 	set(val):
@@ -17,6 +17,21 @@ var position: Vector2:
 		length = _bottom - _top
 		_bottom = val.y + length
 		_top = val.y
+
+var position_inverted: Vector2: ## Stores the position of the bottom-right corner of this ControlPosition relative to the anchor point.
+	get:
+		return Vector2(_right, _bottom)
+	set(val):
+		var length: float = _left - _right
+		_left = val.x + length
+		_right = val.x
+
+		length = _top - _bottom
+		_top = val.y + length
+		_bottom = val.y
+
+func _init(node: Control) -> void:
+	update_position(node)
 
 func set_node_position(node: Control) -> void:
 	node.offset_top = _top
