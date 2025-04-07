@@ -8,12 +8,12 @@
    version="1.1"
    id="svg5"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
-   sodipodi:docname="00.svg"
+   sodipodi:docname="03.svg"
    inkscape:export-filename="../towers/crossbow/preview.svg"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
-   inkscape:export-batch-path="..\tiles\map1"
-   inkscape:export-batch-name="tower"
+   inkscape:export-batch-path="C:\Users\kevin\OneDrive\Desktop\Tower Defence\tower-defense\assets\towers\crossbow\03"
+   inkscape:export-batch-name=""
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -29,9 +29,9 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="px"
      showgrid="true"
-     inkscape:zoom="2.0000001"
-     inkscape:cx="114.74999"
-     inkscape:cy="125.74999"
+     inkscape:zoom="2.8284273"
+     inkscape:cx="105.18213"
+     inkscape:cy="130.28442"
      inkscape:window-width="1920"
      inkscape:window-height="991"
      inkscape:window-x="-9"
@@ -90,7 +90,7 @@
      id="layer2"
      inkscape:label="Stick">
     <rect
-       style="fill:#a16bb5;fill-opacity:1;stroke-width:0.591799;stroke-dasharray:none"
+       style="fill:#ffeb1a;fill-opacity:1;stroke-width:0.591799;stroke-dasharray:none"
        id="rect3"
        width="4.7343893"
        height="61.547047"
@@ -105,7 +105,7 @@
      id="layer4"
      inkscape:label="String">
     <path
-       style="fill:none;stroke:#d9c0e1;stroke-width:1.18359724;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:none;stroke:#ffffcc;stroke-width:1.18359724;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
        d="M 47.34389,11.835972 V 63.914248"
        id="path466" />
   </g>
@@ -113,10 +113,31 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Frame">
+    <circle
+       style="fill:#ffeb1b;stroke-width:0.591612;stroke-linecap:round;stroke-linejoin:round;fill-opacity:1"
+       id="path1"
+       cx="47.343891"
+       cy="63.914249"
+       r="3.5507917" />
+    <circle
+       style="fill:#ffeb1b;fill-opacity:1;stroke-width:0.591612;stroke-linecap:round;stroke-linejoin:round"
+       id="path1-0"
+       cx="47.343887"
+       cy="11.835972"
+       r="3.5507917" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#6f4b8b;stroke-width:4.73439;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#ffa421;stroke-width:4.73439;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        d="M 47.343888,11.835972 66.281443,28.406333 V 47.343888 L 47.343888,63.914249"
        id="path4"
        sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#ffff34;fill-opacity:1;stroke-width:0.591612;stroke-linecap:round;stroke-linejoin:round"
+       id="rect2"
+       width="1.1835972"
+       height="7.1015844"
+       x="68.056839"
+       y="34.324318"
+       rx="1.1835972"
+       ry="0.51000398" />
   </g>
 </svg>
