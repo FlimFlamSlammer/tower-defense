@@ -120,7 +120,7 @@ stats = Dictionary[String, Variant]({
 "pierce": 3,
 "projectile": ExtResource("2_uve1q"),
 "projectile_offset": Vector2(24, 0),
-"projectile_speed": 4200.0,
+"projectile_speed": 5000.0,
 "range": 3.5
 })
 

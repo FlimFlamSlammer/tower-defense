@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://btyah6ndyxhhd"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_iada5"]
-[ext_resource type="PackedScene" path="res://scenes/projectiles/giant_bolt.tscn" id="2_iada5"]
+[ext_resource type="PackedScene" uid="uid://xjiobpfklo17" path="res://scenes/projectiles/giant_bolt.tscn" id="2_iada5"]
 [ext_resource type="Texture2D" uid="uid://bsiipwmemm5nr" path="res://assets/towers/crossbow/30/Stick.svg" id="3_iada5"]
 [ext_resource type="Texture2D" uid="uid://dd5naa3yrbdt5" path="res://assets/towers/crossbow/30/Frame.svg" id="4_ies1b"]
 
@@ -72,7 +72,7 @@ stats = Dictionary[String, Variant]({
 "pierce": 5,
 "projectile": ExtResource("2_iada5"),
 "projectile_offset": Vector2(30, 0),
-"projectile_speed": 4500.0,
+"projectile_speed": 5250.0,
 "range": 3.5
 })
 
