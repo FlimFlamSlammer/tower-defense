@@ -11,7 +11,6 @@ collision_layer = 0
 collision_mask = 2
 monitorable = false
 script = ExtResource("1_0fvi7")
-speed = 3500.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 rotation = 1.5708

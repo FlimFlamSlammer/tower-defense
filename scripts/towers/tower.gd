@@ -7,19 +7,14 @@ signal tower_clicked(tower: Tower)
 
 enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
+@export var tower_name: StringName
 @export var targeting_options: Array[Targeting] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
-@export var base_stats: Dictionary[String, Variant] = {
-	"range" = 4.0,
-	"damage" = 1.0,
-	"fire_rate" = 1.0,
-	"pierce" = 1,
-}
 @export var mutable_data_path: StringName
 @export var price: int = 100
 
 var tile_position: Vector2i
 var targeting: int
-var current_upgrade: Array[int] = [-1, -1]
+var current_upgrade: Array[int] = [0, 0]
 var selected: bool = false
 
 var stat_multipliers: Dictionary[String, Dictionary]
@@ -27,13 +22,12 @@ var stat_adders: Dictionary[String, Dictionary]
 
 var _placed: bool = false
 
-@onready var stats: Dictionary[String, Variant] = base_stats
+@onready var stats: Dictionary[String, Variant]
 @onready var upgrades: Upgrades = $Upgrades
 
 @onready var _mutable_data: MutableData = $MutableData
 @onready var _range_indicator: Node2D = $RangeIndicator
 @onready var _range_area: Area2D = $RangeArea
-@onready var _animations: AnimationPlayer = _mutable_data.get_node("Animations")
 @onready var _range_animations: AnimationPlayer = $RangeAnimation
 @onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 @onready var _click_area: Control = $ClickArea
@@ -103,6 +97,7 @@ func upgrade_tower(path: int) -> int:
 	new_mutable_data.name = _mutable_data.name
 
 	_mutable_data.queue_free()
+	_mutable_data = new_mutable_data
 	add_child.call_deferred(new_mutable_data)
 	modify_tower.call_deferred(true)
 

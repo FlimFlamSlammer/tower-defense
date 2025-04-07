@@ -45,8 +45,8 @@ func attempt_fire(timer: Timer, fire: Callable) -> void:
 	var target: Enemy = _get_target(stats.range)
 	if not target: return
 	_pivot.look_at(target.global_position)
-	_animations.stop()
-	_animations.play("fire")
+	_mutable_data.animations.stop()
+	_mutable_data.animations.play("fire")
 	fire.call(target)
 	timer.start(1.0 / stats.fire_rate)
 

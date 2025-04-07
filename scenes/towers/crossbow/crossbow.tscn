@@ -1,44 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://l6rhoi3yb5xc"]
+[gd_scene load_steps=5 format=3 uid="uid://l6rhoi3yb5xc"]
 
 [ext_resource type="PackedScene" uid="uid://bolphubyb6fu1" path="res://scenes/towers/shooting_tower.tscn" id="1_dyx6r"]
 [ext_resource type="Script" uid="uid://d2ox3rj3b05h2" path="res://scripts/towers/crossbow.gd" id="2_adi17"]
-[ext_resource type="PackedScene" uid="uid://dv52w3ak7nc32" path="res://scenes/projectiles/bolt.tscn" id="3_ts51x"]
 [ext_resource type="Script" uid="uid://col0ystitn4jb" path="res://scripts/towers/upgrade.gd" id="4_tvbwh"]
 [ext_resource type="PackedScene" uid="uid://dtp2gsrpc04qt" path="res://scenes/towers/crossbow/mutable_data/00.tscn" id="5_gc0ds"]
 
 [node name="Crossbow" groups=["attacking_towers"] instance=ExtResource("1_dyx6r")]
 script = ExtResource("2_adi17")
-base_stats = Dictionary[String, Variant]({
-"damage": 1.0,
-"fire_rate": 0.8,
-"pierce": 1.0,
-"projectile": ExtResource("3_ts51x"),
-"projectile_offset": Vector2(-24, 0),
-"range": 2.5
-})
+tower_name = &"Crossbow"
 
 [node name="Reinforced Strings" type="Node" parent="Upgrades/Path0" index="0"]
 script = ExtResource("4_tvbwh")
-description = "Increases damage."
+description = "Bolts fly faster and do more damage."
 stat_multipliers = Dictionary[String, float]({
 "damage": 1.5
-})
-cost = 20
-metadata/_custom_type_script = "uid://col0ystitn4jb"
-
-[node name="Sharper Bolts" type="Node" parent="Upgrades/Path0" index="1"]
-script = ExtResource("4_tvbwh")
-description = "Bolts fly faster and pierce more targets."
-stat_multipliers = Dictionary[String, float]({
-"pierce": 2.0,
-"projectile_speed": 1.2
 })
 cost = 40
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
+[node name="Sharper Bolts" type="Node" parent="Upgrades/Path0" index="1"]
+script = ExtResource("4_tvbwh")
+description = "Bolts fly even faster, deal even more damage, and pierce more targets."
+stat_multipliers = Dictionary[String, float]({
+"pierce": 2.0,
+"projectile_speed": 1.2
+})
+cost = 60
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
 [node name="Giant Crossbow" type="Node" parent="Upgrades/Path0" index="2"]
 script = ExtResource("4_tvbwh")
-description = "Giant Crossbow that fires giant bolts."
+description = "Improves overall stats at the cost of fire rate."
 stat_multipliers = Dictionary[String, float]({
 "damage": 3.0,
 "fire_rate": 0.5,
@@ -66,7 +58,7 @@ description = "Faster fire rate."
 stat_multipliers = Dictionary[String, float]({
 "fire_rate": 1.25
 })
-cost = 15
+cost = 25
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Improved Sensors" type="Node" parent="Upgrades/Path1" index="1"]
@@ -75,7 +67,7 @@ description = "Longer range."
 stat_multipliers = Dictionary[String, float]({
 "range": 1.3
 })
-cost = 20
+cost = 30
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Fuse Bolts" type="Node" parent="Upgrades/Path1" index="2"]

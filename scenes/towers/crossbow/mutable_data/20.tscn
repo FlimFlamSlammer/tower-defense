@@ -119,6 +119,8 @@ stats = Dictionary[String, Variant]({
 "fire_rate": 0.8,
 "pierce": 3,
 "projectile": ExtResource("2_upebp"),
+"projectile_offset": Vector2(24, 0),
+"projectile_speed": 4200.0,
 "range": 2.5
 })
 
