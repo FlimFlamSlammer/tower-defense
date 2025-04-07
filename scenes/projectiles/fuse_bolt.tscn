@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://co62srhvsut4c"]
+[gd_scene load_steps=3 format=3 uid="uid://ci20pb3sg6lt5"]
 
 [ext_resource type="Script" uid="uid://2ob2omvrkre1" path="res://scripts/projectiles/bolt.gd" id="1_ohsdw"]
 
@@ -23,7 +23,7 @@ polygon = PackedVector2Array(0, 120, 4.0007, 96, 3.99931, -96, 0, -120, -4.0007,
 rotation = 1.5708
 scale = Vector2(0.5, 1)
 color = Color(1, 0.866667, 0.462745, 1)
-polygon = PackedVector2Array(-0.000680558, -94, -6.00059, -82, -6.0007, -96, -0.000897758, -124, 5.9993, -96, 5.99941, -82)
+polygon = PackedVector2Array(-0.000622638, -86, -8.00059, -82, -8.0007, -96, -0.000897758, -124, 7.9993, -96, 7.99941, -82)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_ejeda")
