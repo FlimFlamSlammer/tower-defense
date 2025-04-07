@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://btyah6ndyxhhd"]
+[gd_scene load_steps=8 format=3 uid="uid://bbvh62sdn0q8b"]
 
-[ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_iada5"]
-[ext_resource type="PackedScene" uid="uid://xjiobpfklo17" path="res://scenes/projectiles/giant_bolt.tscn" id="2_iada5"]
-[ext_resource type="Texture2D" uid="uid://bsiipwmemm5nr" path="res://assets/towers/crossbow/30/Stick.svg" id="3_iada5"]
-[ext_resource type="Texture2D" uid="uid://dd5naa3yrbdt5" path="res://assets/towers/crossbow/30/Frame.svg" id="4_ies1b"]
+[ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_rbdnw"]
+[ext_resource type="PackedScene" uid="uid://xjiobpfklo17" path="res://scenes/projectiles/giant_bolt.tscn" id="2_2wlcq"]
+[ext_resource type="Texture2D" uid="uid://duwekmdukhsmp" path="res://assets/towers/crossbow/40/Stick.svg" id="2_vu7vp"]
+[ext_resource type="Texture2D" uid="uid://iskra7fmk4nn" path="res://assets/towers/crossbow/40/Frame.svg" id="3_rbdnw"]
 
-[sub_resource type="Animation" id="Animation_2l0pa"]
+[sub_resource type="Animation" id="Animation_2wlcq"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -17,7 +17,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [PackedVector2Array(8, -152, -142, 0, 8, 152)]
+"values": [PackedVector2Array(12, -200, -160, 0, 12, 200)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -29,7 +29,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [PackedVector2Array(-130, -12, -142, 0, -130, 12)]
+"values": [PackedVector2Array(-150, -12, -160, 0, -150, 12)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -56,10 +56,10 @@ tracks/3/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_ldsdy"]
+[sub_resource type="Animation" id="Animation_0apns"]
 resource_name = "fire"
 length = 1.6
-step = 0.1
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -70,7 +70,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.03, 0.5, 1.6),
 "transitions": PackedFloat32Array(1, 1, 0.8, 1),
 "update": 0,
-"values": [PackedVector2Array(8, -152, -142, 0, 8, 152), PackedVector2Array(8, -152, 8, 0, 8, 152), PackedVector2Array(8, -152, 8, 0, 8, 152), PackedVector2Array(8, -152, -142, 0, 8, 152)]
+"values": [PackedVector2Array(12, -200, -160, 0, 12, 200), PackedVector2Array(12, -200, 12, 6, 12, 200), PackedVector2Array(12, -200, 12, 6, 12, 200), PackedVector2Array(12, -200, -160, 0, 12, 200)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -82,7 +82,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.03, 0.5, 1.6),
 "transitions": PackedFloat32Array(1, 1, 0.8, 1),
 "update": 0,
-"values": [PackedVector2Array(-130, -12, -142, 0, -130, 12), PackedVector2Array(8, -12, 8, 0, 8, 12), PackedVector2Array(8, -12, 8, 0, 8, 12), PackedVector2Array(-130, -12, -142, 0, -130, 12)]
+"values": [PackedVector2Array(-150, -12, -160, 0, -150, 12), PackedVector2Array(12, -10, 12, 0, 12, 10), PackedVector2Array(12, -10, 12, 0, 12, 10), PackedVector2Array(-150, -12, -160, 0, -150, 12)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -109,35 +109,35 @@ tracks/3/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kcqc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3f21w"]
 _data = {
-&"RESET": SubResource("Animation_2l0pa"),
-&"fire": SubResource("Animation_ldsdy")
+&"RESET": SubResource("Animation_2wlcq"),
+&"fire": SubResource("Animation_0apns")
 }
 
-[node name="MutableData" instance=ExtResource("1_iada5")]
+[node name="MutableData" instance=ExtResource("1_rbdnw")]
 stats = Dictionary[String, Variant]({
-"damage": 12.0,
+"damage": 50.0,
 "fire_rate": 0.5,
-"pierce": 5,
-"projectile": ExtResource("2_iada5"),
+"pierce": 50,
+"projectile": ExtResource("2_2wlcq"),
 "projectile_offset": Vector2(30, 0),
 "projectile_speed": 5250.0,
-"range": 3.5
+"range": 4.0
 })
 
 [node name="Animations" type="AnimationPlayer" parent="." index="0"]
 libraries = {
-&"": SubResource("AnimationLibrary_2kcqc")
+&"": SubResource("AnimationLibrary_3f21w")
 }
 
 [node name="Pivot" type="Node2D" parent="." index="1"]
 
 [node name="Stick" type="Sprite2D" parent="Pivot" index="0"]
-texture = ExtResource("3_iada5")
+texture = ExtResource("2_vu7vp")
 
 [node name="String" type="Line2D" parent="Pivot" index="1"]
-points = PackedVector2Array(8, -152, -142, 0, 8, 152)
+points = PackedVector2Array(12, -200, -160, 0, 12, 200)
 width = 4.0
 default_color = Color(0.805434, 0.810207, 0.935233, 1)
 joint_mode = 2
@@ -151,7 +151,7 @@ scale = Vector2(0.5, 1)
 polygon = PackedVector2Array(0, 172, 4, 108, 4, -108, 0, -172, -4, -108, -4, 108)
 
 [node name="StringPad" type="Line2D" parent="Pivot" index="3"]
-points = PackedVector2Array(-130, -12, -142, 0, -130, 12)
+points = PackedVector2Array(-150, -12, -160, 0, -150, 12)
 width = 6.0
 default_color = Color(0.286, 0.3036, 0.55, 1)
 joint_mode = 2
@@ -159,5 +159,5 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Frame" type="Sprite2D" parent="Pivot" index="4"]
-position = Vector2(72, 0)
-texture = ExtResource("4_ies1b")
+position = Vector2(90, 0)
+texture = ExtResource("3_rbdnw")

@@ -20,12 +20,12 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Sharper Bolts" type="Node" parent="Upgrades/Path0" index="1"]
 script = ExtResource("4_tvbwh")
-description = "Bolts fly even faster, deal even more damage, and pierce more targets."
+description = "Bolts fly even faster and pierce more targets."
 stat_multipliers = Dictionary[String, float]({
 "pierce": 2.0,
 "projectile_speed": 1.2
 })
-cost = 60
+cost = 50
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Giant Crossbow" type="Node" parent="Upgrades/Path0" index="2"]
@@ -37,7 +37,7 @@ stat_multipliers = Dictionary[String, float]({
 "pierce": 2.0,
 "range": 1.5
 })
-cost = 120
+cost = 500
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Grand Javelin" type="Node" parent="Upgrades/Path0" index="3"]
@@ -49,7 +49,7 @@ stat_multipliers = Dictionary[String, float]({
 "pierce": 3.0,
 "range": 1.2
 })
-cost = 800
+cost = 1600
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="High-Tech Motors" type="Node" parent="Upgrades/Path1" index="0"]
@@ -73,13 +73,13 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 [node name="Fuse Bolts" type="Node" parent="Upgrades/Path1" index="2"]
 script = ExtResource("4_tvbwh")
 description = "Bolts explode shortly after hitting a target."
-cost = 150
+cost = 400
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Pulsing Shots" type="Node" parent="Upgrades/Path1" index="3"]
 script = ExtResource("4_tvbwh")
 description = "Bolts explode multiple times after sticking to a target."
-cost = 750
+cost = 2400
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="ClickArea" parent="." index="6"]

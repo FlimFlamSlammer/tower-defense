@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c4ibb42n6xcku" path="res://assets/towers/crossbow/00/stick.svg" id="3_xi135"]
 [ext_resource type="Texture2D" uid="uid://b6se1oiaichxq" path="res://assets/towers/crossbow/02/Frame.svg" id="4_8gxxb"]
 
-[sub_resource type="Animation" id="Animation_2l0pa"]
+[sub_resource type="Animation" id="Animation_lmmje"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -56,7 +56,7 @@ tracks/3/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_ldsdy"]
+[sub_resource type="Animation" id="Animation_fbg2w"]
 resource_name = "fire"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -107,10 +107,10 @@ tracks/3/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kcqc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_erbt3"]
 _data = {
-&"RESET": SubResource("Animation_2l0pa"),
-&"fire": SubResource("Animation_ldsdy")
+&"RESET": SubResource("Animation_lmmje"),
+&"fire": SubResource("Animation_fbg2w")
 }
 
 [node name="MutableData" instance=ExtResource("1_3i6hd")]
@@ -126,7 +126,7 @@ stats = Dictionary[String, Variant]({
 
 [node name="Animations" type="AnimationPlayer" parent="." index="0"]
 libraries = {
-&"": SubResource("AnimationLibrary_2kcqc")
+&"": SubResource("AnimationLibrary_erbt3")
 }
 
 [node name="Pivot" type="Node2D" parent="." index="1"]
@@ -143,7 +143,7 @@ polygon = PackedVector2Array(0, 120, 4, 72, 4, -72, 0, -120, -4, -72, -4, 72)
 
 [node name="String" type="Line2D" parent="Pivot" index="2"]
 points = PackedVector2Array(32, -88, -100, 0, 32, 88)
-width = 4.0
+width = 3.0
 default_color = Color(0.851076, 0.75177, 0.882812, 1)
 joint_mode = 2
 begin_cap_mode = 2

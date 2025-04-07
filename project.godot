@@ -24,6 +24,7 @@ gdscript/warnings/integer_division=0
 
 window/size/viewport_width=4096
 window/size/viewport_height=2304
+window/size/mode=2
 window/stretch/mode="canvas_items"
 
 [global_group]

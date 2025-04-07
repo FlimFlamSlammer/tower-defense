@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="178"
-   height="420"
-   viewBox="0 0 52.670077 124.27771"
+   width="182"
+   height="428"
+   viewBox="0 0 53.853674 126.6449"
    version="1.1"
    id="svg5"
    xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +13,19 @@
      id="defs2" />
   <g
      id="layer3"
-     transform="translate(-39.650504,24.263745)">
+     transform="translate(-38.466909,25.447342)">
+    <circle
+       style="fill:#9191d4;stroke-width:1.1836;stroke-linecap:round"
+       id="path3"
+       cx="42.609501"
+       cy="-21.30475"
+       r="4.1425915" />
+    <circle
+       style="fill:#9191d4;stroke-width:1.1836;stroke-linecap:round"
+       id="path3-0"
+       cx="42.609501"
+       cy="97.05497"
+       r="4.1425915" />
     <path
        style="fill:none;stroke:#9191d4;stroke-width:1.1836;stroke-linecap:round"
        d="M 85.218998,30.773528 68.648637,0"
@@ -30,18 +42,6 @@
        style="fill:#4d4d4d;stroke:#9191d4;stroke-width:2.36719;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
        d="M 53.815792,-15.818222 77.801395,4.169785"
        id="path1-8-7-1" />
-    <circle
-       style="fill:#9191d4;stroke:#9191d4;stroke-width:7.69338;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-       id="path3"
-       cx="42.609501"
-       cy="97.054977"
-       r="1.4195385e-06" />
-    <circle
-       style="fill:#9191d4;stroke:#9191d4;stroke-width:7.69338;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-       id="path3-9"
-       cx="42.609501"
-       cy="-21.304743"
-       r="1.4195385e-06" />
     <path
        style="fill:none;fill-opacity:1;stroke:#5f66ba;stroke-width:5.91799;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        d="m 42.609499,-21.30475 42.6095,35.507916 v 47.343889 l -42.6095,35.507916"
