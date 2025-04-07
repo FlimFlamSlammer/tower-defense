@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://2ob2omvrkre1" path="res://scripts/projectiles/bolt.gd" id="1_0fvi7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ejeda"]
-b = Vector2(128, 0)
+b = Vector2(120, 0)
 
 [node name="Bolt" type="Area2D"]
 z_index = 2
