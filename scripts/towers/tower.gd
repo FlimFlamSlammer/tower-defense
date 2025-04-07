@@ -5,11 +5,12 @@ signal tower_modified()
 signal update_paths()
 signal tower_clicked(tower: Tower)
 
+const MUTABLE_DATA_PATH: StringName = "res://scenes/towers/crossbow/mutable_data/"
+
 enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
 @export var tower_name: StringName
 @export var targeting_options: Array[Targeting] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
-@export var mutable_data_path: StringName
 @export var price: int = 100
 
 var tile_position: Vector2i
@@ -92,7 +93,9 @@ func upgrade_tower(path: int) -> int:
 
 	current_upgrade[path] = tier
 
-	var mutable_data_scene: PackedScene = load(mutable_data_path + "/" + str(current_upgrade[0]) + str(current_upgrade[1]))
+	var mutable_data_path: String = MUTABLE_DATA_PATH + str(current_upgrade[0]) + str(current_upgrade[1]) + &".tscn"
+	print(mutable_data_path)
+	var mutable_data_scene: PackedScene = load(mutable_data_path)
 	var new_mutable_data = mutable_data_scene.instantiate()
 	new_mutable_data.name = _mutable_data.name
 

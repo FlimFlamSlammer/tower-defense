@@ -3,8 +3,8 @@ extends Area2D
 
 signal enemyLeaked(health: float)
 
-@export var max_health = 5
-@export var health = 5
+@export var max_health: float = 5
+@export var health: float = 5
 @export var speed: float = 0.3 ## Speed in tiles per second.
 
 var cur_tile := Vector2i(-1, 2)

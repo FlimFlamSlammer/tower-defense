@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4gm6t7577hbt"]
+[gd_scene load_steps=6 format=3 uid="uid://c4gm6t7577hbt"]
 
 [ext_resource type="Texture2D" uid="uid://t57xpvt76yec" path="res://assets/ui/crystal.svg" id="1_jh4ae"]
 [ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_y32eg"]
+[ext_resource type="Script" uid="uid://bp7fulg73bouq" path="res://scripts/ui/upgrade_path.gd" id="2_hnrgt"]
 [ext_resource type="StyleBox" uid="uid://i4csefihyled" path="res://resources/panel_on.tres" id="2_uifmr"]
 [ext_resource type="StyleBox" uid="uid://bc4s26ts4ee5t" path="res://resources/panel_off.tres" id="3_fh7fl"]
 
@@ -9,6 +10,7 @@
 offset_right = 264.0
 offset_bottom = 40.0
 theme = ExtResource("1_y32eg")
+script = ExtResource("2_hnrgt")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -22,6 +24,8 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="MarginContainer/HFlex"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -54,7 +58,8 @@ layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/HFlex/Button/MarginContainer/HBox"]
+[node name="PriceLabel" type="Label" parent="MarginContainer/HFlex/Button/MarginContainer/HBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -70,27 +75,30 @@ texture = ExtResource("1_jh4ae")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="Indicator" type="VBoxContainer" parent="MarginContainer/HFlex"]
+[node name="TierIndicator" type="VBoxContainer" parent="MarginContainer/HFlex"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="4" type="Panel" parent="MarginContainer/HFlex/Indicator"]
+[node name="4" type="Panel" parent="MarginContainer/HFlex/TierIndicator"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("3_fh7fl")
 
-[node name="3" type="Panel" parent="MarginContainer/HFlex/Indicator"]
+[node name="3" type="Panel" parent="MarginContainer/HFlex/TierIndicator"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("3_fh7fl")
 
-[node name="2" type="Panel" parent="MarginContainer/HFlex/Indicator"]
+[node name="2" type="Panel" parent="MarginContainer/HFlex/TierIndicator"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("3_fh7fl")
 
-[node name="1" type="Panel" parent="MarginContainer/HFlex/Indicator"]
+[node name="1" type="Panel" parent="MarginContainer/HFlex/TierIndicator"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("2_uifmr")
+
+[connection signal="pressed" from="MarginContainer/HFlex/Button" to="." method="_on_button_pressed"]
