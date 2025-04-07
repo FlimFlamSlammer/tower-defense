@@ -90,4 +90,8 @@ description = "Bolts explode multiple times after sticking to a target."
 cost = 750
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
+[node name="ClickArea" parent="." index="6"]
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
 [node name="MutableData" parent="." index="7" instance=ExtResource("5_gc0ds")]

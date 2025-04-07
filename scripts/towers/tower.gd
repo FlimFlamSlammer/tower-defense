@@ -139,5 +139,4 @@ func _get_tile_danger_level_multiplier(tile: Vector2i) -> float:
 
 func _on_tower_clicked(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
-		print("yes")
 		tower_clicked.emit(self)

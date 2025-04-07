@@ -180,10 +180,18 @@ color = Vector4(0.8, 0.8, 0.8, 0.4)
 
 [node name="ClickArea" type="Control" parent="."]
 layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -104.0
 offset_top = -104.0
 offset_right = 104.0
 offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [connection signal="gui_input" from="ClickArea" to="." method="_on_tower_clicked"]
