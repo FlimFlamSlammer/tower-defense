@@ -9,4 +9,4 @@ const TowerGroups: Dictionary[StringName, StringName] = {
 	&"SUPPORT": &"support_towers",
 }
 
-enum DamageTypes {BULLET, ENERGY, EXPLOSION, ELECTRIC, NORMAL}
+enum DamageTypes {NORMAL = 0, SHARP = 1, ENERGY = 2, EXPLOSION = 3, ELECTRIC = 4}

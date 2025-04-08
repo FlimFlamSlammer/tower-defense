@@ -1,7 +1,7 @@
 class_name Enemy
 extends Area2D
 
-signal enemyLeaked(health: float)
+signal enemy_leaked(health: float)
 @export var base_stats: Dictionary[StringName, Variant]
 
 var cur_tile := Vector2i(-1, 2)
@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 		progress -= 1.0
 		cur_tile = next_tile
 		if cur_tile == tile_controller.finish_tile:
-			enemyLeaked.emit(stats.health)
+			enemy_leaked.emit(stats.health)
 			queue_free()
 			return
 		next_tile = (tile_controller.tiles.get_tile(next_tile) as PathTile).next_path

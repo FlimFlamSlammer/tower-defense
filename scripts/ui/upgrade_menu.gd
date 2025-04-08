@@ -33,7 +33,7 @@ func update_tower(tower: Tower) -> void:
 func _update() -> void:
 	var highest_tier: int = _selected_tower.current_upgrade.max()
 	var lock_other_paths: bool = highest_tier > MAX_TIER_CROSSPATH
-	
+
 	for i in _selected_tower.current_upgrade.size():
 		var upgrade_path: UpgradePath = _upgrade_paths[i]
 		var tier: int = _selected_tower.current_upgrade[i]

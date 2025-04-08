@@ -4,7 +4,7 @@ extends Node2D
 signal tower_modified() ## Emits when the tower's update function is called.
 signal update_paths() ## Emits when the tower's update function is called and requests a pathfinding update.
 signal tower_clicked(tower: Tower) ## Emits when the Tower is clicked by the player.
-signal tower_used_money(amount: int, cb: Callable) ## Emits when the tower requests an action that uses money. Call param cb to confirm the action.
+signal money_requested(amount: int, spend: bool, cb: Callable) ## Emits when the tower requests an action that uses money. Call param cb to confirm the action.
 
 const MUTABLE_DATA_PATH: StringName = "res://scenes/towers/crossbow/mutable_data/"
 
@@ -12,7 +12,7 @@ enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
 @export var tower_name: StringName
 @export var targeting_options: Array[Targeting] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
-@export var price: int
+@export var cost: int
 
 var tile_position: Vector2i
 var targeting: int ## The targeting option that the Tower is currently using.
@@ -97,25 +97,30 @@ func remove_status_effect(id: StringName, p_update: bool = true):
 		update()
 
 
-## Upgrades the tower by one tier on the specified path. Returns the upgrade cost.
-func upgrade_tower(path: int) -> int:
+## Upgrades the tower by one tier on the specified path. Param cb is called when the upgrade finishes, and has a boolean parameter that stores whether the upgrade was successful.
+func upgrade_tower(path: int, cb: Callable = Callable()) -> void:
 	var tier: int = current_upgrade[path] + 1
 	var upgrade: Upgrade = upgrades.get_upgrade(path, tier)
 
-	current_upgrade[path] = tier
+	money_requested.emit(upgrade.cost, true, func(success: bool):
+		if cb: cb.call(success)
 
-	var mutable_data_path: String = MUTABLE_DATA_PATH + str(current_upgrade[0]) + str(current_upgrade[1]) + &".tscn"
-	print(mutable_data_path)
-	var mutable_data_scene: PackedScene = load(mutable_data_path)
-	var new_mutable_data = mutable_data_scene.instantiate()
-	new_mutable_data.name = _mutable_data.name
+		if not success:
+			return
 
-	_mutable_data.queue_free()
-	_mutable_data = new_mutable_data
-	add_child.call_deferred(new_mutable_data)
-	update.call_deferred()
+		current_upgrade[path] = tier
 
-	return upgrade.cost
+		var mutable_data_path: String = MUTABLE_DATA_PATH + str(current_upgrade[0]) + str(current_upgrade[1]) + &".tscn"
+		print(mutable_data_path)
+		var mutable_data_scene: PackedScene = load(mutable_data_path)
+		var new_mutable_data = mutable_data_scene.instantiate()
+		new_mutable_data.name = _mutable_data.name
+
+		_mutable_data.queue_free()
+		_mutable_data = new_mutable_data
+		add_child.call_deferred(new_mutable_data)
+		update.call_deferred()
+	)
 
 
 func enemy_in_range(p_range: float) -> bool:

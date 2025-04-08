@@ -1,6 +1,7 @@
 class_name GUIRoot
 extends Control
 
+signal money_requested(amount: int, spend: bool, cb: Callable)
 signal tower_placed(tower: Tower)
 
 const MENU_CLOSED_OFFSET: float = 100.0
@@ -45,15 +46,18 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		if is_placing:
-			var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
-			if _tile_controller.place_tower(pos, selected_tower):
-				tower_placed.emit(selected_tower) # Tower will be placed by tile controller
-				selected_tower.tower_clicked.connect(_select_tower)
-				_select_tower(selected_tower)
-				is_placing = false
-				_tower_menu.open()
-			return
+			money_requested.emit(selected_tower.cost, true, func(success: bool):
+				if not success: return
 
+				var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
+				if _tile_controller.place_tower(pos, selected_tower):
+					tower_placed.emit(selected_tower)
+					selected_tower.tower_clicked.connect(_select_tower)
+					_select_tower(selected_tower)
+					is_placing = false
+					_tower_menu.open()
+			)
+			return
 		if _upgrade_menu.is_open:
 			_clear_selection()
 		if _tower_menu.is_open:

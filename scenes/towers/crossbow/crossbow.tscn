@@ -8,80 +8,54 @@
 [node name="Crossbow" groups=["attacking_towers"] instance=ExtResource("1_dyx6r")]
 script = ExtResource("2_adi17")
 tower_name = &"Crossbow"
-targeting_options = null
-price = 1000
+cost = 1000
 
 [node name="Reinforced Strings" type="Node" parent="Upgrades/Path0" index="0"]
 script = ExtResource("4_tvbwh")
 description = "Bolts fly faster and do more damage."
-stat_multipliers = Dictionary[String, float]({
-"damage": 1.5
-})
-cost = 400
+cost = 500
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Sharper Bolts" type="Node" parent="Upgrades/Path0" index="1"]
 script = ExtResource("4_tvbwh")
 description = "Bolts fly even faster and pierce more targets. Explosions do more damage."
-stat_multipliers = Dictionary[String, float]({
-"pierce": 2.0,
-"projectile_speed": 1.2
-})
-cost = 500
+cost = 550
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Giant Crossbow" type="Node" parent="Upgrades/Path0" index="2"]
 script = ExtResource("4_tvbwh")
 description = "Improves overall stats at the cost of fire rate."
-stat_multipliers = Dictionary[String, float]({
-"damage": 3.0,
-"fire_rate": 0.5,
-"pierce": 2.0,
-"range": 1.5
-})
-cost = 5000
+cost = 1200
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Grand Javelin" type="Node" parent="Upgrades/Path0" index="3"]
 script = ExtResource("4_tvbwh")
 description = "Grand Javelin bolts deal big damage and pierce almost anything"
-stat_multipliers = Dictionary[String, float]({
-"damage": 4.0,
-"fire_rate": 1.2,
-"pierce": 3.0,
-"range": 1.2
-})
-cost = 20000
+cost = 6000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="High-Tech Motors" type="Node" parent="Upgrades/Path1" index="0"]
 script = ExtResource("4_tvbwh")
 description = "Faster fire rate."
-stat_multipliers = Dictionary[String, float]({
-"fire_rate": 1.25
-})
-cost = 400
+cost = 450
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Improved Sensors" type="Node" parent="Upgrades/Path1" index="1"]
 script = ExtResource("4_tvbwh")
 description = "Longer range."
-stat_multipliers = Dictionary[String, float]({
-"range": 1.3
-})
-cost = 300
+cost = 350
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Fuse Bolts" type="Node" parent="Upgrades/Path1" index="2"]
 script = ExtResource("4_tvbwh")
 description = "Bolts explode shortly after hitting a target."
-cost = 4500
+cost = 1500
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Pulsing Shots" type="Node" parent="Upgrades/Path1" index="3"]
 script = ExtResource("4_tvbwh")
 description = "Bolts pulse multiple times after sticking to a target, before violently exploding."
-cost = 16000
+cost = 9000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="ClickArea" parent="." index="6"]

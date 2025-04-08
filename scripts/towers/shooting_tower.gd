@@ -4,7 +4,8 @@ extends Tower
 @onready var _attack_timer: Timer = $AttackTimer
 
 func _process(delta: float) -> void:
-	attempt_fire(_attack_timer, _fire)
+	if not _placed: return
+	attempt_fire(_attack_timer, _fire, stats.attack_cost)
 
 
 func update_danger_levels(group: String) -> void:
@@ -38,16 +39,19 @@ func _fire(target: Enemy) -> void:
 	pass
 
 
-func attempt_fire(timer: Timer, fire: Callable) -> void:
+func attempt_fire(timer: Timer, fire: Callable, cost: int) -> void:
 	if not _placed or not timer.is_stopped(): return
 
 	var target: Enemy = _get_target(stats.range)
 	if not target: return
-	_mutable_data.get_node("Pivot").look_at(target.global_position)
-	_mutable_data.animations.stop()
-	_mutable_data.animations.play("fire")
-	fire.call(target)
-	timer.start(1.0 / stats.fire_rate)
+
+	money_requested.emit(cost, true, func():
+		_mutable_data.get_node("Pivot").look_at(target.global_position)
+		_mutable_data.animations.stop()
+		_mutable_data.animations.play("fire")
+		fire.call(target)
+		timer.start(1.0 / stats.fire_rate)
+	)
 
 
 func _get_target(p_range: float) -> Enemy:

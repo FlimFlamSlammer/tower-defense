@@ -14,7 +14,7 @@ var upgrade_name: String:
 var cost: int:
 	set(val):
 		cost = val
-		_price_label.text = str(val)
+		_cost_label.text = str(val)
 
 var tier: int:
 	set(val):
@@ -29,14 +29,14 @@ var disabled: bool = false:
 	set(val):
 		disabled = val
 		if val:
-			_price_label.text = "Locked"
+			_cost_label.text = "Locked"
 		else:
-			cost = cost # force update price label
+			cost = cost # force update cost label
 		_button.disabled = val
 			
 
 @onready var _label: Label = %Label
-@onready var _price_label: Label = %PriceLabel
+@onready var _cost_label: Label = %PriceLabel
 @onready var _tier_indicator: VBoxContainer = %TierIndicator
 @onready var _button: Button = %Button
 
