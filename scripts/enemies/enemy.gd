@@ -69,7 +69,7 @@ func remove_status_effect(id: StringName, update: bool = true):
 	_status_effects.erase(id)
 	if update:
 		_update_status_effects()
-	
+
 
 func get_distance_from_finish() -> float:
 	var cur_tile_ref := tile_controller.tiles.get_tile(cur_tile) as PathTile
