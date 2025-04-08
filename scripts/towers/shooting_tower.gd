@@ -3,36 +3,14 @@ extends Tower
 
 @onready var _attack_timer: Timer = $AttackTimer
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not _placed: return
 	attempt_fire(_attack_timer, _fire, stats.attack_cost)
 
 
-func update_danger_levels(group: String) -> void:
-	var visited: Dictionary = {}
-	var to_visit: Array[Vector2i] = [tile_position]
-
-	while not to_visit.is_empty():
-		var top_tile: Vector2i = to_visit.back()
-		to_visit.pop_back()
-
-		if visited.has(top_tile):
-			continue
-		visited[top_tile] = true
-
-		var danger_mult: float = _get_tile_danger_level_multiplier(top_tile)
-
-		if (danger_mult == 0.0):
-			continue
-
-		var tile_ref := _tile_controller.tiles.get_tile(top_tile) as PathTile
-		if tile_ref:
-			tile_ref.danger_level += danger_mult * stats.damage * stats.fire_rate
-
-		to_visit.push_back(top_tile + Vector2i(0, 1))
-		to_visit.push_back(top_tile + Vector2i(0, -1))
-		to_visit.push_back(top_tile + Vector2i(1, 0))
-		to_visit.push_back(top_tile + Vector2i(-1, 0))
+func _update_tile_danger_levels(group: StringName, tile: PathTile, danger_mult: float):
+	if group == Globals.TowerGroups.ATTACKING:
+		tile.danger_level += danger_mult * stats.damage * stats.fire_rate
 
 
 func _fire(target: Enemy) -> void:
@@ -45,7 +23,9 @@ func attempt_fire(timer: Timer, fire: Callable, cost: int) -> void:
 	var target: Enemy = _get_target(stats.range)
 	if not target: return
 
-	money_requested.emit(cost, true, func():
+	money_requested.emit(cost, true, func(success: bool):
+		if not success: return
+
 		_mutable_data.get_node("Pivot").look_at(target.global_position)
 		_mutable_data.animations.stop()
 		_mutable_data.animations.play("fire")

@@ -38,8 +38,35 @@ func _ready() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 0.4)
 
 
-func update_danger_levels(group: String) -> void:
+func _update_tile_danger_levels(group: StringName, tile: PathTile, danger_mult: float):
 	pass
+
+
+func update_danger_levels(group: StringName) -> void:
+	var visited: Dictionary = {}
+	var to_visit: Array[Vector2i] = [tile_position]
+
+	while not to_visit.is_empty():
+		var top_tile: Vector2i = to_visit.back()
+		to_visit.pop_back()
+
+		if visited.has(top_tile):
+			continue
+		visited[top_tile] = true
+
+		var danger_mult: float = _get_tile_danger_level_multiplier(top_tile)
+
+		if (danger_mult == 0.0):
+			continue
+
+		var tile_ref := _tile_controller.tiles.get_tile(top_tile) as PathTile
+		if tile_ref:
+			_update_tile_danger_levels(group, tile_ref, danger_mult)
+
+		to_visit.push_back(top_tile + Vector2i(0, 1))
+		to_visit.push_back(top_tile + Vector2i(0, -1))
+		to_visit.push_back(top_tile + Vector2i(1, 0))
+		to_visit.push_back(top_tile + Vector2i(-1, 0))
 
 
 func place() -> void:
