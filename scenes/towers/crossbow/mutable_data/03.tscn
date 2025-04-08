@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2vqt7crkfb4e"]
+[gd_scene load_steps=8 format=3 uid="uid://cbc1kno0jeqs6"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_sxaji"]
 [ext_resource type="PackedScene" uid="uid://ci20pb3sg6lt5" path="res://scenes/projectiles/fuse_bolt.tscn" id="2_sxaji"]
@@ -162,15 +162,17 @@ _data = {
 }
 
 [node name="MutableData" instance=ExtResource("1_sxaji")]
-stats = Dictionary[String, Variant]({
-"damage": 3.0,
-"explosion_damage": 2.5,
-"fire_rate": 1.0,
-"pierce": 1,
-"projectile": ExtResource("2_sxaji"),
-"projectile_offset": Vector2(24, 0),
-"projectile_speed": 4500.0,
-"range": 3.5
+stats = Dictionary[StringName, Variant]({
+&"attack_cost": 6,
+&"damage": 3.0,
+&"damage_type": 2,
+&"explosion_damage": 2.5,
+&"fire_rate": 1.0,
+&"pierce": 1,
+&"projectile": ExtResource("2_sxaji"),
+&"projectile_offset": Vector2(24, 0),
+&"projectile_speed": 4500.0,
+&"range": 3.5
 })
 
 [node name="Animations" type="AnimationPlayer" parent="." index="0"]

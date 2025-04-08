@@ -115,14 +115,16 @@ _data = {
 
 [node name="MutableData" instance=ExtResource("1_fsfwr")]
 z_index = 2
-stats = Dictionary[String, Variant]({
-"damage": 4.0,
-"fire_rate": 0.8,
-"pierce": 2,
-"projectile": ExtResource("2_27tyn"),
-"projectile_offset": Vector2(24, 0),
-"projectile_speed": 4000.0,
-"range": 2.5
+stats = Dictionary[StringName, Variant]({
+&"attack_cost": 4,
+&"damage": 4.0,
+&"damage_type": 2,
+&"fire_rate": 0.8,
+&"pierce": 2,
+&"projectile": ExtResource("2_27tyn"),
+&"projectile_offset": Vector2(24, 0),
+&"projectile_speed": 4000.0,
+&"range": 2.5
 })
 
 [node name="Animations" type="AnimationPlayer" parent="." index="0"]
