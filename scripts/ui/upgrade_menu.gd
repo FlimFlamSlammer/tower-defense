@@ -1,6 +1,9 @@
 class_name UpgradeMenu
 extends ClosableMenu
 
+const MAX_TIER: int = 4
+const MAX_TIER_CROSSPATH: int = 2
+
 var _selected_tower: Tower
 
 @onready var _upgrade_paths: Array[Node] = %UpgradePaths.get_children()
@@ -28,12 +31,19 @@ func update_tower(tower: Tower) -> void:
 
 
 func _update() -> void:
+	var highest_tier: int = _selected_tower.current_upgrade.max()
+	var lock_other_paths: bool = highest_tier > MAX_TIER_CROSSPATH
+	
 	for i in _selected_tower.current_upgrade.size():
 		var upgrade_path: UpgradePath = _upgrade_paths[i]
 		var tier: int = _selected_tower.current_upgrade[i]
 
-		upgrade_path.upgrade_name = _selected_tower.upgrades.get_upgrade(i, tier + 1).name
-		upgrade_path.cost = _selected_tower.upgrades.get_upgrade(i, tier + 1).cost
+		if lock_other_paths and tier == MAX_TIER_CROSSPATH or tier == MAX_TIER:
+			upgrade_path.disabled = true
+		else:
+			upgrade_path.disabled = false
+			upgrade_path.upgrade_name = _selected_tower.upgrades.get_upgrade(i, tier + 1).name
+			upgrade_path.cost = _selected_tower.upgrades.get_upgrade(i, tier + 1).cost
 
 		upgrade_path.tier = tier
 

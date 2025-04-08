@@ -85,11 +85,7 @@ func modify_tower(p_update_paths: bool) -> void:
 ## Upgrades the tower by one tier on the specified path. Returns the upgrade cost.
 func upgrade_tower(path: int) -> int:
 	var tier: int = current_upgrade[path] + 1
-	var upgrade := upgrades.get_upgrade(path, tier)
-
-	if not upgrade:
-		print_debug("T", tier, " upgrade from path ", path, " not found, skipping...")
-		return 0
+	var upgrade: Upgrade = upgrades.get_upgrade(path, tier)
 
 	current_upgrade[path] = tier
 

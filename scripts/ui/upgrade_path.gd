@@ -25,9 +25,20 @@ var tier: int:
 			else:
 				panel.add_theme_stylebox_override(&"panel", PANEL_OFF)
 
+var disabled: bool = false:
+	set(val):
+		disabled = val
+		if val:
+			_price_label.text = "Locked"
+		else:
+			cost = cost # force update price label
+		_button.disabled = val
+			
+
 @onready var _label: Label = %Label
 @onready var _price_label: Label = %PriceLabel
 @onready var _tier_indicator: VBoxContainer = %TierIndicator
+@onready var _button: Button = %Button
 
 func _on_button_pressed() -> void:
 	button_pressed.emit()
