@@ -46,11 +46,12 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		if is_placing:
-			money_requested.emit(selected_tower.cost, true, func(success: bool):
+			money_requested.emit(selected_tower.cost, false, func(success: bool):
 				if not success: return
 
 				var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
 				if _tile_controller.place_tower(pos, selected_tower):
+					money_requested.emit(selected_tower.cost, true, Callable())
 					tower_placed.emit(selected_tower)
 					selected_tower.tower_clicked.connect(_select_tower)
 					_select_tower(selected_tower)
