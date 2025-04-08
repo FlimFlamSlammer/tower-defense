@@ -88,7 +88,8 @@ func deselect() -> void:
 
 ## Applies status effects, updates range circle and recalculates pathfinding data. If param do_not_update_paths is true, skips recalculation of pathfinding data.
 func update(do_not_update_paths: bool = true) -> void:
-	stats = _mutable_data.stats
+	stats = _mutable_data.stats.duplicate()
+	stats.damage = 999999
 	for effect in _status_effects.keys():
 		effect.apply(stats)
 

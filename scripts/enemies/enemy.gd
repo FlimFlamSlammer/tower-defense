@@ -2,19 +2,22 @@ class_name Enemy
 extends Area2D
 
 signal enemy_leaked(health: float)
+
 @export var base_stats: Dictionary[StringName, Variant]
+@export var initial_health_ratio: float = 1.0
 
 var cur_tile := Vector2i(-1, 2)
 var next_tile := Vector2i(0, 2)
 var progress: float
+var stats: Dictionary[StringName, Variant]
 
 var _status_effects: Dictionary[StringName, EnemyStatusEffect]
 
-@onready var stats: Dictionary = base_stats
 @onready var tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 
 func _ready() -> void:
-	base_stats.erase(&"health")
+	stats = base_stats.duplicate()
+	stats.health = initial_health_ratio * stats.max_health
 
 
 func _process(delta: float) -> void:
@@ -88,6 +91,6 @@ func _rotate() -> void:
 
 
 func _update_status_effects():
-	stats = base_stats
+	stats = base_stats.duplicate()
 	for id in _status_effects.keys():
 		_status_effects[id].apply(stats)
