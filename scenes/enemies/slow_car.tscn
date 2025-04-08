@@ -12,7 +12,6 @@ collision_layer = 2
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_x1m33")
-speed = 1.0
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_l6ml4")

@@ -35,7 +35,7 @@ func _process(_delta: float) -> void:
 	if is_placing:
 		var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
 		selected_tower.position = _tile_controller.map_to_local(pos)
-		selected_tower.modify_tower(false)
+		selected_tower.update(false)
 		if _tile_controller._can_place_tower(pos):
 			selected_tower.set_display_valid()
 		else:

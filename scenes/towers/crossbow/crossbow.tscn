@@ -8,6 +8,7 @@
 [node name="Crossbow" groups=["attacking_towers"] instance=ExtResource("1_dyx6r")]
 script = ExtResource("2_adi17")
 tower_name = &"Crossbow"
+targeting_options = null
 price = 1000
 
 [node name="Reinforced Strings" type="Node" parent="Upgrades/Path0" index="0"]

@@ -3,16 +3,11 @@ extends ShootingTower
 
 func _fire(target: Enemy) -> void:
 	tower_used_money.emit(stats.attack_cost)
-	
+
 	var new_projectile: Bolt = stats.projectile.instantiate()
 	var pivot: Node2D = _mutable_data.get_node("Pivot")
 
-	new_projectile.position = position
-	new_projectile.movement_dir = pivot.rotation
-	new_projectile.rotation = pivot.rotation
-	new_projectile.pierce = stats.pierce
-	new_projectile.damage = stats.damage
-	new_projectile.speed = stats.projectile_speed
+	new_projectile.stats = stats
 
 	var fuse_bolt := new_projectile as FuseBolt
 	if fuse_bolt:

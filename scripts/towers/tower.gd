@@ -1,10 +1,10 @@
 class_name Tower
 extends Node2D
 
-signal tower_modified()
-signal update_paths()
-signal tower_clicked(tower: Tower)
-signal tower_used_money(amount: int)
+signal tower_modified() ## Emits when the tower's update function is called.
+signal update_paths() ## Emits when the tower's update function is called and requests a pathfinding update.
+signal tower_clicked(tower: Tower) ## Emits when the Tower is clicked by the player.
+signal tower_used_money(amount: int, cb: Callable) ## Emits when the tower requests an action that uses money. Call param cb to confirm the action.
 
 const MUTABLE_DATA_PATH: StringName = "res://scenes/towers/crossbow/mutable_data/"
 
@@ -12,19 +12,17 @@ enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
 @export var tower_name: StringName
 @export var targeting_options: Array[Targeting] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
-@export var price: int = 100
+@export var price: int
 
 var tile_position: Vector2i
-var targeting: int
+var targeting: int ## The targeting option that the Tower is currently using.
 var current_upgrade: Array[int] = [0, 0]
 var selected: bool = false
 
-var stat_multipliers: Dictionary[String, Dictionary]
-var stat_adders: Dictionary[String, Dictionary]
-
+var _status_effects: Dictionary[StringName, TowerStatusEffect]
 var _placed: bool = false
 
-@onready var stats: Dictionary[String, Variant]
+@onready var stats: Dictionary[StringName, Variant]
 @onready var upgrades: Upgrades = $Upgrades
 
 @onready var _mutable_data: MutableData = $MutableData
@@ -47,7 +45,7 @@ func update_danger_levels(group: String) -> void:
 func place() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 1.0)
 	_placed = true
-	modify_tower(true)
+	update(true)
 	_click_area.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
@@ -61,26 +59,42 @@ func deselect() -> void:
 	_range_animations.play("hide_range")
 
 
-## Updates tower stats and appearance, taking into account stat modifiers. If param is true, recalculates pathfinding data.
-func modify_tower(p_update_paths: bool) -> void:
+## Applies status effects, updates range circle and recalculates pathfinding data. If param do_not_update_paths is true, skips recalculation of pathfinding data.
+func update(do_not_update_paths: bool = true) -> void:
 	stats = _mutable_data.stats
-	for mod in stat_multipliers.values():
-		for key in mod.keys():
-			if not stats.has(key):
-				stats[key] = 0.0
-			stats[key] *= mod[key]
-
-	for mod in stat_adders.values():
-		for key in mod.keys():
-			if not stats.has(key):
-				stats[key] = 0.0
-			stats[key] += mod[key]
+	for effect in _status_effects.keys():
+		effect.apply(stats)
 
 	_range_indicator.scale = Vector2.ONE * stats.range
 	tower_modified.emit()
 
-	if p_update_paths:
+	if not do_not_update_paths:
 		update_paths.emit()
+
+
+## Reparents the TowerStatusEffect to the Tower where the function was called. Use duplicate() to preserve to TowerStatusEffect.
+func apply_status_effect(effect: TowerStatusEffect, p_update: bool = true):
+	if _status_effects.has(effect.id):
+		if _status_effects[effect.id].priority > effect.priority:
+			effect.queue_free()
+			return
+		else:
+			remove_status_effect(effect.id, false)
+
+	effect.expired.connect(remove_status_effect.bind(effect.id))
+
+	_status_effects[effect.id] = effect
+	effect.reparent(self)
+
+	if p_update:
+		update()
+
+
+func remove_status_effect(id: StringName, p_update: bool = true):
+	_status_effects[id].queue_free()
+	_status_effects.erase(id)
+	if p_update:
+		update()
 
 
 ## Upgrades the tower by one tier on the specified path. Returns the upgrade cost.
@@ -99,7 +113,7 @@ func upgrade_tower(path: int) -> int:
 	_mutable_data.queue_free()
 	_mutable_data = new_mutable_data
 	add_child.call_deferred(new_mutable_data)
-	modify_tower.call_deferred(true)
+	update.call_deferred()
 
 	return upgrade.cost
 
@@ -109,16 +123,16 @@ func enemy_in_range(p_range: float) -> bool:
 	return _range_area.has_overlapping_areas()
 
 
-func select_to_place() -> void:
+func select_to_place() -> void: ## Selects the tower in preview mode. Use when the tower is in placement mode.
 	_range_animations.play("show_range")
 	_range_animations.advance(_range_animations.current_animation_length)
 
 
-func set_display_invalid() -> void:
+func set_display_invalid() -> void: ## Changes the color to represent an invalid placement position. Use when the tower is in placement mode.
 	modulate = Color(1.0, 0.1, 0.1, 0.4)
 
 
-func set_display_valid() -> void:
+func set_display_valid() -> void: ## Changes the color to represent a valid placement position. Use when the tower is in placement mode.
 	modulate = Color(1.0, 1.0, 1.0, 0.4)
 
 

@@ -3,8 +3,6 @@ extends Bolt
 
 const FIRED_Z_INDEX = 1
 
-var explosion_damage: float
-
 var _attached_enemy: Enemy = null
 var _attached_local_position: Vector2
 var _attached_local_rotation: float
@@ -28,7 +26,7 @@ func _on_area_entered(area: Area2D) -> void:
 
 	var enemy: Enemy = area
 
-	enemy.hit(damage)
+	enemy.hit(stats.damage, stats.damage_type)
 	_attached_enemy = enemy
 	_attached_local_position = enemy.to_local(position)
 	_attached_local_rotation = rotation - enemy.rotation
@@ -44,7 +42,7 @@ func _explode() -> void:
 	var enemies: Array[Area2D] = _blast_area.get_overlapping_areas()
 
 	for enemy: Enemy in enemies:
-		enemy.hit(explosion_damage)
+		enemy.hit(stats.explosion_damage, Globals.DamageTypes.EXPLOSION)
 
 	_fire_effect.emitting = true
 	_fire_effect.reparent(get_parent())
