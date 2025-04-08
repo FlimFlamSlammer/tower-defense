@@ -77,8 +77,7 @@ func cancel_tower_placement() -> void:
 
 
 func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
-	if is_placing:
-		return
+	if is_placing: return
 
 	_tower_menu.close()
 	_clear_selection()
@@ -92,6 +91,8 @@ func _on_tower_menu_button_pressed() -> void:
 
 
 func _select_tower(tower: Tower) -> void:
+	if is_placing: return
+
 	if _upgrade_menu.is_open and selected_tower == tower:
 		_clear_selection()
 	else:
