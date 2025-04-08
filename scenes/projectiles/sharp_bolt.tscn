@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://2ob2omvrkre1" path="res://scripts/projectiles/bolt.gd" id="1_hnb8n"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ejeda"]
-b = Vector2(128, 0)
+b = Vector2(144, 0)
 
 [node name="Bolt" type="Area2D"]
 z_index = 2
@@ -18,6 +18,7 @@ scale = Vector2(0.5, 1)
 polygon = PackedVector2Array(0, 120, 4.00041, 56, 3.99959, -56, 0, -120, -4.00041, -56, -3.99959, 56)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 11
 shape = SubResource("SegmentShape2D_ejeda")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -4,6 +4,7 @@ extends Node2D
 signal tower_modified()
 signal update_paths()
 signal tower_clicked(tower: Tower)
+signal tower_used_money(amount: int)
 
 const MUTABLE_DATA_PATH: StringName = "res://scenes/towers/crossbow/mutable_data/"
 

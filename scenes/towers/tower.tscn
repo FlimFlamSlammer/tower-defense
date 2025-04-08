@@ -137,7 +137,7 @@ _data = {
 radius = 256.0
 
 [node name="Tower" type="Node2D" groups=["towers"]]
-z_index = 1
+z_index = 10
 script = ExtResource("1_0jldc")
 
 [node name="RangeAnimation" type="AnimationPlayer" parent="."]
@@ -165,7 +165,7 @@ texture = ExtResource("1_5hrty")
 
 [node name="RangeIndicator" type="Node2D" parent="."]
 visible = false
-z_index = 2
+z_index = 5
 
 [node name="Scaler" type="Node2D" parent="RangeIndicator"]
 scale = Vector2(0.25, 0.25)

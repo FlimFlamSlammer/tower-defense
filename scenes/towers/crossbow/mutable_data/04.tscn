@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2bnhgqtt885o"]
+[gd_scene load_steps=8 format=3 uid="uid://o2u6w2sr7e4r"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_6pryx"]
 [ext_resource type="PackedScene" uid="uid://dv52w3ak7nc32" path="res://scenes/projectiles/bolt.tscn" id="2_2gyjc"]
@@ -207,5 +207,6 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Frame" type="Sprite2D" parent="Pivot" index="4"]
+z_index = 2
 position = Vector2(64, 0)
 texture = ExtResource("4_ex4ft")

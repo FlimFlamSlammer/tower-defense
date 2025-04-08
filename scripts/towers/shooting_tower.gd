@@ -1,5 +1,6 @@
 class_name ShootingTower
 extends Tower
+
 @onready var _attack_timer: Timer = $AttackTimer
 
 func _process(delta: float) -> void:

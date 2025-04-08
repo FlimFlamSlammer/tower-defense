@@ -1,9 +1,9 @@
 class_name Projectile
 extends Area2D
 
-@export var speed: float = 7000.0
-@export var damage: float = 1.0
-@export var pierce: int = 1
+var speed: float
+var damage: float
+var pierce: int
 
 var movement_dir: float
 

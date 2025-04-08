@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cbc1kno0jeqs6"]
+[gd_scene load_steps=8 format=3 uid="uid://c2vqt7crkfb4e"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_sxaji"]
 [ext_resource type="PackedScene" uid="uid://ci20pb3sg6lt5" path="res://scenes/projectiles/fuse_bolt.tscn" id="2_sxaji"]
@@ -164,7 +164,7 @@ _data = {
 [node name="MutableData" instance=ExtResource("1_sxaji")]
 stats = Dictionary[String, Variant]({
 "damage": 3.0,
-"explosion_damage": 1.5,
+"explosion_damage": 2.5,
 "fire_rate": 1.0,
 "pierce": 1,
 "projectile": ExtResource("2_sxaji"),
@@ -215,5 +215,6 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Frame" type="Sprite2D" parent="Pivot" index="5"]
+z_index = 2
 position = Vector2(64, 0)
 texture = ExtResource("4_v1785")

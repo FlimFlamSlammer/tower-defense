@@ -40,6 +40,7 @@ func _update() -> void:
 
 		if lock_other_paths and tier == MAX_TIER_CROSSPATH or tier == MAX_TIER:
 			upgrade_path.disabled = true
+			upgrade_path.upgrade_name = _selected_tower.upgrades.get_upgrade(i, tier).name
 		else:
 			upgrade_path.disabled = false
 			upgrade_path.upgrade_name = _selected_tower.upgrades.get_upgrade(i, tier + 1).name

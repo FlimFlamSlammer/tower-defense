@@ -3,15 +3,14 @@
 [ext_resource type="Script" uid="uid://2ob2omvrkre1" path="res://scripts/projectiles/bolt.gd" id="1_76pyt"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_76pyt"]
-b = Vector2(0, -172)
+b = Vector2(-0.00136112, -188)
 
 [node name="Bolt" type="Area2D"]
-z_index = 2
+z_index = 11
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 script = ExtResource("1_76pyt")
-speed = 3500.0
 
 [node name="Polygon2D2" type="Polygon2D" parent="."]
 rotation = 1.5708
