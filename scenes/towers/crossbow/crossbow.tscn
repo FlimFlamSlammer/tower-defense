@@ -43,7 +43,7 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 [node name="Improved Sensors" type="Node" parent="Upgrades/Path1" index="1"]
 script = ExtResource("4_tvbwh")
 description = "Longer range."
-cost = 350
+cost = 400
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Fuse Bolts" type="Node" parent="Upgrades/Path1" index="2"]
