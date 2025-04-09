@@ -13,13 +13,13 @@ cost = 1000
 [node name="Reinforced Strings" type="Node" parent="Upgrades/Path0" index="0"]
 script = ExtResource("4_tvbwh")
 description = "Bolts fly faster and do more damage."
-cost = 500
+cost = 400
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Sharper Bolts" type="Node" parent="Upgrades/Path0" index="1"]
 script = ExtResource("4_tvbwh")
 description = "Bolts fly even faster and pierce more targets. Explosions do more damage."
-cost = 550
+cost = 450
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Giant Crossbow" type="Node" parent="Upgrades/Path0" index="2"]
