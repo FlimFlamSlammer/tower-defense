@@ -51,7 +51,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 				var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
 				if _tile_controller.place_tower(pos, selected_tower):
-					money_requested.emit(selected_tower.cost, true, func(success: bool): )
+					money_requested.emit(selected_tower.cost, true, func(__: bool): )
 					tower_placed.emit(selected_tower)
 					selected_tower.tower_clicked.connect(_select_tower)
 					is_placing = false
