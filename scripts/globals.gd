@@ -1,7 +1,7 @@
 class_name Globals
 extends Object
 
-const TILE_CONTROLLER_PATH: NodePath = ^"/root/Map/MainTileMap"
+const TILE_CONTROLLER_PATH: NodePath = "/root/Map/MainTileMap"
 
 const TowerGroups: Dictionary[StringName, StringName] = {
 	ATTACKING = "attacking_towers",
