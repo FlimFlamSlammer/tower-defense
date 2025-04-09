@@ -1,5 +1,5 @@
 class_name Projectile
-extends Area2D
+extends Node2D
 
 var stats: Dictionary[StringName, Variant]
 
