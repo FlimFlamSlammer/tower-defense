@@ -26,7 +26,7 @@ func attempt_fire(timer: Timer, fire: Callable, cost: int) -> void:
 	money_requested.emit(cost, true, func(success: bool):
 		if not success: return
 
-		_mutable_data.get_node("Pivot").look_at(target.global_position)
+		_mutable_data.pivot.look_at(target.global_position)
 		_mutable_data.animations.stop()
 		_mutable_data.animations.play("fire")
 		fire.call(target)

@@ -3,15 +3,11 @@ extends ShootingTower
 
 func _fire(target: Enemy) -> void:
 	var new_projectile: Bolt = stats.projectile.instantiate()
-	var pivot: Node2D = _mutable_data.get_node("Pivot")
 
-	new_projectile.stats = stats
-
-	var fuse_bolt := new_projectile as FuseBolt
-	if fuse_bolt:
-		fuse_bolt.explosion_damage = stats.explosion_damage
+	new_projectile.stats = stats.duplicate()
+	new_projectile.movement_dir = _mutable_data.pivot.rotation
 
 	var rotated_offset: Vector2 = stats.projectile_offset.rotated(new_projectile.movement_dir)
-	new_projectile.translate(rotated_offset)
+	new_projectile.position = position + rotated_offset
 
 	add_sibling(new_projectile)

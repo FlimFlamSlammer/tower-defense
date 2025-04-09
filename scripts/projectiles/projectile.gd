@@ -10,6 +10,7 @@ var _pierce_used: int = 0
 
 func _ready() -> void:
 	_calculate_movement_vector()
+	rotation = movement_dir
 
 
 func _process(delta: float) -> void:

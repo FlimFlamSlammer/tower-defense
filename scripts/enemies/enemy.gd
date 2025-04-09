@@ -18,6 +18,7 @@ var _status_effects: Dictionary[StringName, EnemyStatusEffect]
 func _ready() -> void:
 	stats = base_stats.duplicate()
 	stats.health = initial_health_ratio * stats.max_health
+	print(stats.health)
 
 
 func _process(delta: float) -> void:
