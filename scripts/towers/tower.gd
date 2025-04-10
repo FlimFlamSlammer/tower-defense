@@ -6,13 +6,12 @@ signal update_paths() ## Emits when the tower's update function is called and re
 signal tower_clicked(tower: Tower) ## Emits when the Tower is clicked by the player.
 signal money_requested(amount: int, spend: bool, cb: Callable) ## Emits when the tower requests an action that uses money. Call param cb to confirm the action.
 
-const MUTABLE_DATA_PATH: StringName = "res://scenes/towers/crossbow/mutable_data/"
-
 enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
 @export var tower_name: StringName
 @export var targeting_options: Array[Targeting] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
 @export var cost: int
+@export var mutable_data_path: String = "res://scenes/towers/crossbow/mutable_data/"
 
 var tile_position: Vector2i
 var targeting: int ## The targeting option that the Tower is currently using.
@@ -38,12 +37,12 @@ func _ready() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 0.4)
 
 
-func _update_tile_danger_levels(group: StringName, tile: PathTile, danger_mult: float):
-	pass
+func _update_tile_danger_levels(group: StringName, current_danger_level: float, danger_mult: float) -> float:
+	return current_danger_level
 
 
-func update_danger_levels(group: StringName) -> void:
-	var visited: Dictionary = {}
+func run_for_tiles_in_range(cb: Callable) -> void:
+	var visited: Dictionary[Vector2i, bool] = {}
 	var to_visit: Array[Vector2i] = [tile_position]
 
 	while not to_visit.is_empty():
@@ -54,14 +53,13 @@ func update_danger_levels(group: StringName) -> void:
 			continue
 		visited[top_tile] = true
 
-		var danger_mult: float = _get_tile_danger_level_multiplier(top_tile)
+		var overlap_ratio: float = _get_tile_danger_level_multiplier(top_tile)
 
-		if (danger_mult == 0.0):
+		if (overlap_ratio == 0.0):
 			continue
 
-		var tile_ref := _tile_controller.tiles.get_tile(top_tile) as PathTile
-		if tile_ref:
-			_update_tile_danger_levels(group, tile_ref, danger_mult)
+		var tile_ref: Tile = _tile_controller.tiles.get_tile(top_tile)
+		cb.call(tile_ref, overlap_ratio)
 
 		to_visit.push_back(top_tile + Vector2i(0, 1))
 		to_visit.push_back(top_tile + Vector2i(0, -1))
@@ -69,10 +67,21 @@ func update_danger_levels(group: StringName) -> void:
 		to_visit.push_back(top_tile + Vector2i(-1, 0))
 
 
+func update_danger_levels(group: StringName) -> void:
+	if not group in get_groups():
+		return
+
+	run_for_tiles_in_range(func(tile: Tile, overlap_ratio: float):
+		var path_tile := tile as PathTile
+		if path_tile:
+			path_tile.danger_level = _update_tile_danger_levels(group, path_tile.danger_level, overlap_ratio)
+	)
+
+
 func place() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 1.0)
 	_placed = true
-	update(true)
+	update()
 	_click_area.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
@@ -87,7 +96,7 @@ func deselect() -> void:
 
 
 ## Applies status effects, updates range circle and recalculates pathfinding data. If param do_not_update_paths is true, skips recalculation of pathfinding data.
-func update(do_not_update_paths: bool = true) -> void:
+func update(do_not_update_paths: bool = false) -> void:
 	stats = _mutable_data.stats.duplicate()
 	for effect in _status_effects.keys():
 		effect.apply(stats)
@@ -99,9 +108,9 @@ func update(do_not_update_paths: bool = true) -> void:
 		update_paths.emit()
 
 
-## Reparents the TowerStatusEffect to the Tower where the function was called. Use duplicate() to preserve to TowerStatusEffect.
+## Reparents the TowerStatusEffect to the Tower where the function was called. Use duplicate() to preserve the TowerStatusEffect.
 func apply_status_effect(effect: TowerStatusEffect, p_update: bool = true):
-	if _status_effects.has(effect.id):
+	if effect.id in _status_effects:
 		if _status_effects[effect.id].priority > effect.priority:
 			effect.queue_free()
 			return
@@ -111,7 +120,10 @@ func apply_status_effect(effect: TowerStatusEffect, p_update: bool = true):
 	effect.expired.connect(remove_status_effect.bind(effect.id))
 
 	_status_effects[effect.id] = effect
-	effect.reparent(self)
+	if effect.get_parent():
+		effect.reparent(self)
+	else:
+		add_child(effect)
 
 	if p_update:
 		update()
@@ -125,19 +137,19 @@ func remove_status_effect(id: StringName, p_update: bool = true):
 
 
 ## Upgrades the tower by one tier on the specified path. Param cb is called when the upgrade finishes, and has a boolean parameter that stores whether the upgrade was successful.
-func upgrade_tower(path: int, cb: Callable = Callable()) -> void:
+func upgrade_tower(path: int, cb: Callable = func(__: bool): ) -> void:
 	var tier: int = current_upgrade[path] + 1
 	var upgrade: Upgrade = upgrades.get_upgrade(path, tier)
 
 	money_requested.emit(upgrade.cost, true, func(success: bool):
-		if cb: cb.call(success)
+		cb.call(success)
 
 		if not success:
 			return
 
 		current_upgrade[path] = tier
 
-		var mutable_data_path: String = MUTABLE_DATA_PATH + str(current_upgrade[0]) + str(current_upgrade[1]) + &".tscn"
+		var mutable_data_path: String = mutable_data_path + str(current_upgrade[0]) + str(current_upgrade[1]) + ".tscn"
 		print(mutable_data_path)
 		var mutable_data_scene: PackedScene = load(mutable_data_path)
 		var new_mutable_data = mutable_data_scene.instantiate()
@@ -171,7 +183,7 @@ func set_display_valid() -> void: ## Changes the color to represent a valid plac
 func _get_tile_danger_level_multiplier(tile: Vector2i) -> float:
 	var dist := tile.distance_to(tile_position)
 	## Danger value computed using range and distance.
-	var danger: float = ((stats.range - dist - 0.5) * 1.0) + 1.0
+	var danger: float = stats.range - dist + 0.5
 	danger = clampf(danger, 0.0, 1.0)
 	if danger < 1.0 and danger > 0.0:
 		danger = sqrt(danger)
