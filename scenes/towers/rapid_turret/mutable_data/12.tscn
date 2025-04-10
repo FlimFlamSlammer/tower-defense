@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://jnihsldvu2bw"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_ex7hp"]
-[ext_resource type="PackedScene" uid="uid://dfxwg3gri3gr8" path="res://scenes/projectiles/bullet.tscn" id="2_gybh8"]
+[ext_resource type="PackedScene" uid="uid://cvy6grcey5qcd" path="res://scenes/projectiles/bullet.tscn" id="2_gybh8"]
 [ext_resource type="Texture2D" uid="uid://dop43ucup0at7" path="res://assets/towers/rapid_turret/12/Turret.svg" id="3_gybh8"]
 
 [sub_resource type="Animation" id="Animation_v2dyu"]
@@ -36,4 +36,5 @@ libraries = {
 [node name="Pivot" type="Node2D" parent="." index="1"]
 
 [node name="Turret" type="Sprite2D" parent="Pivot" index="0"]
+position = Vector2(12, 0)
 texture = ExtResource("3_gybh8")
