@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3skqu0bhk65h"]
+[gd_scene load_steps=6 format=3 uid="uid://b3skqu0bhk65h"]
 
 [ext_resource type="PackedScene" uid="uid://uy78f1v0v425" path="res://scenes/towers/tower.tscn" id="1_kfxjv"]
 [ext_resource type="Script" uid="uid://dqncc4nykdff2" path="res://scripts/towers/bullet_factory.gd" id="2_trb26"]
 [ext_resource type="Script" uid="uid://col0ystitn4jb" path="res://scripts/towers/upgrade.gd" id="3_trb26"]
+[ext_resource type="Texture2D" uid="uid://cms306djwk18r" path="res://assets/towers/bullet_factory/00/Layer 1.svg" id="4_x8q53"]
 [ext_resource type="PackedScene" uid="uid://bhtm3em6dfg1v" path="res://scenes/towers/bullet_factory/mutable_data/00.tscn" id="4_xrhpj"]
 
 [node name="BulletFactory" groups=["supporting_towers"] instance=ExtResource("1_kfxjv")]
@@ -42,5 +43,8 @@ description = "Replaces titanium bullets with plasma-powered bullets that deal 2
 [node name="Molten Core" type="Node" parent="Upgrades/Path1" index="3"]
 script = ExtResource("3_trb26")
 description = "Superheated bullets melt enemy defenses."
+
+[node name="Base" parent="." index="3"]
+texture = ExtResource("4_x8q53")
 
 [node name="MutableData" parent="." index="6" instance=ExtResource("4_xrhpj")]
