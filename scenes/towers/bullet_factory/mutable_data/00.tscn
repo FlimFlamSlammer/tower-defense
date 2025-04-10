@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_t826g"]
 
 [node name="MutableData" instance=ExtResource("1_a8xpl")]
+stats = Dictionary[StringName, Variant]({
+&"range": 3.5
+})
 
 [node name="StatusEffects" type="Node" parent="." index="0"]
 
