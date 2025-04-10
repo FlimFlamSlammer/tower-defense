@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3skqu0bhk65h"]
+[gd_scene load_steps=4 format=3 uid="uid://b3skqu0bhk65h"]
 
 [ext_resource type="PackedScene" uid="uid://uy78f1v0v425" path="res://scenes/towers/tower.tscn" id="1_kfxjv"]
+[ext_resource type="Script" uid="uid://dqncc4nykdff2" path="res://scripts/towers/bullet_factory.gd" id="2_trb26"]
 [ext_resource type="PackedScene" uid="uid://df1qesprypgk6" path="res://scenes/towers/upgrade.tscn" id="2_xnihh"]
 
 [node name="BulletFactory" instance=ExtResource("1_kfxjv")]
+script = ExtResource("2_trb26")
 tower_name = &"Bullet Factory"
 targeting_options = Array[int]([])
 cost = 7500
