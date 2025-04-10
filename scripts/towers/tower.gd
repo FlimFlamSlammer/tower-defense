@@ -11,10 +11,9 @@ enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 @export var tower_name: StringName
 @export var targeting_options: Array[Targeting] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
 @export var cost: int
-@export var mutable_data_path: String = "res://scenes/towers/crossbow/mutable_data/"
 
 var tile_position: Vector2i
-var targeting: int ## The targeting option that the Tower is currently using.
+var targeting: Targeting ## The targeting option that the Tower is currently using.
 var current_upgrade: Array[int] = [0, 0]
 var selected: bool = false
 
@@ -149,7 +148,8 @@ func upgrade_tower(path: int, cb: Callable = func(__: bool): ) -> void:
 
 		current_upgrade[path] = tier
 
-		var mutable_data_path: String = mutable_data_path + str(current_upgrade[0]) + str(current_upgrade[1]) + ".tscn"
+		var mutable_data_directory: String = owner.scene_file_path.get_base_dir().path_join("mutable_data")
+		var mutable_data_path: String = mutable_data_directory.path_join(str(current_upgrade[0]) + str(current_upgrade[1]) + ".tscn")
 		print(mutable_data_path)
 		var mutable_data_scene: PackedScene = load(mutable_data_path)
 		var new_mutable_data = mutable_data_scene.instantiate()
