@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3skqu0bhk65h"]
+
+[ext_resource type="PackedScene" uid="uid://uy78f1v0v425" path="res://scenes/towers/tower.tscn" id="1_kfxjv"]
+[ext_resource type="PackedScene" uid="uid://df1qesprypgk6" path="res://scenes/towers/upgrade.tscn" id="2_xnihh"]
+
+[node name="BulletFactory" instance=ExtResource("1_kfxjv")]
+tower_name = &"Bullet Factory"
+targeting_options = Array[int]([])
+cost = 7500
+
+[node name="Efficient Manufacturing" parent="Upgrades/Path0" index="0" instance=ExtResource("2_xnihh")]
+description = "Reduces bullet price."
+
+[node name="Improved Coverage" parent="Upgrades/Path0" index="1" instance=ExtResource("2_xnihh")]
+description = "Increases range."
+
+[node name="Big Factory" parent="Upgrades/Path0" index="2" instance=ExtResource("2_xnihh")]
+description = "Reduces bullet prices significantly, at the cost of pollution."
+
+[node name="The Showstopper" parent="Upgrades/Path0" index="3" instance=ExtResource("2_xnihh")]
+description = "Bullets briefly slow down hit enemies."
+
+[node name="Titanium Bullets" parent="Upgrades/Path1" index="0" instance=ExtResource("2_xnihh")]
+description = "Slightly increases bullet damage."
+
+[node name="Armor Piercing Bullets" parent="Upgrades/Path1" index="1" instance=ExtResource("2_xnihh")]
+description = "Bullets deal 10% more damage. This damage ignores enemy immunity."
+
+[node name="Energy Bullets" parent="Upgrades/Path1" index="2" instance=ExtResource("2_xnihh")]
+description = "Replaces titanium bullets with plasma-powered bullets that deal 20% more damage."
+
+[node name="Molten Core" parent="Upgrades/Path1" index="3" instance=ExtResource("2_xnihh")]
+description = "Superheated bullets melt enemy defenses."
