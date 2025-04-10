@@ -9,7 +9,7 @@ func _process(_delta: float) -> void:
 
 
 func _update_tile_danger_levels(group: StringName, current_danger_level: float, danger_mult: float):
-	if group == Globals.TowerGroups.ATTACKING:
+	if group == Tower.Groups.ATTACKING:
 		return current_danger_level + (danger_mult * stats.damage * stats.fire_rate)
 	return current_danger_level
 

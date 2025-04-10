@@ -15,7 +15,7 @@ func _fire(target: Enemy) -> void:
 	add_sibling(new_projectile)
 
 func _update_tile_danger_levels(group: StringName, current_danger_level: float, danger_mult: float) -> float:
-	if group == Globals.TowerGroups.ATTACKING:
+	if group == Tower.Groups.ATTACKING:
 		var diff: float = stats.fire_rate * stats.damage
 		if "explosion_damage" in stats:
 			diff += stats.explosion_damage * EXPECTED_EXPLOSION_PIERCE

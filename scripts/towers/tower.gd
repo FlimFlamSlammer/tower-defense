@@ -8,6 +8,13 @@ signal money_requested(amount: int, spend: bool, cb: Callable) ## Emits when the
 
 enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
+const Groups: Dictionary[StringName, StringName] = {
+	ATTACKING = "attacking_towers",
+	SETUP = "setup_towers",
+	SUPPORT = "support_towers",
+	USES_BULLET = "uses_bullet_towers",
+}
+
 @export var tower_name: StringName
 @export var targeting_options: Array[Targeting] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
 @export var cost: int

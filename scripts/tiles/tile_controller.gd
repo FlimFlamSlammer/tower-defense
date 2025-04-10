@@ -133,15 +133,15 @@ func update_danger_levels() -> void:
 
 			tile.danger_level = 0
 
-	var towers: Array[Node] = get_tree().get_nodes_in_group(Globals.TowerGroups.ATTACKING)
+	var towers: Array[Node] = get_tree().get_nodes_in_group(Tower.Groups.ATTACKING)
 
 	for tower: Tower in towers:
-		tower.update_danger_levels(Globals.TowerGroups.ATTACKING)
+		tower.update_danger_levels(Tower.Groups.ATTACKING)
 
-	towers = get_tree().get_nodes_in_group(Globals.TowerGroups.SETUP)
+	towers = get_tree().get_nodes_in_group(Tower.Groups.SETUP)
 
 	for tower: Tower in towers:
-		tower.update_danger_levels(Globals.TowerGroups.SETUP)
+		tower.update_danger_levels(Tower.Groups.SETUP)
 
 	update_paths()
 
