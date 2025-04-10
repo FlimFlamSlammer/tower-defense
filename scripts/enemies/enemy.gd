@@ -52,7 +52,7 @@ func hit(damage: float, type: Globals.DamageTypes) -> bool:
 
 
 func apply_status_effect(effect: EnemyStatusEffect, update: bool = true):
-	if _status_effects.has(effect.id):
+	if effect.id in _status_effects:
 		if _status_effects[effect.id].priority > effect.priority:
 			effect.queue_free()
 			return
