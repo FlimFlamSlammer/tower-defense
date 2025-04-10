@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://dfxwg3gri3gr8"]
+[gd_scene load_steps=2 format=3 uid="uid://cvy6grcey5qcd"]
 
-[node name="Bullet" type="RayCast2D"]
+[ext_resource type="Script" uid="uid://deh2a5w8iejja" path="res://scripts/projectiles/bullet.gd" id="1_yvfy2"]
+
+[node name="Bullet" type="RayCast2D" node_paths=PackedStringArray("_ray_cast")]
+target_position = Vector2(8192, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("1_yvfy2")
+_ray_cast = NodePath(".")

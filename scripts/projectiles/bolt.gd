@@ -1,2 +1,2 @@
 class_name Bolt
-extends Projectile
+extends AreaProjectile
