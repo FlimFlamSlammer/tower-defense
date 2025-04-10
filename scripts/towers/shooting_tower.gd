@@ -27,8 +27,11 @@ func attempt_fire(timer: Timer, fire: Callable, cost: int) -> void:
 		if not success: return
 
 		_mutable_data.pivot.look_at(target.global_position)
-		_mutable_data.animations.stop()
-		_mutable_data.animations.play("fire")
+
+		if _mutable_data.animations.has_animation("fire"):
+			_mutable_data.animations.stop()
+			_mutable_data.animations.play("fire")
+			
 		fire.call(target)
 		timer.start(1.0 / stats.fire_rate)
 	)
