@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3ftv6p6r1071"]
+[gd_scene load_steps=13 format=3 uid="uid://c3ftv6p6r1071"]
 
 [ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_8bulm"]
 [ext_resource type="Script" uid="uid://dt80n4vowgof1" path="res://scripts/ui/gui_root.gd" id="1_uktbi"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://t57xpvt76yec" path="res://assets/ui/crystal.svg" id="4_j5hfe"]
 [ext_resource type="Script" uid="uid://dhf6s7lrolgof" path="res://scripts/ui/closable_menu.gd" id="6_py6rl"]
 [ext_resource type="PackedScene" uid="uid://c4tpi83r71ldm" path="res://scenes/ui/upgrade_menu.tscn" id="9_j5hfe"]
+[ext_resource type="PackedScene" uid="uid://ckqx1sw1yqdkr" path="res://scenes/towers/rapid_turret/rapid_turret.tscn" id="10_yetrs"]
+[ext_resource type="PackedScene" uid="uid://b3skqu0bhk65h" path="res://scenes/towers/bullet_factory/bullet_factory.tscn" id="11_kayra"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -78,14 +80,22 @@ metadata/_tab_index = 0
 [node name="Buttons" parent="TowerMenu/Offense" index="0"]
 size_flags_horizontal = 0
 
-[node name="TowerSelector_Offense_Padding_Buttons#Crossbow" parent="TowerMenu/Offense/Buttons" index="0" instance=ExtResource("2_k2ell")]
+[node name="Crossbow" parent="TowerMenu/Offense/Buttons" index="0" instance=ExtResource("2_k2ell")]
 layout_mode = 2
 tower_scene = ExtResource("4_00jwl")
+
+[node name="Rapid Turret" parent="TowerMenu/Offense/Buttons" index="1" instance=ExtResource("2_k2ell")]
+layout_mode = 2
+tower_scene = ExtResource("10_yetrs")
 
 [node name="Production" parent="TowerMenu" instance=ExtResource("2_astdl")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="Bullet Factory" parent="TowerMenu/Production/Buttons" index="0" instance=ExtResource("2_k2ell")]
+layout_mode = 2
+tower_scene = ExtResource("11_kayra")
 
 [node name="TowerMenuButton" type="Button" parent="."]
 layout_mode = 1
@@ -120,4 +130,5 @@ metadata/_edit_use_anchors_ = true
 [editable path="TopBar/LivesDisplay"]
 [editable path="TopBar/MoneyDisplay"]
 [editable path="TowerMenu/Offense"]
+[editable path="TowerMenu/Offense/Buttons/Rapid Turret"]
 [editable path="TowerMenu/Production"]

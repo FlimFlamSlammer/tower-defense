@@ -28,10 +28,9 @@ window/stretch/mode="canvas_items"
 
 [global_group]
 
-start_wave_button=""
 attacking_towers=""
 towers=""
-tower_buttons=""
+uses_bullet_towers=""
 
 [input]
 

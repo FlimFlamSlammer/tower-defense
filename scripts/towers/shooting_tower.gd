@@ -19,6 +19,7 @@ func _fire(target: Enemy) -> void:
 
 func attempt_fire(timer: Timer, fire: Callable, cost: int) -> void:
 	if not _placed or not timer.is_stopped(): return
+	if Groups.USES_BULLET in get_groups() and not "bullets" in _status_effects: return
 
 	var target: Enemy = _get_target(stats.range)
 	if not target: return

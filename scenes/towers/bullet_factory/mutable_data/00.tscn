@@ -12,13 +12,12 @@ stats = Dictionary[StringName, Variant]({
 
 [node name="BulletGiver" type="Node" parent="StatusEffects" index="0"]
 script = ExtResource("2_t826g")
-id = &"bullet"
+id = &"bullets"
 stat_multipliers = Dictionary[StringName, float]({
 &"attack_cost": 1.0,
 &"damage": 1.0
 })
 stat_setters = Dictionary[StringName, Variant]({
-&"can_fire": null,
 &"damage_type": 1
 })
 metadata/_custom_type_script = "uid://0afypir31y4j"

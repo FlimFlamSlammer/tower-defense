@@ -16,7 +16,7 @@ _data = {
 stats = Dictionary[StringName, Variant]({
 &"attack_cost": 4,
 &"damage": 4.0,
-&"fire_rate": 3.0,
+&"fire_rate": 4.0,
 &"pierce": 1,
 &"projectile": ExtResource("2_msxcf"),
 &"projectile_offset": PackedVector2Array(80, -82, 80, 82),
@@ -32,5 +32,5 @@ libraries = {
 [node name="Pivot" type="Node2D" parent="." index="1"]
 
 [node name="Turret" type="Sprite2D" parent="Pivot" index="0"]
-position = Vector2(12, 0)
+position = Vector2(16, 0)
 texture = ExtResource("3_msxcf")

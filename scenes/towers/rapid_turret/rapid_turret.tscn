@@ -1,3 +1,61 @@
-[gd_scene format=3 uid="uid://ckqx1sw1yqdkr"]
+[gd_scene load_steps=5 format=3 uid="uid://ckqx1sw1yqdkr"]
 
-[node name="RapidTurret" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://bolphubyb6fu1" path="res://scenes/towers/shooting_tower.tscn" id="1_7oefg"]
+[ext_resource type="PackedScene" uid="uid://cfukt8cysv520" path="res://scenes/towers/rapid_turret/mutable_data/00.tscn" id="2_7wjjk"]
+[ext_resource type="Script" uid="uid://col0ystitn4jb" path="res://scripts/towers/upgrade.gd" id="2_dhkf1"]
+[ext_resource type="Script" uid="uid://dsafattdrgd1a" path="res://scripts/towers/rapid_turret.gd" id="2_y2o04"]
+
+[node name="RapidTurret" groups=["attacking_towers", "uses_bullet_towers"] instance=ExtResource("1_7oefg")]
+script = ExtResource("2_y2o04")
+tower_name = &"Rapid Turret"
+cost = 1600
+
+[node name="Improved Precision" type="Node" parent="Upgrades/Path0" index="0"]
+script = ExtResource("2_dhkf1")
+description = "Increases damage."
+cost = 750
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Muzzle Brake" type="Node" parent="Upgrades/Path0" index="1"]
+script = ExtResource("2_dhkf1")
+description = "Reduces bullet spread."
+cost = 600
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Piercing Shots" type="Node" parent="Upgrades/Path0" index="2"]
+script = ExtResource("2_dhkf1")
+description = "Bullet accelerator technology allows shots to pierce through enemies."
+cost = 6000
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Bullet Ricochet" type="Node" parent="Upgrades/Path0" index="3"]
+script = ExtResource("2_dhkf1")
+description = "Advanced bullet ricochet technology allows bullets to automatically bounce up to 5 targets!"
+cost = 50000
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Engine Upgrades" type="Node" parent="Upgrades/Path1" index="0"]
+script = ExtResource("2_dhkf1")
+description = "Increases fire rate."
+cost = 700
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Long-Range Sensor" type="Node" parent="Upgrades/Path1" index="1"]
+script = ExtResource("2_dhkf1")
+description = "Increases range."
+cost = 700
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Quad Barrels" type="Node" parent="Upgrades/Path1" index="2"]
+script = ExtResource("2_dhkf1")
+description = "Double barrels for double bullets."
+cost = 5000
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="The Shredder" type="Node" parent="Upgrades/Path1" index="3"]
+script = ExtResource("2_dhkf1")
+description = "The Shredder will obliterate everything in sight."
+cost = 40000
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="MutableData" parent="." index="7" instance=ExtResource("2_7wjjk")]
