@@ -17,14 +17,14 @@ func _fire(target: Enemy) -> void:
 	pass
 
 
-func attempt_fire(timer: Timer, fire: Callable, cost: int) -> void:
+func attempt_fire(timer: Timer, fire: Callable, attack_cost: int) -> void:
 	if not _placed or not timer.is_stopped(): return
 	if Groups.USES_BULLET in get_groups() and not "bullets" in _status_effects: return
 
 	var target: Enemy = _get_target(stats.range)
 	if not target: return
 
-	money_requested.emit(cost, true, func(success: bool):
+	money_requested.emit(attack_cost, true, func(success: bool):
 		if not success: return
 
 		_mutable_data.pivot.look_at(target.global_position)

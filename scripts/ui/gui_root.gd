@@ -9,6 +9,8 @@ const MENU_CLOSED_OFFSET: float = 100.0
 var selected_tower: Tower
 
 var is_placing: bool = false
+var placing_previous_position: Vector2i
+
 var is_selecting: bool = false
 var is_tower_selector_open: bool = false
 
@@ -35,12 +37,19 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if is_placing:
 		var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
-		selected_tower.position = _tile_controller.map_to_local(pos)
-		selected_tower.update(false)
-		if _tile_controller._can_place_tower(pos):
-			selected_tower.set_display_valid()
-		else:
-			selected_tower.set_display_invalid()
+
+		if pos != placing_previous_position:
+			placing_previous_position = pos
+
+			selected_tower.tile_position = pos
+			selected_tower.position = _tile_controller.map_to_local(pos)
+
+			_tile_controller.update_support_towers()
+			selected_tower.update_status_effects()
+			if _tile_controller._can_place_tower(pos):
+				selected_tower.set_display_valid()
+			else:
+				selected_tower.set_display_invalid()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -67,7 +76,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("sell"):
 		if _upgrade_menu.is_open:
 			_upgrade_menu.close()
-			selected_tower.queue_free()
+			selected_tower.sell()
 
 
 func cancel_tower_placement() -> void:
@@ -84,6 +93,7 @@ func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
 	selected_tower = tower_scene.instantiate()
 	_tile_controller.add_child(selected_tower, true)
 	is_placing = true
+	placing_previous_position = Vector2i(-999, -999)
 
 
 func _on_tower_menu_button_pressed() -> void:

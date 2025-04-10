@@ -194,4 +194,4 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[connection signal="gui_input" from="ClickArea" to="." method="_on_tower_clicked"]
+[connection signal="gui_input" from="ClickArea" to="." method="_on_input_received"]

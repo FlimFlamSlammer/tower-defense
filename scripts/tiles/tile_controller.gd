@@ -8,6 +8,8 @@ extends TileMapLayer
 var start_tile: Vector2i
 var finish_tile: Vector2i
 
+var _path_update_queued: bool = false
+
 @onready var tiles := TileMatrix.new(first_tile, last_tile)
 
 func _ready() -> void:
@@ -15,7 +17,11 @@ func _ready() -> void:
 	start_tile = map_data.start
 	finish_tile = map_data.finish
 
-	update_paths()
+	_update_paths()
+
+
+func _process(_delta: float) -> void:
+	_check_path_updates.call_deferred()
 
 
 func can_place_wall(pos: Vector2i, south: bool) -> bool:
@@ -82,9 +88,16 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 	tower.reparent(self);
 	tower.tile_position = pos
 	tower.position = map_to_local(pos)
-	tower.update_paths.connect(update_danger_levels)
 	tile.tower = tower
+
+	tower.tower_modified.connect(update_paths)
+	if Tower.Groups.SUPPORT in tower.get_groups():
+		print("support tower placed")
+		tower.tower_sold.connect(update_support_towers)
+
 	tower.place()
+
+	update_support_towers()
 
 	return true
 
@@ -94,12 +107,33 @@ func remove_tower(pos: Vector2i) -> bool:
 	if tile and tile.tower:
 		tile.tower.queue_free()
 		tile.tower = null
-		update_paths()
+		_update_paths()
 		return true
 	return false
 
 
 func update_paths() -> void:
+	_path_update_queued = true
+
+
+func update_support_towers():
+	for tower: Tower in get_tree().get_nodes_in_group(Tower.Groups.ALL):
+		tower.clear_persistent_status_effects()
+
+	var towers: Array[Node] = get_tree().get_nodes_in_group(Tower.Groups.SUPPORT)
+	for tower: SupportTower in towers:
+		if not tower.is_queued_for_deletion():
+			tower.give_status_effects()
+
+
+func _check_path_updates() -> void:
+	if _path_update_queued:
+		_update_paths()
+
+
+func _update_paths() -> void:
+	_update_danger_levels()
+
 	var visited: Dictionary[Vector2i, bool]
 	var pq := PriorityQueue.new(
 		func compare(a: Array, b: Array) -> bool:
@@ -123,7 +157,7 @@ func update_paths() -> void:
 		_push_pathfinding_data(visited, pq, data, Vector2i.RIGHT)
 
 
-func update_danger_levels() -> void:
+func _update_danger_levels() -> void:
 	# reset current danger levels
 	for x in range(first_tile.x, last_tile.x + 1):
 		for y in range(first_tile.y, last_tile.y + 1):
@@ -142,8 +176,6 @@ func update_danger_levels() -> void:
 
 	for tower: Tower in towers:
 		tower.update_danger_levels(Tower.Groups.SETUP)
-
-	update_paths()
 
 
 func _can_place_tower(pos: Vector2i) -> bool:

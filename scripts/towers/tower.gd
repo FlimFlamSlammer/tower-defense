@@ -2,16 +2,17 @@ class_name Tower
 extends Node2D
 
 signal tower_modified() ## Emits when the tower's update function is called.
-signal update_paths() ## Emits when the tower's update function is called and requests a pathfinding update.
+signal tower_sold()
 signal tower_clicked(tower: Tower) ## Emits when the Tower is clicked by the player.
 signal money_requested(amount: int, spend: bool, cb: Callable) ## Emits when the tower requests an action that uses money. Call param cb to confirm the action.
 
 enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
 
 const Groups: Dictionary[StringName, StringName] = {
+	ALL = "towers",
 	ATTACKING = "attacking_towers",
 	SETUP = "setup_towers",
-	SUPPORT = "support_towers",
+	SUPPORT = "supporting_towers",
 	USES_BULLET = "uses_bullet_towers",
 }
 
@@ -47,37 +48,10 @@ func _update_tile_danger_levels(group: StringName, current_danger_level: float, 
 	return current_danger_level
 
 
-func run_for_tiles_in_range(cb: Callable) -> void:
-	var visited: Dictionary[Vector2i, bool] = {}
-	var to_visit: Array[Vector2i] = [tile_position]
-
-	while not to_visit.is_empty():
-		var top_tile: Vector2i = to_visit.back()
-		to_visit.pop_back()
-
-		if visited.has(top_tile):
-			continue
-		visited[top_tile] = true
-
-		var overlap_ratio: float = _get_tile_danger_level_multiplier(top_tile)
-
-		if (overlap_ratio == 0.0):
-			continue
-
-		var tile_ref: Tile = _tile_controller.tiles.get_tile(top_tile)
-		cb.call(tile_ref, overlap_ratio)
-
-		to_visit.push_back(top_tile + Vector2i(0, 1))
-		to_visit.push_back(top_tile + Vector2i(0, -1))
-		to_visit.push_back(top_tile + Vector2i(1, 0))
-		to_visit.push_back(top_tile + Vector2i(-1, 0))
-
-
 func update_danger_levels(group: StringName) -> void:
-	if not group in get_groups():
-		return
+	if not group in get_groups() or not _placed: return
 
-	run_for_tiles_in_range(func(tile: Tile, overlap_ratio: float):
+	_run_for_tiles_in_range(func(tile: Tile, overlap_ratio: float):
 		var path_tile := tile as PathTile
 		if path_tile:
 			path_tile.danger_level = _update_tile_danger_levels(group, path_tile.danger_level, overlap_ratio)
@@ -87,7 +61,7 @@ func update_danger_levels(group: StringName) -> void:
 func place() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 1.0)
 	_placed = true
-	update()
+	update_status_effects()
 	_click_area.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
@@ -101,17 +75,29 @@ func deselect() -> void:
 	_range_animations.play("hide_range")
 
 
-## Applies status effects, updates range circle and recalculates pathfinding data. If param do_not_update_paths is true, skips recalculation of pathfinding data.
-func update(do_not_update_paths: bool = false) -> void:
+func sell() -> void:
+	var sell_value: float = 0.333
+	if "sell_value" in stats:
+		sell_value *= stats.sell_value
+
+	money_requested.emit(-cost * sell_value, true, func(__: bool): )
+
+	queue_free()
+	tower_sold.emit()
+
+
+func update_status_effects() -> void:
 	stats = _mutable_data.stats.duplicate()
-	for effect in _status_effects.keys():
+	for effect in _status_effects.values():
 		effect.apply(stats)
 
-	_range_indicator.scale = Vector2.ONE * stats.range
-	tower_modified.emit()
+	update_range_circle()
 
-	if not do_not_update_paths:
-		update_paths.emit()
+	if _placed: tower_modified.emit()
+
+
+func update_range_circle() -> void:
+	_range_indicator.scale = Vector2.ONE * stats.range
 
 
 ## Reparents the TowerStatusEffect to the Tower where the function was called. Use duplicate() to preserve the TowerStatusEffect.
@@ -132,14 +118,21 @@ func apply_status_effect(effect: TowerStatusEffect, p_update: bool = true):
 		add_child(effect)
 
 	if p_update:
-		update()
+		update_status_effects()
+
+
+func clear_persistent_status_effects():
+	for effect in _status_effects.values():
+		if effect.persistent:
+			_status_effects[effect.id].queue_free()
+			_status_effects.erase(effect.id)
 
 
 func remove_status_effect(id: StringName, p_update: bool = true):
 	_status_effects[id].queue_free()
 	_status_effects.erase(id)
 	if p_update:
-		update()
+		update_status_effects()
 
 
 ## Upgrades the tower by one tier on the specified path. Param cb is called when the upgrade finishes, and has a boolean parameter that stores whether the upgrade was successful.
@@ -165,7 +158,7 @@ func upgrade_tower(path: int, cb: Callable = func(__: bool): ) -> void:
 		_mutable_data.queue_free()
 		_mutable_data = new_mutable_data
 		add_child.call_deferred(new_mutable_data)
-		update.call_deferred()
+		update_status_effects.call_deferred()
 	)
 
 
@@ -197,6 +190,32 @@ func _get_tile_danger_level_multiplier(tile: Vector2i) -> float:
 	return danger
 
 
-func _on_tower_clicked(event: InputEvent) -> void:
+func _on_input_received(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		tower_clicked.emit(self)
+
+
+func _run_for_tiles_in_range(cb: Callable) -> void:
+	var visited: Dictionary[Vector2i, bool] = {}
+	var to_visit: Array[Vector2i] = [tile_position]
+
+	while not to_visit.is_empty():
+		var top_tile: Vector2i = to_visit.back()
+		to_visit.pop_back()
+
+		if visited.has(top_tile):
+			continue
+		visited[top_tile] = true
+
+		var overlap_ratio: float = _get_tile_danger_level_multiplier(top_tile)
+
+		if (overlap_ratio == 0.0):
+			continue
+
+		var tile_ref: Tile = _tile_controller.tiles.get_tile(top_tile)
+		cb.call(tile_ref, overlap_ratio)
+
+		to_visit.push_back(top_tile + Vector2i(0, 1))
+		to_visit.push_back(top_tile + Vector2i(0, -1))
+		to_visit.push_back(top_tile + Vector2i(1, 0))
+		to_visit.push_back(top_tile + Vector2i(-1, 0))

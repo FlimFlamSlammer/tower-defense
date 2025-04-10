@@ -59,3 +59,5 @@ cost = 40000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="MutableData" parent="." index="7" instance=ExtResource("2_7wjjk")]
+
+[connection signal="gui_input" from="ClickArea" to="." method="_on_tower_clicked"]

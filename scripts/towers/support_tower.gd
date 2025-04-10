@@ -5,9 +5,10 @@ func _can_affect_tower(tower: Tower, status_effect: TowerStatusEffect) -> bool:
 	return true
 
 
-func update(do_not_update_paths: bool = false) -> void:
-	super (true)
-	run_for_tiles_in_range(func(tile: Tile, overlap_ratio: float):
+func give_status_effects() -> void:
+	if not _placed: return
+
+	_run_for_tiles_in_range(func(tile: Tile, overlap_ratio: float):
 		if overlap_ratio < 0.5:
 			return
 
@@ -24,5 +25,3 @@ func update(do_not_update_paths: bool = false) -> void:
 			if _can_affect_tower(tower, status_effect):
 				tower.apply_status_effect(status_effect.duplicate(), false)
 	)
-	if not do_not_update_paths:
-		update_paths.emit()

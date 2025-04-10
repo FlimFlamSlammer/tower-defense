@@ -31,6 +31,7 @@ window/stretch/mode="canvas_items"
 attacking_towers=""
 towers=""
 uses_bullet_towers=""
+supporting_towers=""
 
 [input]
 

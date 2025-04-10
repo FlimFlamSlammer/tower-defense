@@ -7,7 +7,9 @@ signal ticked(apply_tick: Callable)
 @export var id: StringName
 @export var stat_multipliers: Dictionary[StringName, float]
 @export var stat_setters: Dictionary[StringName, Variant]
-@export var priority: int
+@export var priority: int = 0
+## Persistent effects need to be continuously given by the source. Most buffs from support towers are persistent.
+@export var persistent: bool = true
 
 func _apply_tick(stats: Dictionary) -> void:
 	pass

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://col0ystitn4jb" path="res://scripts/towers/upgrade.gd" id="3_trb26"]
 [ext_resource type="PackedScene" uid="uid://bhtm3em6dfg1v" path="res://scenes/towers/bullet_factory/mutable_data/00.tscn" id="4_xrhpj"]
 
-[node name="BulletFactory" instance=ExtResource("1_kfxjv")]
+[node name="BulletFactory" groups=["supporting_towers"] instance=ExtResource("1_kfxjv")]
 script = ExtResource("2_trb26")
 tower_name = &"Bullet Factory"
 targeting_options = Array[int]([])
