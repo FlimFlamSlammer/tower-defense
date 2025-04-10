@@ -155,7 +155,7 @@ func upgrade_tower(path: int, cb: Callable = func(__: bool): ) -> void:
 
 		current_upgrade[path] = tier
 
-		var mutable_data_directory: String = owner.scene_file_path.get_base_dir().path_join("mutable_data")
+		var mutable_data_directory: String = self.scene_file_path.get_base_dir().path_join("mutable_data")
 		var mutable_data_path: String = mutable_data_directory.path_join(str(current_upgrade[0]) + str(current_upgrade[1]) + ".tscn")
 		print(mutable_data_path)
 		var mutable_data_scene: PackedScene = load(mutable_data_path)
