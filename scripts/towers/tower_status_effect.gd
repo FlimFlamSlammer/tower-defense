@@ -5,8 +5,8 @@ signal expired()
 signal ticked(apply_tick: Callable)
 
 @export var id: StringName
-@export var stat_multipliers: Dictionary
-@export var stat_setters: Dictionary
+@export var stat_multipliers: Dictionary[StringName, float]
+@export var stat_setters: Dictionary[StringName, Variant]
 @export var priority: int
 
 func _apply_tick(stats: Dictionary) -> void:
