@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://jnihsldvu2bw"]
+[gd_scene load_steps=6 format=3 uid="uid://jnihsldvu2bw"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_ex7hp"]
 [ext_resource type="PackedScene" uid="uid://cvy6grcey5qcd" path="res://scenes/projectiles/bullet.tscn" id="2_gybh8"]
@@ -7,13 +7,9 @@
 [sub_resource type="Animation" id="Animation_v2dyu"]
 length = 0.001
 
-[sub_resource type="Animation" id="Animation_v38si"]
-resource_name = "fire"
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4fkxx"]
 _data = {
-&"RESET": SubResource("Animation_v2dyu"),
-&"fire": SubResource("Animation_v38si")
+&"RESET": SubResource("Animation_v2dyu")
 }
 
 [node name="MutableData" instance=ExtResource("1_ex7hp")]
