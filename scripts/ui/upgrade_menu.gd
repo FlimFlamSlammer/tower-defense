@@ -20,7 +20,7 @@ func update_tower(tower: Tower) -> void:
 	_disconnect_previous_tower()
 	_selected_tower = tower
 
-	_tower_label.text = _selected_tower.name
+	_tower_label.text = _selected_tower.tower_name
 
 	for i in _upgrade_paths.size():
 		var upgrade_path: UpgradePath = _upgrade_paths[i]
