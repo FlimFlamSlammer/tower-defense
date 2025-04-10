@@ -8,10 +8,10 @@ func _process(_delta: float) -> void:
 	attempt_fire(_attack_timer, _fire, stats.attack_cost)
 
 
-func _update_tile_danger_levels(group: StringName, tile: PathTile, danger_mult: float):
+func _update_tile_danger_levels(group: StringName, current_danger_level: float, danger_mult: float):
 	if group == Globals.TowerGroups.ATTACKING:
-		tile.danger_level += danger_mult * stats.damage * stats.fire_rate
-
+		return current_danger_level + (danger_mult * stats.damage * stats.fire_rate)
+	return current_danger_level
 
 func _fire(target: Enemy) -> void:
 	pass

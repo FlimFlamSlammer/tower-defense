@@ -82,7 +82,7 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 	tower.reparent(self);
 	tower.tile_position = pos
 	tower.position = map_to_local(pos)
-	tower.tower_modified.connect(update_danger_levels)
+	tower.update_paths.connect(update_danger_levels)
 	tile.tower = tower
 	tower.place()
 
@@ -157,7 +157,7 @@ func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array,
 
 	new_data[0] = data[0] + offset
 
-	if visited.has(new_data[0]): return
+	if new_data[0] in visited: return
 
 	var new_tile := tiles.get_tile(new_data[0]) as PathTile
 	if not new_tile:
