@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhhlei7815x4"]
+[gd_scene load_steps=4 format=3 uid="uid://vhosxgmojqiv"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_kxdd2"]
 [ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_2ylbu"]
@@ -15,11 +15,11 @@ stats = Dictionary[StringName, Variant]({
 script = ExtResource("2_2ylbu")
 id = &"bullets"
 stat_multipliers = Dictionary[StringName, float]({
-&"armor_piercing": 0.111,
 &"attack_cost": 1.0,
 &"damage": 1.32
 })
 stat_setters = Dictionary[StringName, Variant]({
+&"armor_piercing": 0.111,
 &"damage_type": 1
 })
 priority = 4
