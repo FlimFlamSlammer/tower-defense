@@ -8,7 +8,7 @@ extends Projectile
 func _ready() -> void:
 	super ()
 	_ray_cast.force_raycast_update()
-	var last_pos := Vector2.RIGHT.rotated(rotation) * 8192
+	var last_pos := Vector2.RIGHT.rotated(rotation) * 4600 # defaults to approximate screen diagonal length
 	var last_normal := Vector2.ZERO
 	while _ray_cast.is_colliding() and _pierce_used < stats.pierce:
 		var collider: Area2D = _ray_cast.get_collider()
