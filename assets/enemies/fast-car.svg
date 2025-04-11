@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="127.99999"
-   height="52.000004"
-   viewBox="0 0 33.866664 13.758334"
+   width="200"
+   height="79.999992"
+   viewBox="0 0 52.916665 21.166665"
    version="1.1"
    id="svg1"
    xmlns="http://www.w3.org/2000/svg"
@@ -12,35 +12,16 @@
   <defs
      id="defs1" />
   <g
-     id="layer1"
-     transform="translate(0.01101761)">
-    <rect
-       style="fill:#f5d800;fill-opacity:1;stroke:#ffe72c;stroke-width:0.361507;stroke-dasharray:0, 3.97657"
-       id="rect2-6"
-       width="19.478743"
-       height="13.740417"
-       x="-0.011017612"
-       y="-2.2062911e-06"
-       ry="1.7175531"
-       rx="1.326841" />
-    <rect
-       style="fill:#ffe499;fill-opacity:1;stroke:#ffe72c;stroke-width:0.316754;stroke-dasharray:0, 3.4843"
-       id="rect2-5-6"
-       width="11.517708"
-       height="9.5125961"
-       x="3.5272188"
-       y="2.1139102"
-       ry="1.4268892"
-       rx="1.3821249" />
+     id="layer1">
     <path
-       style="fill:#f5d800;fill-opacity:1;stroke:#8cd864;stroke-width:0.529167;stroke-dasharray:0, 5.82083"
-       id="path10"
-       d="M 82.873493,16.948476 59.23359,30.596982 59.233588,1.1530169 82.873493,14.80152 a 1.2395455,1.2395455 89.999997 0 1 0,2.146956 z"
-       transform="matrix(0.6392272,0,0,0.46727175,-19.515518,-0.53877273)" />
+       style="fill:#ffed34;fill-opacity:1;stroke-width:0.529167;stroke-linecap:round"
+       d="M 4.2333332,2.1166665 H 25.399999 c 2.338005,0 5.982866,0.7289722 8.141025,1.628205 l 17.584615,7.3269225 c 2.158159,0.899233 2.158159,2.357177 0,3.25641 l -17.584615,7.326923 c -2.158159,0.899233 -5.80302,1.628205 -8.141025,1.628205 l -21.1666658,0 C 1.8953278,23.283332 0,21.388004 0,19.049999 V 6.3499997 C 0,4.0119943 1.8953278,2.1166665 4.2333332,2.1166665 Z"
+       id="path1"
+       transform="translate(0,-2.1166667)" />
     <path
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ffe397;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0, 5.82083;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000"
-       d="m 52.652081,6.6573698 0,4.1481842 a 0.57942669,0.57942669 34.721975 0 0 0.782877,0.542534 l 6.900515,-2.5876936 a 0.28730867,0.28730867 88.39899 0 0 -0.01518,-0.5432459 l -6.86975,-2.1467977 a 0.61501447,0.61501447 143.67702 0 0 -0.798458,0.587019 z"
-       id="path9"
-       transform="matrix(1.6542918,0,0,1.779032,-74.342091,-8.6316865)" />
+       style="fill:#fff69c;fill-opacity:1;stroke-width:0.529167;stroke-linecap:round"
+       d="m 3.1749999,9.5249995 0,6.3499995 c 0,2.338005 1.8953278,4.233333 4.2333332,4.233333 l 11.6416659,0 c 2.338005,0 5.870477,-0.955001 7.889997,-2.133054 l 5.386672,-3.142225 c 2.01952,-1.178053 2.01952,-3.088055 0,-4.266108 L 26.939996,7.4247201 C 24.920476,6.246667 21.388004,5.2916663 19.049999,5.2916663 H 7.4083331 c -2.3380054,0 -4.2333332,1.8953278 -4.2333332,4.2333332 z"
+       id="path2"
+       transform="translate(0,-2.1166667)" />
   </g>
 </svg>

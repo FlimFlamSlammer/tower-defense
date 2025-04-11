@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://djwj4lx7m00c6"]
+
+[ext_resource type="Script" uid="uid://csa5uq4xgsuff" path="res://scripts/enemies/enemy.gd" id="1_o2lwj"]
+[ext_resource type="Texture2D" uid="uid://cstg65hrhw5xu" path="res://assets/enemies/tank.svg" id="2_mxdtq"]
+
+[node name="Enemy" type="Area2D" groups=["enemies"]]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_o2lwj")
+base_stats = Dictionary[StringName, Variant]({
+&"immunities": PackedInt64Array(1),
+&"max_health": 15.0,
+&"speed": 1.0
+})
+metadata/_custom_type_script = "uid://csa5uq4xgsuff"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -64, 128, -32, 128, 32, 0, 64, -128, 32, -128, -32)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_mxdtq")

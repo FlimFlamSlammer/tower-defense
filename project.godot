@@ -32,6 +32,7 @@ attacking_towers=""
 towers=""
 uses_bullet_towers=""
 supporting_towers=""
+enemies=""
 
 [input]
 

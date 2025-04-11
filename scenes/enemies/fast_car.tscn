@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://csa5uq4xgsuff" path="res://scripts/enemies/enemy.gd" id="1_t10ux"]
 [ext_resource type="Texture2D" uid="uid://bts3yqqimgg6b" path="res://assets/enemies/fast-car.svg" id="2_c0mi0"]
 
-[node name="FastCar" type="Area2D"]
+[node name="FastCar" type="Area2D" groups=["enemies"]]
 collision_layer = 2
 collision_mask = 0
 monitoring = false
@@ -19,4 +19,4 @@ metadata/_custom_type_script = "uid://csa5uq4xgsuff"
 texture = ExtResource("2_c0mi0")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-96, -40, 12, -40, 104, 0, 12, 40, -96, 40)
+polygon = PackedVector2Array(-100, -40, 12, -40, 108, 0, 12, 40, -100, 40)

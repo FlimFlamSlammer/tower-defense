@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpu5w33lh3n6g"
-path="res://.godot/imported/slow-car.svg-5df352a8d89d1e46a735e98f31e62169.ctex"
+uid="uid://cstg65hrhw5xu"
+path="res://.godot/imported/tank.svg-04343f7d3bf79436e7e0b7b849458aae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/slow-car.svg"
-dest_files=["res://.godot/imported/slow-car.svg-5df352a8d89d1e46a735e98f31e62169.ctex"]
+source_file="res://assets/enemies/tank.svg"
+dest_files=["res://.godot/imported/tank.svg-04343f7d3bf79436e7e0b7b849458aae.ctex"]
 
 [params]
 

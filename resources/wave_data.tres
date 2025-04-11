@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="WaveData" load_steps=4 format=3 uid="uid://bje0j4gpndoyc"]
+[gd_resource type="Resource" script_class="WaveData" load_steps=5 format=3 uid="uid://bje0j4gpndoyc"]
 
 [ext_resource type="PackedScene" uid="uid://lvqv7e8j8dut" path="res://scenes/enemies/slow_car.tscn" id="1_66k7f"]
 [ext_resource type="Script" uid="uid://0cvalmpqh1pa" path="res://scripts/enemies/spawner/wave_data.gd" id="1_kgv4u"]
 [ext_resource type="PackedScene" uid="uid://cxy3pqhua6x16" path="res://scenes/enemies/fast_car.tscn" id="2_mh3ks"]
+[ext_resource type="PackedScene" uid="uid://djwj4lx7m00c6" path="res://scenes/enemies/tank.tscn" id="3_m4j23"]
 
 [resource]
 script = ExtResource("1_kgv4u")
@@ -31,4 +32,34 @@ data = Array[Array]([[{
 &"interval": 3.0,
 &"time": 1.5,
 &"type": ExtResource("2_mh3ks")
+}], [{
+&"amount": 5,
+&"interval": 0.8,
+&"time": 0.0,
+&"type": ExtResource("1_66k7f")
+}, {
+&"amount": 5,
+&"interval": 0.8,
+&"time": 5.0,
+&"type": ExtResource("1_66k7f")
+}, {
+&"amount": 10,
+&"interval": 0.7,
+&"time": 10.0,
+&"type": ExtResource("1_66k7f")
+}], [{
+&"amount": 10,
+&"interval": 2.0,
+&"time": 0.0,
+&"type": ExtResource("2_mh3ks")
+}], [{
+&"amount": 5,
+&"interval": 0.8,
+&"time": 0.0,
+&"type": ExtResource("1_66k7f")
+}, {
+&"amount": 2,
+&"interval": 1.5,
+&"time": 1.0,
+&"type": ExtResource("3_m4j23")
 }]])
