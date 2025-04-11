@@ -10,7 +10,7 @@ var lives: int = 100:
 		gui.lives_display.value = str(lives)
 		lives_changed.emit(val)
 
-var money: int = 200000:
+var money: int = 2000:
 	set(val):
 		money = val
 		gui.money_display.value = str(money)

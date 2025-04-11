@@ -25,13 +25,13 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 [node name="Giant Crossbow" type="Node" parent="Upgrades/Path0" index="2"]
 script = ExtResource("4_tvbwh")
 description = "Improves overall stats at the cost of fire rate."
-cost = 1200
+cost = 2400
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Grand Javelin" type="Node" parent="Upgrades/Path0" index="3"]
 script = ExtResource("4_tvbwh")
 description = "Grand Javelin bolts deal big damage and pierce almost anything"
-cost = 6000
+cost = 12000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="High-Tech Motors" type="Node" parent="Upgrades/Path1" index="0"]
@@ -49,13 +49,13 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 [node name="Fuse Bolts" type="Node" parent="Upgrades/Path1" index="2"]
 script = ExtResource("4_tvbwh")
 description = "Bolts explode shortly after hitting a target."
-cost = 1500
+cost = 2600
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Pulsing Shots" type="Node" parent="Upgrades/Path1" index="3"]
 script = ExtResource("4_tvbwh")
 description = "Bolts pulse multiple times after sticking to a target, before violently exploding."
-cost = 9000
+cost = 18000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="ClickArea" parent="." index="6"]
