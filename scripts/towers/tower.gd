@@ -6,7 +6,14 @@ signal tower_sold()
 signal tower_clicked(tower: Tower) ## Emits when the Tower is clicked by the player.
 signal money_requested(amount: int, spend: bool, cb: Callable) ## Emits when the tower requests an action that uses money. Call param cb to confirm the action.
 
-enum Targeting {FIRST, LAST, CLOSE, FAR, STRONG, WEAK}
+const Targeting: Dictionary[StringName, StringName] = {
+	FIRST = "First",
+	LAST = "Last",
+	CLOSE = "Close",
+	FAR = "Far",
+	STRONG = "Strong",
+	WEAK = "Weak",
+}
 
 const Groups: Dictionary[StringName, StringName] = {
 	ALL = "towers",
@@ -17,11 +24,11 @@ const Groups: Dictionary[StringName, StringName] = {
 }
 
 @export var tower_name: StringName
-@export var targeting_options: Array[Targeting] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
+@export var targeting_options: Array[StringName] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
 @export var cost: int
 
 var tile_position: Vector2i
-var targeting: Targeting ## The targeting option that the Tower is currently using.
+var targeting: StringName = Targeting.FIRST ## The targeting option that the Tower is currently using.
 var current_upgrade: Array[int] = [0, 0]
 var selected: bool = false
 

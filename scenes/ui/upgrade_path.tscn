@@ -30,13 +30,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 text = "Upgrade name"
-autowrap_mode = 2
+autowrap_mode = 3
 
 [node name="Button" type="Button" parent="MarginContainer/HFlex"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 6.0
+size_flags_stretch_ratio = 2.5
 theme_override_constants/icon_max_width = 32
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HFlex/Button"]
@@ -78,8 +78,8 @@ stretch_mode = 4
 
 [node name="TierIndicator" type="VBoxContainer" parent="MarginContainer/HFlex"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
 [node name="4" type="Panel" parent="MarginContainer/HFlex/TierIndicator"]

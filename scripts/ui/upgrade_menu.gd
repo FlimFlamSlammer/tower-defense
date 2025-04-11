@@ -8,6 +8,7 @@ var _selected_tower: Tower
 
 @onready var _upgrade_paths: Array[Node] = %UpgradePaths.get_children()
 @onready var _tower_label: Label = %TowerLabel
+@onready var _targeting_selector: Carousel = %TargetingSelector
 
 
 func close(instant: bool = false) -> void:
@@ -27,12 +28,24 @@ func update_tower(tower: Tower) -> void:
 		upgrade_path.button_pressed.connect(tower.upgrade_tower.bind(i))
 
 	tower.tower_modified.connect(_update)
+
+	_targeting_selector.option_changed.connect(func(val: int):
+		_selected_tower.targeting = _selected_tower.targeting_options[val]
+	)
+
 	_update()
 
 
 func _update() -> void:
 	var highest_tier: int = _selected_tower.current_upgrade.max()
 	var lock_other_paths: bool = highest_tier > MAX_TIER_CROSSPATH
+
+	if _selected_tower.targeting_options.is_empty():
+		_targeting_selector.hide()
+	else:
+		_targeting_selector.show()
+		_targeting_selector.set_options(_selected_tower.targeting_options)
+		_targeting_selector.set_option(_selected_tower.targeting_options.find(_selected_tower.targeting))
 
 	for i in _selected_tower.current_upgrade.size():
 		var upgrade_path: UpgradePath = _upgrade_paths[i]

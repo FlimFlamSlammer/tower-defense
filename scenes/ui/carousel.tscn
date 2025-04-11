@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl8kkqt67bagk"]
+
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_18nwo"]
+[ext_resource type="Script" uid="uid://8bm86ve4k170" path="res://scripts/ui/carousel.gd" id="1_avtga"]
+[ext_resource type="Texture2D" uid="uid://b2oiq88ijjvu3" path="res://assets/ui/chevron_left.svg" id="3_apcp6"]
+[ext_resource type="Texture2D" uid="uid://c8qllekfg4kci" path="res://assets/ui/chevron_right.svg" id="4_5b5ht"]
+
+[node name="Carousel" type="HBoxContainer"]
+offset_right = 56.0
+offset_bottom = 23.0
+theme = ExtResource("1_18nwo")
+alignment = 1
+script = ExtResource("1_avtga")
+
+[node name="Left" type="TextureButton" parent="."]
+layout_mode = 2
+texture_normal = ExtResource("3_apcp6")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Right" type="TextureButton" parent="."]
+layout_mode = 2
+texture_normal = ExtResource("4_5b5ht")
+
+[connection signal="pressed" from="Left" to="." method="_change_index" binds= [-1]]
+[connection signal="pressed" from="Right" to="." method="_change_index" binds= [1]]

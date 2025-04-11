@@ -32,7 +32,7 @@ func attempt_fire(timer: Timer, fire: Callable, attack_cost: int) -> void:
 		if _mutable_data.animations.has_animation("fire"):
 			_mutable_data.animations.stop()
 			_mutable_data.animations.play("fire")
-			
+
 		fire.call(target)
 		timer.start(1.0 / stats.fire_rate)
 	)
@@ -55,9 +55,9 @@ func _get_target(p_range: float) -> Enemy:
 			Targeting.LAST:
 				enemy_value = enemy.get_distance_from_finish()
 			Targeting.STRONG:
-				enemy_value = enemy.health
+				enemy_value = enemy.stats.health
 			Targeting.WEAK:
-				enemy_value = - enemy.health
+				enemy_value = - enemy.stats.health
 			Targeting.CLOSE:
 				enemy_value = - global_position.distance_squared_to(enemy.global_position)
 			Targeting.FAR:

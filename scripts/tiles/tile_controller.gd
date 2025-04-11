@@ -129,6 +129,7 @@ func update_support_towers():
 func _check_path_updates() -> void:
 	if _path_update_queued:
 		_update_paths()
+		_path_update_queued = false
 
 
 func _update_paths() -> void:
