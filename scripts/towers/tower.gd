@@ -101,11 +101,11 @@ func update_range_circle() -> void:
 
 
 ## Reparents the TowerStatusEffect to the Tower where the function was called. Use duplicate() to preserve the TowerStatusEffect.
-func apply_status_effect(effect: TowerStatusEffect, p_update: bool = true):
+func apply_status_effect(effect: TowerStatusEffect, p_update: bool = true) -> bool:
 	if effect.id in _status_effects:
-		if _status_effects[effect.id].priority > effect.priority:
+		if _status_effects[effect.id].priority >= effect.priority:
 			effect.queue_free()
-			return
+			return false
 		else:
 			remove_status_effect(effect.id, false)
 
@@ -119,6 +119,8 @@ func apply_status_effect(effect: TowerStatusEffect, p_update: bool = true):
 
 	if p_update:
 		update_status_effects()
+
+	return true
 
 
 func clear_persistent_status_effects():

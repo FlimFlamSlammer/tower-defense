@@ -8,6 +8,8 @@ func _can_affect_tower(tower: Tower, status_effect: TowerStatusEffect) -> bool:
 func give_status_effects() -> void:
 	if not _placed: return
 
+	var status_effects: Array[Node] = _mutable_data.get_node("StatusEffects").get_children()
+
 	_run_for_tiles_in_range(func(tile: Tile, overlap_ratio: float):
 		if overlap_ratio < 0.5:
 			return
@@ -19,9 +21,13 @@ func give_status_effects() -> void:
 			return
 
 		var tower: Tower = tile.tower
-		var status_effects: Array[Node] = _mutable_data.get_node("StatusEffects").get_children()
+		var tower_changed: bool = false
 
 		for status_effect: TowerStatusEffect in status_effects:
 			if _can_affect_tower(tower, status_effect):
-				tower.apply_status_effect(status_effect.duplicate(), false)
+				tower_changed = tower_changed or tower.apply_status_effect(status_effect.duplicate(), false)
+
+		if tower_changed:
+			tower.update_status_effects()
 	)
+	print(self, "buffs reapplied!")
