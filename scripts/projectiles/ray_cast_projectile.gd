@@ -16,6 +16,17 @@ func _ready() -> void:
 		if enemy:
 			enemy.hit(stats.damage, 1)
 			_pierce_used += 1
+
+			if "projectile_status_effects" in stats:
+				var status_effects: Array[EnemyStatusEffect] = stats.projectile_status_effects
+				for effect in status_effects:
+					var new_effect
+					if _pierce_used == stats.pierce:
+						new_effect = effect
+					else:
+						new_effect = effect.duplicate()
+					enemy.apply_status_effect(new_effect)
+
 			last_pos = _ray_cast.get_collision_point()
 			last_normal = _ray_cast.get_collision_normal()
 
