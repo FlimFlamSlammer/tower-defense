@@ -7,8 +7,6 @@ var _attached_enemy: Enemy = null
 var _attached_local_position: Vector2
 var _attached_local_rotation: float
 
-var _exploded: bool = false
-
 @onready var _fire_effect: GPUParticles2D = $Fire
 @onready var _blast_area: Area2D = $BlastArea
 @onready var _fuse: Timer = $Fuse
@@ -36,8 +34,7 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func _explode() -> void:
-	if _exploded: return
-	_exploded = true
+	if is_queued_for_deletion(): return
 
 	var enemies: Array[Area2D] = _blast_area.get_overlapping_areas()
 

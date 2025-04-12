@@ -1,0 +1,239 @@
+[gd_scene load_steps=24 format=3 uid="uid://dgpvpgukg8v46"]
+
+[ext_resource type="Script" uid="uid://ddqhmqvc7viif" path="res://scripts/projectiles/pulse_bolt.gd" id="1_3vopy"]
+[ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="2_q0e7i"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_j31ok"]
+b = Vector2(144, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q0e7i"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pjd4x"]
+radius = 350.0
+
+[sub_resource type="Curve" id="Curve_gjf1x"]
+_data = [Vector2(0, 1), 0.0, -0.348636, 0, 0, Vector2(1, 0), -2.10384, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fvxf0"]
+curve = SubResource("Curve_gjf1x")
+
+[sub_resource type="Gradient" id="Gradient_jwesq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.76, 0.76, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fvxf0"]
+gradient = SubResource("Gradient_jwesq")
+
+[sub_resource type="Gradient" id="Gradient_jihoq"]
+offsets = PackedFloat32Array(0, 0.722581, 1)
+colors = PackedColorArray(1, 0.996667, 0.8, 1, 1, 0.986667, 0.2, 1, 0.83, 0.818933, 0.166, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xo8pq"]
+gradient = SubResource("Gradient_jihoq")
+
+[sub_resource type="Curve" id="Curve_75v82"]
+_limits = [1.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.428149, 0, 0, Vector2(1, 1.5), 0.522169, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xo8pq"]
+curve = SubResource("Curve_75v82")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q0e7i"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 190.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+damping_min = 150.0
+damping_max = 200.0
+scale_min = 0.4
+scale_max = 0.48
+scale_curve = SubResource("CurveTexture_xo8pq")
+color_ramp = SubResource("GradientTexture1D_xo8pq")
+color_initial_ramp = SubResource("GradientTexture1D_fvxf0")
+alpha_curve = SubResource("CurveTexture_fvxf0")
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 2
+
+[sub_resource type="Curve" id="Curve_euwh2"]
+_limits = [0.0, 0.4, 0.0, 1.0]
+_data = [Vector2(0, 0.4), 0.0, -0.0924412, 0, 0, Vector2(1, 0), -0.934407, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6qo1t"]
+curve = SubResource("Curve_euwh2")
+
+[sub_resource type="Curve" id="Curve_q0e7i"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 2.4695, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j31ok"]
+curve = SubResource("Curve_q0e7i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pjd4x"]
+lifetime_randomness = 0.8
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 160.0
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 450.0
+gravity = Vector3(0, 0, 0)
+damping_min = 400.0
+damping_max = 550.0
+scale_min = 0.5
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_j31ok")
+color = Color(0, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_6qo1t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_01548"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 380.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 160.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+damping_min = 150.0
+damping_max = 200.0
+scale_min = 0.7
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_xo8pq")
+color_ramp = SubResource("GradientTexture1D_xo8pq")
+color_initial_ramp = SubResource("GradientTexture1D_fvxf0")
+alpha_curve = SubResource("CurveTexture_fvxf0")
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 2
+
+[sub_resource type="Curve" id="Curve_0bhws"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 2.4695, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3klb1"]
+curve = SubResource("Curve_0bhws")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fcubg"]
+lifetime_randomness = 0.8
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 300.0
+spread = 180.0
+initial_velocity_min = 450.0
+initial_velocity_max = 660.0
+gravity = Vector3(0, 0, 0)
+damping_min = 400.0
+damping_max = 550.0
+scale_min = 0.75
+scale_max = 0.95
+scale_curve = SubResource("CurveTexture_3klb1")
+color = Color(0, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_6qo1t")
+
+[node name="PulsingBolt" type="Area2D"]
+z_index = 11
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_3vopy")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.5, 1)
+color = Color(1, 1, 0.72549, 1)
+polygon = PackedVector2Array(0, 120, 4.0007, 96, 3.99931, -96, 0, -120, -4.0007, -96, -3.99931, 96)
+
+[node name="Tip" type="Polygon2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.5, 1)
+color = Color(1, 0.866667, 0.462745, 1)
+polygon = PackedVector2Array(-0.000622638, -86, -8.00059, -82, -8.0007, -96, -0.000897758, -124, 7.9993, -96, 7.99941, -82)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_j31ok")
+
+[node name="PulseTimer" type="Timer" parent="."]
+wait_time = 0.6
+
+[node name="ExitTower" type="Timer" parent="."]
+wait_time = 0.07
+one_shot = true
+autostart = true
+
+[node name="PulseBlastArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PulseBlastArea"]
+position = Vector2(102, 0)
+shape = SubResource("CircleShape2D_q0e7i")
+
+[node name="BlastArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlastArea"]
+position = Vector2(102, 0)
+shape = SubResource("CircleShape2D_pjd4x")
+
+[node name="PulseFire" type="GPUParticles2D" parent="."]
+z_index = 20
+position = Vector2(102, 0)
+emitting = false
+amount = 20
+sub_emitter = NodePath("Smoke")
+texture = ExtResource("2_q0e7i")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 48
+process_material = SubResource("ParticleProcessMaterial_q0e7i")
+
+[node name="Smoke" type="GPUParticles2D" parent="PulseFire"]
+z_index = -1
+emitting = false
+amount = 100000
+texture = ExtResource("2_q0e7i")
+lifetime = 0.7
+explosiveness = 1.0
+fixed_fps = 48
+process_material = SubResource("ParticleProcessMaterial_pjd4x")
+
+[node name="Fire" type="GPUParticles2D" parent="."]
+z_index = 20
+position = Vector2(102, 0)
+emitting = false
+amount = 34
+sub_emitter = NodePath("Smoke")
+texture = ExtResource("2_q0e7i")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 48
+process_material = SubResource("ParticleProcessMaterial_01548")
+
+[node name="Smoke" type="GPUParticles2D" parent="Fire"]
+z_index = -1
+emitting = false
+amount = 10000
+texture = ExtResource("2_q0e7i")
+lifetime = 0.7
+explosiveness = 1.0
+fixed_fps = 48
+process_material = SubResource("ParticleProcessMaterial_fcubg")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="PulseTimer" to="." method="_pulse"]
+[connection signal="timeout" from="ExitTower" to="." method="_set_z_index"]
