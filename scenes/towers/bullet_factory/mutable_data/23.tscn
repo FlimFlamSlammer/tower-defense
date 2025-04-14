@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://qd4t6srf0dlt"]
+
+[ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_ys15q"]
+[ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_ejqsc"]
+
+[node name="MutableData" instance=ExtResource("1_ys15q")]
+stats = Dictionary[StringName, Variant]({
+&"range": 3.0
+})
+
+[node name="StatusEffects" type="Node" parent="." index="0"]
+
+[node name="BulletGiver" type="Node" parent="StatusEffects" index="0"]
+script = ExtResource("2_ejqsc")
+id = &"bullets"
+stat_multipliers = Dictionary[StringName, float]({
+&"attack_cost": 0.75,
+&"damage": 1.584
+})
+stat_setters = Dictionary[StringName, Variant]({
+&"damage_type": 2
+})
+priority = 10
+metadata/_custom_type_script = "uid://0afypir31y4j"

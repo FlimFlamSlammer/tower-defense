@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvndhdswtkg15"]
+
+[ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_2cnrg"]
+[ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_ui8i3"]
+[ext_resource type="Script" uid="uid://bl1yhg2trfgy1" path="res://scripts/enemies/enemy_status_effect.gd" id="3_g810o"]
+
+[node name="MutableData" instance=ExtResource("1_2cnrg")]
+stats = Dictionary[StringName, Variant]({
+&"range": 3.0
+})
+
+[node name="StatusEffects" type="Node" parent="." index="0"]
+
+[node name="BulletGiver" type="Node" parent="StatusEffects" index="0"]
+script = ExtResource("2_ui8i3")
+id = &"bullets"
+stat_multipliers = Dictionary[StringName, float]({
+&"attack_cost": 0.4,
+&"damage": 1.32
+})
+stat_setters = Dictionary[StringName, Variant]({
+&"damage_type": 2,
+&"projectile_status_effects": []
+})
+priority = 6
+metadata/_custom_type_script = "uid://0afypir31y4j"
+
+[node name="ProjectileStatusEffects" type="Node" parent="." index="1"]
+
+[node name="EnemyStatusEffect" type="Node" parent="ProjectileStatusEffects" index="0"]
+script = ExtResource("3_g810o")
+id = &"bullet_factory_slow"
+stat_multipliers = Dictionary[StringName, float]({
+&"speed": 0.8
+})
+metadata/_custom_type_script = "uid://bl1yhg2trfgy1"
+
+[node name="Timer" type="Timer" parent="ProjectileStatusEffects/EnemyStatusEffect" index="0"]
+wait_time = 0.5
+
+[connection signal="timeout" from="ProjectileStatusEffects/EnemyStatusEffect/Timer" to="ProjectileStatusEffects/EnemyStatusEffect" method="_expire"]
