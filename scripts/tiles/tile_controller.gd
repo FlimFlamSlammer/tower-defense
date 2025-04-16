@@ -39,7 +39,7 @@ func can_place_wall(pos: Vector2i, vertical: bool) -> bool:
 			return false
 		adjacent = tiles.get_tile(pos + Vector2i(1, 0)) as PathTile
 	else:
-		if tile.east_wall:
+		if tile.south_wall:
 			return false
 		adjacent = tiles.get_tile(pos + Vector2i(0, 1)) as PathTile
 

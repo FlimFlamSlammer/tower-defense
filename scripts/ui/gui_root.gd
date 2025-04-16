@@ -92,8 +92,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				money_requested.emit(selected_wall.cost, false, func(success: bool):
 					if not success: return
 
-					var pos: Dictionary[StringName, Variant] = _tile_controller.get_wall_pos_from_mouse()
-					if _tile_controller.place_wall(pos.pos, pos.vertical, selected_wall):
+					if _tile_controller.place_wall(selected_wall.pos, selected_wall.vertical, selected_wall):
 						money_requested.emit(selected_wall.cost, true, func(__: bool): )
 						wall_placed.emit(selected_wall)
 						is_placing = false
@@ -112,13 +111,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func cancel_tower_placement() -> void:
-	if is_placing:
+	if is_placing and selected_tower:
 		is_placing = false
 		selected_tower.queue_free()
 
 
 func cancel_wall_placement() -> void:
-	if is_placing:
+	if is_placing and selected_wall:
 		is_placing = false
 		selected_wall.queue_free()
 
