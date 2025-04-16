@@ -1,0 +1,192 @@
+[gd_scene load_steps=10 format=3 uid="uid://boq8nbsagg0yo"]
+
+[ext_resource type="Script" uid="uid://deh2a5w8iejja" path="res://scripts/projectiles/bullet.gd" id="1_hc63x"]
+[ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="2_1maaj"]
+
+[sub_resource type="Curve" id="Curve_k5ji7"]
+_data = [Vector2(0, 0.797753), 0.0, 3.08547, 0, 0, Vector2(0.124464, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_48g2p"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.966292), 0.0, 1.57716, 0, 0, Vector2(1, 1.07865), -0.378364, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k5ji7"]
+curve = SubResource("Curve_48g2p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_48g2p"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+spread = 15.0
+initial_velocity_min = 5000.0
+initial_velocity_max = 6000.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.03
+scale_max = 0.07
+scale_curve = SubResource("CurveTexture_k5ji7")
+color = Color(0.984314, 1, 0.831373, 1)
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.19
+
+[sub_resource type="Animation" id="Animation_k5ji7"]
+length = 0.001
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MuzzleFlash:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Trail:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Trail:default_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.984314, 1, 0.831373, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Trail:width")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="Animation" id="Animation_yvfy2"]
+resource_name = "fire"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MuzzleFlash:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Trail:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Trail:default_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.02, 0.3),
+"transitions": PackedFloat32Array(1, 1, 2, 1),
+"update": 0,
+"values": [Color(0.984314, 1, 0.831373, 1), Color(0.984314, 1, 0.831373, 1), Color(1, 1, 1, 0.0392157), Color(1, 1, 1, 0.00392157)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Trail:width")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.3),
+"transitions": PackedFloat32Array(0.6, 0.6, 1),
+"update": 0,
+"values": [3.0, 1.0, 16.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_48g2p"]
+_data = {
+&"RESET": SubResource("Animation_k5ji7"),
+&"fire": SubResource("Animation_yvfy2")
+}
+
+[node name="Bullet" type="RayCast2D" node_paths=PackedStringArray("_ray_cast", "_tracer", "_animation_player")]
+target_position = Vector2(8192, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("1_hc63x")
+_ray_cast = NodePath(".")
+_tracer = NodePath("Trail")
+_animation_player = NodePath("AnimationPlayer")
+
+[node name="Trail" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0)
+width = 2.0
+width_curve = SubResource("Curve_k5ji7")
+default_color = Color(0.984314, 1, 0.831373, 1)
+
+[node name="MuzzleFlash" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 2
+texture = ExtResource("2_1maaj")
+lifetime = 0.03
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 120
+trail_enabled = true
+trail_lifetime = 0.05
+trail_sections = 12
+trail_section_subdivisions = 2
+process_material = SubResource("ParticleProcessMaterial_48g2p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_48g2p")
+}
