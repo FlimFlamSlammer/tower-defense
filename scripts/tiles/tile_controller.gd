@@ -76,16 +76,18 @@ func get_wall_between(origin: Vector2i, target: Vector2i) -> Wall:
 	var origin_tile := tiles.get_tile(origin) as PathTile
 
 	if not target_tile or not origin_tile:
-		return
+		return null
 
 	if offset.x == 1 and origin_tile.east_wall:
-		wall_health = origin_tile.east_wall.stats.health
+		return origin_tile.east_wall
 	elif offset.y == 1 and origin_tile.south_wall:
-		wall_health = origin_tile.south_wall.stats.health
-	elif offset.x == -1 and new_tile.east_wall:
-		wall_health = new_tile.east_wall.stats.health
-	elif offset.y == -1 and new_tile.east_wall:
-		wall_health = new_tile.east_wall.stats.health
+		return origin_tile.south_wall
+	elif offset.x == -1 and target_tile.east_wall:
+		return target_tile.east_wall
+	elif offset.y == -1 and target_tile.east_wall:
+		return target_tile.south_wall
+
+	return null
 
 
 func get_wall_pos_from_mouse() -> Dictionary[StringName, Variant]:
@@ -210,17 +212,9 @@ func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array,
 	# Calculate danger level
 	new_data[1] = data[1] + (new_tile.danger_level / EXPECTED_ENEMY_SPEED)
 
-	var wall_health: float
-	if offset.x == 1 and origin_tile.east_wall:
-		wall_health = origin_tile.east_wall.stats.health
-	elif offset.y == 1 and origin_tile.south_wall:
-		wall_health = origin_tile.south_wall.stats.health
-	elif offset.x == -1 and new_tile.east_wall:
-		wall_health = new_tile.east_wall.stats.health
-	elif offset.y == -1 and new_tile.east_wall:
-		wall_health = new_tile.east_wall.stats.health
-
-	new_data[1] += wall_health
+	var wall_between: Wall = get_wall_between(data[0], new_data[0])
+	if wall_between:
+		new_data[1] += wall_between.stats.health
 
 	# Calculate distance from finish
 	new_data[2] = data[2] + 1
