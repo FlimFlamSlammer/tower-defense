@@ -78,13 +78,13 @@ func get_wall_between(origin: Vector2i, target: Vector2i) -> Wall:
 	if not target_tile or not origin_tile:
 		return null
 
-	if offset.x == 1 and origin_tile.east_wall:
+	if offset.x == 1:
 		return origin_tile.east_wall
-	elif offset.y == 1 and origin_tile.south_wall:
+	elif offset.y == 1:
 		return origin_tile.south_wall
-	elif offset.x == -1 and target_tile.east_wall:
+	elif offset.x == -1:
 		return target_tile.east_wall
-	elif offset.y == -1 and target_tile.east_wall:
+	elif offset.y == -1:
 		return target_tile.south_wall
 
 	return null
@@ -153,15 +153,30 @@ func _update_paths() -> void:
 				return a[2] > b[2]
 			return a[1] > b[1]
 	)
-	pq.push([finish_tile, 0, 0])
+	pq.push([finish_tile, 0, 0, finish_tile])
 	# data format:
 	# [tile, danger level, distance from exit]
-
-	visited[finish_tile] = true
 
 	while pq.size():
 		var data = pq.top()
 		pq.pop()
+
+		if data[0] in visited: continue
+		visited[data[0]] = true
+		print(visited[data[0]], data[0])
+
+		var tile: PathTile = tiles.get_tile(data[0])
+		tile.next_path = data[3]
+		tile.distance_from_finish = data[2]
+
+		# Debug arrows
+		var atlas_coords: Dictionary[Vector2i, Vector2i]
+		atlas_coords[Vector2i.ZERO] = Vector2i(0, 0)
+		atlas_coords[Vector2i.LEFT] = Vector2i(0, 0)
+		atlas_coords[Vector2i.DOWN] = Vector2i(1, 0)
+		atlas_coords[Vector2i.RIGHT] = Vector2i(2, 0)
+		atlas_coords[Vector2i.UP] = Vector2i(3, 0)
+		arrow_tile_map.set_cell(data[0], 0, atlas_coords[data[0] - data[3]])
 
 		_push_pathfinding_data(visited, pq, data, Vector2i.UP)
 		_push_pathfinding_data(visited, pq, data, Vector2i.DOWN)
@@ -197,11 +212,9 @@ func _can_place_tower(pos: Vector2i) -> bool:
 
 func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array, offset: Vector2i) -> void:
 	var new_data: Array = []
-	new_data.resize(3)
+	new_data.resize(4)
 
 	new_data[0] = data[0] + offset
-
-	if new_data[0] in visited: return
 
 	var new_tile := tiles.get_tile(new_data[0]) as PathTile
 	if not new_tile:
@@ -218,18 +231,6 @@ func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array,
 
 	# Calculate distance from finish
 	new_data[2] = data[2] + 1
-	new_tile.distance_from_finish = new_data[2]
+	new_data[3] = data[0]
 
 	pq.push(new_data)
-	visited[new_data[0]] = true
-
-	new_tile.next_path = data[0]
-
-	# debug arrows
-	var atlas_coords: Dictionary[Vector2i, Vector2i]
-	atlas_coords[Vector2i.LEFT] = Vector2i(0, 0)
-	atlas_coords[Vector2i.DOWN] = Vector2i(1, 0)
-	atlas_coords[Vector2i.RIGHT] = Vector2i(2, 0)
-	atlas_coords[Vector2i.UP] = Vector2i(3, 0)
-
-	arrow_tile_map.set_cell(new_data[0], 0, atlas_coords[offset])
