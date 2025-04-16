@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3ftv6p6r1071"]
+[gd_scene load_steps=15 format=3 uid="uid://c3ftv6p6r1071"]
 
 [ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_8bulm"]
 [ext_resource type="Script" uid="uid://dt80n4vowgof1" path="res://scripts/ui/gui_root.gd" id="1_uktbi"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://c4tpi83r71ldm" path="res://scenes/ui/upgrade_menu.tscn" id="9_j5hfe"]
 [ext_resource type="PackedScene" uid="uid://ckqx1sw1yqdkr" path="res://scenes/towers/rapid_turret/rapid_turret.tscn" id="10_yetrs"]
 [ext_resource type="PackedScene" uid="uid://b3skqu0bhk65h" path="res://scenes/towers/bullet_factory/bullet_factory.tscn" id="11_kayra"]
+[ext_resource type="PackedScene" uid="uid://ch6hsd4n1vlfd" path="res://scenes/ui/wall_button.tscn" id="12_4lr0w"]
+[ext_resource type="PackedScene" uid="uid://dla8smgiuc0vj" path="res://scenes/walls/wooden_wall.tscn" id="13_rv1qw"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -97,6 +99,15 @@ metadata/_tab_index = 1
 layout_mode = 2
 tower_scene = ExtResource("11_kayra")
 
+[node name="Walls" parent="TowerMenu" instance=ExtResource("2_astdl")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="WallButton" parent="TowerMenu/Walls/Buttons" index="0" instance=ExtResource("12_4lr0w")]
+layout_mode = 2
+wall_scene = ExtResource("13_rv1qw")
+
 [node name="TowerMenuButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -131,3 +142,4 @@ metadata/_edit_use_anchors_ = true
 [editable path="TowerMenu/Offense"]
 [editable path="TowerMenu/Offense/Buttons/Rapid Turret"]
 [editable path="TowerMenu/Production"]
+[editable path="TowerMenu/Walls"]

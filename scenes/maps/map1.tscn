@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://g5ftce2y2brt"]
+[gd_scene load_steps=12 format=4 uid="uid://g5ftce2y2brt"]
 
 [ext_resource type="Texture2D" uid="uid://dakxh7a0v4e5l" path="res://assets/tiles/map1/tile.svg" id="1_d08bi"]
 [ext_resource type="Script" uid="uid://d2e1n6bs7jdv" path="res://scripts/game_provider.gd" id="1_tdg3v"]
@@ -27,6 +27,11 @@ custom_data_layer_0/name = "type"
 custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_sj0o3")
 
+[sub_resource type="TileSet" id="TileSet_tdg3v"]
+tile_shape = 1
+tile_layout = 1
+tile_size = Vector2i(256, 256)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_42hvp"]
 texture = ExtResource("3_sn5yq")
 texture_region_size = Vector2i(256, 256)
@@ -50,6 +55,9 @@ script = ExtResource("2_5yiy8")
 first_tile = Vector2i(-1, -1)
 last_tile = Vector2i(16, 9)
 arrow_tile_map = NodePath("../ArrowTileMap")
+
+[node name="WallMap" type="TileMapLayer" parent="MainTileMap"]
+tile_set = SubResource("TileSet_tdg3v")
 
 [node name="Spawner" parent="MainTileMap" instance=ExtResource("5_x5r6q")]
 

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch6hsd4n1vlfd"]
+
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_jqr0g"]
+[ext_resource type="StyleBox" uid="uid://cd3jiwiqqagw7" path="res://resources/panel_2.tres" id="2_iggvq"]
+[ext_resource type="StyleBox" uid="uid://cnq6jgcav4xgl" path="res://resources/panel_1.tres" id="3_6xjan"]
+[ext_resource type="Script" uid="uid://ik7aq27xn12p" path="res://scripts/ui/wall_button.gd" id="4_jqr0g"]
+[ext_resource type="Texture2D" uid="uid://05bclr4bytv6" path="res://assets/towers/crossbow/preview.svg" id="5_xolep"]
+
+[node name="WallButton" type="Button" groups=["wall_buttons"]]
+custom_minimum_size = Vector2(260, 260)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_jqr0g")
+theme_override_styles/hover_pressed_mirrored = ExtResource("2_iggvq")
+theme_override_styles/hover_pressed = ExtResource("2_iggvq")
+theme_override_styles/hover = ExtResource("2_iggvq")
+theme_override_styles/pressed = ExtResource("2_iggvq")
+theme_override_styles/normal = ExtResource("3_6xjan")
+script = ExtResource("4_jqr0g")
+
+[node name="Texture" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 256.0
+offset_bottom = 256.0
+mouse_filter = 2
+texture = ExtResource("5_xolep")
+
+[connection signal="pressed" from="." to="." method="_on_button_pressed"]

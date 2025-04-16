@@ -1,6 +1,8 @@
 class_name TileController
 extends TileMapLayer
 
+const EXPECTED_ENEMY_SPEED: float = 1.2 ## Assumption of enemy speed, used for pathfinding.
+
 @export var first_tile: Vector2i
 @export var last_tile: Vector2i
 @export var arrow_tile_map: TileMapLayer
@@ -11,6 +13,7 @@ var finish_tile: Vector2i
 var _path_update_queued: bool = false
 
 @onready var tiles := TileMatrix.new(first_tile, last_tile)
+@onready var wall_tile_map: TileMapLayer = $WallMap
 
 func _ready() -> void:
 	var map_data: Dictionary = tiles.load_map(self)
@@ -24,21 +27,23 @@ func _process(_delta: float) -> void:
 	_check_path_updates.call_deferred()
 
 
-func can_place_wall(pos: Vector2i, south: bool) -> bool:
+func can_place_wall(pos: Vector2i, vertical: bool) -> bool:
 	var tile := tiles.get_tile(pos) as PathTile
 
 	if not tile:
 		return false
 
 	var adjacent: PathTile
-	if south:
-		if tile.southWall:
-			return false
-		adjacent = tiles.get_tile(pos + Vector2i(0, 1)) as PathTile
-	else:
-		if tile.eastWall:
+	if vertical:
+		if tile.east_wall:
 			return false
 		adjacent = tiles.get_tile(pos + Vector2i(1, 0)) as PathTile
+	else:
+		if tile.east_wall:
+			return false
+		adjacent = tiles.get_tile(pos + Vector2i(0, 1)) as PathTile
+
+	print(adjacent)
 
 	if not adjacent:
 		return false
@@ -46,37 +51,52 @@ func can_place_wall(pos: Vector2i, south: bool) -> bool:
 	return true
 
 
-func place_wall(pos: Vector2i, south: bool, wall: Wall) -> bool:
-	if not can_place_wall(pos, south):
+func place_wall(pos: Vector2i, vertical: bool, wall: Wall) -> bool:
+	if not can_place_wall(pos, vertical):
 		return false
 
-	var tile := tiles.get_tile(pos) as PathTile
-	if south:
-		tile.southWall = wall
+	var tile: PathTile = tiles.get_tile(pos)
+	if vertical:
+		tile.east_wall = wall
 	else:
-		tile.eastWall = wall
+		tile.south_wall = wall
+
+	wall.tile_pos = pos
+	wall.vertical = vertical
+
+	update_paths()
 
 	return true
 
 
-func remove_wall(pos: Vector2i, south: bool) -> bool:
-	var tile := tiles.get_tile(pos) as PathTile
+func get_wall_between(origin: Vector2i, target: Vector2i) -> Wall:
+	var offset: Vector2i = target - origin
 
-	if not tile:
-		return false
+	var target_tile := tiles.get_tile(target) as PathTile
+	var origin_tile := tiles.get_tile(origin) as PathTile
 
-	if south:
-		if not tile.southWall:
-			return false
-		else:
-			tile.southWall = null
-	else:
-		if not tile.eastWall:
-			return false
-		else:
-			tile.eastWall = null
+	if not target_tile or not origin_tile:
+		return
 
-	return true
+	if offset.x == 1 and origin_tile.east_wall:
+		wall_health = origin_tile.east_wall.stats.health
+	elif offset.y == 1 and origin_tile.south_wall:
+		wall_health = origin_tile.south_wall.stats.health
+	elif offset.x == -1 and new_tile.east_wall:
+		wall_health = new_tile.east_wall.stats.health
+	elif offset.y == -1 and new_tile.east_wall:
+		wall_health = new_tile.east_wall.stats.health
+
+
+func get_wall_pos_from_mouse() -> Dictionary[StringName, Variant]:
+	var map_pos: Vector2i = wall_tile_map.local_to_map(get_local_mouse_position())
+	var wall_pos: Vector2i = Vector2i(map_pos.x, map_pos.y / 2)
+	var vertical: bool = not (map_pos.y % 2)
+
+	return {
+		"pos": wall_pos,
+		"vertical": vertical,
+	}
 
 
 func place_tower(pos: Vector2i, tower: Tower) -> bool:
@@ -92,7 +112,6 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 
 	tower.tower_modified.connect(update_paths)
 	if Tower.Groups.SUPPORT in tower.get_groups():
-		print("support tower placed")
 		tower.tower_sold.connect(update_support_towers)
 
 	tower.place()
@@ -100,16 +119,6 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 	update_support_towers()
 
 	return true
-
-
-func remove_tower(pos: Vector2i) -> bool:
-	var tile := tiles.get_tile(pos) as TowerTile
-	if tile and tile.tower:
-		tile.tower.queue_free()
-		tile.tower = null
-		_update_paths()
-		return true
-	return false
 
 
 func update_paths() -> void:
@@ -198,14 +207,22 @@ func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array,
 
 	var origin_tile := tiles.get_tile(data[0]) as PathTile
 
-	if (
-		(offset.x < 0 and new_tile.east_wall)
-		or (offset.y < 0 and new_tile.south_wall)
-		or (offset.x > 0 and origin_tile.east_wall)
-		or (offset.y > 0 and origin_tile.south_wall)
-	): return
+	# Calculate danger level
+	new_data[1] = data[1] + (new_tile.danger_level / EXPECTED_ENEMY_SPEED)
 
-	new_data[1] = data[1] + new_tile.danger_level
+	var wall_health: float
+	if offset.x == 1 and origin_tile.east_wall:
+		wall_health = origin_tile.east_wall.stats.health
+	elif offset.y == 1 and origin_tile.south_wall:
+		wall_health = origin_tile.south_wall.stats.health
+	elif offset.x == -1 and new_tile.east_wall:
+		wall_health = new_tile.east_wall.stats.health
+	elif offset.y == -1 and new_tile.east_wall:
+		wall_health = new_tile.east_wall.stats.health
+
+	new_data[1] += wall_health
+
+	# Calculate distance from finish
 	new_data[2] = data[2] + 1
 	new_tile.distance_from_finish = new_data[2]
 

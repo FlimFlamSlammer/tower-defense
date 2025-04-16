@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dla8smgiuc0vj"]
+
+[ext_resource type="PackedScene" uid="uid://du51eokmmapbp" path="res://scenes/walls/wall.tscn" id="1_j6u1p"]
+
+[node name="WoodenWall" instance=ExtResource("1_j6u1p")]
+base_stats = Dictionary[StringName, Variant]({
+&"health": 25.0
+})
+cost = 100
