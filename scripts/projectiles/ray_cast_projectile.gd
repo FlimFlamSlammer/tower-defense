@@ -14,7 +14,7 @@ func _ready() -> void:
 		var collider: Area2D = _ray_cast.get_collider()
 		var enemy := collider as Enemy
 		if enemy:
-			enemy.hit(stats.damage, 1)
+			enemy.hit(stats.damage, stats.damage_type)
 			_pierce_used += 1
 
 			if "projectile_status_effects" in stats:
