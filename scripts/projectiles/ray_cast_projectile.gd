@@ -18,9 +18,9 @@ func _ready() -> void:
 			_pierce_used += 1
 
 			if "projectile_status_effects" in stats:
-				var status_effects: Array[EnemyStatusEffect] = stats.projectile_status_effects
+				var status_effects: Array[Variant] = stats.projectile_status_effects
 				for effect in status_effects:
-					var new_effect
+					var new_effect: EnemyStatusEffect
 					if _pierce_used == stats.pierce:
 						new_effect = effect
 					else:
