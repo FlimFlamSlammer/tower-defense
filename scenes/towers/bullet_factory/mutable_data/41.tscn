@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dacwq1yoko5cx"]
+[gd_scene load_steps=4 format=3 uid="uid://nqujkj5naylr"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_6n0fx"]
 [ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_fk7ja"]
@@ -22,7 +22,7 @@ stat_setters = Dictionary[StringName, Variant]({
 &"damage_type": 2,
 &"projectile_status_effects": []
 })
-priority = 6
+priority = 12
 metadata/_custom_type_script = "uid://0afypir31y4j"
 
 [node name="ProjectileStatusEffects" type="Node" parent="." index="1"]
@@ -31,11 +31,11 @@ metadata/_custom_type_script = "uid://0afypir31y4j"
 script = ExtResource("3_55px3")
 id = &"bullet_factory_slow"
 stat_multipliers = Dictionary[StringName, float]({
-&"speed": 0.8
+&"speed": 0.6
 })
 metadata/_custom_type_script = "uid://bl1yhg2trfgy1"
 
-[node name="Timer" type="Timer" parent="ProjectileStatusEffects/EnemyStatusEffect" index="0"]
-wait_time = 0.5
+[node name="ExpirationTimer" type="Timer" parent="ProjectileStatusEffects/EnemyStatusEffect" index="0"]
+wait_time = 0.3
 
-[connection signal="timeout" from="ProjectileStatusEffects/EnemyStatusEffect/Timer" to="ProjectileStatusEffects/EnemyStatusEffect" method="_expire"]
+[connection signal="timeout" from="ProjectileStatusEffects/EnemyStatusEffect/ExpirationTimer" to="ProjectileStatusEffects/EnemyStatusEffect" method="_expire"]

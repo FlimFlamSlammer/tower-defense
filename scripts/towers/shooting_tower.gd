@@ -13,6 +13,7 @@ func _update_tile_danger_levels(group: StringName, current_danger_level: float, 
 		return current_danger_level + (danger_mult * stats.damage * stats.fire_rate)
 	return current_danger_level
 
+
 func _fire(target: Enemy) -> void:
 	pass
 

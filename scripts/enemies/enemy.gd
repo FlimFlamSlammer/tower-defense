@@ -59,6 +59,9 @@ func apply_status_effect(effect: EnemyStatusEffect, update: bool = true):
 			remove_status_effect(effect.id, false)
 
 	effect.expired.connect(remove_status_effect.bind(effect.id))
+	var expiration_timer: Timer = effect.get_node_or_null("ExpirationTimer")
+	if expiration_timer:
+		expiration_timer.start()
 
 	_status_effects[effect.id] = effect
 	effect.reparent(self)
@@ -91,6 +94,9 @@ func _rotate() -> void:
 
 
 func _update_status_effects():
+	var prev_health: float = stats.health
 	stats = base_stats.duplicate()
+	stats.health = prev_health
+
 	for id in _status_effects.keys():
 		_status_effects[id].apply(stats)

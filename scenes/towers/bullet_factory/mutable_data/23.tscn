@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://qd4t6srf0dlt"]
+[gd_scene load_steps=3 format=3 uid="uid://b57kqcp46u7yb"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_ys15q"]
 [ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_ejqsc"]

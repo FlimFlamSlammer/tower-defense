@@ -24,6 +24,15 @@ func give_status_effects() -> void:
 		var tower_changed: bool = false
 
 		for status_effect: TowerStatusEffect in status_effects:
+			if status_effect.stat_setters.has("projectile_status_effects"):
+				var effect_paths: Array = status_effect.stat_setters.projectile_status_effects
+
+				for i: int in range(effect_paths.size()):
+					if effect_paths[i] is NodePath:
+						effect_paths[i] = status_effect.get_node(effect_paths[i])
+						print_debug(effect_paths[i])
+
+
 			if _can_affect_tower(tower, status_effect):
 				tower_changed = tower_changed or tower.apply_status_effect(status_effect.duplicate(), false)
 
