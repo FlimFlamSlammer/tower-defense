@@ -37,8 +37,6 @@ func can_place_wall(pos: Vector2i, vertical: bool) -> bool:
 			return false
 		adjacent = tiles.get_tile(pos + Vector2i(0, 1)) as PathTile
 
-	print(adjacent)
-
 	if not adjacent:
 		return false
 
@@ -189,7 +187,6 @@ func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 
 		if data[0] in visited: continue
 		visited[data[0]] = true
-		print(visited[data[0]], data[0])
 
 		var tile: PathTile = tiles.get_tile(data[0])
 		tile.next_path[immunities] = data[3]

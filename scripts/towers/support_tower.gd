@@ -31,7 +31,6 @@ func give_status_effects() -> void:
 				for i: int in range(effect_paths.size()):
 					if effect_paths[i] is NodePath:
 						effect_paths[i] = status_effect.get_node(effect_paths[i])
-						print_debug(effect_paths[i])
 
 
 			if _can_affect_tower(tower, status_effect):
@@ -40,4 +39,3 @@ func give_status_effects() -> void:
 		if tower_changed:
 			tower.update_status_effects()
 	)
-	print(self, "buffs reapplied!")

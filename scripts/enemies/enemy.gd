@@ -4,8 +4,9 @@ extends Area2D
 const WALL_CHECK_PROGRESS_MIN = 0.2
 const WALL_CHECK_PROGRESS_MAX = 0.7
 
-signal enemy_leaked(health: float)
+signal leaked(health: float)
 signal path_data_requested(immunities: Array[Globals.DamageTypes], cb: Callable)
+signal died()
 
 @export var base_stats: Dictionary[StringName, Variant]
 @export var initial_health_ratio: float = 1.0
@@ -34,13 +35,13 @@ func _process(delta: float) -> void:
 		progress -= 1.0
 
 		if next_tile == tile_controller.finish_tile and not is_queued_for_deletion():
-				enemy_leaked.emit(stats.health)
 				queue_free()
+				died.emit()
+				leaked.emit(stats.health)
 				return
 
 		path_data_requested.emit(stats.immunities, next_tile, func(tile: PathTile):
 			cur_tile = next_tile
-			print(tile.next_path)
 			next_tile = tile.next_path[stats.immunities as Array[Globals.DamageTypes]]
 
 			if progress > WALL_CHECK_PROGRESS_MIN:
@@ -62,6 +63,7 @@ func hit(damage: float, type: Globals.DamageTypes) -> bool:
 	if stats.health <= 0.0:
 		hide()
 		queue_free()
+		died.emit()
 
 	return true
 
