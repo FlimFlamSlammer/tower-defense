@@ -54,6 +54,7 @@ func _update_tile_danger_levels(group: StringName, current_danger_level: float, 
 	return current_danger_level
 
 
+## Updates the danger levels of all [PathTiles] in range of the tower.
 func update_danger_levels(group: StringName, immunities: Array[Globals.DamageTypes]) -> void:
 	if not group in get_groups() or not _placed: return
 
@@ -64,6 +65,7 @@ func update_danger_levels(group: StringName, immunities: Array[Globals.DamageTyp
 	)
 
 
+## Places the tower, updating some functionalities.
 func place() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 1.0)
 	_placed = true
@@ -71,11 +73,13 @@ func place() -> void:
 	_click_area.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
+## Marks the tower as selected, showing its range circle.
 func select() -> void:
 	selected = true
 	_range_animations.play("show_range")
 
 
+## Marks the tower as deselected, hiding its range circle.
 func deselect() -> void:
 	selected = false
 	_range_animations.play("hide_range")
@@ -92,6 +96,7 @@ func sell() -> void:
 	tower_sold.emit()
 
 
+## Applies status effects to the tower and runs any functions that depend on the tower's stats.
 func update_status_effects() -> void:
 	stats = _mutable_data.stats.duplicate()
 	for effect in _status_effects.values():
@@ -102,6 +107,7 @@ func update_status_effects() -> void:
 	if _placed: tower_modified.emit()
 
 
+## Resizes the range circle based on range stat.
 func update_range_circle() -> void:
 	_range_indicator.scale = Vector2.ONE * stats.range
 
@@ -175,16 +181,19 @@ func enemy_in_range(p_range: float) -> bool:
 	return _range_area.has_overlapping_areas()
 
 
-func select_to_place() -> void: ## Selects the tower in preview mode. Use when the tower is in placement mode.
+## Selects the tower in preview mode. Use when the tower is in placement mode.
+func select_to_place() -> void:
 	_range_animations.play("show_range")
 	_range_animations.advance(_range_animations.current_animation_length)
 
 
-func set_display_invalid() -> void: ## Changes the color to represent an invalid placement position. Use when the tower is in placement mode.
+## Changes the color to represent an invalid placement position. Use when the tower is in placement mode.
+func set_display_invalid() -> void:
 	modulate = Color(1.0, 0.1, 0.1, 0.4)
 
 
-func set_display_valid() -> void: ## Changes the color to represent a valid placement position. Use when the tower is in placement mode.
+## Changes the color to represent a valid placement position. Use when the tower is in placement mode.
+func set_display_valid() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 0.4)
 
 

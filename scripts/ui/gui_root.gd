@@ -55,7 +55,7 @@ func _process(_delta: float) -> void:
 
 				_tile_controller.update_support_towers()
 				selected_tower.update_status_effects()
-				if _tile_controller._can_place_tower(pos):
+				if _tile_controller.can_place_tower(pos):
 					selected_tower.set_display_valid()
 				else:
 					selected_tower.set_display_invalid()

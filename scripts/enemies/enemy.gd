@@ -118,6 +118,7 @@ func _update_status_effects():
 		_status_effects[id].apply(stats)
 
 
+# Checks if there is a wall between cur_tile and next_tile. Damages the enemy and wall if it exists.
 func _check_wall() -> void:
 	var wall: Wall = tile_controller.get_wall_between(cur_tile, next_tile)
 

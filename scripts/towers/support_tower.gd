@@ -5,6 +5,7 @@ func _can_affect_tower(tower: Tower, status_effect: TowerStatusEffect) -> bool:
 	return true
 
 
+## Applies all status effects in child [code]StatusEffects[/code] to nearby towers.
 func give_status_effects() -> void:
 	if not _placed: return
 

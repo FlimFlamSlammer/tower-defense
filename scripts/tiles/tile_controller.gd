@@ -45,6 +45,7 @@ func can_place_wall(pos: Vector2i, vertical: bool) -> bool:
 	return true
 
 
+## Places [param wall] at the specified position. Returns [code]true[/code] if the operation was successful.
 func place_wall(pos: Vector2i, vertical: bool, wall: Wall) -> bool:
 	if not can_place_wall(pos, vertical):
 		return false
@@ -65,6 +66,7 @@ func place_wall(pos: Vector2i, vertical: bool, wall: Wall) -> bool:
 	return true
 
 
+## Returns the [Wall] between to tile positions. If the [Wall] doesn't exist, it returns [code]null[/code].
 func get_wall_between(origin: Vector2i, target: Vector2i) -> Wall:
 	var offset: Vector2i = target - origin
 
@@ -86,6 +88,14 @@ func get_wall_between(origin: Vector2i, target: Vector2i) -> Wall:
 	return null
 
 
+## Returns a dictionary as follows:
+## [codeblock]
+## {
+##     "pos": Vector2i,
+##     "vertical": bool,
+## }
+## [/codeblock]
+## where [code]pos[/code] is the tile position of a [Wall] based on the mouse position and [code]vertical[/code] is the orientation of the [Wall].
 func get_wall_pos_from_mouse() -> Dictionary[StringName, Variant]:
 	var map_pos: Vector2i = wall_tile_map.local_to_map(get_local_mouse_position())
 	var wall_pos: Vector2i = Vector2i(map_pos.x, map_pos.y / 2)
@@ -97,8 +107,14 @@ func get_wall_pos_from_mouse() -> Dictionary[StringName, Variant]:
 	}
 
 
+func can_place_tower(pos: Vector2i) -> bool:
+	var tile := tiles.get_tile(pos) as TowerTile
+	return tile and not tile.tower
+
+
+## Places [param tower] at [param pos]. Returns [code]true[/code] if the operation was successful.
 func place_tower(pos: Vector2i, tower: Tower) -> bool:
-	if not _can_place_tower(pos):
+	if not can_place_tower(pos):
 		return false
 
 	var tile := tiles.get_tile(pos) as TowerTile
@@ -119,6 +135,8 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 	return true
 
 
+## Returns the [PathTile] at [param tile_pos]. [br]
+## If the pathfinding data for [param immunities] hasn't been generated yet, it will be generated first.
 func handle_path_data_request(immunities: Array[Globals.DamageTypes], tile_pos: Vector2i, cb: Callable):
 	if not immunities in _updated_immunities:
 		_update_paths(immunities)
@@ -126,6 +144,7 @@ func handle_path_data_request(immunities: Array[Globals.DamageTypes], tile_pos: 
 	cb.call(tiles.get_tile(tile_pos))
 
 
+## Clears persistent [TowerStatusEffect] from every [Tower], then runs [method SupportTower.give_status_effects] for every [SupportTower].
 func update_support_towers():
 	for tower: Tower in get_tree().get_nodes_in_group(Tower.Groups.ALL):
 		tower.clear_persistent_status_effects()
@@ -136,34 +155,20 @@ func update_support_towers():
 			tower.give_status_effects()
 
 
+# Iterates over all PathTiles and clears their next_tile property.
 func _clear_pathfinding_data() -> void:
-	var visited: Dictionary[Vector2i, bool]
-	var stack: Array[Vector2i]
+	for x in range(first_tile.x, last_tile.x + 1):
+		for y in range(first_tile.y, last_tile.y + 1):
+			var tile := tiles.get_tile(Vector2i(x, y)) as PathTile
+			if not tile:
+				continue
 
-	stack.push_back(finish_tile)
-
-	while not stack.is_empty():
-		var pos: Vector2i = stack.pop_back()
-
-		var tile: PathTile = tiles.get_tile(pos)
-		tile.next_path.clear()
-
-		_push_clearing_pathfinding_data(pos + Vector2i(0, 1), stack, visited)
-		_push_clearing_pathfinding_data(pos + Vector2i(0, -1), stack, visited)
-		_push_clearing_pathfinding_data(pos + Vector2i(1, 0), stack, visited)
-		_push_clearing_pathfinding_data(pos + Vector2i(-1, 0), stack, visited)
+			tile.next_path.clear()
 
 	_updated_immunities.clear()
 
 
-func _push_clearing_pathfinding_data(pos: Vector2i, stack: Array[Vector2i], visited: Dictionary[Vector2i, bool]) -> void:
-	if pos in visited: return
-	if not (tiles.get_tile(pos) is PathTile): return
-
-	visited[pos] = true
-	stack.push_back(pos)
-
-
+# Appends the next_tile property of all tiles that can reach the finish tile based on param immunities.
 func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 	_update_danger_levels(immunities)
 
@@ -199,14 +204,15 @@ func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 		atlas_coords[Vector2i.UP] = Vector2i(3, 0)
 		arrow_tile_map.set_cell(data[0], 0, atlas_coords[data[0] - data[3]])
 
-		_push_pathfinding_data(visited, pq, data, Vector2i.UP)
-		_push_pathfinding_data(visited, pq, data, Vector2i.DOWN)
-		_push_pathfinding_data(visited, pq, data, Vector2i.LEFT)
-		_push_pathfinding_data(visited, pq, data, Vector2i.RIGHT)
+		_push_pathfinding_data(pq, data, Vector2i.UP)
+		_push_pathfinding_data(pq, data, Vector2i.DOWN)
+		_push_pathfinding_data(pq, data, Vector2i.LEFT)
+		_push_pathfinding_data(pq, data, Vector2i.RIGHT)
 
 	_updated_immunities[immunities] = true
 
 
+# Iterates over every [Tower] to calculate the danger level of every [PathTile].
 func _update_danger_levels(immunities: Array[Globals.DamageTypes]) -> void:
 	# reset current danger levels
 	for x in range(first_tile.x, last_tile.x + 1):
@@ -228,12 +234,7 @@ func _update_danger_levels(immunities: Array[Globals.DamageTypes]) -> void:
 		tower.update_danger_levels(Tower.Groups.SETUP, immunities)
 
 
-func _can_place_tower(pos: Vector2i) -> bool:
-	var tile := tiles.get_tile(pos) as TowerTile
-	return tile and not tile.tower
-
-
-func _push_pathfinding_data(visited: Dictionary, pq: PriorityQueue, data: Array, offset: Vector2i) -> void:
+func _push_pathfinding_data(pq: PriorityQueue, data: Array, offset: Vector2i) -> void:
 	var new_data: Array = []
 	new_data.resize(4)
 
