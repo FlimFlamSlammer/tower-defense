@@ -27,8 +27,9 @@ func _ready() -> void:
 						new_effect = effect.duplicate()
 					enemy.apply_status_effect(new_effect)
 
-			last_pos = _ray_cast.get_collision_point()
-			last_normal = _ray_cast.get_collision_normal()
+			if _pierce_used == stats.pierce:
+				last_pos = _ray_cast.get_collision_point()
+				last_normal = _ray_cast.get_collision_normal()
 
 		_ray_cast.add_exception(collider)
 		_ray_cast.force_raycast_update()
