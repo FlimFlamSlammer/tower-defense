@@ -11,6 +11,9 @@ signal ticked(apply_tick: Callable)
 ## Persistent effects need to be continuously given by the source. Most buffs from support towers are persistent.
 @export var persistent: bool = true
 
+
+## Runs when the status effect is ticked by its [Timer]. This function may not run if there is no tick [Timer].
+## Override this function to add custom behaviour with a custom interval, e.g. damage over time.
 func _apply_tick(stats: Dictionary) -> void:
 	pass
 
