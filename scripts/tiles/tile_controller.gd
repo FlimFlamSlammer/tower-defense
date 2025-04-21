@@ -10,7 +10,7 @@ const EXPECTED_ENEMY_SPEED: float = 1.2 ## Assumption of enemy speed, used for p
 var start_tile: Vector2i
 var finish_tile: Vector2i
 
-var _path_update_queued: bool = false
+var _updated_immunities: Dictionary[Array, bool]
 
 @onready var tiles := TileMatrix.new(first_tile, last_tile)
 @onready var wall_tile_map: TileMapLayer = $WallMap
@@ -19,12 +19,6 @@ func _ready() -> void:
 	var map_data: Dictionary = tiles.load_map(self)
 	start_tile = map_data.start
 	finish_tile = map_data.finish
-
-	_update_paths()
-
-
-func _process(_delta: float) -> void:
-	_check_path_updates.call_deferred()
 
 
 func can_place_wall(pos: Vector2i, vertical: bool) -> bool:
@@ -66,7 +60,7 @@ func place_wall(pos: Vector2i, vertical: bool, wall: Wall) -> bool:
 
 	wall.place()
 
-	update_paths()
+	_clear_pathfinding_data()
 
 	return true
 
@@ -114,7 +108,7 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 	tower.position = map_to_local(pos)
 	tile.tower = tower
 
-	tower.tower_modified.connect(update_paths)
+	tower.tower_modified.connect(_clear_pathfinding_data)
 	if Tower.Groups.SUPPORT in tower.get_groups():
 		tower.tower_sold.connect(update_support_towers)
 
@@ -125,8 +119,11 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 	return true
 
 
-func update_paths() -> void:
-	_path_update_queued = true
+func handle_path_data_request(immunities: Array[Globals.DamageTypes], tile_pos: Vector2i, cb: Callable):
+	if not immunities in _updated_immunities:
+		_update_paths(immunities)
+
+	cb.call(tiles.get_tile(tile_pos))
 
 
 func update_support_towers():
@@ -139,14 +136,36 @@ func update_support_towers():
 			tower.give_status_effects()
 
 
-func _check_path_updates() -> void:
-	if _path_update_queued:
-		_update_paths()
-		_path_update_queued = false
+func _clear_pathfinding_data() -> void:
+	var visited: Dictionary[Vector2i, bool]
+	var stack: Array[Vector2i]
+
+	stack.push_back(finish_tile)
+
+	while not stack.is_empty():
+		var pos: Vector2i = stack.pop_back()
+
+		var tile: PathTile = tiles.get_tile(pos)
+		tile.next_path.clear()
+
+		_push_clearing_pathfinding_data(pos + Vector2i(0, 1), stack, visited)
+		_push_clearing_pathfinding_data(pos + Vector2i(0, -1), stack, visited)
+		_push_clearing_pathfinding_data(pos + Vector2i(1, 0), stack, visited)
+		_push_clearing_pathfinding_data(pos + Vector2i(-1, 0), stack, visited)
+
+	_updated_immunities.clear()
 
 
-func _update_paths() -> void:
-	_update_danger_levels()
+func _push_clearing_pathfinding_data(pos: Vector2i, stack: Array[Vector2i], visited: Dictionary[Vector2i, bool]) -> void:
+	if pos in visited: return
+	if not (tiles.get_tile(pos) is PathTile): return
+
+	visited[pos] = true
+	stack.push_back(pos)
+
+
+func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
+	_update_danger_levels(immunities)
 
 	var visited: Dictionary[Vector2i, bool]
 	var pq := PriorityQueue.new(
@@ -160,7 +179,7 @@ func _update_paths() -> void:
 	# [tile, danger level, distance from exit]
 
 	while pq.size():
-		var data = pq.top()
+		var data: Array = pq.top()
 		pq.pop()
 
 		if data[0] in visited: continue
@@ -168,7 +187,7 @@ func _update_paths() -> void:
 		print(visited[data[0]], data[0])
 
 		var tile: PathTile = tiles.get_tile(data[0])
-		tile.next_path = data[3]
+		tile.next_path[immunities] = data[3]
 		tile.distance_from_finish = data[2]
 
 		# Debug arrows
@@ -185,8 +204,10 @@ func _update_paths() -> void:
 		_push_pathfinding_data(visited, pq, data, Vector2i.LEFT)
 		_push_pathfinding_data(visited, pq, data, Vector2i.RIGHT)
 
+	_updated_immunities[immunities] = true
 
-func _update_danger_levels() -> void:
+
+func _update_danger_levels(immunities: Array[Globals.DamageTypes]) -> void:
 	# reset current danger levels
 	for x in range(first_tile.x, last_tile.x + 1):
 		for y in range(first_tile.y, last_tile.y + 1):
@@ -199,12 +220,12 @@ func _update_danger_levels() -> void:
 	var towers: Array[Node] = get_tree().get_nodes_in_group(Tower.Groups.ATTACKING)
 
 	for tower: Tower in towers:
-		tower.update_danger_levels(Tower.Groups.ATTACKING)
+		tower.update_danger_levels(Tower.Groups.ATTACKING, immunities)
 
 	towers = get_tree().get_nodes_in_group(Tower.Groups.SETUP)
 
 	for tower: Tower in towers:
-		tower.update_danger_levels(Tower.Groups.SETUP)
+		tower.update_danger_levels(Tower.Groups.SETUP, immunities)
 
 
 func _can_place_tower(pos: Vector2i) -> bool:

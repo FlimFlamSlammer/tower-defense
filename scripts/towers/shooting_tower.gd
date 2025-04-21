@@ -8,9 +8,14 @@ func _process(_delta: float) -> void:
 	attempt_fire(_attack_timer, _fire, stats.attack_cost)
 
 
-func _update_tile_danger_levels(group: StringName, current_danger_level: float, danger_mult: float):
-	if group == Tower.Groups.ATTACKING:
-		return current_danger_level + (danger_mult * stats.damage * stats.fire_rate)
+func _update_tile_danger_levels(group: StringName, current_danger_level: float, danger_mult: float, immunities: Array[Globals.DamageTypes]) -> float:
+	if Groups.USES_BULLET in get_groups() and not "bullets" in _status_effects:
+		return current_danger_level
+
+	if group == Tower.Groups.ATTACKING and not stats.damage_type in immunities:
+		var diff: float = stats.fire_rate * stats.damage
+		return current_danger_level + (danger_mult * diff)
+
 	return current_danger_level
 
 

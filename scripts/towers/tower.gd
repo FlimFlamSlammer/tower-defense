@@ -50,17 +50,17 @@ func _ready() -> void:
 	_range_animations.play("show_range")
 
 
-func _update_tile_danger_levels(group: StringName, current_danger_level: float, danger_mult: float) -> float:
+func _update_tile_danger_levels(group: StringName, current_danger_level: float, danger_mult: float, immunities: Array[Globals.DamageTypes]) -> float:
 	return current_danger_level
 
 
-func update_danger_levels(group: StringName) -> void:
+func update_danger_levels(group: StringName, immunities: Array[Globals.DamageTypes]) -> void:
 	if not group in get_groups() or not _placed: return
 
 	_run_for_tiles_in_range(func(tile: Tile, overlap_ratio: float):
 		var path_tile := tile as PathTile
 		if path_tile:
-			path_tile.danger_level = _update_tile_danger_levels(group, path_tile.danger_level, overlap_ratio)
+			path_tile.danger_level = _update_tile_danger_levels(group, path_tile.danger_level, overlap_ratio, immunities)
 	)
 
 

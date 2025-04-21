@@ -18,12 +18,14 @@ var money: int = 2000:
 
 @onready var spawner: Spawner = $MainTileMap/Spawner
 @onready var gui: GUIRoot = $GUILayer/GUI
+@onready var tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 
 func _ready() -> void:
 	spawner.enemy_spawned.connect(func(enemy: Enemy):
 		enemy.enemy_leaked.connect(func(health: float):
 			lives -= max(roundi(health), 1)
 		)
+		enemy.path_data_requested.connect(tile_controller.handle_path_data_request)
 	)
 
 	gui.money_requested.connect(_handle_money_request)

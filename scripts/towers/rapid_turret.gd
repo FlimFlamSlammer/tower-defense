@@ -15,11 +15,3 @@ func _fire(target: Enemy) -> void:
 	_current_barrel = (_current_barrel + 1) % stats.projectile_offset.size()
 
 	add_sibling(new_projectile)
-
-
-func _update_tile_danger_levels(group: StringName, current_danger_level: float, danger_mult: float) -> float:
-	if group == Tower.Groups.ATTACKING:
-		var diff: float = stats.fire_rate * stats.damage
-		return current_danger_level + (danger_mult * diff)
-
-	return current_danger_level

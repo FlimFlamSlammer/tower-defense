@@ -5,6 +5,7 @@ const WALL_CHECK_PROGRESS_MIN = 0.25
 const WALL_CHECK_PROGRESS_MAX = 0.7
 
 signal enemy_leaked(health: float)
+signal path_data_requested(immunities: Array[Globals.DamageTypes], cb: Callable)
 
 @export var base_stats: Dictionary[StringName, Variant]
 @export var initial_health_ratio: float = 1.0
@@ -29,19 +30,24 @@ func _process(delta: float) -> void:
 	if progress > WALL_CHECK_PROGRESS_MIN and progress < WALL_CHECK_PROGRESS_MAX:
 		_check_wall()
 
-	while progress >= 1:
+	while progress >= 1.0:
 		progress -= 1.0
-		cur_tile = next_tile
-		if cur_tile == tile_controller.finish_tile:
-			enemy_leaked.emit(stats.health)
-			queue_free()
-			return
-		next_tile = (tile_controller.tiles.get_tile(next_tile) as PathTile).next_path
 
-		if progress > WALL_CHECK_PROGRESS_MIN:
-			_check_wall()
+		if next_tile == tile_controller.finish_tile and not is_queued_for_deletion():
+				enemy_leaked.emit(stats.health)
+				queue_free()
+				return
 
-		_rotate()
+		path_data_requested.emit(stats.immunities, next_tile, func(tile: PathTile):
+			cur_tile = next_tile
+			print(tile.next_path)
+			next_tile = tile.next_path[stats.immunities as Array[Globals.DamageTypes]]
+
+			if progress > WALL_CHECK_PROGRESS_MIN:
+				_check_wall()
+
+			_rotate()
+		)
 
 	var cur_tile_position: Vector2 = tile_controller.map_to_local(cur_tile)
 	var next_tile_position: Vector2 = tile_controller.map_to_local(next_tile)
