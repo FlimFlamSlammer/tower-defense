@@ -1,7 +1,7 @@
 class_name Enemy
 extends Area2D
 
-const WALL_CHECK_PROGRESS_MIN = 0.25
+const WALL_CHECK_PROGRESS_MIN = 0.2
 const WALL_CHECK_PROGRESS_MAX = 0.7
 
 signal enemy_leaked(health: float)
