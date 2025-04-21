@@ -1,15 +1,249 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpj2jjkrhkghd"]
+[gd_scene load_steps=22 format=3 uid="uid://dpj2jjkrhkghd"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_nrkob"]
 [ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_qn4px"]
+[ext_resource type="Texture2D" uid="uid://dpv0oxsp0kmpf" path="res://assets/towers/bullet_factory/40/floor1.svg" id="2_w7x6j"]
+[ext_resource type="Texture2D" uid="uid://blxt3af8nof6h" path="res://assets/towers/bullet_factory/40/Gear.svg" id="3_7el3k"]
 [ext_resource type="Script" uid="uid://bl1yhg2trfgy1" path="res://scripts/enemies/enemy_status_effect.gd" id="3_d7kq8"]
+[ext_resource type="Texture2D" uid="uid://tfnvhli3xbhq" path="res://assets/towers/bullet_factory/40/floor2.svg" id="4_48cxd"]
+[ext_resource type="Texture2D" uid="uid://34xm6ha06nu3" path="res://assets/towers/bullet_factory/40/mover.svg" id="5_1x6vy"]
+[ext_resource type="Texture2D" uid="uid://chd4uodw7xlx4" path="res://assets/towers/bullet_factory/40/top_gear_small.svg" id="5_48cxd"]
+[ext_resource type="Texture2D" uid="uid://da8fum5sgbex8" path="res://assets/towers/bullet_factory/40/top_gear_big.svg" id="6_1x6vy"]
+[ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="6_medx1"]
+
+[sub_resource type="Animation" id="Animation_u641d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MovingRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-44, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MovingLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-60, 56)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Gear:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BigGear:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vg8pp"]
+resource_name = "loop"
+length = 2.1
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MovingRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.1, 1.9),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(-44, -8), Vector2(-44, 56), Vector2(-44, 56), Vector2(-44, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MovingLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.4, 1.2, 1.5),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(-60, -8), Vector2(-60, -8), Vector2(-60, 56), Vector2(-60, 56)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Gear:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -3.14159]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BigGear:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_586ef"]
+_data = {
+&"RESET": SubResource("Animation_u641d"),
+&"loop": SubResource("Animation_vg8pp")
+}
+
+[sub_resource type="Animation" id="Animation_48cxd"]
+resource_name = "loop"
+length = 1.68
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmallGear:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.66667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -3.14159]
+}
+
+[sub_resource type="Animation" id="Animation_1x6vy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmallGear:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_medx1"]
+_data = {
+&"RESET": SubResource("Animation_1x6vy"),
+&"loop": SubResource("Animation_48cxd")
+}
+
+[sub_resource type="Gradient" id="Gradient_uxa8x"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.172727, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.3, 0.3, 0.3, 0.666667, 0.1, 0.1, 0.1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_48cxd"]
+gradient = SubResource("Gradient_uxa8x")
+
+[sub_resource type="Curve" id="Curve_hm4a8"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.314607), 0.0, 0.0, 0, 0, Vector2(1, 2), 3.78966, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1x6vy"]
+curve = SubResource("Curve_hm4a8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k6v5x"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(16, 16, 0)
+spread = 180.0
+initial_velocity_min = 7.0
+initial_velocity_max = 45.0
+gravity = Vector3(0, 0, 0)
+damping_min = 5.0
+damping_max = 5.0
+scale_min = 0.9
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_1x6vy")
+color_ramp = SubResource("GradientTexture1D_48cxd")
 
 [node name="MutableData" instance=ExtResource("1_nrkob")]
 stats = Dictionary[StringName, Variant]({
 &"range": 3.0
 })
 
-[node name="StatusEffects" type="Node" parent="." index="0"]
+[node name="Floor1" type="Sprite2D" parent="." index="0"]
+position = Vector2(0, 3)
+texture = ExtResource("2_w7x6j")
+
+[node name="Gear" type="Sprite2D" parent="." index="1"]
+position = Vector2(36, -40)
+texture = ExtResource("3_7el3k")
+
+[node name="Floor2" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("4_48cxd")
+
+[node name="SmallGear" type="Sprite2D" parent="." index="3"]
+position = Vector2(70, -32)
+texture = ExtResource("5_48cxd")
+
+[node name="BigGear" type="Sprite2D" parent="." index="4"]
+position = Vector2(60, -61)
+texture = ExtResource("6_1x6vy")
+
+[node name="MovingLeft" type="Sprite2D" parent="." index="5"]
+position = Vector2(-60, 56)
+texture = ExtResource("5_1x6vy")
+
+[node name="MovingRight" type="Sprite2D" parent="." index="6"]
+position = Vector2(-44, -8)
+texture = ExtResource("5_1x6vy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+libraries = {
+&"": SubResource("AnimationLibrary_586ef")
+}
+autoplay = "loop"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="8"]
+libraries = {
+&"": SubResource("AnimationLibrary_medx1")
+}
+autoplay = "loop"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="9"]
+position = Vector2(-48, -44)
+amount = 12
+texture = ExtResource("6_medx1")
+lifetime = 5.0
+draw_order = 2
+process_material = SubResource("ParticleProcessMaterial_k6v5x")
+
+[node name="StatusEffects" type="Node" parent="." index="10"]
 
 [node name="BulletGiver" type="Node" parent="StatusEffects" index="0"]
 script = ExtResource("2_qn4px")
@@ -25,7 +259,7 @@ stat_setters = Dictionary[StringName, Variant]({
 priority = 11
 metadata/_custom_type_script = "uid://0afypir31y4j"
 
-[node name="ProjectileStatusEffects" type="Node" parent="." index="1"]
+[node name="ProjectileStatusEffects" type="Node" parent="." index="11"]
 
 [node name="EnemyStatusEffect" type="Node" parent="ProjectileStatusEffects" index="0"]
 script = ExtResource("3_d7kq8")

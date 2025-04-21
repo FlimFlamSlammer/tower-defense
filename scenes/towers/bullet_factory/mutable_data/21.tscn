@@ -1,8 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvoecfv0ybo3d"]
+[gd_scene load_steps=10 format=3 uid="uid://dvoecfv0ybo3d"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_ntxg3"]
 [ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_ptn7x"]
 [ext_resource type="Texture2D" uid="uid://bpe6shb4touup" path="res://assets/towers/bullet_factory/21/Factory.svg" id="3_81aux"]
+[ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="4_ptn7x"]
+
+[sub_resource type="Gradient" id="Gradient_ptn7x"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.172727, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.45, 0.45, 0.45, 0.784314, 0.13, 0.13, 0.13, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_81aux"]
+gradient = SubResource("Gradient_ptn7x")
+
+[sub_resource type="Curve" id="Curve_w36jg"]
+_limits = [0.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 0.292135), 0.0, 0.305618, 0, 0, Vector2(1, 1.5), 3.25724, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hive7"]
+curve = SubResource("Curve_w36jg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o8ggb"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(16, 16, 0)
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+damping_min = 5.0
+damping_max = 5.0
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_hive7")
+color_ramp = SubResource("GradientTexture1D_81aux")
 
 [node name="MutableData" instance=ExtResource("1_ntxg3")]
 stats = Dictionary[StringName, Variant]({
@@ -26,3 +58,10 @@ metadata/_custom_type_script = "uid://0afypir31y4j"
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_81aux")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="2"]
+position = Vector2(48, -56)
+texture = ExtResource("4_ptn7x")
+lifetime = 4.0
+draw_order = 2
+process_material = SubResource("ParticleProcessMaterial_o8ggb")

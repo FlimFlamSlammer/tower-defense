@@ -1,14 +1,170 @@
-[gd_scene load_steps=3 format=3 uid="uid://fvqchod856gr"]
+[gd_scene load_steps=16 format=3 uid="uid://fvqchod856gr"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_0dp5u"]
+[ext_resource type="Texture2D" uid="uid://cggemfs42jper" path="res://assets/towers/bullet_factory/31/floor1.svg" id="2_gtf7h"]
 [ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_rifxg"]
+[ext_resource type="Texture2D" uid="uid://dbenqeykibyhf" path="res://assets/towers/bullet_factory/31/gear.svg" id="3_2pwrc"]
+[ext_resource type="Texture2D" uid="uid://ddaqq3gf23ny8" path="res://assets/towers/bullet_factory/31/floor2.svg" id="4_u4552"]
+[ext_resource type="Texture2D" uid="uid://bxv0gvv3ibh6p" path="res://assets/towers/bullet_factory/31/mover.svg" id="5_gtf7h"]
+[ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="6_ii5qk"]
+
+[sub_resource type="Animation" id="Animation_vg8pp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MovingRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-44, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MovingLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-60, 56)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Gear:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_u641d"]
+resource_name = "loop"
+length = 2.1
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MovingRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.1, 1.9),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(-44, -8), Vector2(-44, 56), Vector2(-44, 56), Vector2(-44, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MovingLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.4, 1.2, 1.5),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(-60, -8), Vector2(-60, -8), Vector2(-60, 56), Vector2(-60, 56)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Gear:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -3.14159]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_586ef"]
+_data = {
+&"RESET": SubResource("Animation_vg8pp"),
+&"loop": SubResource("Animation_u641d")
+}
+
+[sub_resource type="Gradient" id="Gradient_j064d"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.172727, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.3, 0.3, 0.3, 0.666667, 0.1, 0.1, 0.1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gtf7h"]
+gradient = SubResource("Gradient_j064d")
+
+[sub_resource type="Curve" id="Curve_8dyhl"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.314607), 0.0, 0.0, 0, 0, Vector2(1, 2), 3.78966, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2pwrc"]
+curve = SubResource("Curve_8dyhl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hursv"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(16, 16, 0)
+spread = 180.0
+initial_velocity_min = 7.0
+initial_velocity_max = 45.0
+gravity = Vector3(0, 0, 0)
+damping_min = 5.0
+damping_max = 5.0
+scale_min = 0.9
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_2pwrc")
+color_ramp = SubResource("GradientTexture1D_gtf7h")
 
 [node name="MutableData" instance=ExtResource("1_0dp5u")]
 stats = Dictionary[StringName, Variant]({
 &"range": 3.0
 })
 
-[node name="StatusEffects" type="Node" parent="." index="0"]
+[node name="Floor1" type="Sprite2D" parent="." index="0"]
+position = Vector2(0, 3)
+texture = ExtResource("2_gtf7h")
+
+[node name="Gear" type="Sprite2D" parent="." index="1"]
+position = Vector2(36, -40)
+texture = ExtResource("3_2pwrc")
+
+[node name="Floor2" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("4_u4552")
+
+[node name="MovingLeft" type="Sprite2D" parent="." index="3"]
+position = Vector2(-60, 56)
+texture = ExtResource("5_gtf7h")
+
+[node name="MovingRight" type="Sprite2D" parent="." index="4"]
+position = Vector2(-44, -8)
+texture = ExtResource("5_gtf7h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_586ef")
+}
+autoplay = "loop"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="6"]
+position = Vector2(-48, -44)
+amount = 12
+texture = ExtResource("6_ii5qk")
+lifetime = 5.0
+draw_order = 2
+process_material = SubResource("ParticleProcessMaterial_hursv")
+
+[node name="StatusEffects" type="Node" parent="." index="7"]
 
 [node name="BulletGiver" type="Node" parent="StatusEffects" index="0"]
 script = ExtResource("2_rifxg")
