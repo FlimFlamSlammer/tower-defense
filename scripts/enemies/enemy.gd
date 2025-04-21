@@ -1,6 +1,9 @@
 class_name Enemy
 extends Area2D
 
+const WALL_CHECK_PROGRESS_MIN = 0.25
+const WALL_CHECK_PROGRESS_MAX = 0.7
+
 signal enemy_leaked(health: float)
 
 @export var base_stats: Dictionary[StringName, Variant]
@@ -23,6 +26,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	progress += stats.speed * delta
 
+	if progress > WALL_CHECK_PROGRESS_MIN and progress < WALL_CHECK_PROGRESS_MAX:
+		_check_wall()
+
 	while progress >= 1:
 		progress -= 1.0
 		cur_tile = next_tile
@@ -31,6 +37,10 @@ func _process(delta: float) -> void:
 			queue_free()
 			return
 		next_tile = (tile_controller.tiles.get_tile(next_tile) as PathTile).next_path
+
+		if progress > WALL_CHECK_PROGRESS_MIN:
+			_check_wall()
+
 		_rotate()
 
 	var cur_tile_position: Vector2 = tile_controller.map_to_local(cur_tile)
@@ -100,3 +110,13 @@ func _update_status_effects():
 
 	for id in _status_effects.keys():
 		_status_effects[id].apply(stats)
+
+
+func _check_wall() -> void:
+	var wall: Wall = tile_controller.get_wall_between(cur_tile, next_tile)
+
+	if wall:
+		var damage: float = minf(wall.stats.health, stats.health)
+
+		hit(damage, Globals.DamageTypes.NORMAL)
+		wall.hit(damage)

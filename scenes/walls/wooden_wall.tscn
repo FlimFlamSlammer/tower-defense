@@ -6,4 +6,4 @@
 base_stats = Dictionary[StringName, Variant]({
 &"health": 25.0
 })
-cost = 100
+cost = 150
