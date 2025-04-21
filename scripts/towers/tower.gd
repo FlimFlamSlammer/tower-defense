@@ -48,7 +48,6 @@ var _placed: bool = false
 
 func _ready() -> void:
 	_range_animations.play("show_range")
-	modulate = Color(1.0, 1.0, 1.0, 0.4)
 
 
 func _update_tile_danger_levels(group: StringName, current_danger_level: float, danger_mult: float) -> float:
