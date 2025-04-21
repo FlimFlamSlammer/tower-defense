@@ -64,6 +64,8 @@ func place_wall(pos: Vector2i, vertical: bool, wall: Wall) -> bool:
 	wall.tile_pos = pos
 	wall.vertical = vertical
 
+	wall.place()
+
 	update_paths()
 
 	return true

@@ -67,10 +67,13 @@ func _process(_delta: float) -> void:
 
 				var pos: Dictionary[StringName, Variant] = _tile_controller.get_wall_pos_from_mouse()
 
-				if _tile_controller.can_place_wall(pos.pos, pos.vertical):
-					selected_wall.tile_pos = pos.pos
-					selected_wall.vertical = pos.vertical
+				selected_wall.tile_pos = pos.pos
+				selected_wall.vertical = pos.vertical
 
+				if _tile_controller.can_place_wall(pos.pos, pos.vertical):
+					selected_wall.set_display_valid()
+				else:
+					selected_wall.set_display_invalid()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
@@ -92,7 +95,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				money_requested.emit(selected_wall.cost, false, func(success: bool):
 					if not success: return
 
-					if _tile_controller.place_wall(selected_wall.pos, selected_wall.vertical, selected_wall):
+					var pos: Dictionary[StringName, Variant] = _tile_controller.get_wall_pos_from_mouse()
+
+					if _tile_controller.place_wall(pos.pos, pos.vertical, selected_wall):
 						money_requested.emit(selected_wall.cost, true, func(__: bool): )
 						wall_placed.emit(selected_wall)
 						is_placing = false
