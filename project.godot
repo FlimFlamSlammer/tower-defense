@@ -25,6 +25,7 @@ gdscript/warnings/integer_division=0
 window/size/viewport_width=4096
 window/size/viewport_height=2304
 window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=2
 
 [global_group]
 
@@ -54,4 +55,4 @@ sell={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=2
-anti_aliasing/quality/msaa_2d=2
+anti_aliasing/quality/msaa_2d=3
