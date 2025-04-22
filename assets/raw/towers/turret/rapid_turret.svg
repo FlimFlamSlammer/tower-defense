@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="256"
+   height="256"
+   viewBox="0 0 75.750223 75.750223"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <g
+     id="layer1">
+    <rect
+       style="fill:#1a1a1a;fill-opacity:0;stroke:#ffffff;stroke-width:0.591799;stroke-dasharray:none;stroke-opacity:0"
+       id="rect111"
+       width="75.158424"
+       height="75.158424"
+       x="0.29589844"
+       y="0.29589844" />
+    <rect
+       style="fill:#dfdfdf;stroke-width:0.591799;stroke-dasharray:none"
+       id="rect1"
+       width="56.516769"
+       height="56.516769"
+       x="9.6167259"
+       y="-66.133492"
+       ry="4.5864406"
+       rx="4.5864406"
+       transform="rotate(90)" />
+    <circle
+       style="fill:#6d6d6d;fill-opacity:1;stroke-width:0.591799;stroke-dasharray:none"
+       id="path2"
+       cy="-37.875111"
+       cx="37.875111"
+       r="14.203166"
+       transform="rotate(90)" />
+  </g>
+  <g
+     id="layer3">
+    <path
+       style="fill:none;fill-opacity:1;stroke:#6d6f7a;stroke-width:2.36719;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 41.425902,15.386764 h 21.30475"
+       id="path5" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#6b6c79;stroke-width:2.36719;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 41.425902,60.363458 h 21.30475"
+       id="path5-8" />
+    <rect
+       style="fill:#3e3f46;fill-opacity:1;stroke-width:0.591613;stroke-linecap:round;stroke-linejoin:round"
+       id="rect2"
+       width="18.937557"
+       height="61.547054"
+       x="28.406332"
+       y="7.101583"
+       rx="1.1835971"
+       ry="1.1835971" />
+    <rect
+       style="fill:#2f3035;stroke-width:0.591613;stroke-linecap:round;stroke-linejoin:round"
+       id="rect4"
+       width="30.773531"
+       height="33.14072"
+       x="22.488346"
+       y="21.30475"
+       rx="1.183597"
+       ry="1.1835972" />
+  </g>
+</svg>
