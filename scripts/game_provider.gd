@@ -69,4 +69,4 @@ func _are_enemies_remaining() -> bool:
 
 
 func _get_wave_bonus(wave: int):
-	return 500 + (50 * wave)
+	return 450 + (30 * wave)
