@@ -16,12 +16,6 @@ var money: int = 2000:
 		_gui.money_display.value = str(money)
 		money_changed.emit(val)
 
-var wave_running: bool = false:
-	set(val):
-		wave_running = val
-		_start_wave_button.disabled = val
-
-
 @onready var _spawner: Spawner = $MainTileMap/Spawner
 @onready var _gui: GUIRoot = $GUILayer/GUI
 @onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
@@ -30,7 +24,6 @@ var wave_running: bool = false:
 func _ready() -> void:
 	_start_wave_button.pressed.connect(func():
 		_spawner.start_wave()
-		wave_running = true
 	)
 
 	_spawner.enemy_spawned.connect(func(enemy: Enemy):
@@ -39,11 +32,14 @@ func _ready() -> void:
 		)
 		enemy.path_data_requested.connect(_tile_controller.handle_path_data_request)
 		enemy.died.connect(func():
-			wave_running = _is_wave_running()
-
-			if not wave_running:
+			if not _are_enemies_remaining() and not _spawner.spawning:
 				money += _get_wave_bonus(_spawner.wave)
+				_start_wave_button.disabled = false
 		)
+	)
+
+	_spawner.wave_started.connect(func():
+		_start_wave_button.disabled = true
 	)
 
 	_gui.money_requested.connect(_handle_money_request)
@@ -62,7 +58,7 @@ func _handle_money_request(amount: int, spend_money: bool, cb: Callable) -> void
 		money -= amount
 
 
-func _is_wave_running() -> bool:
+func _are_enemies_remaining() -> bool:
 	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemies")
 
 	for enemy: Enemy in enemies:
