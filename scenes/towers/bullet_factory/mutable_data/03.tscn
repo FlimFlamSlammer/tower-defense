@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://8xswvwhugwbe"]
+[gd_scene load_steps=5 format=3 uid="uid://8xswvwhugwbe"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_vijua"]
 [ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_mx0sn"]
+[ext_resource type="Texture2D" uid="uid://b0m1efm0qy75s" path="res://assets/towers/bullet_factory/03/core.svg" id="3_d673f"]
+[ext_resource type="Texture2D" uid="uid://b6finnhg6hmb2" path="res://assets/towers/bullet_factory/03/Factory.svg" id="4_jowl0"]
 
 [node name="MutableData" instance=ExtResource("1_vijua")]
 stats = Dictionary[StringName, Variant]({
@@ -22,3 +24,9 @@ stat_setters = Dictionary[StringName, Variant]({
 })
 priority = 9
 metadata/_custom_type_script = "uid://0afypir31y4j"
+
+[node name="core" type="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_d673f")
+
+[node name="factory" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("4_jowl0")
