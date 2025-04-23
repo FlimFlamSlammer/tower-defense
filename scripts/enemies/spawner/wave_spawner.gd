@@ -12,8 +12,6 @@ var _groups_finished: int = 0
 
 var _group_spawner: PackedScene = preload("uid://b616w7ivj0t6t")
 
-@onready var _start_tile: Vector2i = (get_node(Globals.TILE_CONTROLLER_PATH) as TileController).start_tile
-
 func _process(delta: float) -> void:
 	_time_since_wave_start += delta
 

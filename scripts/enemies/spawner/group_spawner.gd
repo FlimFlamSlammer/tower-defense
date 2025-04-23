@@ -19,7 +19,7 @@ func _spawn_enemy() -> void:
 	enemy.cur_tile = spawner.tile_controller.start_tile
 	enemy.position = spawner.tile_controller.map_to_local(enemy.cur_tile)
 	enemy_spawned.emit(enemy)
-	get_parent().add_sibling(enemy)
+	spawner.add_sibling(enemy)
 
 	_counter += 1
 	if _counter >= group_data.amount:
