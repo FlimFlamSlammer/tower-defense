@@ -20,6 +20,7 @@ var is_tower_selector_open: bool = false
 @onready var _upgrade_menu: UpgradeMenu = $UpgradeMenu
 @onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 @onready var _top_bar: HBoxContainer = $TopBar
+
 @onready var lives_display: ResourceDisplay = _top_bar.get_node("LivesDisplay")
 @onready var money_display: ResourceDisplay = _top_bar.get_node("MoneyDisplay")
 

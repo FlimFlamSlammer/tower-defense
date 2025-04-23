@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://g5ftce2y2brt"]
+[gd_scene load_steps=14 format=4 uid="uid://g5ftce2y2brt"]
 
 [ext_resource type="Texture2D" uid="uid://dakxh7a0v4e5l" path="res://assets/tiles/map1/tile.svg" id="1_d08bi"]
 [ext_resource type="Script" uid="uid://d2e1n6bs7jdv" path="res://scripts/game_provider.gd" id="1_tdg3v"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://d8lo4dccj3kb" path="res://assets/tiles/map1/tiles_debug.svg" id="3_sn5yq"]
 [ext_resource type="PackedScene" uid="uid://brovx3xt83ihl" path="res://scenes/spawner.tscn" id="5_x5r6q"]
 [ext_resource type="PackedScene" uid="uid://c3ftv6p6r1071" path="res://scenes/ui/gui_root.tscn" id="6_ymv7b"]
+[ext_resource type="Script" uid="uid://bjwimbxges3e" path="res://scripts/ui/screen_menu_layer.gd" id="7_bou56"]
+[ext_resource type="PackedScene" uid="uid://c7manlpxje4pd" path="res://scenes/ui/pause_menu.tscn" id="7_ykcni"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sj0o3"]
 texture = ExtResource("1_d08bi")
@@ -71,3 +73,11 @@ layer = 2
 
 [node name="GUI" parent="GUILayer" instance=ExtResource("6_ymv7b")]
 mouse_filter = 2
+
+[node name="ScreenMenuLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 3
+script = ExtResource("7_bou56")
+
+[node name="PauseMenu" parent="ScreenMenuLayer" instance=ExtResource("7_ykcni")]
+visible = false

@@ -33,9 +33,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -2048.0
+offset_left = -1024.0
 offset_top = 32.0
-offset_right = 2048.0
+offset_right = 1024.0
 offset_bottom = 113.0
 grow_horizontal = 2
 theme_override_constants/separation = 16
@@ -55,6 +55,19 @@ layout_mode = 2
 
 [node name="TextureRect" parent="TopBar/MoneyDisplay/MarginContainer/HBoxContainer" index="0"]
 texture = ExtResource("4_j5hfe")
+
+[node name="PauseMenuButton" type="Button" parent="." groups=["pause_menu_buttons"]]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -113.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 113.0
+grow_horizontal = 0
+text = "≡"
 
 [node name="TowerMenu" type="TabContainer" parent="."]
 layout_mode = 1
@@ -147,6 +160,11 @@ offset_top = -384.0
 offset_bottom = 384.0
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
 
 [connection signal="pressed" from="TowerMenuButton" to="." method="_on_tower_menu_button_pressed"]
 

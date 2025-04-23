@@ -18,6 +18,7 @@ var money: int = 2000:
 
 @onready var _spawner: Spawner = $MainTileMap/Spawner
 @onready var _gui: GUIRoot = $GUILayer/GUI
+@onready var _screen_menu_layer: ScreenMenuLayer = $ScreenMenuLayer
 @onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 @onready var _start_wave_button: Button = get_tree().get_first_node_in_group("start_wave_button")
 
@@ -48,6 +49,9 @@ func _ready() -> void:
 		tower.money_requested.connect(_handle_money_request)
 	)
 
+	_screen_menu_layer.pause_requested.connect(_pause_game)
+	_screen_menu_layer.resume_requested.connect(_resume_game)
+
 	money = money # force update money display
 	lives = lives # force update lives display
 
@@ -68,5 +72,13 @@ func _are_enemies_remaining() -> bool:
 	return false
 
 
-func _get_wave_bonus(wave: int):
+func _get_wave_bonus(wave: int) -> int:
 	return 500 + (30 * wave)
+
+
+func _pause_game() -> void:
+	get_tree().paused = true
+
+
+func _resume_game() -> void:
+	get_tree().paused = false
