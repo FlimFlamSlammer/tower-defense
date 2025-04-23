@@ -21,6 +21,7 @@ var _status_effects: Dictionary[StringName, EnemyStatusEffect]
 @onready var tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 
 func _ready() -> void:
+	base_stats.resistance = 1.0
 	stats = base_stats.duplicate()
 	stats.health = initial_health_ratio * stats.max_health
 
@@ -59,11 +60,7 @@ func hit(damage: float, type: Globals.DamageTypes) -> bool:
 	if type in stats.immunities:
 		return false
 
-	var resistance: float = 1.0
-	if "resistance" in stats:
-		resistance = stats.resistance
-
-	stats.health -= damage / resistance
+	stats.health -= damage / stats.resistance
 	if stats.health <= 0.0:
 		hide()
 		queue_free()
@@ -86,7 +83,11 @@ func apply_status_effect(effect: EnemyStatusEffect, update: bool = true):
 		expiration_timer.start()
 
 	_status_effects[effect.id] = effect
-	effect.reparent(self)
+
+	if effect.get_parent():
+		effect.reparent(self)
+	else:
+		add_child(effect)
 
 	if update:
 		_update_status_effects()
