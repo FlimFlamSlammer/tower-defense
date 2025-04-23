@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="WaveData" load_steps=5 format=3 uid="uid://bje0j4gpndoyc"]
+[gd_resource type="Resource" script_class="WaveData" load_steps=7 format=3 uid="uid://bje0j4gpndoyc"]
 
 [ext_resource type="PackedScene" uid="uid://lvqv7e8j8dut" path="res://scenes/enemies/slow_car.tscn" id="1_66k7f"]
 [ext_resource type="Script" uid="uid://0cvalmpqh1pa" path="res://scripts/enemies/spawner/wave_data.gd" id="1_kgv4u"]
 [ext_resource type="PackedScene" uid="uid://cxy3pqhua6x16" path="res://scenes/enemies/fast_car.tscn" id="2_mh3ks"]
 [ext_resource type="PackedScene" uid="uid://djwj4lx7m00c6" path="res://scenes/enemies/tank.tscn" id="3_m4j23"]
+[ext_resource type="PackedScene" uid="uid://cfp44shoe56gq" path="res://scenes/enemies/big_tank.tscn" id="4_qngl8"]
+[ext_resource type="PackedScene" uid="uid://j5wqcdx6y2ns" path="res://scenes/enemies/armored_car.tscn" id="5_s7hhm"]
 
 [resource]
 script = ExtResource("1_kgv4u")
@@ -87,4 +89,49 @@ data = Array[Array]([[{
 &"interval": 2.5,
 &"time": 7.0,
 &"type": ExtResource("3_m4j23")
+}], [{
+&"amount": 10,
+&"interval": 1.2,
+&"time": 0.0,
+&"type": ExtResource("3_m4j23")
+}, {
+&"amount": 1,
+&"interval": 0.0,
+&"time": 13.2,
+&"type": ExtResource("4_qngl8")
+}], [{
+&"amount": 20,
+&"interval": 0.5,
+&"time": 0.0,
+&"type": ExtResource("1_66k7f")
+}, {
+&"amount": 5,
+&"interval": 2.0,
+&"time": 0.0,
+&"type": ExtResource("2_mh3ks")
+}], [{
+&"amount": 4,
+&"interval": 1.0,
+&"time": 0.0,
+&"type": ExtResource("3_m4j23")
+}, {
+&"amount": 12,
+&"interval": 0.9,
+&"time": 4.0,
+&"type": ExtResource("1_66k7f")
+}, {
+&"amount": 10,
+&"interval": 0.8,
+&"time": 7.0,
+&"type": ExtResource("2_mh3ks")
+}], [{
+&"amount": 15,
+&"interval": 0.8,
+&"time": 0.0,
+&"type": ExtResource("1_66k7f")
+}, {
+&"amount": 5,
+&"interval": 0.8,
+&"time": 13.0,
+&"type": ExtResource("5_s7hhm")
 }]])

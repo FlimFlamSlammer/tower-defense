@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfp44shoe56gq"]
+
+[ext_resource type="PackedScene" uid="uid://o1l1pxkirthe" path="res://scenes/enemies/enemy.tscn" id="1_i2t4n"]
+[ext_resource type="Texture2D" uid="uid://c6jsk43hnlx7y" path="res://assets/enemies/big-tank.png" id="2_emfnn"]
+
+[node name="Enemy" instance=ExtResource("1_i2t4n")]
+base_stats = Dictionary[StringName, Variant]({
+&"immunities": PackedInt64Array(1),
+&"max_health": 120.0,
+&"speed": 0.5
+})
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
+polygon = PackedVector2Array(0, -64, 128, -32, 128, 32, 0, 64, -128, 32, -128, -32)
+
+[node name="Sprite" type="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_emfnn")
