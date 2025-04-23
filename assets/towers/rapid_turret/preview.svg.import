@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx6jxe7c1kex0"
-path="res://.godot/imported/bullet_factory.svg-869dc3404c12c9572ff812e2eb22f399.ctex"
+uid="uid://c1ys8fsvqj4pl"
+path="res://.godot/imported/preview.svg-a1b1c64feefc9e0a6ea1c497daf56bba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/raw/towers/bullet-factory/bullet_factory.svg"
-dest_files=["res://.godot/imported/bullet_factory.svg-869dc3404c12c9572ff812e2eb22f399.ctex"]
+source_file="res://assets/towers/rapid_turret/preview.svg"
+dest_files=["res://.godot/imported/preview.svg-a1b1c64feefc9e0a6ea1c497daf56bba.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1ys8fsvqj4pl"
-path="res://.godot/imported/rapid_turret.svg-b2ef6f76a29d67997a673fa88262342a.ctex"
+uid="uid://bx6jxe7c1kex0"
+path="res://.godot/imported/preview.svg-6d65c8668b8808c0ec56bbc74e6b2b83.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/raw/towers/turret/rapid_turret.svg"
-dest_files=["res://.godot/imported/rapid_turret.svg-b2ef6f76a29d67997a673fa88262342a.ctex"]
+source_file="res://assets/towers/bullet_factory/preview.svg"
+dest_files=["res://.godot/imported/preview.svg-6d65c8668b8808c0ec56bbc74e6b2b83.ctex"]
 
 [params]
 

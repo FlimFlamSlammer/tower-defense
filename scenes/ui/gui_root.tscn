@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c3ftv6p6r1071"]
+[gd_scene load_steps=18 format=3 uid="uid://c3ftv6p6r1071"]
 
 [ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_8bulm"]
 [ext_resource type="Script" uid="uid://dt80n4vowgof1" path="res://scripts/ui/gui_root.gd" id="1_uktbi"]
@@ -11,9 +11,12 @@
 [ext_resource type="Script" uid="uid://dhf6s7lrolgof" path="res://scripts/ui/closable_menu.gd" id="6_py6rl"]
 [ext_resource type="PackedScene" uid="uid://c4tpi83r71ldm" path="res://scenes/ui/upgrade_menu.tscn" id="9_j5hfe"]
 [ext_resource type="PackedScene" uid="uid://ckqx1sw1yqdkr" path="res://scenes/towers/rapid_turret/rapid_turret.tscn" id="10_yetrs"]
+[ext_resource type="Texture2D" uid="uid://c1ys8fsvqj4pl" path="res://assets/towers/rapid_turret/preview.svg" id="11_jl46i"]
 [ext_resource type="PackedScene" uid="uid://b3skqu0bhk65h" path="res://scenes/towers/bullet_factory/bullet_factory.tscn" id="11_kayra"]
 [ext_resource type="PackedScene" uid="uid://ch6hsd4n1vlfd" path="res://scenes/ui/wall_button.tscn" id="12_4lr0w"]
+[ext_resource type="Texture2D" uid="uid://bx6jxe7c1kex0" path="res://assets/towers/bullet_factory/preview.svg" id="13_ivrlk"]
 [ext_resource type="PackedScene" uid="uid://dla8smgiuc0vj" path="res://scenes/walls/wooden_wall.tscn" id="13_rv1qw"]
+[ext_resource type="Texture2D" uid="uid://x1jdj8ex5vto" path="res://assets/walls/wooden_wall.svg" id="16_tqdjj"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -90,6 +93,9 @@ tower_scene = ExtResource("4_00jwl")
 layout_mode = 2
 tower_scene = ExtResource("10_yetrs")
 
+[node name="Texture" parent="TowerMenu/Offense/Buttons/Rapid Turret" index="0"]
+texture = ExtResource("11_jl46i")
+
 [node name="Production" parent="TowerMenu" instance=ExtResource("2_astdl")]
 visible = false
 layout_mode = 2
@@ -99,6 +105,9 @@ metadata/_tab_index = 1
 layout_mode = 2
 tower_scene = ExtResource("11_kayra")
 
+[node name="Texture" parent="TowerMenu/Production/Buttons/Bullet Factory" index="0"]
+texture = ExtResource("13_ivrlk")
+
 [node name="Walls" parent="TowerMenu" instance=ExtResource("2_astdl")]
 visible = false
 layout_mode = 2
@@ -107,6 +116,10 @@ metadata/_tab_index = 2
 [node name="WallButton" parent="TowerMenu/Walls/Buttons" index="0" instance=ExtResource("12_4lr0w")]
 layout_mode = 2
 wall_scene = ExtResource("13_rv1qw")
+
+[node name="Texture" parent="TowerMenu/Walls/Buttons/WallButton" index="0"]
+texture = ExtResource("16_tqdjj")
+stretch_mode = 5
 
 [node name="TowerMenuButton" type="Button" parent="."]
 layout_mode = 1
@@ -142,4 +155,6 @@ metadata/_edit_use_anchors_ = true
 [editable path="TowerMenu/Offense"]
 [editable path="TowerMenu/Offense/Buttons/Rapid Turret"]
 [editable path="TowerMenu/Production"]
+[editable path="TowerMenu/Production/Buttons/Bullet Factory"]
 [editable path="TowerMenu/Walls"]
+[editable path="TowerMenu/Walls/Buttons/WallButton"]
