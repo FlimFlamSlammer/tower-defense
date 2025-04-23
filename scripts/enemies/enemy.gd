@@ -59,7 +59,11 @@ func hit(damage: float, type: Globals.DamageTypes) -> bool:
 	if type in stats.immunities:
 		return false
 
-	stats.health -= damage
+	var resistance: float = 1.0
+	if "resistance" in stats:
+		resistance = stats.resistance
+
+	stats.health -= damage / resistance
 	if stats.health <= 0.0:
 		hide()
 		queue_free()
