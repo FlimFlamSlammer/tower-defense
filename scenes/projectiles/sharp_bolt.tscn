@@ -21,4 +21,4 @@ polygon = PackedVector2Array(0, 120, 4.00041, 56, 3.99959, -56, 0, -120, -4.0004
 z_index = 11
 shape = SubResource("SegmentShape2D_ejeda")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_collision"]

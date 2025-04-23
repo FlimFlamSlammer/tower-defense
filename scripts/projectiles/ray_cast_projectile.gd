@@ -5,39 +5,39 @@ extends Projectile
 @export var _tracer: Line2D
 @export var _animation_player: AnimationPlayer
 
+var _last_normal := Vector2.ZERO
+var _last_pos := Vector2.ZERO
+
 func _ready() -> void:
 	super ()
+
 	_ray_cast.force_raycast_update()
-	var last_pos := Vector2.RIGHT.rotated(rotation) * 4600 # defaults to approximate screen diagonal length
-	var last_normal := Vector2.ZERO
 	while _ray_cast.is_colliding() and _pierce_used < stats.pierce:
 		var collider: Area2D = _ray_cast.get_collider()
-		var enemy := collider as Enemy
-		if enemy:
-			enemy.hit(stats.damage, stats.damage_type)
-			_pierce_used += 1
 
-			if "projectile_status_effects" in stats:
-				var status_effects: Array[Variant] = stats.projectile_status_effects
-				for effect in status_effects:
-					var new_effect: EnemyStatusEffect
-					if _pierce_used == stats.pierce:
-						new_effect = effect
-					else:
-						new_effect = effect.duplicate()
-					enemy.apply_status_effect(new_effect)
-
-			if _pierce_used == stats.pierce:
-				last_pos = _ray_cast.get_collision_point()
-				last_normal = _ray_cast.get_collision_normal()
+		_on_collision(collider)
 
 		_ray_cast.add_exception(collider)
 		_ray_cast.force_raycast_update()
 
-	_ray_cast.enabled = false
+	if _last_normal == Vector2.ZERO:
+		_destruct()
 
+
+func _on_collision(area: Area2D):
+	if _pierce_used + 1 == stats.pierce:
+		_last_pos = _ray_cast.get_collision_point()
+		_last_normal = _ray_cast.get_collision_normal()
+	super (area)
+
+
+func _destruct():
+	_ray_cast.enabled = false
 	if _tracer:
-		_tracer.add_point(to_local(last_pos))
+		if _last_normal == Vector2.ZERO:
+			_tracer.add_point(to_local(Vector2.RIGHT.rotated(_ray_cast.global_rotation) * 8192))
+		else:
+			_tracer.add_point(to_local(_last_pos))
 
 	if _animation_player:
 		_animation_player.play("fire")

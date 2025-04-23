@@ -157,6 +157,7 @@ _data = {
 }
 
 [node name="Bullet" type="RayCast2D" node_paths=PackedStringArray("_ray_cast", "_tracer", "_animation_player")]
+z_index = 11
 target_position = Vector2(8192, 0)
 collision_mask = 2
 collide_with_areas = true

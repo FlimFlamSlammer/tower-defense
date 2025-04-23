@@ -19,12 +19,12 @@ func _process(delta: float) -> void:
 		super (delta)
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_collision(area: Area2D) -> void:
 	if _attached_enemy: return
+	super (area)
 
 	var enemy: Enemy = area
 
-	enemy.hit(stats.damage, stats.damage_type)
 	_attached_enemy = enemy
 	_attached_local_position = enemy.to_local(position)
 	_attached_local_rotation = rotation - enemy.rotation
@@ -32,6 +32,10 @@ func _on_area_entered(area: Area2D) -> void:
 
 	_fuse.start()
 
+
+func _destruct() -> void:
+	pass
+	
 
 func _explode() -> void:
 	if is_queued_for_deletion(): return

@@ -154,6 +154,6 @@ explosiveness = 1.0
 fixed_fps = 48
 process_material = SubResource("ParticleProcessMaterial_uab25")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_collision"]
 [connection signal="timeout" from="Fuse" to="." method="_explode"]
 [connection signal="timeout" from="ExitTower" to="." method="_set_z_index"]

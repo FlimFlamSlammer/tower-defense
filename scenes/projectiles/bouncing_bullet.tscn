@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://boq8nbsagg0yo"]
+[gd_scene load_steps=11 format=3 uid="uid://boq8nbsagg0yo"]
 
-[ext_resource type="Script" uid="uid://deh2a5w8iejja" path="res://scripts/projectiles/bullet.gd" id="1_hc63x"]
+[ext_resource type="Script" uid="uid://df70a6qef60s6" path="res://scripts/projectiles/bouncing_bullet.gd" id="1_hc63x"]
 [ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="2_1maaj"]
 
 [sub_resource type="Curve" id="Curve_k5ji7"]
@@ -156,13 +156,13 @@ _data = {
 &"fire": SubResource("Animation_yvfy2")
 }
 
-[node name="Bullet" type="RayCast2D" node_paths=PackedStringArray("_ray_cast", "_tracer", "_animation_player")]
-target_position = Vector2(8192, 0)
-collision_mask = 2
-collide_with_areas = true
-collide_with_bodies = false
+[sub_resource type="CircleShape2D" id="CircleShape2D_hc63x"]
+radius = 384.0
+
+[node name="Bullet" type="Node2D" node_paths=PackedStringArray("_ray_cast", "_tracer", "_animation_player")]
+z_index = 11
 script = ExtResource("1_hc63x")
-_ray_cast = NodePath(".")
+_ray_cast = NodePath("RayCast2D")
 _tracer = NodePath("Trail")
 _animation_player = NodePath("AnimationPlayer")
 
@@ -190,3 +190,16 @@ process_material = SubResource("ParticleProcessMaterial_48g2p")
 libraries = {
 &"": SubResource("AnimationLibrary_48g2p")
 }
+
+[node name="BounceShapeCast" type="ShapeCast2D" parent="."]
+shape = SubResource("CircleShape2D_hc63x")
+target_position = Vector2(0, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(8192, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
