@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqjuknjf5fgoy"]
+
+[ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_slwqy"]
+[ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_1hsuo"]
+[ext_resource type="Texture2D" uid="uid://bmof32bww5usk" path="res://assets/towers/bullet_factory/04/core.svg" id="3_bikyf"]
+[ext_resource type="Texture2D" uid="uid://6c1gmi2x8ev5" path="res://assets/towers/bullet_factory/14/Factory.svg" id="4_bonhp"]
+[ext_resource type="Script" uid="uid://bl1yhg2trfgy1" path="res://scripts/enemies/enemy_status_effect.gd" id="5_dkh75"]
+
+[node name="MutableData" instance=ExtResource("1_slwqy")]
+stats = Dictionary[StringName, Variant]({
+&"range": 2.0
+})
+
+[node name="StatusEffects" type="Node" parent="." index="0"]
+
+[node name="BulletGiver" type="Node" parent="StatusEffects" index="0"]
+script = ExtResource("2_1hsuo")
+id = &"bullets"
+stat_multipliers = Dictionary[StringName, float]({
+&"attack_cost": 0.75,
+&"damage": 1.584
+})
+stat_setters = Dictionary[StringName, Variant]({
+&"damage_type": 2,
+&"projectile_status_effects": [NodePath("../../ProjectileStatusEffects/EnemyStatusEffect")]
+})
+priority = 14
+metadata/_custom_type_script = "uid://0afypir31y4j"
+
+[node name="core" type="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_bikyf")
+
+[node name="factory" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("4_bonhp")
+
+[node name="ProjectileStatusEffects" type="Node" parent="." index="3"]
+
+[node name="EnemyStatusEffect" type="Node" parent="ProjectileStatusEffects" index="0"]
+script = ExtResource("5_dkh75")
+id = &"bullet_factory_slow"
+stat_multipliers = Dictionary[StringName, float]({
+&"resistance": 0.6
+})
+metadata/_custom_type_script = "uid://bl1yhg2trfgy1"
+
+[node name="ExpirationTimer" type="Timer" parent="ProjectileStatusEffects/EnemyStatusEffect" index="0"]
+wait_time = 0.15
+
+[connection signal="timeout" from="ProjectileStatusEffects/EnemyStatusEffect/ExpirationTimer" to="ProjectileStatusEffects/EnemyStatusEffect" method="_expire"]
