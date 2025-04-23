@@ -23,8 +23,10 @@ func start_wave() -> void:
 
 	wave_spawner.wave_data = wave_data.data[wave - 1] # zero-indexing
 	wave_spawner.enemy_spawned.connect(enemy_spawned.emit)
+	wave_spawner.finished.connect(_on_wave_spawner_finished)
 
 	_remaining_wave_spawners += 1
+	spawning = true
 	wave_started.emit()
 
 	add_child(wave_spawner)
