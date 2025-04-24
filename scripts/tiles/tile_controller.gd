@@ -53,6 +53,7 @@ func place_wall(pos: Vector2i, vertical: bool, wall: Wall) -> bool:
 	else:
 		add_child(wall)
 
+	wall.tile_map = wall_tile_map
 	wall.tile_position = pos
 	wall.vertical = vertical
 
@@ -126,6 +127,8 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 		tower.reparent(self);
 	else:
 		add_child(tower)
+		
+	tower.tile_controller = self
 	tower.tile_position = pos
 	tile.tower = tower
 
