@@ -76,8 +76,7 @@ func place() -> void:
 func save() -> Dictionary:
 	var save_dict = {
 		"scene_path": get_scene_file_path(),
-		"tile_x": tile_position.x,
-		"tile_y": tile_position.y,
+		"position": tile_position,
 		"upgrade": current_upgrade,
 	}
 	return save_dict

@@ -91,9 +91,7 @@ func _resume_game() -> void:
 
 
 func _save_game() -> void:
-	var save_file = _get_save_file(FileAccess.WRITE)
-
-	print("saving game...")
+	var save_file: FileAccess = _get_save_file(FileAccess.WRITE)
 
 	var game_data: Dictionary = {
 		"money": money,
@@ -101,7 +99,7 @@ func _save_game() -> void:
 		"wave": _spawner.wave,
 	}
 
-	save_file.store_line(JSON.stringify(game_data))
+	save_file.store_var(game_data)
 
 	var data_array: Array[Dictionary]
 
@@ -111,7 +109,7 @@ func _save_game() -> void:
 		var data: Dictionary = towers[i].save()
 		data_array[i] = data
 
-	save_file.store_line(JSON.stringify(data_array))
+	save_file.store_var(data_array)
 
 	var walls = get_tree().get_nodes_in_group("walls")
 	data_array.resize(walls.size())
@@ -119,42 +117,47 @@ func _save_game() -> void:
 		var data: Dictionary = walls[i].save()
 		data_array[i] = data
 
-	save_file.store_line(JSON.stringify(data_array))
+	save_file.store_var(data_array)
 
 
 func _load_game() -> void:
-	var save_file = _get_save_file(FileAccess.READ)
+	var save_file: FileAccess = _get_save_file(FileAccess.READ)
 	if save_file == null: return
 
-	print("loading game...")
-
-	var game_data: Dictionary = JSON.parse_string(save_file.get_line())
+	var game_data: Dictionary = Utils.get_var_safe(save_file, TYPE_DICTIONARY)
+	if game_data == null: _reset_game()
 	money = game_data.money
 	lives = game_data.lives
 	_spawner.wave = game_data.wave
 
 	var data_array: Array
 
-	data_array = JSON.parse_string(save_file.get_line())
+	data_array = Utils.get_var_safe(save_file, TYPE_ARRAY)
+	if data_array == null: _reset_game()
 	for tower_data: Dictionary in data_array:
 		var tower_scene: PackedScene = load(tower_data.scene_path)
 		var tower: Tower = tower_scene.instantiate()
 
-		_tile_controller.place_tower(Vector2i(tower_data.tile_x, tower_data.tile_y), tower)
+		_tile_controller.place_tower(tower_data.position, tower)
 		tower.load(tower_data)
 
-	data_array = JSON.parse_string(save_file.get_line())
+	data_array = Utils.get_var_safe(save_file, TYPE_ARRAY)
+	if data_array == null: _reset_game()
 	for wall_data: Dictionary in data_array:
 		var wall_scene: PackedScene = load(wall_data.scene_path)
 		var wall: Wall = wall_scene.instantiate()
 
-		_tile_controller.place_wall(Vector2i(wall_data.tile_x, wall_data.tile_y), wall_data.vertical, wall)
+		_tile_controller.place_wall(wall_data.position, wall_data.vertical, wall)
 		wall.stats.health = wall_data.health
 
 	_gui.load()
 	var towers: Array[Node] = get_tree().get_nodes_in_group("towers")
 	for tower: Tower in towers:
 		tower.money_requested.connect(_handle_money_request)
+
+
+func _reset_game() -> void:
+	var dir = DirAccess.remove_absolute(Globals.SAVE_PATH.path_join("save-" + map_name))
 
 
 func _get_save_file(flags: int) -> FileAccess:
