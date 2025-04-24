@@ -4,6 +4,8 @@ extends Sprite2D
 @export var base_stats: Dictionary[StringName, Variant]
 @export var cost: int
 
+var tile_map: TileMapLayer
+
 var tile_position: Vector2i:
 	set(val):
 		tile_position = val
@@ -18,8 +20,6 @@ var vertical: bool:
 		else:
 			rotation = TAU * 0.25
 		tile_position = tile_position
-
-@onready var tile_map: TileMapLayer = get_node(Globals.TILE_CONTROLLER_PATH).wall_tile_map
 
 @onready var stats = base_stats.duplicate()
 
@@ -36,9 +36,9 @@ func set_display_valid() -> void: ## Changes the color to represent a valid plac
 	modulate = Color(1.0, 1.0, 1.0, 0.4)
 
 
-func save() -> Dictionary:
+func save() -> Dictionary[StringName, Variant]:
 	var save_dict = {
-		"scene_path": get_scene_file_path(),
+		"scene_path": scene_file_path,
 		"position": tile_position,
 		"vertical": vertical,
 		"health": stats.health,

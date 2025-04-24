@@ -3,6 +3,7 @@ extends Node
 
 signal lives_changed(lives: int)
 signal money_changed(money: int)
+signal scene_change_requested(scene: PackedScene)
 
 @export var map_name: String = "valley"
 
@@ -18,16 +19,14 @@ var money: int = 2000:
 		_gui.money_display.value = str(money)
 		money_changed.emit(val)
 
-@onready var _spawner: Spawner = $MainTileMap/Spawner
+@onready var _spawner: Spawner = %Spawner
 @onready var _gui: GUIRoot = $GUILayer/GUI
 @onready var _screen_menu_layer: ScreenMenuLayer = $ScreenMenuLayer
-@onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
-@onready var _start_wave_button: Button = get_tree().get_first_node_in_group("start_wave_button")
+@onready var _tile_controller: TileController = Globals.get_tile_controller(get_tree())
+@onready var _start_wave_button: Button = get_tree().get_nodes_in_group("start_wave_button")[-1]
 
 func _ready() -> void:
-	_start_wave_button.pressed.connect(func():
-		_spawner.start_wave()
-	)
+	_start_wave_button.pressed.connect(_spawner.start_wave)
 
 	_spawner.enemy_spawned.connect(func(enemy: Enemy):
 		enemy.leaked.connect(func(health: float):
@@ -93,7 +92,7 @@ func _resume_game() -> void:
 func _save_game() -> void:
 	var save_file: FileAccess = _get_save_file(FileAccess.WRITE)
 
-	var game_data: Dictionary = {
+	var game_data: Dictionary[StringName, Variant] = {
 		"money": money,
 		"lives": lives,
 		"wave": _spawner.wave,
@@ -103,18 +102,18 @@ func _save_game() -> void:
 
 	var data_array: Array[Dictionary]
 
-	var towers = get_tree().get_nodes_in_group("towers")
+	var towers: Array[Node] = get_tree().get_nodes_in_group("towers")
 	data_array.resize(towers.size())
 	for i: int in range(towers.size()):
-		var data: Dictionary = towers[i].save()
+		var data: Dictionary[StringName, Variant] = towers[i].save()
 		data_array[i] = data
 
 	save_file.store_var(data_array)
 
-	var walls = get_tree().get_nodes_in_group("walls")
+	var walls: Array[Node] = get_tree().get_nodes_in_group("walls")
 	data_array.resize(walls.size())
 	for i: int in range(walls.size()):
-		var data: Dictionary = walls[i].save()
+		var data: Dictionary[StringName, Variant] = walls[i].save()
 		data_array[i] = data
 
 	save_file.store_var(data_array)
@@ -124,16 +123,16 @@ func _load_game() -> void:
 	var save_file: FileAccess = _get_save_file(FileAccess.READ)
 	if save_file == null: return
 
-	var game_data: Dictionary = Utils.get_var_safe(save_file, TYPE_DICTIONARY)
-	if game_data == null: _reset_game()
+	var game_data = save_file.get_var()
+	if not game_data is Dictionary: _reset_game()
 	money = game_data.money
 	lives = game_data.lives
 	_spawner.wave = game_data.wave
 
-	var data_array: Array
+	var data_array
 
-	data_array = Utils.get_var_safe(save_file, TYPE_ARRAY)
-	if data_array == null: _reset_game()
+	data_array = save_file.get_var()
+	if not data_array is Array: _reset_game()
 	for tower_data: Dictionary in data_array:
 		var tower_scene: PackedScene = load(tower_data.scene_path)
 		var tower: Tower = tower_scene.instantiate()
@@ -141,8 +140,8 @@ func _load_game() -> void:
 		_tile_controller.place_tower(tower_data.position, tower)
 		tower.load(tower_data)
 
-	data_array = Utils.get_var_safe(save_file, TYPE_ARRAY)
-	if data_array == null: _reset_game()
+	data_array = save_file.get_var()
+	if not data_array is Array: _reset_game()
 	for wall_data: Dictionary in data_array:
 		var wall_scene: PackedScene = load(wall_data.scene_path)
 		var wall: Wall = wall_scene.instantiate()
@@ -157,7 +156,8 @@ func _load_game() -> void:
 
 
 func _reset_game() -> void:
-	var dir = DirAccess.remove_absolute(Globals.SAVE_PATH.path_join("save-" + map_name))
+	DirAccess.remove_absolute(Globals.SAVE_PATH.path_join("save-" + map_name))
+	scene_change_requested.emit(load(scene_file_path))
 
 
 func _get_save_file(flags: int) -> FileAccess:

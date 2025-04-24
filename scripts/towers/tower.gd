@@ -27,7 +27,13 @@ const Groups: Dictionary[StringName, StringName] = {
 @export var targeting_options: Array[StringName] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
 @export var cost: int
 
-var tile_position: Vector2i
+var tile_controller: TileController
+
+var tile_position: Vector2i:
+	set(val):
+		tile_position = val
+		position = tile_controller.map_to_local(val)
+
 var targeting: StringName = Targeting.FIRST ## The targeting option that the Tower is currently using.
 var current_upgrade: Array[int] = [0, 0]
 var selected: bool = false
@@ -42,7 +48,6 @@ var _placed: bool = false
 @onready var _range_indicator: Node2D = $RangeIndicator
 @onready var _range_area: Area2D = $RangeArea
 @onready var _range_animations: AnimationPlayer = $RangeAnimation
-@onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 @onready var _click_area: Control = $ClickArea
 
 
@@ -73,16 +78,16 @@ func place() -> void:
 	_click_area.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
-func save() -> Dictionary:
-	var save_dict = {
-		"scene_path": get_scene_file_path(),
+func save() -> Dictionary[StringName, Variant]:
+	var save_dict: Dictionary[StringName, Variant] = {
+		"scene_path": scene_file_path,
 		"position": tile_position,
 		"upgrade": current_upgrade,
 	}
 	return save_dict
 
 
-func load(data: Dictionary) -> void:
+func load(data: Dictionary[StringName, Variant]) -> void:
 	for i: int in range(data.upgrade.size()):
 		current_upgrade[i] = data.upgrade[i] as int
 
@@ -253,7 +258,7 @@ func _run_for_tiles_in_range(cb: Callable) -> void:
 		if (overlap_ratio == 0.0):
 			continue
 
-		var tile_ref: Tile = _tile_controller.tiles.get_tile(top_tile)
+		var tile_ref: Tile = tile_controller.tiles.get_tile(top_tile)
 		cb.call(tile_ref, overlap_ratio)
 
 		to_visit.push_back(top_tile + Vector2i(0, 1))

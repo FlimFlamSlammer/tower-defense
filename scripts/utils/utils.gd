@@ -12,10 +12,3 @@ static func tween_properties(object: Object, properties: Array[NodePath], final_
 	for i in range(properties.size()):
 		var tween = object.create_tween()
 		tween.tween_property(object, properties[i], final_vals[i], duration).set_ease(ease_type).set_trans(trans_type)
-
-
-static func get_var_safe(file: FileAccess, type: int) -> Variant:
-	var data: Variant = file.get_var()
-	if typeof(data) == type:
-		return data
-	return null

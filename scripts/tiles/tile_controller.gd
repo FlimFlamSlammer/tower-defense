@@ -16,7 +16,7 @@ var _updated_immunities: Dictionary[Array, bool]
 @onready var wall_tile_map: TileMapLayer = $WallMap
 
 func _ready() -> void:
-	var map_data: Dictionary = tiles.load_map(self)
+	var map_data: Dictionary[StringName, Variant] = tiles.load_map(self)
 	start_tile = map_data.start
 	finish_tile = map_data.finish
 
@@ -127,7 +127,6 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 	else:
 		add_child(tower)
 	tower.tile_position = pos
-	tower.position = map_to_local(pos)
 	tile.tower = tower
 
 	tower.tower_modified.connect(_clear_pathfinding_data)

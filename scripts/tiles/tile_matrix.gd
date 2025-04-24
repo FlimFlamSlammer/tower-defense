@@ -29,8 +29,8 @@ func set_tile(index: Vector2i, tile: Tile) -> bool:
 	return false
 
 
-func load_map(map: TileMapLayer) -> Dictionary:
-	var data: Dictionary = {
+func load_map(map: TileMapLayer) -> Dictionary[StringName, Variant]:
+	var data: Dictionary[StringName, Variant] = {
 		"start" = Vector2i.ZERO,
 		"finish" = Vector2i.ZERO,
 	}

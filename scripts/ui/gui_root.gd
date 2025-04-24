@@ -18,7 +18,7 @@ var is_tower_selector_open: bool = false
 
 @onready var _tower_menu: ClosableMenu = $TowerMenu
 @onready var _upgrade_menu: UpgradeMenu = $UpgradeMenu
-@onready var _tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
+@onready var _tile_controller: TileController = Globals.get_tile_controller(get_tree())
 @onready var _top_bar: HBoxContainer = $TopBar
 
 @onready var lives_display: ResourceDisplay = _top_bar.get_node("LivesDisplay")
@@ -52,7 +52,6 @@ func _process(_delta: float) -> void:
 				placing_previous_position = pos
 
 				selected_tower.tile_position = pos
-				selected_tower.position = _tile_controller.map_to_local(pos)
 
 				_tile_controller.update_support_towers()
 				selected_tower.update_status_effects()
@@ -142,6 +141,7 @@ func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
 	_tower_menu.close()
 	_clear_selection()
 	selected_tower = tower_scene.instantiate()
+	selected_tower.tile_controller = _tile_controller
 	_tile_controller.add_child(selected_tower, true)
 	is_placing = true
 	placing_previous_position = Vector2i(-999, -999)
@@ -153,6 +153,7 @@ func _on_wall_button_pressed(wall_scene: PackedScene) -> void:
 	_tower_menu.close()
 	_clear_selection()
 	selected_wall = wall_scene.instantiate()
+	selected_wall.tile_map = _tile_controller.wall_tile_map
 	_tile_controller.add_child(selected_wall, true)
 	is_placing = true
 	placing_previous_position = Vector2i(-999, -999)

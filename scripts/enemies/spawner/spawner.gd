@@ -14,8 +14,7 @@ var _wave_spawner: PackedScene = preload("uid://bsxu1mlbbwsws")
 
 var _remaining_wave_spawners: int = 0
 
-@onready var tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
-
+@onready var tile_controller: TileController = Globals.get_tile_controller(get_tree())
 
 func start_wave() -> void:
 	wave += 1;

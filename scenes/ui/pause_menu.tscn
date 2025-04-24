@@ -37,9 +37,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -256.0
-offset_top = -192.0
+offset_top = -256.0
 offset_right = 256.0
-offset_bottom = 192.0
+offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_8uki6")
@@ -61,10 +61,17 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Resume"
 
+[node name="RestartButton" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Restart"
+
 [node name="ExitButton" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Save and Exit
+text = "Exit
 "
 
 [connection signal="pressed" from="Menu/VBoxContainer/ResumeButton" to="." method="close"]
+[connection signal="pressed" from="Menu/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

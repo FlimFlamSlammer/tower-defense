@@ -15,10 +15,9 @@ var cur_tile := Vector2i(-1, 2)
 var next_tile := Vector2i(0, 2)
 var progress: float
 var stats: Dictionary[StringName, Variant]
+var tile_controller: TileController
 
 var _status_effects: Dictionary[StringName, EnemyStatusEffect]
-
-@onready var tile_controller: TileController = get_node(Globals.TILE_CONTROLLER_PATH)
 
 func _ready() -> void:
 	base_stats.resistance = 1.0
