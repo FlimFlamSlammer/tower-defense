@@ -4,9 +4,9 @@ extends Sprite2D
 @export var base_stats: Dictionary[StringName, Variant]
 @export var cost: int
 
-var tile_pos: Vector2i:
+var tile_position: Vector2i:
 	set(val):
-		tile_pos = val
+		tile_position = val
 		position = tile_map.map_to_local(Vector2i(val.x, val.y * 2 + int(not vertical)))
 
 
@@ -17,7 +17,7 @@ var vertical: bool:
 			rotation = 0.0
 		else:
 			rotation = TAU * 0.25
-		tile_pos = tile_pos
+		tile_position = tile_position
 
 @onready var tile_map: TileMapLayer = get_node(Globals.TILE_CONTROLLER_PATH).wall_tile_map
 
@@ -34,6 +34,17 @@ func set_display_invalid() -> void: ## Changes the color to represent an invalid
 
 func set_display_valid() -> void: ## Changes the color to represent a valid placement position. Use when the wall is in placement mode.
 	modulate = Color(1.0, 1.0, 1.0, 0.4)
+
+
+func save() -> Dictionary:
+	var save_dict = {
+		"scene_path": get_scene_file_path(),
+		"tile_x": tile_position.x,
+		"tile_y": tile_position.y,
+		"vertical": vertical,
+		"health": stats.health,
+	}
+	return save_dict
 
 
 func hit(damage: float) -> void:

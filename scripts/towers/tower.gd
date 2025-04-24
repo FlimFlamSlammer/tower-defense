@@ -3,7 +3,7 @@ extends Node2D
 
 signal tower_modified() ## Emits when the tower's update function is called.
 signal tower_sold()
-signal tower_clicked(tower: Tower) ## Emits when the Tower is clicked by the player.
+signal tower_clicked() ## Emits when the Tower is clicked by the player.
 signal money_requested(amount: int, spend: bool, cb: Callable) ## Emits when the tower requests an action that uses money. Call param cb to confirm the action.
 
 const Targeting: Dictionary[StringName, StringName] = {
@@ -71,6 +71,33 @@ func place() -> void:
 	_placed = true
 	update_status_effects()
 	_click_area.mouse_filter = Control.MOUSE_FILTER_STOP
+
+
+func save() -> Dictionary:
+	var save_dict = {
+		"scene_path": get_scene_file_path(),
+		"tile_x": tile_position.x,
+		"tile_y": tile_position.y,
+		"upgrade": current_upgrade,
+	}
+	return save_dict
+
+
+func load(data: Dictionary) -> void:
+	for i: int in range(data.upgrade.size()):
+		current_upgrade[i] = data.upgrade[i] as int
+
+	var mutable_data_scene: PackedScene = _get_current_mutable_data_scene()
+
+	var new_mutable_data = mutable_data_scene.instantiate()
+	new_mutable_data.name = _mutable_data.name
+
+	_mutable_data.queue_free()
+	_mutable_data = new_mutable_data
+	add_child.call_deferred(new_mutable_data)
+	update_status_effects.call_deferred()
+
+	_range_animations.play("RESET")
 
 
 ## Marks the tower as selected, showing its range circle.
@@ -162,10 +189,8 @@ func upgrade_tower(path: int, cb: Callable = func(__: bool): ) -> void:
 
 		current_upgrade[path] = tier
 
-		var mutable_data_directory: String = self.scene_file_path.get_base_dir().path_join("mutable_data")
-		var mutable_data_path: String = mutable_data_directory.path_join(str(current_upgrade[0]) + str(current_upgrade[1]) + ".tscn")
-		var mutable_data_scene: PackedScene = load(mutable_data_path)
-		
+		var mutable_data_scene: PackedScene = _get_current_mutable_data_scene()
+
 		var new_mutable_data = mutable_data_scene.instantiate()
 		new_mutable_data.name = _mutable_data.name
 
@@ -209,7 +234,7 @@ func _get_tile_danger_level_multiplier(tile: Vector2i) -> float:
 
 func _on_input_received(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
-		tower_clicked.emit(self)
+		tower_clicked.emit()
 
 
 func _run_for_tiles_in_range(cb: Callable) -> void:
@@ -236,3 +261,9 @@ func _run_for_tiles_in_range(cb: Callable) -> void:
 		to_visit.push_back(top_tile + Vector2i(0, -1))
 		to_visit.push_back(top_tile + Vector2i(1, 0))
 		to_visit.push_back(top_tile + Vector2i(-1, 0))
+
+
+func _get_current_mutable_data_scene() -> PackedScene:
+	var mutable_data_directory: String = self.scene_file_path.get_base_dir().path_join("mutable_data")
+	var mutable_data_path: String = mutable_data_directory.path_join(str(current_upgrade[0]) + str(current_upgrade[1]) + ".tscn")
+	return load(mutable_data_path)

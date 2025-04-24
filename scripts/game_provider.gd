@@ -4,6 +4,8 @@ extends Node
 signal lives_changed(lives: int)
 signal money_changed(money: int)
 
+@export var map_name: String = "valley"
+
 var lives: int = 100:
 	set(val):
 		lives = val
@@ -36,6 +38,8 @@ func _ready() -> void:
 			if not _are_enemies_remaining() and not _spawner.spawning:
 				money += _get_wave_bonus(_spawner.wave)
 				_start_wave_button.disabled = false
+
+				_save_game()
 		)
 	)
 
@@ -54,6 +58,8 @@ func _ready() -> void:
 
 	money = money # force update money display
 	lives = lives # force update lives display
+
+	_load_game()
 
 
 func _handle_money_request(amount: int, spend_money: bool, cb: Callable) -> void:
@@ -82,3 +88,74 @@ func _pause_game() -> void:
 
 func _resume_game() -> void:
 	get_tree().paused = false
+
+
+func _save_game() -> void:
+	var save_file = _get_save_file(FileAccess.WRITE)
+
+	print("saving game...")
+
+	var game_data: Dictionary = {
+		"money": money,
+		"lives": lives,
+		"wave": _spawner.wave,
+	}
+
+	save_file.store_line(JSON.stringify(game_data))
+
+	var data_array: Array[Dictionary]
+
+	var towers = get_tree().get_nodes_in_group("towers")
+	data_array.resize(towers.size())
+	for i: int in range(towers.size()):
+		var data: Dictionary = towers[i].save()
+		data_array[i] = data
+
+	save_file.store_line(JSON.stringify(data_array))
+
+	var walls = get_tree().get_nodes_in_group("walls")
+	data_array.resize(walls.size())
+	for i: int in range(walls.size()):
+		var data: Dictionary = walls[i].save()
+		data_array[i] = data
+
+	save_file.store_line(JSON.stringify(data_array))
+
+
+func _load_game() -> void:
+	var save_file = _get_save_file(FileAccess.READ)
+	if save_file == null: return
+
+	print("loading game...")
+
+	var game_data: Dictionary = JSON.parse_string(save_file.get_line())
+	money = game_data.money
+	lives = game_data.lives
+	_spawner.wave = game_data.wave
+
+	var data_array: Array
+
+	data_array = JSON.parse_string(save_file.get_line())
+	for tower_data: Dictionary in data_array:
+		var tower_scene: PackedScene = load(tower_data.scene_path)
+		var tower: Tower = tower_scene.instantiate()
+
+		_tile_controller.place_tower(Vector2i(tower_data.tile_x, tower_data.tile_y), tower)
+		tower.load(tower_data)
+
+	data_array = JSON.parse_string(save_file.get_line())
+	for wall_data: Dictionary in data_array:
+		var wall_scene: PackedScene = load(wall_data.scene_path)
+		var wall: Wall = wall_scene.instantiate()
+
+		_tile_controller.place_wall(Vector2i(wall_data.tile_x, wall_data.tile_y), wall_data.vertical, wall)
+		wall.stats.health = wall_data.health
+
+	_gui.load()
+	var towers: Array[Node] = get_tree().get_nodes_in_group("towers")
+	for tower: Tower in towers:
+		tower.money_requested.connect(_handle_money_request)
+
+
+func _get_save_file(flags: int) -> FileAccess:
+	return FileAccess.open(Globals.SAVE_PATH.path_join("save-" + map_name), flags)

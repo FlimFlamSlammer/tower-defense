@@ -39,6 +39,9 @@ func _push_menu(menu: ScreenMenu) -> void:
 
 
 func _close_menu(menu: ScreenMenu = _menu_stack.back()) -> void:
+	if (_menu_stack.is_empty()):
+		return
+
 	if _menu_stack.back() == menu:
 		_menu_stack.resize(_menu_stack.size() - 1)
 	else:

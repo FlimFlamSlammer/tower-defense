@@ -68,13 +68,14 @@ func _process(_delta: float) -> void:
 
 				var pos: Dictionary[StringName, Variant] = _tile_controller.get_wall_pos_from_mouse()
 
-				selected_wall.tile_pos = pos.pos
+				selected_wall.tile_position = pos.pos
 				selected_wall.vertical = pos.vertical
 
 				if _tile_controller.can_place_wall(pos.pos, pos.vertical):
 					selected_wall.set_display_valid()
 				else:
 					selected_wall.set_display_invalid()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
@@ -87,7 +88,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					if _tile_controller.place_tower(pos, selected_tower):
 						money_requested.emit(selected_tower.cost, true, func(__: bool): )
 						tower_placed.emit(selected_tower)
-						selected_tower.tower_clicked.connect(_select_tower)
+						selected_tower.tower_clicked.connect(_select_tower.bind(selected_tower))
 						is_placing = false
 						_select_tower(selected_tower)
 						_tower_menu.open()
@@ -114,6 +115,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _upgrade_menu.is_open:
 			_upgrade_menu.close()
 			selected_tower.sell()
+
+
+func load() -> void:
+	var towers: Array[Node] = get_tree().get_nodes_in_group("towers")
+
+	for tower: Tower in towers:
+		tower.tower_clicked.connect(_select_tower.bind(tower))
 
 
 func cancel_tower_placement() -> void:

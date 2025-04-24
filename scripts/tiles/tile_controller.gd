@@ -48,14 +48,19 @@ func place_wall(pos: Vector2i, vertical: bool, wall: Wall) -> bool:
 	if not can_place_wall(pos, vertical):
 		return false
 
+	if wall.get_parent():
+		wall.reparent(self)
+	else:
+		add_child(wall)
+
+	wall.tile_position = pos
+	wall.vertical = vertical
+
 	var tile: PathTile = tiles.get_tile(pos)
 	if vertical:
 		tile.east_wall = wall
 	else:
 		tile.south_wall = wall
-
-	wall.tile_pos = pos
-	wall.vertical = vertical
 
 	wall.place()
 
@@ -117,7 +122,10 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 
 	var tile := tiles.get_tile(pos) as TowerTile
 
-	tower.reparent(self);
+	if tower.get_parent():
+		tower.reparent(self);
+	else:
+		add_child(tower)
 	tower.tile_position = pos
 	tower.position = map_to_local(pos)
 	tile.tower = tower

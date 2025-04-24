@@ -36,6 +36,7 @@ supporting_towers=""
 enemies=""
 start_wave_button=""
 pause_menu_buttons=""
+walls=""
 
 [input]
 
