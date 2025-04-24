@@ -4,10 +4,10 @@ extends ScreenMenu
 signal restart_requested()
 signal exit_requested()
 
+@onready var _pause_menu_button: Button = get_tree().get_nodes_in_group("pause_menu_buttons")[-1]
+
 func _ready() -> void:
-	var buttons: Array[Node] = get_tree().get_nodes_in_group("pause_menu_buttons")
-	for button: Button in buttons:
-		button.pressed.connect(open)
+	_pause_menu_button.pressed.connect(open)
 
 
 func _input(event: InputEvent) -> void:
