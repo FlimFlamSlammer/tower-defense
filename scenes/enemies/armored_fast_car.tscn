@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://u3x6oqgr1f75"]
+
+[ext_resource type="PackedScene" uid="uid://o1l1pxkirthe" path="res://scenes/enemies/enemy.tscn" id="1_hqvtq"]
+[ext_resource type="Texture2D" uid="uid://bh5l03cdxnsvp" path="res://assets/enemies/armored-fast-car.svg" id="2_kvjt1"]
+
+[node name="Enemy" instance=ExtResource("1_hqvtq")]
+base_stats = Dictionary[StringName, Variant]({
+&"immunities": PackedInt64Array(),
+&"max_health": 14.0,
+&"speed": 2.2
+})
+
+[node name="Sprite" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_kvjt1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(-100, -40, 12, -40, 108, 0, 12, 40, -100, 40)
