@@ -3,7 +3,7 @@ extends Bullet
 
 @onready var _bounce_shape_cast: ShapeCast2D = $BounceShapeCast
 
-func _on_collision(area: Area2D):
+func _on_collision(area: Area2D) -> void:
 	super (area)
 
 	_bounce_shape_cast.add_exception(area)

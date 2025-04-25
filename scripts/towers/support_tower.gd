@@ -11,7 +11,7 @@ func give_status_effects() -> void:
 
 	var status_effects: Array[Node] = _mutable_data.get_node("StatusEffects").get_children()
 
-	_run_for_tiles_in_range(func(tile: Tile, overlap_ratio: float):
+	_run_for_tiles_in_range(func(tile: Tile, overlap_ratio: float) -> void:
 		if overlap_ratio < 0.5:
 			return
 

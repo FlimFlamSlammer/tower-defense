@@ -35,7 +35,7 @@ func _ready() -> void:
 
 	_tower_menu.closed_position.position.y = MENU_CLOSED_OFFSET
 	_tower_menu.close(true)
-	_tower_menu.on_open = func():
+	_tower_menu.on_open = func() -> void:
 		cancel_tower_placement()
 		cancel_wall_placement()
 
@@ -80,37 +80,16 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		if is_placing:
 			if selected_tower:
-				money_requested.emit(selected_tower.cost, false, func(success: bool):
-					if not success: return
-
-					var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
-					if _tile_controller.place_tower(pos, selected_tower):
-						money_requested.emit(selected_tower.cost, true, func(__: bool): )
-						tower_placed.emit(selected_tower)
-						selected_tower.tower_clicked.connect(_select_tower.bind(selected_tower))
-						is_placing = false
-						_select_tower(selected_tower)
-						_tower_menu.open()
-				)
+				_place_selected_tower()
 			elif selected_wall:
-				money_requested.emit(selected_wall.cost, false, func(success: bool):
-					if not success: return
+				_place_selected_wall()
+		else:
+			if _upgrade_menu.is_open:
+				_clear_selection()
+			if _tower_menu.is_open:
+				_tower_menu.close()
 
-					var pos: Dictionary[StringName, Variant] = _tile_controller.get_wall_pos_from_mouse()
-
-					if _tile_controller.place_wall(pos.pos, pos.vertical, selected_wall):
-						money_requested.emit(selected_wall.cost, true, func(__: bool): )
-						wall_placed.emit(selected_wall)
-						is_placing = false
-						_tower_menu.open()
-				)
-			return
-		if _upgrade_menu.is_open:
-			_clear_selection()
-		if _tower_menu.is_open:
-			_tower_menu.close()
-
-	if event.is_action_pressed("sell"):
+	elif event.is_action_pressed("sell"):
 		if _upgrade_menu.is_open:
 			_upgrade_menu.close()
 			selected_tower.sell()
@@ -133,6 +112,35 @@ func cancel_wall_placement() -> void:
 	if is_placing and selected_wall:
 		is_placing = false
 		selected_wall.queue_free()
+
+
+func _place_selected_tower() -> void:
+	money_requested.emit(selected_tower.cost, false, func(success: bool) -> void:
+		if not success: return
+
+		var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
+		if _tile_controller.place_tower(pos, selected_tower):
+			money_requested.emit(selected_tower.cost, true, func(__: bool) -> void: )
+			tower_placed.emit(selected_tower)
+			selected_tower.tower_clicked.connect(_select_tower.bind(selected_tower))
+			is_placing = false
+			_select_tower(selected_tower)
+			_tower_menu.open()
+	)
+
+
+func _place_selected_wall() -> void:
+	money_requested.emit(selected_wall.cost, false, func(success: bool) -> void:
+		if not success: return
+
+		var pos: Dictionary[StringName, Variant] = _tile_controller.get_wall_pos_from_mouse()
+
+		if _tile_controller.place_wall(pos.pos, pos.vertical, selected_wall):
+			money_requested.emit(selected_wall.cost, true, func(__: bool) -> void: )
+			wall_placed.emit(selected_wall)
+			is_placing = false
+			_tower_menu.open()
+	)
 
 
 func _on_tower_button_pressed(tower_scene: PackedScene) -> void:

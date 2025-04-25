@@ -30,7 +30,7 @@ func attempt_fire(timer: Timer, fire: Callable, attack_cost: int) -> void:
 	var target: Enemy = _get_target(stats.range)
 	if not target: return
 
-	money_requested.emit(attack_cost, true, func(success: bool):
+	money_requested.emit(attack_cost, true, func(success: bool) -> void:
 		if not success: return
 
 		_mutable_data.pivot.look_at(target.global_position)

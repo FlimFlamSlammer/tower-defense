@@ -14,10 +14,10 @@ func _apply_tick(stats: Dictionary) -> void:
 
 
 func apply(stats: Dictionary[StringName, Variant]) -> void:
-	for key in stat_multipliers.keys():
+	for key: StringName in stat_multipliers.keys():
 		stats[key] *= stat_multipliers[key]
 
-	for key in stat_setters.keys():
+	for key: StringName in stat_setters.keys():
 		stats[key] = stat_setters[key]
 
 

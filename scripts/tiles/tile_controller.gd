@@ -145,7 +145,7 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 
 ## Returns the [PathTile] at [param tile_pos]. [br]
 ## If the pathfinding data for [param immunities] hasn't been generated yet, it will be generated first.
-func handle_path_data_request(immunities: Array[Globals.DamageTypes], tile_pos: Vector2i, cb: Callable):
+func handle_path_data_request(immunities: Array[Globals.DamageTypes], tile_pos: Vector2i, cb: Callable) -> void:
 	if not immunities in _updated_immunities:
 		_update_paths(immunities)
 
@@ -153,7 +153,7 @@ func handle_path_data_request(immunities: Array[Globals.DamageTypes], tile_pos: 
 
 
 ## Clears persistent [TowerStatusEffect] from every [Tower], then runs [method SupportTower.give_status_effects] for every [SupportTower].
-func update_support_towers():
+func update_support_towers() -> void:
 	for tower: Tower in get_tree().get_nodes_in_group(Tower.Groups.ALL):
 		tower.clear_persistent_status_effects()
 
@@ -250,8 +250,6 @@ func _push_pathfinding_data(pq: PriorityQueue, data: Array, offset: Vector2i) ->
 	var new_tile := tiles.get_tile(new_data[0]) as PathTile
 	if not new_tile:
 		return
-
-	var origin_tile := tiles.get_tile(data[0]) as PathTile
 
 	# Calculate danger level
 	new_data[1] = data[1] + (new_tile.danger_level / EXPECTED_ENEMY_SPEED)

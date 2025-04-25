@@ -63,7 +63,7 @@ func _update_tile_danger_levels(group: StringName, current_danger_level: float, 
 func update_danger_levels(group: StringName, immunities: Array[Globals.DamageTypes]) -> void:
 	if not group in get_groups() or not _placed: return
 
-	_run_for_tiles_in_range(func(tile: Tile, overlap_ratio: float):
+	_run_for_tiles_in_range(func(tile: Tile, overlap_ratio: float) -> void:
 		var path_tile := tile as PathTile
 		if path_tile:
 			path_tile.danger_level = _update_tile_danger_levels(group, path_tile.danger_level, overlap_ratio, immunities)
@@ -94,7 +94,7 @@ func load(data: Dictionary[StringName, Variant]) -> void:
 
 	var mutable_data_scene: PackedScene = _get_current_mutable_data_scene()
 
-	var new_mutable_data = mutable_data_scene.instantiate()
+	var new_mutable_data: MutableData = mutable_data_scene.instantiate()
 	new_mutable_data.name = _mutable_data.name
 
 	_mutable_data.queue_free()
@@ -124,7 +124,7 @@ func sell() -> void:
 	if "sell_value" in stats:
 		sell_value *= stats.sell_value
 
-	money_requested.emit(-cost * sell_value, true, func(__: bool): )
+	money_requested.emit(-cost * sell_value, true, func(__: bool) -> void: )
 
 	queue_free()
 	tower_sold.emit()
@@ -133,7 +133,7 @@ func sell() -> void:
 ## Applies status effects to the tower and runs any functions that depend on the tower's stats.
 func update_status_effects() -> void:
 	stats = _mutable_data.stats.duplicate()
-	for effect in _status_effects.values():
+	for effect: TowerStatusEffect in _status_effects.values():
 		effect.apply(stats)
 
 	update_range_circle()
@@ -169,14 +169,14 @@ func apply_status_effect(effect: TowerStatusEffect, p_update: bool = true) -> bo
 	return true
 
 
-func clear_persistent_status_effects():
-	for effect in _status_effects.values():
+func clear_persistent_status_effects() -> void:
+	for effect: TowerStatusEffect in _status_effects.values():
 		if effect.persistent:
 			_status_effects[effect.id].queue_free()
 			_status_effects.erase(effect.id)
 
 
-func remove_status_effect(id: StringName, p_update: bool = true):
+func remove_status_effect(id: StringName, p_update: bool = true) -> void:
 	_status_effects[id].queue_free()
 	_status_effects.erase(id)
 	if p_update:
@@ -184,11 +184,11 @@ func remove_status_effect(id: StringName, p_update: bool = true):
 
 
 ## Upgrades the tower by one tier on the specified path. Param cb is called when the upgrade finishes, and has a boolean parameter that stores whether the upgrade was successful.
-func upgrade_tower(path: int, cb: Callable = func(__: bool): ) -> void:
+func upgrade_tower(path: int, cb: Callable = func(__: bool) -> void: ) -> void:
 	var tier: int = current_upgrade[path] + 1
 	var upgrade: Upgrade = upgrades.get_upgrade(path, tier)
 
-	money_requested.emit(upgrade.cost, true, func(success: bool):
+	money_requested.emit(upgrade.cost, true, func(success: bool) -> void:
 		cb.call(success)
 
 		if not success:
@@ -198,7 +198,7 @@ func upgrade_tower(path: int, cb: Callable = func(__: bool): ) -> void:
 
 		var mutable_data_scene: PackedScene = _get_current_mutable_data_scene()
 
-		var new_mutable_data = mutable_data_scene.instantiate()
+		var new_mutable_data: MutableData = mutable_data_scene.instantiate()
 		new_mutable_data.name = _mutable_data.name
 
 		_mutable_data.queue_free()

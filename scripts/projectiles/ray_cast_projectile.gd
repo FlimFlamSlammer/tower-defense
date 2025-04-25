@@ -24,14 +24,14 @@ func _ready() -> void:
 		_destruct()
 
 
-func _on_collision(area: Area2D):
+func _on_collision(area: Area2D) -> void:
 	if _pierce_used + 1 == stats.pierce:
 		_last_pos = _ray_cast.get_collision_point()
 		_last_normal = _ray_cast.get_collision_normal()
 	super (area)
 
 
-func _destruct():
+func _destruct() -> void:
 	_ray_cast.enabled = false
 	if _tracer:
 		if _last_normal == Vector2.ZERO:

@@ -28,12 +28,12 @@ var money: int = 2000:
 func _ready() -> void:
 	_start_wave_button.pressed.connect(_spawner.start_wave)
 
-	_spawner.enemy_spawned.connect(func(enemy: Enemy):
-		enemy.leaked.connect(func(health: float):
+	_spawner.enemy_spawned.connect(func(enemy: Enemy) -> void:
+		enemy.leaked.connect(func(health: float) -> void:
 			lives -= max(roundi(health), 1)
 		)
 		enemy.path_data_requested.connect(_tile_controller.handle_path_data_request)
-		enemy.died.connect(func():
+		enemy.died.connect(func() -> void:
 			if not _are_enemies_remaining() and not _spawner.spawning:
 				money += _get_wave_bonus(_spawner.wave)
 				_start_wave_button.disabled = false
@@ -42,13 +42,13 @@ func _ready() -> void:
 		)
 	)
 
-	_spawner.wave_started.connect(func():
+	_spawner.wave_started.connect(func() -> void:
 		_start_wave_button.disabled = true
 	)
 
 	_gui.money_requested.connect(_handle_money_request)
 
-	_gui.tower_placed.connect(func(tower: Tower):
+	_gui.tower_placed.connect(func(tower: Tower) -> void:
 		tower.money_requested.connect(_handle_money_request)
 	)
 
@@ -123,13 +123,13 @@ func _load_game() -> void:
 	var save_file: FileAccess = _get_save_file(FileAccess.READ)
 	if save_file == null: return
 
-	var game_data = save_file.get_var()
+	var game_data: Variant = save_file.get_var()
 	if not game_data is Dictionary: _reset_game()
 	money = game_data.money
 	lives = game_data.lives
 	_spawner.wave = game_data.wave
 
-	var data_array
+	var data_array: Variant
 
 	data_array = save_file.get_var()
 	if not data_array is Array: _reset_game()

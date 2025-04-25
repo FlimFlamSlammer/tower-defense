@@ -10,5 +10,5 @@ static func valid_index(arr: Array, idx: int) -> bool:
 
 static func tween_properties(object: Object, properties: Array[NodePath], final_vals: Array[Variant], duration: float, ease_type: int, trans_type: int) -> void:
 	for i in range(properties.size()):
-		var tween = object.create_tween()
+		var tween: Tween = object.create_tween()
 		tween.tween_property(object, properties[i], final_vals[i], duration).set_ease(ease_type).set_trans(trans_type)

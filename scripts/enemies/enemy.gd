@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 				leaked.emit(stats.health)
 				return
 
-		path_data_requested.emit(stats.immunities, next_tile, func(tile: PathTile):
+		path_data_requested.emit(stats.immunities, next_tile, func(tile: PathTile) -> void:
 			cur_tile = next_tile
 			next_tile = tile.next_path[stats.immunities as Array[Globals.DamageTypes]]
 
@@ -68,7 +68,7 @@ func hit(damage: float, type: Globals.DamageTypes) -> bool:
 	return true
 
 
-func apply_status_effect(effect: EnemyStatusEffect, update: bool = true):
+func apply_status_effect(effect: EnemyStatusEffect, update: bool = true) -> void:
 	if effect.id in _status_effects:
 		if _status_effects[effect.id].priority > effect.priority:
 			effect.queue_free()
@@ -92,7 +92,7 @@ func apply_status_effect(effect: EnemyStatusEffect, update: bool = true):
 		_update_status_effects()
 
 
-func remove_status_effect(id: StringName, update: bool = true):
+func remove_status_effect(id: StringName, update: bool = true) -> void:
 	_status_effects[id].queue_free()
 	_status_effects.erase(id)
 	if update:
@@ -111,16 +111,15 @@ func get_distance_from_finish() -> float:
 
 func _rotate() -> void:
 	var new_rotation: float = lerp_angle(rotation, Vector2(cur_tile).angle_to_point(next_tile), 1.0)
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "rotation", new_rotation, 0.15 / stats.speed * absf(new_rotation - rotation))
+	create_tween().tween_property(self, "rotation", new_rotation, 0.15 / stats.speed * absf(new_rotation - rotation))
 
 
-func _update_status_effects():
+func _update_status_effects() -> void:
 	var prev_health: float = stats.health
 	stats = base_stats.duplicate()
 	stats.health = prev_health
 
-	for id in _status_effects.keys():
+	for id: StringName in _status_effects.keys():
 		_status_effects[id].apply(stats)
 
 

@@ -29,7 +29,7 @@ func update_tower(tower: Tower) -> void:
 
 	tower.tower_modified.connect(_update)
 
-	_targeting_selector.option_changed.connect(func(val: int):
+	_targeting_selector.option_changed.connect(func(val: int) -> void:
 		_selected_tower.targeting = _selected_tower.targeting_options[val]
 	)
 

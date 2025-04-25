@@ -21,7 +21,7 @@ var vertical: bool:
 			rotation = TAU * 0.25
 		tile_position = tile_position
 
-@onready var stats = base_stats.duplicate()
+@onready var stats: Dictionary[StringName, Variant] = base_stats.duplicate()
 
 
 func place() -> void:

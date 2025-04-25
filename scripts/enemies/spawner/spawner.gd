@@ -10,7 +10,7 @@ signal wave_ended()
 var wave: int = 0 ## The current wave (zero-indexed)
 var spawning: bool = false ## Whether or not this [Spawner] is currently spawning
 
-var _wave_spawner: PackedScene = preload("uid://bsxu1mlbbwsws")
+var _wave_spawner: PackedScene = preload("res://scenes/enemies/spawner/wave_spawner.tscn")
 
 var _remaining_wave_spawners: int = 0
 
@@ -31,7 +31,7 @@ func start_wave() -> void:
 	add_child(wave_spawner)
 
 
-func _on_wave_spawner_finished():
+func _on_wave_spawner_finished() -> void:
 	_remaining_wave_spawners -= 1
 	wave_ended.emit()
 	if _remaining_wave_spawners == 0:

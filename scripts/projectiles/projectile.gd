@@ -30,13 +30,12 @@ func _on_collision(area: Area2D) -> void:
 
 		if "projectile_status_effects" in stats:
 			var status_effects: Array[Variant] = stats.projectile_status_effects
-			for effect in status_effects:
-				var new_effect: EnemyStatusEffect
+			for effect: EnemyStatusEffect in status_effects:
 				if _pierce_used == stats.pierce:
-					new_effect = effect
+					enemy.apply_status_effect(effect)
 				else:
-					new_effect = effect.duplicate()
-				enemy.apply_status_effect(new_effect)
+					enemy.apply_status_effect(effect.duplicate())
+
 
 	if _pierce_used == stats.pierce:
 		_destruct()

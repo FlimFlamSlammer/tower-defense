@@ -7,7 +7,7 @@ func _ready() -> void:
 		current_scene.connect("scene_change_requested", _change_scene)
 
 
-func _change_scene(new_scene: PackedScene):
+func _change_scene(new_scene: PackedScene) -> void:
 	var current_scene: Node = get_tree().root.get_child(-1)
 	current_scene.queue_free()
 

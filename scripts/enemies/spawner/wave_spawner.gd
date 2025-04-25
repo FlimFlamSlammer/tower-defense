@@ -10,7 +10,7 @@ var _time_since_wave_start: float = 0.0
 var _group_index: int = 0
 var _groups_finished: int = 0
 
-var _group_spawner: PackedScene = preload("uid://b616w7ivj0t6t")
+var _group_spawner: PackedScene = preload("res://scenes/enemies/spawner/group_spawner.tscn")
 
 func _process(delta: float) -> void:
 	_time_since_wave_start += delta
@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 		_group_index += 1;
 
 
-func _on_group_spawner_finish():
+func _on_group_spawner_finish() -> void:
 	_groups_finished += 1
 	if _groups_finished == wave_data.size():
 		queue_free()

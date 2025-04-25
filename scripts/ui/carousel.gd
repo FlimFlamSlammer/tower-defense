@@ -8,20 +8,20 @@ var _current_index: int
 
 @onready var _label: Label = $Label
 
-func set_options(options: Array[StringName]):
+func set_options(options: Array[StringName]) -> void:
 	_option_names = options
 
 
-func set_option(index: int):
+func set_option(index: int) -> void:
 	_current_index = index
 	_update_label()
 
 
-func _change_index(amount: int):
+func _change_index(amount: int) -> void:
 	_current_index = wrapi(_current_index + amount, 0, _option_names.size())
 	option_changed.emit(_current_index)
 	_update_label()
 
 
-func _update_label():
+func _update_label() -> void:
 	_label.text = _option_names[_current_index]
