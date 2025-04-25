@@ -156,9 +156,9 @@ func _load_game() -> void:
 
 
 func _reset_game() -> void:
-	DirAccess.remove_absolute(Globals.SAVE_PATH.path_join("save-" + map_name))
+	DirAccess.remove_absolute(Globals.SAVE_PATH.path_join("save-%s" % map_name))
 	scene_change_requested.emit(load(scene_file_path))
 
 
 func _get_save_file(flags: int) -> FileAccess:
-	return FileAccess.open(Globals.SAVE_PATH.path_join("save-" + map_name), flags)
+	return FileAccess.open(Globals.SAVE_PATH.path_join("save-%s" % map_name), flags)

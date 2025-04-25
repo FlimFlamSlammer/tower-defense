@@ -37,7 +37,7 @@ func set_display_valid() -> void: ## Changes the color to represent a valid plac
 
 
 func save() -> Dictionary[StringName, Variant]:
-	var save_dict = {
+	var save_dict: Dictionary[StringName, Variant] = {
 		"scene_path": scene_file_path,
 		"position": tile_position,
 		"vertical": vertical,

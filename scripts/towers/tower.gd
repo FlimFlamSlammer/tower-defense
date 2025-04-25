@@ -269,5 +269,5 @@ func _run_for_tiles_in_range(cb: Callable) -> void:
 
 func _get_current_mutable_data_scene() -> PackedScene:
 	var mutable_data_directory: String = self.scene_file_path.get_base_dir().path_join("mutable_data")
-	var mutable_data_path: String = mutable_data_directory.path_join(str(current_upgrade[0]) + str(current_upgrade[1]) + ".tscn")
+	var mutable_data_path: String = mutable_data_directory.path_join("%s%s.tscn" % current_upgrade)
 	return load(mutable_data_path)
