@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvvk0f2tlyikk"
-path="res://.godot/imported/range-circle.svg-b3233076a5cde862b1daf37e6aeab996.ctex"
+uid="uid://c60uis25xj2n6"
+path="res://.godot/imported/big_tank.svg-fa286a92034c0b5f38e7fc55217640c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/raw/range-circle.svg"
-dest_files=["res://.godot/imported/range-circle.svg-b3233076a5cde862b1daf37e6aeab996.ctex"]
+source_file="res://assets/raw/enemies/big_tank.svg"
+dest_files=["res://.godot/imported/big_tank.svg-fa286a92034c0b5f38e7fc55217640c8.ctex"]
 
 [params]
 

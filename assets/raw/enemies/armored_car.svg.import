@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://krgnxy1j72uk"
-path="res://.godot/imported/fast-car.svg-508774f8079d6b80dfd9f6a157cb4470.ctex"
+uid="uid://cfcmsyg5umgex"
+path="res://.godot/imported/armored_car.svg-f1db8e8b29b52fbfe17f51c7b3b92a7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/raw/fast-car.svg"
-dest_files=["res://.godot/imported/fast-car.svg-508774f8079d6b80dfd9f6a157cb4470.ctex"]
+source_file="res://assets/raw/enemies/armored_car.svg"
+dest_files=["res://.godot/imported/armored_car.svg-f1db8e8b29b52fbfe17f51c7b3b92a7b.ctex"]
 
 [params]
 

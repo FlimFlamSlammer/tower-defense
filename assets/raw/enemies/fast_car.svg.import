@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c60uis25xj2n6"
-path="res://.godot/imported/big-tank.svg-4af1511f0ab0f9590fd75d4a6c75bb38.ctex"
+uid="uid://krgnxy1j72uk"
+path="res://.godot/imported/fast_car.svg-b41362f9a5c7fd7cb7d5767b93e1e493.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/raw/big-tank.svg"
-dest_files=["res://.godot/imported/big-tank.svg-4af1511f0ab0f9590fd75d4a6c75bb38.ctex"]
+source_file="res://assets/raw/enemies/fast_car.svg"
+dest_files=["res://.godot/imported/fast_car.svg-b41362f9a5c7fd7cb7d5767b93e1e493.ctex"]
 
 [params]
 

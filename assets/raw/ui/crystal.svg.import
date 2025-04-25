@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wfdkkgdjsjwc"
-path="res://.godot/imported/tank.svg-81a8bc7ba9b6000e7b952ffe24dd0949.ctex"
+uid="uid://b34qgm542kk6o"
+path="res://.godot/imported/crystal.svg-eb89f5faeade6870abb89170585f4fc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/raw/tank.svg"
-dest_files=["res://.godot/imported/tank.svg-81a8bc7ba9b6000e7b952ffe24dd0949.ctex"]
+source_file="res://assets/raw/ui/crystal.svg"
+dest_files=["res://.godot/imported/crystal.svg-eb89f5faeade6870abb89170585f4fc1.ctex"]
 
 [params]
 

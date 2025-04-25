@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://uiq1di43dds1"]
 
-[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_gbihs"]
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="1_gbihs"]
 [ext_resource type="Script" uid="uid://r850fqkq2al5" path="res://scripts/ui/tower_button.gd" id="2_h4r6f"]
-[ext_resource type="StyleBox" uid="uid://cd3jiwiqqagw7" path="res://resources/panel_2.tres" id="2_juamh"]
-[ext_resource type="StyleBox" uid="uid://cnq6jgcav4xgl" path="res://resources/panel_1.tres" id="3_irls4"]
+[ext_resource type="StyleBox" uid="uid://cd3jiwiqqagw7" path="res://resources/ui/panel_2.tres" id="2_juamh"]
+[ext_resource type="StyleBox" uid="uid://cnq6jgcav4xgl" path="res://resources/ui/panel_1.tres" id="3_irls4"]
 [ext_resource type="Texture2D" uid="uid://05bclr4bytv6" path="res://assets/towers/crossbow/preview.svg" id="3_juamh"]
 
 [node name="TowerButton" type="Button" groups=["tower_buttons"]]

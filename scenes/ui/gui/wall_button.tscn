@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://ch6hsd4n1vlfd"]
 
-[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_jqr0g"]
-[ext_resource type="StyleBox" uid="uid://cd3jiwiqqagw7" path="res://resources/panel_2.tres" id="2_iggvq"]
-[ext_resource type="StyleBox" uid="uid://cnq6jgcav4xgl" path="res://resources/panel_1.tres" id="3_6xjan"]
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="1_jqr0g"]
+[ext_resource type="StyleBox" uid="uid://cd3jiwiqqagw7" path="res://resources/ui/panel_2.tres" id="2_iggvq"]
+[ext_resource type="StyleBox" uid="uid://cnq6jgcav4xgl" path="res://resources/ui/panel_1.tres" id="3_6xjan"]
 [ext_resource type="Script" uid="uid://ik7aq27xn12p" path="res://scripts/ui/wall_button.gd" id="4_jqr0g"]
 [ext_resource type="Texture2D" uid="uid://05bclr4bytv6" path="res://assets/towers/crossbow/preview.svg" id="5_xolep"]
 

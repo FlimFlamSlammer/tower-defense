@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqwou8lnkysmh"
-path="res://.godot/imported/panel256x.svg-00d799a6d4f7ce1bf2f7a31e19dbb68a.ctex"
+uid="uid://dvvk0f2tlyikk"
+path="res://.godot/imported/range_circle.svg-ce48f7434fa2dd9873f2a6a239e24351.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/raw/ui/panel256x.svg"
-dest_files=["res://.godot/imported/panel256x.svg-00d799a6d4f7ce1bf2f7a31e19dbb68a.ctex"]
+source_file="res://assets/raw/towers/range_circle.svg"
+dest_files=["res://.godot/imported/range_circle.svg-ce48f7434fa2dd9873f2a6a239e24351.ctex"]
 
 [params]
 

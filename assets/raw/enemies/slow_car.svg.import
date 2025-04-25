@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkuxm8qitqq8m"
-path="res://.godot/imported/pallette.svg-e07290a3d06b9bcb2afde52a83f7711a.ctex"
+uid="uid://b2qa6o3tysxol"
+path="res://.godot/imported/slow_car.svg-5a89d670b429b3ab5ec919896733dd3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/pallette.svg"
-dest_files=["res://.godot/imported/pallette.svg-e07290a3d06b9bcb2afde52a83f7711a.ctex"]
+source_file="res://assets/raw/enemies/slow_car.svg"
+dest_files=["res://.godot/imported/slow_car.svg-5a89d670b429b3ab5ec919896733dd3f.ctex"]
 
 [params]
 

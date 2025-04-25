@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://c4tpi83r71ldm"]
 
-[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/theme.tres" id="1_211cs"]
-[ext_resource type="StyleBox" uid="uid://c41ikuoc2xqi2" path="res://resources/panel_0.tres" id="2_b03nv"]
-[ext_resource type="StyleBox" uid="uid://baihiuteq2brc" path="res://resources/panel_bg_outline.tres" id="2_cqxas"]
-[ext_resource type="PackedScene" uid="uid://c4gm6t7577hbt" path="res://scenes/ui/upgrade_path.tscn" id="2_j2skl"]
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="1_211cs"]
+[ext_resource type="StyleBox" uid="uid://c41ikuoc2xqi2" path="res://resources/ui/panel_0.tres" id="2_b03nv"]
+[ext_resource type="StyleBox" uid="uid://baihiuteq2brc" path="res://resources/ui/panel_bg_outline.tres" id="2_cqxas"]
+[ext_resource type="PackedScene" uid="uid://c4gm6t7577hbt" path="res://scenes/ui/gui/upgrade_path.tscn" id="2_j2skl"]
 [ext_resource type="Script" uid="uid://dwku2d0674hdg" path="res://scripts/ui/upgrade_menu.gd" id="3_uofuh"]
-[ext_resource type="PackedScene" uid="uid://dl8kkqt67bagk" path="res://scenes/ui/carousel.tscn" id="4_m2qc7"]
+[ext_resource type="PackedScene" uid="uid://dl8kkqt67bagk" path="res://scenes/ui/shared/carousel.tscn" id="4_m2qc7"]
 
 [node name="UpgradeMenu" type="PanelContainer"]
 offset_right = 768.0

@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://d2e1n6bs7jdv" path="res://scripts/game_provider.gd" id="1_tdg3v"]
 [ext_resource type="Script" uid="uid://bp8wugfx6tk0m" path="res://scripts/tiles/tile_controller.gd" id="2_5yiy8"]
 [ext_resource type="Texture2D" uid="uid://d8lo4dccj3kb" path="res://assets/tiles/map1/tiles_debug.svg" id="3_sn5yq"]
-[ext_resource type="PackedScene" uid="uid://brovx3xt83ihl" path="res://scenes/spawner.tscn" id="5_x5r6q"]
-[ext_resource type="PackedScene" uid="uid://c3ftv6p6r1071" path="res://scenes/ui/gui_root.tscn" id="6_ymv7b"]
+[ext_resource type="PackedScene" uid="uid://brovx3xt83ihl" path="res://scenes/enemies/spawner/spawner.tscn" id="5_x5r6q"]
+[ext_resource type="PackedScene" uid="uid://c3ftv6p6r1071" path="res://scenes/ui/gui/gui_root.tscn" id="6_ymv7b"]
 [ext_resource type="Script" uid="uid://bjwimbxges3e" path="res://scripts/ui/screen_menu_layer.gd" id="7_bou56"]
-[ext_resource type="PackedScene" uid="uid://c7manlpxje4pd" path="res://scenes/ui/pause_menu.tscn" id="7_ykcni"]
+[ext_resource type="PackedScene" uid="uid://c7manlpxje4pd" path="res://scenes/ui/screen_menus/pause_menu.tscn" id="7_ykcni"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sj0o3"]
 texture = ExtResource("1_d08bi")

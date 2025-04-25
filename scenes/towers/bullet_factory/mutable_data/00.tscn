@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_t826g"]
 [ext_resource type="Texture2D" uid="uid://bqv2vdp4g7b6p" path="res://assets/towers/bullet_factory/00/Factory.svg" id="3_8gk7w"]
 [ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="4_visfu"]
-[ext_resource type="Material" uid="uid://cfmuqbja78mlq" path="res://resources/factory_smoke.tres" id="5_ifsc2"]
+[ext_resource type="Material" uid="uid://cfmuqbja78mlq" path="res://resources/particle_materials/factory_smoke.tres" id="5_ifsc2"]
 
 [node name="MutableData" instance=ExtResource("1_a8xpl")]
 stats = Dictionary[StringName, Variant]({
