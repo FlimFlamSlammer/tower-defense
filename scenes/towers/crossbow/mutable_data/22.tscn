@@ -1,117 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://4e1jhi7ki3c2"]
+[gd_scene load_steps=6 format=3 uid="uid://4e1jhi7ki3c2"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_kfk70"]
 [ext_resource type="PackedScene" uid="uid://1kabel7jn7ti" path="res://scenes/projectiles/sharp_bolt.tscn" id="2_uve1q"]
 [ext_resource type="Texture2D" uid="uid://c4ibb42n6xcku" path="res://assets/towers/crossbow/00/stick.svg" id="3_qpmli"]
+[ext_resource type="AnimationLibrary" uid="uid://wmljv2t2bdbb" path="res://resources/animations/crossbow.res" id="3_uve1q"]
 [ext_resource type="Texture2D" uid="uid://b6se1oiaichxq" path="res://assets/towers/crossbow/02/Frame.svg" id="4_sja5i"]
-
-[sub_resource type="Animation" id="Animation_2l0pa"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/String:points")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [PackedVector2Array(32, -88, -100, 0, 32, 88)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot/StringPad:points")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [PackedVector2Array(-88, -8, -100, 0, -88, 8)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot/Polygon2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(24, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Pivot/Polygon2D:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_ldsdy"]
-resource_name = "fire"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/String:points")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.466667, 1),
-"transitions": PackedFloat32Array(1, 1, 0.8, 0.5),
-"update": 0,
-"values": [PackedVector2Array(32, -88, -100, 0, 32, 88), PackedVector2Array(32, -88, 32, 0, 32, 88), PackedVector2Array(32, -88, 32, 0, 32, 88), PackedVector2Array(32, -88, -100, 0, 32, 88)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot/StringPad:points")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.466667, 1),
-"transitions": PackedFloat32Array(1, 1, 0.8, 0.5),
-"update": 0,
-"values": [PackedVector2Array(-88, -8, -100, 0, -88, 8), PackedVector2Array(32, -8, 32, 0, 32, 8), PackedVector2Array(32, -8, 32, 0, 32, 8), PackedVector2Array(-88, -8, -100, 0, -88, 8)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot/Polygon2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.466667, 1),
-"transitions": PackedFloat32Array(0.8, 1),
-"update": 0,
-"values": [Vector2(148, 0), Vector2(20, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Pivot/Polygon2D:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.433333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kcqc"]
-_data = {
-&"RESET": SubResource("Animation_2l0pa"),
-&"fire": SubResource("Animation_ldsdy")
-}
 
 [node name="MutableData" instance=ExtResource("1_kfk70")]
 stats = Dictionary[StringName, Variant]({
@@ -128,7 +21,7 @@ stats = Dictionary[StringName, Variant]({
 
 [node name="Animations" type="AnimationPlayer" parent="." index="0"]
 libraries = {
-&"": SubResource("AnimationLibrary_2kcqc")
+&"": ExtResource("3_uve1q")
 }
 
 [node name="Pivot" type="Node2D" parent="." index="1"]

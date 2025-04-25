@@ -1,69 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://qf4tv4hnmxma"]
+[gd_scene load_steps=6 format=3 uid="uid://qf4tv4hnmxma"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_d21hr"]
 [ext_resource type="PackedScene" uid="uid://dv52w3ak7nc32" path="res://scenes/projectiles/bolt.tscn" id="2_d21hr"]
 [ext_resource type="Texture2D" uid="uid://c4ibb42n6xcku" path="res://assets/towers/crossbow/00/stick.svg" id="3_dqi5s"]
+[ext_resource type="AnimationLibrary" uid="uid://wmljv2t2bdbb" path="res://resources/animations/crossbow.res" id="3_olslw"]
 [ext_resource type="Texture2D" uid="uid://b6se1oiaichxq" path="res://assets/towers/crossbow/02/Frame.svg" id="4_xswd4"]
-
-[sub_resource type="Animation" id="Animation_2l0pa"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/Polygon2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(24, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot/Polygon2D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_ldsdy"]
-resource_name = "fire"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/Polygon2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.466667, 1),
-"transitions": PackedFloat32Array(0.8, 1),
-"update": 0,
-"values": [Vector2(148, 0), Vector2(20, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot/Polygon2D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.433333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kcqc"]
-_data = {
-&"RESET": SubResource("Animation_2l0pa"),
-&"fire": SubResource("Animation_ldsdy")
-}
 
 [node name="MutableData" instance=ExtResource("1_d21hr")]
 stats = Dictionary[StringName, Variant]({
@@ -80,7 +21,7 @@ stats = Dictionary[StringName, Variant]({
 
 [node name="Animations" type="AnimationPlayer" parent="." index="0"]
 libraries = {
-&"": SubResource("AnimationLibrary_2kcqc")
+&"crossbow": ExtResource("3_olslw")
 }
 
 [node name="Pivot" type="Node2D" parent="." index="1"]
