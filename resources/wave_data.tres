@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WaveData" load_steps=7 format=3 uid="uid://bje0j4gpndoyc"]
+[gd_resource type="Resource" script_class="WaveData" load_steps=8 format=3 uid="uid://bje0j4gpndoyc"]
 
 [ext_resource type="PackedScene" uid="uid://lvqv7e8j8dut" path="res://scenes/enemies/slow_car.tscn" id="1_66k7f"]
 [ext_resource type="Script" uid="uid://0cvalmpqh1pa" path="res://scripts/enemies/spawner/wave_data.gd" id="1_kgv4u"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://djwj4lx7m00c6" path="res://scenes/enemies/tank.tscn" id="3_m4j23"]
 [ext_resource type="PackedScene" uid="uid://cfp44shoe56gq" path="res://scenes/enemies/big_tank.tscn" id="4_qngl8"]
 [ext_resource type="PackedScene" uid="uid://j5wqcdx6y2ns" path="res://scenes/enemies/armored_car.tscn" id="5_s7hhm"]
+[ext_resource type="PackedScene" uid="uid://u3x6oqgr1f75" path="res://scenes/enemies/armored_fast_car.tscn" id="6_s7hhm"]
 
 [resource]
 script = ExtResource("1_kgv4u")
@@ -130,8 +131,83 @@ data = Array[Array]([[{
 &"time": 0.0,
 &"type": ExtResource("1_66k7f")
 }, {
-&"amount": 5,
+&"amount": 3,
 &"interval": 0.8,
 &"time": 13.0,
 &"type": ExtResource("5_s7hhm")
+}], [{
+&"amount": 10,
+&"interval": 1.5,
+&"time": 0.0,
+&"type": ExtResource("3_m4j23")
+}, {
+&"amount": 13,
+&"interval": 1.0,
+&"time": 1.0,
+&"type": ExtResource("2_mh3ks")
+}], [{
+&"amount": 15,
+&"interval": 1.5,
+&"time": 0.0,
+&"type": ExtResource("5_s7hhm")
+}, {
+&"amount": 15,
+&"interval": 1.5,
+&"time": 0.75,
+&"type": ExtResource("1_66k7f")
+}], [{
+&"amount": 5,
+&"interval": 0.75,
+&"time": 0.0,
+&"type": ExtResource("5_s7hhm")
+}, {
+&"amount": 6,
+&"interval": 0.75,
+&"time": 6.0,
+&"type": ExtResource("3_m4j23")
+}, {
+&"amount": 7,
+&"interval": 0.75,
+&"time": 13.0,
+&"type": ExtResource("5_s7hhm")
+}, {
+&"amount": 12,
+&"interval": 0.6,
+&"time": 20.0,
+&"type": ExtResource("2_mh3ks")
+}, {
+&"amount": 10,
+&"interval": 0.7,
+&"time": 28.0,
+&"type": ExtResource("5_s7hhm")
+}], [{
+&"amount": 15,
+&"interval": 0.7,
+&"time": 0.0,
+&"type": ExtResource("3_m4j23")
+}, {
+&"amount": 15,
+&"interval": 0.6,
+&"time": 2.0,
+&"type": ExtResource("5_s7hhm")
+}, {
+&"amount": 20,
+&"interval": 0.4,
+&"time": 3.0,
+&"type": ExtResource("2_mh3ks")
+}], [{
+&"amount": 15,
+&"interval": 0.6,
+&"time": 0.0,
+&"type": ExtResource("2_mh3ks")
+}, {
+&"amount": 2,
+&"interval": 1.2,
+&"time": 9.0,
+&"type": ExtResource("6_s7hhm")
+}], [{
+&"amount": 10,
+&"interval": 1.5,
+&"time": 0.0,
+&"type": ExtResource("6_s7hhm")
 }]])
