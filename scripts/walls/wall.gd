@@ -38,12 +38,16 @@ func set_display_valid() -> void: ## Changes the color to represent a valid plac
 
 func save() -> Dictionary[StringName, Variant]:
 	var save_dict: Dictionary[StringName, Variant] = {
-		"scene_path": scene_file_path,
-		"position": tile_position,
-		"vertical": vertical,
-		"health": stats.health,
+		scene_path = scene_file_path,
+		position = tile_position,
+		vertical = vertical,
+		health = stats.health,
 	}
 	return save_dict
+
+
+func load(data: Dictionary[StringName, Variant]) -> void:
+	stats.health = data.health
 
 
 func hit(damage: float) -> void:

@@ -93,9 +93,9 @@ func _save_game() -> void:
 	var save_file: FileAccess = _get_save_file(FileAccess.WRITE)
 
 	var game_data: Dictionary[StringName, Variant] = {
-		"money": money,
-		"lives": lives,
-		"wave": _spawner.wave,
+		money = money,
+		lives = lives,
+		wave = _spawner.wave,
 	}
 
 	save_file.store_var(game_data)
@@ -147,7 +147,7 @@ func _load_game() -> void:
 		var wall: Wall = wall_scene.instantiate()
 
 		_tile_controller.place_wall(wall_data.position, wall_data.vertical, wall)
-		wall.stats.health = wall_data.health
+		wall.load(wall_data)
 
 	_gui.load()
 	var towers: Array[Node] = get_tree().get_nodes_in_group("towers")
