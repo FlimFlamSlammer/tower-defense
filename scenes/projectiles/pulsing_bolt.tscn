@@ -170,6 +170,11 @@ wait_time = 0.07
 one_shot = true
 autostart = true
 
+[node name="ExpirationTimer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+autostart = true
+
 [node name="PulseBlastArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
@@ -237,3 +242,4 @@ process_material = SubResource("ParticleProcessMaterial_fcubg")
 [connection signal="area_entered" from="." to="." method="_on_collision"]
 [connection signal="timeout" from="PulseTimer" to="." method="_pulse"]
 [connection signal="timeout" from="ExitTower" to="." method="_set_z_index"]
+[connection signal="timeout" from="ExpirationTimer" to="." method="queue_free"]
