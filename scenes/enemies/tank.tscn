@@ -10,7 +10,7 @@ monitoring = false
 script = ExtResource("1_o2lwj")
 base_stats = Dictionary[StringName, Variant]({
 &"immunities": PackedInt64Array(1),
-&"max_health": 15.0,
+&"max_health": 18.0,
 &"speed": 1.0
 })
 metadata/_custom_type_script = "uid://csa5uq4xgsuff"

@@ -9,7 +9,7 @@ size = Vector2(192, 96)
 [node name="Enemy" instance=ExtResource("1_ar70y")]
 base_stats = Dictionary[StringName, Variant]({
 &"immunities": PackedInt64Array(),
-&"max_health": 12.0,
+&"max_health": 15.0,
 &"speed": 1.3
 })
 
