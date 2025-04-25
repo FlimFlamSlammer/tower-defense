@@ -80,9 +80,10 @@ func place() -> void:
 
 func save() -> Dictionary[StringName, Variant]:
 	var save_dict: Dictionary[StringName, Variant] = {
-		"scene_path": scene_file_path,
-		"position": tile_position,
-		"upgrade": current_upgrade,
+		scene_path = scene_file_path,
+		position = tile_position,
+		upgrade = current_upgrade,
+		targeting = targeting,
 	}
 	return save_dict
 
@@ -100,6 +101,8 @@ func load(data: Dictionary[StringName, Variant]) -> void:
 	_mutable_data = new_mutable_data
 	add_child.call_deferred(new_mutable_data)
 	update_status_effects.call_deferred()
+
+	targeting = data.targeting
 
 	_range_animations.play("RESET")
 
