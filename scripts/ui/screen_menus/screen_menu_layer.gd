@@ -6,6 +6,8 @@ signal resume_requested()
 
 const MAX_OPEN_SCREEN_MENUS = 64
 
+const _ALERT_SCENE: PackedScene = preload("res://scenes/ui/screen_menus/alert/alert.tscn")
+
 var menu_open: bool = false
 
 var _menu_stack: Array[ScreenMenu]
@@ -13,6 +15,8 @@ var _menu_stack: Array[ScreenMenu]
 @onready var _pause_menu: PauseMenu = $PauseMenu
 
 func _ready() -> void:
+	Events.alert_requested.connect(_create_alert)
+
 	var children: Array[Node] = get_children()
 	for child: Node in children:
 		var menu := child as ScreenMenu
@@ -21,6 +25,21 @@ func _ready() -> void:
 
 		menu.opened.connect(_push_menu.bind(menu))
 		menu.closed.connect(_close_menu.bind(menu))
+
+
+func _create_alert(text: String, options: Array, callables: Array) -> void:
+	var alert: Alert = _ALERT_SCENE.instantiate()
+	add_child(alert)
+
+	alert.opened.connect(_push_menu.bind(alert))
+	alert.closed.connect(_close_menu.bind(alert))
+
+	alert.text = text
+
+	for i: int in range(options.size()):
+		alert.add_option(options[i], callables[i])
+
+	alert.open()
 
 
 func _input(event: InputEvent) -> void:

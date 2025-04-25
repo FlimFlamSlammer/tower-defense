@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs2d24a8xk4jk"]
+
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="1_8jk80"]
+
+[node name="AlertButton" type="Button"]
+size_flags_horizontal = 3
+theme = ExtResource("1_8jk80")

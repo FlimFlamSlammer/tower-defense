@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm2qds006u8ar"]
+
+[ext_resource type="PackedScene" uid="uid://bkhifmreeavwq" path="res://scenes/ui/screen_menus/screen_menu.tscn" id="1_bv3uv"]
+[ext_resource type="Script" uid="uid://bwy50nt7j457g" path="res://scripts/ui/screen_menus/alert.gd" id="2_iv63e"]
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="2_p21ac"]
+[ext_resource type="StyleBox" uid="uid://baihiuteq2brc" path="res://resources/ui/panel_bg_outline.tres" id="3_36vpi"]
+
+[node name="Alert" instance=ExtResource("1_bv3uv")]
+visible = false
+script = ExtResource("2_iv63e")
+
+[node name="Menu" type="PanelContainer" parent="." index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -416.0
+offset_top = -128.0
+offset_right = 416.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_p21ac")
+theme_override_styles/panel = ExtResource("3_36vpi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu" index="0"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="Menu/VBoxContainer" index="0"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(496, 117)
+layout_mode = 2
+text = "
+"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Options" type="HBoxContainer" parent="Menu/VBoxContainer" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_p21ac")
+theme_override_constants/separation = 24

@@ -3,7 +3,6 @@ extends Node
 
 signal lives_changed(lives: int)
 signal money_changed(money: int)
-signal scene_change_requested(scene: PackedScene)
 
 @export var map_name: String = "valley"
 
@@ -156,8 +155,9 @@ func _load_game() -> void:
 
 
 func _reset_game() -> void:
+	print("hey")
 	DirAccess.remove_absolute(Globals.SAVE_PATH.path_join("save-%s" % map_name))
-	scene_change_requested.emit(load(scene_file_path))
+	SceneLoader.change_scene(load(scene_file_path))
 
 
 func _get_save_file(flags: int) -> FileAccess:

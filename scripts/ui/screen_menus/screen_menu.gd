@@ -12,7 +12,7 @@ func open() -> void:
 	show()
 
 	var tween: Tween = create_tween()
-	tween.tween_property(_backdrop, "self_modulate", Color(1, 1, 1, 1), 0.1)
+	tween.tween_property(_backdrop, "self_modulate", Color(1, 1, 1, 1), 0.07).set_ease(Tween.EASE_OUT)
 
 	opened.emit()
 
