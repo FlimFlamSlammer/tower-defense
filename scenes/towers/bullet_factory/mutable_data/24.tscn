@@ -8,7 +8,7 @@
 
 [node name="MutableData" instance=ExtResource("1_t7uor")]
 stats = Dictionary[StringName, Variant]({
-&"range": 3.0
+&"range": 1.5
 })
 
 [node name="StatusEffects" type="Node" parent="." index="0"]

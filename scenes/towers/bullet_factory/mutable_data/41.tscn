@@ -122,6 +122,21 @@ _data = {
 &"loop": SubResource("Animation_vg8pp")
 }
 
+[sub_resource type="Animation" id="Animation_1x6vy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmallGear:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_48cxd"]
 resource_name = "loop"
 length = 1.68
@@ -137,21 +152,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, -3.14159]
-}
-
-[sub_resource type="Animation" id="Animation_1x6vy"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SmallGear:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_medx1"]
@@ -193,7 +193,7 @@ color_ramp = SubResource("GradientTexture1D_k0fpx")
 
 [node name="MutableData" instance=ExtResource("1_6n0fx")]
 stats = Dictionary[StringName, Variant]({
-&"range": 3.0
+&"range": 1.5
 })
 
 [node name="Floor1" type="Sprite2D" parent="." index="0"]

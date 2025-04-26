@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ih35dt42cmc2"]
+[gd_scene load_steps=5 format=3 uid="uid://cw3vtbo6id2gn"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_i11kp"]
 [ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="2_0flfa"]
@@ -7,7 +7,7 @@
 
 [node name="MutableData" instance=ExtResource("1_i11kp")]
 stats = Dictionary[StringName, Variant]({
-&"range": 2.0
+&"range": 1.1
 })
 
 [node name="StatusEffects" type="Node" parent="." index="0"]

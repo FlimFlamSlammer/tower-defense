@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://fvqchod856gr"]
+[gd_scene load_steps=16 format=3 uid="uid://g60okjoxb3at"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_0dp5u"]
 [ext_resource type="Texture2D" uid="uid://cggemfs42jper" path="res://assets/towers/bullet_factory/31/floor1.svg" id="2_gtf7h"]
@@ -128,7 +128,7 @@ color_ramp = SubResource("GradientTexture1D_gtf7h")
 
 [node name="MutableData" instance=ExtResource("1_0dp5u")]
 stats = Dictionary[StringName, Variant]({
-&"range": 3.0
+&"range": 1.5
 })
 
 [node name="Floor1" type="Sprite2D" parent="." index="0"]

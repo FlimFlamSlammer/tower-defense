@@ -128,7 +128,7 @@ color_ramp = SubResource("GradientTexture1D_j8e21")
 
 [node name="MutableData" instance=ExtResource("1_n3c4q")]
 stats = Dictionary[StringName, Variant]({
-&"range": 3.0
+&"range": 1.5
 })
 
 [node name="Floor1" type="Sprite2D" parent="." index="0"]

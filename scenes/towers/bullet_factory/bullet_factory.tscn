@@ -10,7 +10,7 @@
 script = ExtResource("2_trb26")
 tower_name = &"Bullet Factory"
 targeting_options = Array[StringName]([])
-cost = 7500
+cost = 3000
 
 [node name="Efficient Manufacturing" type="Node" parent="Upgrades/Path0" index="0"]
 script = ExtResource("3_trb26")
