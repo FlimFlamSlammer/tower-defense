@@ -49,7 +49,7 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 [node name="Fuse Bolts" type="Node" parent="Upgrades/Path1" index="2"]
 script = ExtResource("4_tvbwh")
 description = "Bolts explode shortly after hitting a target."
-cost = 2500
+cost = 2700
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Pulsing Shots" type="Node" parent="Upgrades/Path1" index="3"]
