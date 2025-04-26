@@ -37,6 +37,7 @@ func _ready() -> void:
 
 	var map: TileMapLayer = map_scene.instantiate()
 	map.name = "TileMap"
+	map.z_index = -2048
 	_tile_controller.add_child(map)
 
 	_tile_controller.load_map()
