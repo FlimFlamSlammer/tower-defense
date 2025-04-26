@@ -4,7 +4,9 @@ extends Node
 signal lives_changed(lives: int)
 signal money_changed(money: int)
 
-@export var map_name: String = "valley"
+const _MAP_SCENE_DIR: String = "res://scenes/maps/"
+
+var map_name: String = "valley"
 
 var lives: int = 100:
 	set(val):
@@ -25,6 +27,21 @@ var money: int = 2000:
 @onready var _start_wave_button: Button = get_tree().get_nodes_in_group("start_wave_button")[-1]
 
 func _ready() -> void:
+	# initialize map scene
+	var map_scene_path: String = _MAP_SCENE_DIR.path_join("%s.tscn" % map_name)
+	var map_scene: PackedScene = load(map_scene_path)
+
+	if not map_scene:
+		print_debug("Map scene not found in path '%s'" % map_scene_path)
+		return
+
+	var map: TileMapLayer = map_scene.instantiate()
+	map.name = "TileMap"
+	_tile_controller.add_child(map)
+
+	_tile_controller.load_map()
+
+	# connect signals
 	_start_wave_button.pressed.connect(_spawner.start_wave)
 
 	_spawner.enemy_spawned.connect(func(enemy: Enemy) -> void:
@@ -155,9 +172,14 @@ func _load_game() -> void:
 
 
 func _reset_game() -> void:
-	print("hey")
 	DirAccess.remove_absolute(Globals.SAVE_PATH.path_join("save-%s" % map_name))
-	SceneLoader.change_scene(load(scene_file_path))
+	SceneLoader.change_scene(load(scene_file_path), func(game: GameProvider) -> void:
+		game.map_name = map_name
+	)
+
+
+func _exit_game() -> void:
+	SceneLoader.change_scene(load(Globals.MAIN_MENU_SCENE_PATH))
 
 
 func _get_save_file(flags: int) -> FileAccess:

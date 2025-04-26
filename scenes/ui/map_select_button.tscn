@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7m5kgc6hf4d3"]
+
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="1_komxi"]
+[ext_resource type="Script" uid="uid://b6mjfchjstx22" path="res://scripts/ui/map_select_button.gd" id="2_brndf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_komxi"]
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="MapButton" type="Button"]
+custom_minimum_size = Vector2(864, 576)
+offset_right = 864.0
+offset_bottom = 576.0
+theme = ExtResource("1_komxi")
+script = ExtResource("2_brndf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+clip_children = 1
+custom_minimum_size = Vector2(768, 432)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_komxi")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/PanelContainer/SubViewportContainer"]
+unique_name_in_owner = true
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(768, 432)
+render_target_update_mode = 4
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_komxi")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

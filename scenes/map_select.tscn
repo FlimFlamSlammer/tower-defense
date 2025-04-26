@@ -1,3 +1,84 @@
-[gd_scene format=3 uid="uid://jybxi5218eqs"]
+[gd_scene load_steps=11 format=3 uid="uid://jybxi5218eqs"]
+
+[ext_resource type="PackedScene" uid="uid://c7m5kgc6hf4d3" path="res://scenes/ui/map_select_button.tscn" id="1_h1ldm"]
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="1_nqqve"]
+[ext_resource type="PackedScene" uid="uid://dg1ogyl1ms81f" path="res://scenes/maps/valley.tscn" id="3_5q6ap"]
+[ext_resource type="PackedScene" uid="uid://ceo7jtlkbl363" path="res://scenes/maps/island.tscn" id="4_1m77x"]
+[ext_resource type="PackedScene" uid="uid://bfpd5bv47yei4" path="res://scenes/maps/ruins.tscn" id="5_2x4ji"]
+[ext_resource type="PackedScene" uid="uid://bceij8l1pgkug" path="res://scenes/maps/duality.tscn" id="6_sslow"]
+[ext_resource type="PackedScene" uid="uid://bp5bvbladtmod" path="res://scenes/maps/field.tscn" id="7_nuel7"]
+
+[sub_resource type="Gradient" id="Gradient_5q6ap"]
+colors = PackedColorArray(0.23, 0.23, 0.23, 1, 0.13, 0.13, 0.13, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1m77x"]
+gradient = SubResource("Gradient_5q6ap")
+fill = 1
+fill_from = Vector2(0.484848, 0.493506)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2x4ji"]
+texture = SubResource("GradientTexture2D_1m77x")
 
 [node name="MapSelect" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2x4ji")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1344.0
+offset_top = -600.0
+offset_right = 1344.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_nqqve")
+theme_override_constants/h_separation = 48
+theme_override_constants/v_separation = 48
+
+[node name="Valley" parent="CanvasLayer/Control/HFlowContainer" instance=ExtResource("1_h1ldm")]
+layout_mode = 2
+map_name = "valley"
+tile_map_scene = ExtResource("3_5q6ap")
+
+[node name="Island" parent="CanvasLayer/Control/HFlowContainer" instance=ExtResource("1_h1ldm")]
+layout_mode = 2
+map_name = "island"
+tile_map_scene = ExtResource("4_1m77x")
+
+[node name="Ruins" parent="CanvasLayer/Control/HFlowContainer" instance=ExtResource("1_h1ldm")]
+layout_mode = 2
+map_name = "ruins"
+tile_map_scene = ExtResource("5_2x4ji")
+
+[node name="Duality" parent="CanvasLayer/Control/HFlowContainer" instance=ExtResource("1_h1ldm")]
+layout_mode = 2
+map_name = "duality"
+tile_map_scene = ExtResource("6_sslow")
+
+[node name="Field" parent="CanvasLayer/Control/HFlowContainer" instance=ExtResource("1_h1ldm")]
+layout_mode = 2
+map_name = "field"
+tile_map_scene = ExtResource("7_nuel7")

@@ -161,11 +161,6 @@ offset_bottom = 384.0
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Button2" type="Button" parent="."]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-
 [connection signal="pressed" from="TowerMenuButton" to="." method="_on_tower_menu_button_pressed"]
 
 [editable path="TopBar/LivesDisplay"]

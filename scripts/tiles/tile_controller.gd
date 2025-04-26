@@ -1,11 +1,13 @@
 class_name TileController
-extends TileMapLayer
+extends Node
 
 const EXPECTED_ENEMY_SPEED: float = 1.2 ## Assumption of enemy speed, used for pathfinding.
 
 @export var first_tile: Vector2i
 @export var last_tile: Vector2i
 @export var arrow_tile_map: TileMapLayer
+
+var tile_map: TileMapLayer
 
 var start_tile: Vector2i
 var finish_tile: Vector2i
@@ -15,8 +17,10 @@ var _updated_immunities: Dictionary[Array, bool]
 @onready var tiles := TileMatrix.new(first_tile, last_tile)
 @onready var wall_tile_map: TileMapLayer = $WallMap
 
-func _ready() -> void:
-	var map_data: Dictionary[StringName, Variant] = tiles.load_map(self)
+func load_map() -> void:
+	tile_map = get_node("TileMap")
+	print(tile_map)
+	var map_data: Dictionary[StringName, Variant] = tiles.load_map(tile_map)
 	start_tile = map_data.start
 	finish_tile = map_data.finish
 
@@ -101,7 +105,7 @@ func get_wall_between(origin: Vector2i, target: Vector2i) -> Wall:
 ## [/codeblock]
 ## where [code]pos[/code] is the tile position of a [Wall] based on the mouse position and [code]vertical[/code] is the orientation of the [Wall].
 func get_wall_pos_from_mouse() -> Dictionary[StringName, Variant]:
-	var map_pos: Vector2i = wall_tile_map.local_to_map(get_local_mouse_position())
+	var map_pos: Vector2i = wall_tile_map.local_to_map(tile_map.get_local_mouse_position())
 	var wall_pos: Vector2i = Vector2i(map_pos.x, map_pos.y / 2)
 	var vertical: bool = not (map_pos.y % 2)
 
@@ -127,7 +131,7 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 		tower.reparent(self);
 	else:
 		add_child(tower)
-		
+
 	tower.tile_controller = self
 	tower.tile_position = pos
 	tile.tower = tower
@@ -203,13 +207,14 @@ func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 		tile.distance_from_finish = data[2]
 
 		# Debug arrows
-		var atlas_coords: Dictionary[Vector2i, Vector2i]
-		atlas_coords[Vector2i.ZERO] = Vector2i(0, 0)
-		atlas_coords[Vector2i.LEFT] = Vector2i(0, 0)
-		atlas_coords[Vector2i.DOWN] = Vector2i(1, 0)
-		atlas_coords[Vector2i.RIGHT] = Vector2i(2, 0)
-		atlas_coords[Vector2i.UP] = Vector2i(3, 0)
-		arrow_tile_map.set_cell(data[0], 0, atlas_coords[data[0] - data[3]])
+		if is_instance_valid(arrow_tile_map):
+			var atlas_coords: Dictionary[Vector2i, Vector2i]
+			atlas_coords[Vector2i.ZERO] = Vector2i(0, 0)
+			atlas_coords[Vector2i.LEFT] = Vector2i(0, 0)
+			atlas_coords[Vector2i.DOWN] = Vector2i(1, 0)
+			atlas_coords[Vector2i.RIGHT] = Vector2i(2, 0)
+			atlas_coords[Vector2i.UP] = Vector2i(3, 0)
+			arrow_tile_map.set_cell(data[0], 0, atlas_coords[data[0] - data[3]])
 
 		_push_pathfinding_data(pq, data, Vector2i.UP)
 		_push_pathfinding_data(pq, data, Vector2i.DOWN)

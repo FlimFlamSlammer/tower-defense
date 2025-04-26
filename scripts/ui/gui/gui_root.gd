@@ -46,7 +46,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if is_placing:
 		if selected_tower:
-			var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
+			var pos: Vector2i = _tile_controller.tile_map.local_to_map(_tile_controller.get_local_mouse_position())
 
 			if pos != placing_previous_position:
 				placing_previous_position = pos
@@ -118,8 +118,7 @@ func _place_selected_tower() -> void:
 	money_requested.emit(selected_tower.cost, false, func(success: bool) -> void:
 		if not success: return
 
-		var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
-		if _tile_controller.place_tower(pos, selected_tower):
+		if _tile_controller.place_tower(placing_previous_position, selected_tower):
 			money_requested.emit(selected_tower.cost, true, Utils.null_callable)
 			tower_placed.emit(selected_tower)
 			selected_tower.tower_clicked.connect(_select_tower.bind(selected_tower))

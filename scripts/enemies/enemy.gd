@@ -11,8 +11,8 @@ signal died()
 @export var base_stats: Dictionary[StringName, Variant]
 @export var initial_health_ratio: float = 1.0
 
-var cur_tile := Vector2i(-1, 2)
-var next_tile := Vector2i(0, 2)
+var cur_tile: Vector2i
+var next_tile: Vector2i
 var progress: float
 var stats: Dictionary[StringName, Variant]
 var tile_controller: TileController
@@ -23,6 +23,12 @@ func _ready() -> void:
 	base_stats.resistance = 1.0
 	stats = base_stats.duplicate()
 	stats.health = initial_health_ratio * stats.max_health
+
+	cur_tile = tile_controller.start_tile
+	path_data_requested.emit(stats.immunities, cur_tile, func(tile: PathTile) -> void:
+		next_tile = tile.next_path[stats.immunities as Array[Globals.DamageTypes]]
+		rotation = Vector2(cur_tile).angle_to_point(next_tile)
+	)
 
 
 func _process(delta: float) -> void:
@@ -50,8 +56,8 @@ func _process(delta: float) -> void:
 			_rotate()
 		)
 
-	var cur_tile_position: Vector2 = tile_controller.map_to_local(cur_tile)
-	var next_tile_position: Vector2 = tile_controller.map_to_local(next_tile)
+	var cur_tile_position: Vector2 = tile_controller.tile_map.map_to_local(cur_tile)
+	var next_tile_position: Vector2 = tile_controller.tile_map.map_to_local(next_tile)
 	position = lerp(cur_tile_position, next_tile_position, progress)
 
 
@@ -110,7 +116,7 @@ func get_distance_from_finish() -> float:
 
 
 func _rotate() -> void:
-	var new_rotation: float = lerp_angle(rotation, Vector2(cur_tile).angle_to_point(next_tile), 1.0)
+	var new_rotation: float = Vector2(cur_tile).angle_to_point(next_tile)
 	create_tween().tween_property(self, "rotation", new_rotation, 0.15 / stats.speed * absf(new_rotation - rotation))
 
 

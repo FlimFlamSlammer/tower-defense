@@ -16,8 +16,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_restart_button_pressed() -> void:
-	Events.alert_requested.emit("Restart this game?\n(All progress in this game will be lost)", ["Cancel", "Restart"], [ func() -> void: , restart_requested.emit])
+	Events.alert_requested.emit("Restart the game?\n(All progress in this game will be lost)", ["Cancel", "Restart"], [ func() -> void: , restart_requested.emit])
 
 
 func _on_exit_button_pressed() -> void:
-	exit_requested.emit()
+	Events.alert_requested.emit("Exit the game?\n(Progress will be saved)", ["Cancel", "Exit"], [ func() -> void: , exit_requested.emit])

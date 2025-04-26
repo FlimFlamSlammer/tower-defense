@@ -32,7 +32,7 @@ var tile_controller: TileController
 var tile_position: Vector2i:
 	set(val):
 		tile_position = val
-		position = tile_controller.map_to_local(val)
+		position = tile_controller.tile_map.map_to_local(val)
 
 var targeting: StringName = Targeting.FIRST ## The targeting option that the Tower is currently using.
 var current_upgrade: Array[int] = [0, 0]

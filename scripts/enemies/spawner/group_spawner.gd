@@ -17,7 +17,7 @@ func _spawn_enemy() -> void:
 	var spawner := get_parent() as Spawner
 	var enemy: Enemy = group_data.type.instantiate()
 	enemy.cur_tile = spawner.tile_controller.start_tile
-	enemy.position = spawner.tile_controller.map_to_local(enemy.cur_tile)
+	enemy.position = spawner.tile_controller.tile_map.map_to_local(enemy.cur_tile)
 	enemy.tile_controller = spawner.tile_controller
 	enemy_spawned.emit(enemy)
 	spawner.add_sibling(enemy)
