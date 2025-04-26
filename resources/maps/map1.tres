@@ -1,0 +1,23 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dguoagbsx5s5f"]
+
+[ext_resource type="Texture2D" uid="uid://dakxh7a0v4e5l" path="res://assets/tiles/map1/tile.svg" id="1_m84n2"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sj0o3"]
+texture = ExtResource("1_m84n2")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+0:0/0/custom_data_0 = "tower"
+1:0/0 = 0
+1:0/0/custom_data_0 = "path"
+2:0/0 = 0
+2:0/0/custom_data_0 = "barrier"
+3:0/0 = 0
+3:0/0/custom_data_0 = "start"
+4:0/0 = 0
+4:0/0/custom_data_0 = "finish"
+
+[resource]
+tile_size = Vector2i(256, 256)
+custom_data_layer_0/name = "type"
+custom_data_layer_0/type = 4
+sources/0 = SubResource("TileSetAtlasSource_sj0o3")
