@@ -21,7 +21,7 @@ stats = Dictionary[StringName, Variant]({
 
 [node name="Animations" type="AnimationPlayer" parent="." index="0"]
 libraries = {
-&"crossbow": ExtResource("3_olslw")
+&"": ExtResource("3_olslw")
 }
 
 [node name="Pivot" type="Node2D" parent="." index="1"]
