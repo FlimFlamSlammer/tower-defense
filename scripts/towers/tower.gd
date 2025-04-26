@@ -124,7 +124,7 @@ func sell() -> void:
 	if "sell_value" in stats:
 		sell_value *= stats.sell_value
 
-	money_requested.emit(-cost * sell_value, true, func(__: bool) -> void: )
+	money_requested.emit(-cost * sell_value, true, Utils.null_callable)
 
 	queue_free()
 	tower_sold.emit()
@@ -184,7 +184,7 @@ func remove_status_effect(id: StringName, p_update: bool = true) -> void:
 
 
 ## Upgrades the tower by one tier on the specified path. Param cb is called when the upgrade finishes, and has a boolean parameter that stores whether the upgrade was successful.
-func upgrade_tower(path: int, cb: Callable = func(__: bool) -> void: ) -> void:
+func upgrade_tower(path: int, cb: Callable = Utils.null_callable) -> void:
 	var tier: int = current_upgrade[path] + 1
 	var upgrade: Upgrade = upgrades.get_upgrade(path, tier)
 

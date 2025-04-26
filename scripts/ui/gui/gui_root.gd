@@ -120,7 +120,7 @@ func _place_selected_tower() -> void:
 
 		var pos: Vector2i = _tile_controller.local_to_map(_tile_controller.get_local_mouse_position())
 		if _tile_controller.place_tower(pos, selected_tower):
-			money_requested.emit(selected_tower.cost, true, func(__: bool) -> void: )
+			money_requested.emit(selected_tower.cost, true, Utils.null_callable)
 			tower_placed.emit(selected_tower)
 			selected_tower.tower_clicked.connect(_select_tower.bind(selected_tower))
 			is_placing = false
@@ -136,7 +136,7 @@ func _place_selected_wall() -> void:
 		var pos: Dictionary[StringName, Variant] = _tile_controller.get_wall_pos_from_mouse()
 
 		if _tile_controller.place_wall(pos.pos, pos.vertical, selected_wall):
-			money_requested.emit(selected_wall.cost, true, func(__: bool) -> void: )
+			money_requested.emit(selected_wall.cost, true, Utils.null_callable)
 			wall_placed.emit(selected_wall)
 			is_placing = false
 			_tower_menu.open()
