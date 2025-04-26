@@ -11,12 +11,12 @@ stats = Dictionary[StringName, Variant]({
 &"attack_cost": 10,
 &"damage": 12.0,
 &"damage_type": 2,
-&"fire_rate": 0.6,
-&"pierce": 5,
+&"fire_rate": 0.55,
+&"pierce": 4,
 &"projectile": ExtResource("2_7dkew"),
 &"projectile_offset": Vector2(30, 0),
 &"projectile_speed": 5250.0,
-&"range": 3.5
+&"range": 2.5
 })
 
 [node name="Animations" type="AnimationPlayer" parent="." index="0"]
