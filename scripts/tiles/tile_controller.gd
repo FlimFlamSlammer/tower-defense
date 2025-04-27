@@ -201,8 +201,9 @@ func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 		var data: Array = pq.top()
 		pq.pop()
 
+		var tile: PathTile = tiles.get_tile(data[0])
+
 		if data[0] in visited:
-			var tile: PathTile = tiles.get_tile(data[0])
 			var next_tile: PathTile = tiles.get_tile(data[3])
 
 			if data[1] == tile.danger_level_to_finish[immunities] and data[2] == tile.distance_to_finish[immunities]:
@@ -217,8 +218,6 @@ func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 			continue
 
 		visited[data[0]] = true
-
-		var tile: PathTile = tiles.get_tile(data[0])
 		tile.next_paths[immunities] = [data[3]] as Array[Vector2i]
 		tile.alternative_next_paths[immunities] = [] as Array[Vector2i]
 		tile.danger_level_to_finish[immunities] = data[1]
