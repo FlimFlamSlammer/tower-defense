@@ -15,42 +15,42 @@ cost = 3000
 [node name="Efficient Manufacturing" type="Node" parent="Upgrades/Path0" index="0"]
 script = ExtResource("3_trb26")
 description = "Reduces bullet price."
-cost = 2000
+cost = 1500
 
 [node name="Improved Coverage" type="Node" parent="Upgrades/Path0" index="1"]
 script = ExtResource("3_trb26")
 description = "Increases range."
-cost = 2500
+cost = 3000
 
 [node name="Big Factory" type="Node" parent="Upgrades/Path0" index="2"]
 script = ExtResource("3_trb26")
 description = "Reduces bullet prices significantly, at the cost of pollution."
-cost = 10000
+cost = 5500
 
 [node name="The Showstopper" type="Node" parent="Upgrades/Path0" index="3"]
 script = ExtResource("3_trb26")
 description = "Bullets briefly slow down hit enemies."
-cost = 25000
+cost = 15000
 
 [node name="Titanium Bullets" type="Node" parent="Upgrades/Path1" index="0"]
 script = ExtResource("3_trb26")
 description = "Slightly increases bullet damage."
-cost = 3000
+cost = 1500
 
 [node name="Armor Piercing Bullets" type="Node" parent="Upgrades/Path1" index="1"]
 script = ExtResource("3_trb26")
 description = "Bullets deal 10% more damage. This damage ignores enemy immunity."
-cost = 5000
+cost = 1800
 
 [node name="Energy Bullets" type="Node" parent="Upgrades/Path1" index="2"]
 script = ExtResource("3_trb26")
 description = "Replaces armor piercing bullets with plasma-powered bullets that deal 20% more damage."
-cost = 12000
+cost = 6000
 
 [node name="Molten Core" type="Node" parent="Upgrades/Path1" index="3"]
 script = ExtResource("3_trb26")
 description = "Superheated bullets melt enemy defenses."
-cost = 60000
+cost = 15000
 
 [node name="Base" parent="." index="3"]
 texture = ExtResource("4_x8q53")
