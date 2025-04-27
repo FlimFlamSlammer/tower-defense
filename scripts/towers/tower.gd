@@ -105,10 +105,10 @@ func load(data: Dictionary[StringName, Variant]) -> void:
 	add_child.call_deferred(new_mutable_data)
 	update_status_effects.call_deferred()
 
+	_range_animations.play("RESET")
+
 	targeting = data.targeting
 	cost = data.cost
-
-	_range_animations.play("RESET")
 
 
 ## Marks the tower as selected, showing its range circle.
