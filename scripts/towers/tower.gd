@@ -207,6 +207,8 @@ func upgrade_tower(path: int, cb: Callable = Utils.null_callable) -> void:
 		_mutable_data = new_mutable_data
 		add_child.call_deferred(new_mutable_data)
 		update_status_effects.call_deferred()
+
+		cost += upgrade.cost
 	)
 
 

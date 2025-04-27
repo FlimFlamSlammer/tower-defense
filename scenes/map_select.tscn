@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://jybxi5218eqs"]
+[gd_scene load_steps=12 format=3 uid="uid://jybxi5218eqs"]
 
 [ext_resource type="PackedScene" uid="uid://c7m5kgc6hf4d3" path="res://scenes/ui/map_select_button.tscn" id="1_h1ldm"]
 [ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="1_nqqve"]
@@ -18,6 +18,9 @@ fill_from = Vector2(0.484848, 0.493506)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2x4ji"]
 texture = SubResource("GradientTexture2D_1m77x")
+
+[sub_resource type="LabelSettings" id="LabelSettings_nuel7"]
+font_size = 192
 
 [node name="MapSelect" type="Node2D"]
 
@@ -82,3 +85,17 @@ tile_map_scene = ExtResource("6_sslow")
 layout_mode = 2
 map_name = "field"
 tile_map_scene = ExtResource("7_nuel7")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -504.5
+offset_top = 224.0
+offset_right = 504.5
+offset_bottom = 487.0
+grow_horizontal = 2
+theme = ExtResource("1_nqqve")
+text = "Maps"
+label_settings = SubResource("LabelSettings_nuel7")
+horizontal_alignment = 1

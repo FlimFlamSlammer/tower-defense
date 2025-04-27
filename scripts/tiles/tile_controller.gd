@@ -2,6 +2,8 @@ class_name TileController
 extends Node
 
 const EXPECTED_ENEMY_SPEED: float = 1.2 ## Assumption of enemy speed, used for pathfinding.
+const ALTERNATIVE_PATH_DANGER_LEVEL_TRESHOLD: float = 2.0 ## Maximum danger level relative to optimal danger level for an alternative path to be considered.
+const ALTERNATIVE_PATH_DISTANCE_TRESHOLD: float = 1.2 ## Maximum distance level relative to optimal distance for an alternative path to be considered.
 
 @export var first_tile: Vector2i
 @export var last_tile: Vector2i
@@ -186,25 +188,36 @@ func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 
 	var visited: Dictionary[Vector2i, bool]
 	var pq := PriorityQueue.new(
-		func compare(a: Array, b: Array) -> bool:
+		func(a: Array, b: Array) -> bool:
 			if a[1] == b[1]:
 				return a[2] > b[2]
 			return a[1] > b[1]
 	)
 	pq.push([finish_tile, 0, 0, finish_tile])
 	# data format:
-	# [tile, danger level, distance from exit]
+	# [tile, danger level from finish, distance from finish, next tile]
 
 	while pq.size():
 		var data: Array = pq.top()
 		pq.pop()
 
-		if data[0] in visited: continue
+		if data[0] in visited:
+			var tile: PathTile = tiles.get_tile(data[0])
+			if data[1] <= tile.danger_level_to_finish[immunities] * ALTERNATIVE_PATH_DANGER_LEVEL_TRESHOLD \
+					and data[2] <= tile.distance_to_finish[immunities] * ALTERNATIVE_PATH_DISTANCE_TRESHOLD \
+					and (tiles.get_tile(data[3]) as PathTile).next_path[immunities] != data[0] \
+					and fmod(Vector2(data[3]).angle_to_point(tile.next_path[immunities]), PI / 2) != 0.0:
+				tile.alternative_next_paths[immunities].push_back(data[3])
+				print(tile.alternative_next_paths[immunities])
+			continue
+
 		visited[data[0]] = true
 
 		var tile: PathTile = tiles.get_tile(data[0])
 		tile.next_path[immunities] = data[3]
-		tile.distance_from_finish = data[2]
+		tile.alternative_next_paths[immunities] = [] as Array[Vector2i]
+		tile.distance_to_finish[immunities] = data[2]
+		tile.danger_level_to_finish[immunities] = data[1]
 
 		# Debug arrows
 		if is_instance_valid(arrow_tile_map):

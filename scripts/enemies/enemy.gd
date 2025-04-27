@@ -3,6 +3,8 @@ extends Area2D
 
 const WALL_CHECK_PROGRESS_MIN = 0.2
 const WALL_CHECK_PROGRESS_MAX = 0.7
+const DEVIATION_CHANCE = 0.35 ## Chance to use an alternative next path instead of the main path.
+const MAX_DEVIATIONS = 3
 
 signal leaked(health: float)
 signal path_data_requested(immunities: Array[Globals.DamageTypes], cb: Callable)
@@ -18,6 +20,7 @@ var stats: Dictionary[StringName, Variant]
 var tile_controller: TileController
 
 var _status_effects: Dictionary[StringName, EnemyStatusEffect]
+var _deviations: int = 0;
 
 func _ready() -> void:
 	base_stats.resistance = 1.0
@@ -48,7 +51,13 @@ func _process(delta: float) -> void:
 
 		path_data_requested.emit(stats.immunities, next_tile, func(tile: PathTile) -> void:
 			cur_tile = next_tile
-			next_tile = tile.next_path[stats.immunities as Array[Globals.DamageTypes]]
+
+			var alternative_paths: Array[Vector2i] = tile.alternative_next_paths[stats.immunities as Array[Globals.DamageTypes]]
+			if _deviations < MAX_DEVIATIONS and not alternative_paths.is_empty() and randf() < DEVIATION_CHANCE:
+				_deviations += 1
+				next_tile = alternative_paths[randi() % alternative_paths.size()]
+			else:
+				next_tile = tile.next_path[stats.immunities as Array[Globals.DamageTypes]]
 
 			if progress > WALL_CHECK_PROGRESS_MIN:
 				_check_wall()
@@ -56,9 +65,9 @@ func _process(delta: float) -> void:
 			_rotate()
 		)
 
-	var cur_tile_position: Vector2 = tile_controller.tile_map.map_to_local(cur_tile)
-	var next_tile_position: Vector2 = tile_controller.tile_map.map_to_local(next_tile)
-	position = lerp(cur_tile_position, next_tile_position, progress)
+	var cur_tile_local_position: Vector2 = tile_controller.tile_map.map_to_local(cur_tile)
+	var next_tile_local_position: Vector2 = tile_controller.tile_map.map_to_local(next_tile)
+	position = lerp(cur_tile_local_position, next_tile_local_position, progress)
 
 
 func hit(damage: float, type: Globals.DamageTypes) -> bool:
@@ -109,8 +118,8 @@ func get_distance_from_finish() -> float:
 	var cur_tile_ref := tile_controller.tiles.get_tile(cur_tile) as PathTile
 	var next_tile_ref := tile_controller.tiles.get_tile(next_tile) as PathTile
 
-	var cur_tile_dist: int = cur_tile_ref.distance_from_finish
-	var next_tile_dist: int = next_tile_ref.distance_from_finish
+	var cur_tile_dist: int = cur_tile_ref.distance_to_finish[stats.immunities as Array[Globals.DamageTypes]]
+	var next_tile_dist: int = next_tile_ref.distance_to_finish[stats.immunities as Array[Globals.DamageTypes]]
 
 	return cur_tile_dist * (1 - progress) + next_tile_dist * progress
 
