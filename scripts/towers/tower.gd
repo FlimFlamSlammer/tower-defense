@@ -86,6 +86,7 @@ func save() -> Dictionary[StringName, Variant]:
 		position = tile_position,
 		upgrade = current_upgrade,
 		targeting = targeting,
+		cost = cost,
 	}
 	return save_dict
 
@@ -105,6 +106,7 @@ func load(data: Dictionary[StringName, Variant]) -> void:
 	update_status_effects.call_deferred()
 
 	targeting = data.targeting
+	cost = data.cost
 
 	_range_animations.play("RESET")
 

@@ -29,7 +29,8 @@ func _ready() -> void:
 
 	cur_tile = tile_controller.start_tile
 	path_data_requested.emit(stats.immunities, cur_tile, func(tile: PathTile) -> void:
-		next_tile = tile.next_paths[stats.immunities as Array[Globals.DamageTypes]][randi() % tile.next_paths.size()]
+		var next_paths: Array[Vector2i] = tile.next_paths[stats.immunities as Array[Globals.DamageTypes]]
+		next_tile = next_paths[randi() % next_paths.size()]
 		rotation = Vector2(cur_tile).angle_to_point(next_tile)
 	)
 
