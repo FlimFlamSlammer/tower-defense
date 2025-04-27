@@ -177,7 +177,7 @@ func _clear_pathfinding_data() -> void:
 			if not tile:
 				continue
 
-			tile.next_path.clear()
+			tile.next_paths.clear()
 
 	_updated_immunities.clear()
 
@@ -195,7 +195,7 @@ func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 	)
 	pq.push([finish_tile, 0, 0, finish_tile])
 	# data format:
-	# [tile, danger level from finish, distance from finish, next tile]
+	# [tile, danger level to finish, distance from finish, next tile]
 
 	while pq.size():
 		var data: Array = pq.top()
@@ -203,21 +203,26 @@ func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 
 		if data[0] in visited:
 			var tile: PathTile = tiles.get_tile(data[0])
-			if data[1] <= tile.danger_level_to_finish[immunities] * ALTERNATIVE_PATH_DANGER_LEVEL_TRESHOLD \
+			var next_tile: PathTile = tiles.get_tile(data[3])
+
+			if data[1] == tile.danger_level_to_finish[immunities] and data[2] == tile.distance_to_finish[immunities]:
+					tile.next_paths[immunities].push_back(data[3])
+
+			elif data[1] <= tile.danger_level_to_finish[immunities] * ALTERNATIVE_PATH_DANGER_LEVEL_TRESHOLD \
 					and data[2] <= tile.distance_to_finish[immunities] * ALTERNATIVE_PATH_DISTANCE_TRESHOLD \
-					and (tiles.get_tile(data[3]) as PathTile).next_path[immunities] != data[0] \
-					and fmod(Vector2(data[3]).angle_to_point(tile.next_path[immunities]), PI / 2) != 0.0:
+					and (next_tile.next_paths.size() > 1 \
+					or (next_tile.next_paths[immunities][0] != data[0] \
+					and fmod(Vector2(data[3]).angle_to_point(tile.next_paths[immunities][0]), PI / 2) != 0.0)):
 				tile.alternative_next_paths[immunities].push_back(data[3])
-				print(tile.alternative_next_paths[immunities])
 			continue
 
 		visited[data[0]] = true
 
 		var tile: PathTile = tiles.get_tile(data[0])
-		tile.next_path[immunities] = data[3]
+		tile.next_paths[immunities] = [data[3]] as Array[Vector2i]
 		tile.alternative_next_paths[immunities] = [] as Array[Vector2i]
-		tile.distance_to_finish[immunities] = data[2]
 		tile.danger_level_to_finish[immunities] = data[1]
+		tile.distance_to_finish[immunities] = data[2]
 
 		# Debug arrows
 		if is_instance_valid(arrow_tile_map):

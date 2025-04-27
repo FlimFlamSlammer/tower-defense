@@ -3,8 +3,8 @@ extends Area2D
 
 const WALL_CHECK_PROGRESS_MIN = 0.2
 const WALL_CHECK_PROGRESS_MAX = 0.7
-const DEVIATION_CHANCE = 0.35 ## Chance to use an alternative next path instead of the main path.
-const MAX_DEVIATIONS = 3
+const DEVIATION_CHANCE = 0.3 ## Chance to use an alternative next path instead of the main path.
+const MIN_TILES_FROM_LAST_DEVIATION = 1 ## Minimum tiles moved from last deviation before able to deviate again.
 
 signal leaked(health: float)
 signal path_data_requested(immunities: Array[Globals.DamageTypes], cb: Callable)
@@ -20,7 +20,7 @@ var stats: Dictionary[StringName, Variant]
 var tile_controller: TileController
 
 var _status_effects: Dictionary[StringName, EnemyStatusEffect]
-var _deviations: int = 0;
+var _tiles_from_last_deviation: int = 4096
 
 func _ready() -> void:
 	base_stats.resistance = 1.0
@@ -29,7 +29,7 @@ func _ready() -> void:
 
 	cur_tile = tile_controller.start_tile
 	path_data_requested.emit(stats.immunities, cur_tile, func(tile: PathTile) -> void:
-		next_tile = tile.next_path[stats.immunities as Array[Globals.DamageTypes]]
+		next_tile = tile.next_paths[stats.immunities as Array[Globals.DamageTypes]][randi() % tile.next_paths.size()]
 		rotation = Vector2(cur_tile).angle_to_point(next_tile)
 	)
 
@@ -50,14 +50,27 @@ func _process(delta: float) -> void:
 				return
 
 		path_data_requested.emit(stats.immunities, next_tile, func(tile: PathTile) -> void:
+			var previous_tile: Vector2i = cur_tile
 			cur_tile = next_tile
 
+			var next_paths: Array[Vector2i] = tile.next_paths[stats.immunities as Array[Globals.DamageTypes]]
 			var alternative_paths: Array[Vector2i] = tile.alternative_next_paths[stats.immunities as Array[Globals.DamageTypes]]
-			if _deviations < MAX_DEVIATIONS and not alternative_paths.is_empty() and randf() < DEVIATION_CHANCE:
-				_deviations += 1
-				next_tile = alternative_paths[randi() % alternative_paths.size()]
+			if not alternative_paths.is_empty() \
+					and randf() < DEVIATION_CHANCE \
+					and _tiles_from_last_deviation >= MIN_TILES_FROM_LAST_DEVIATION:
+				_tiles_from_last_deviation = 0
+				var idx: int = randi() % alternative_paths.size()
+				next_tile = alternative_paths[idx]
+				if next_tile == previous_tile and alternative_paths.size() > 1:
+					idx += randi() % alternative_paths.size() - 1
+					next_tile = alternative_paths[idx]
 			else:
-				next_tile = tile.next_path[stats.immunities as Array[Globals.DamageTypes]]
+				var idx: int = randi() % next_paths.size()
+				next_tile = next_paths[idx]
+				if next_tile == previous_tile and next_paths.size() > 1:
+					idx += randi() % next_paths.size() - 1
+					next_tile = next_paths[idx]
+
 
 			if progress > WALL_CHECK_PROGRESS_MIN:
 				_check_wall()
