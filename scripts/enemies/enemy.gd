@@ -128,6 +128,7 @@ func _advance_path(tile: PathTile) -> void:
 	var does_alternative_path_go_back: bool = alternative_paths.size() == 1 and alternative_paths[0] == previous_tile
 
 	if not alternative_paths.is_empty() \
+			and next_paths.size() == 1 \
 			and not does_alternative_path_go_back \
 			and (randf() < DEVIATION_CHANCE or does_next_path_go_back) \
 			and _tiles_from_last_deviation >= MIN_TILES_FROM_LAST_DEVIATION:
@@ -135,7 +136,8 @@ func _advance_path(tile: PathTile) -> void:
 		var idx: int = randi() % alternative_paths.size()
 		next_tile = alternative_paths[idx]
 		if next_tile == previous_tile and alternative_paths.size() > 1:
-			idx += randi() % alternative_paths.size() - 1
+			#idx += randi() % alternative_paths.size() - 1
+			idx += 1
 			idx %= alternative_paths.size()
 			next_tile = alternative_paths[idx]
 	else:

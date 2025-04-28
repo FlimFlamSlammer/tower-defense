@@ -211,9 +211,9 @@ func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 
 			elif data[1] <= tile.danger_level_to_finish[immunities] * ALTERNATIVE_PATH_DANGER_LEVEL_TRESHOLD \
 					and data[2] <= tile.distance_to_finish[immunities] * ALTERNATIVE_PATH_DISTANCE_TRESHOLD \
-					and (next_tile.next_paths.size() > 1 \
+					and (next_tile.next_paths[immunities].size() > 1 \
 					or (next_tile.next_paths[immunities][0] != data[0] \
-					and fmod(Vector2(data[3]).angle_to_point(tile.next_paths[immunities][0]), PI / 2) != 0.0)):
+					and not is_equal_approx(fmod(Vector2(data[3]).angle_to_point(tile.next_paths[immunities][0]), PI / 2), 0.0))):
 				tile.alternative_next_paths[immunities].push_back(data[3])
 			continue
 
