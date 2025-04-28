@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcwmvw23oeob1"]
+
+[ext_resource type="PackedScene" uid="uid://bkhifmreeavwq" path="res://scenes/ui/screen_menus/screen_menu.tscn" id="1_04os1"]
+[ext_resource type="Script" uid="uid://dyri1cf86u6de" path="res://scripts/ui/screen_menus/win_menu.gd" id="2_cjjjf"]
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="3_lup8u"]
+[ext_resource type="StyleBox" uid="uid://baihiuteq2brc" path="res://resources/ui/panel_bg_outline.tres" id="4_okgp1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_20hd5"]
+font_size = 64
+
+[node name="ScreenMenu" instance=ExtResource("1_04os1")]
+script = ExtResource("2_cjjjf")
+
+[node name="Menu" type="PanelContainer" parent="Backdrop" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -192.0
+offset_right = 256.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_lup8u")
+theme_override_styles/panel = ExtResource("4_okgp1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Backdrop/Menu" index="0"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Backdrop/Menu/VBoxContainer" index="0"]
+layout_mode = 2
+text = "You Win!"
+label_settings = SubResource("LabelSettings_20hd5")
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="Backdrop/Menu/VBoxContainer" index="1"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Restart"
+
+[node name="ExitButton" type="Button" parent="Backdrop/Menu/VBoxContainer" index="2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Exit
+"
+
+[connection signal="pressed" from="Backdrop/Menu/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Backdrop/Menu/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

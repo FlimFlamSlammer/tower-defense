@@ -8,6 +8,7 @@
 [node name="Crossbow" groups=["attacking_towers"] instance=ExtResource("1_dyx6r")]
 script = ExtResource("2_adi17")
 tower_name = &"Crossbow"
+description = "Low damage, high attack cost but cheap. Great for early-game."
 cost = 1000
 
 [node name="Reinforced Strings" type="Node" parent="Upgrades/Path0" index="0"]
@@ -49,13 +50,13 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 [node name="Fuse Bolts" type="Node" parent="Upgrades/Path1" index="2"]
 script = ExtResource("4_tvbwh")
 description = "Bolts explode shortly after hitting a target."
-cost = 2700
+cost = 3200
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Pulsing Shots" type="Node" parent="Upgrades/Path1" index="3"]
 script = ExtResource("4_tvbwh")
 description = "Bolts pulse multiple times after sticking to a target, before violently exploding."
-cost = 18000
+cost = 14000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="ClickArea" parent="." index="6"]

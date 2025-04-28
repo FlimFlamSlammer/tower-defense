@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://g0ovc5m8wyk8"]
+[gd_scene load_steps=3 format=3 uid="uid://dc8muahl7v4y1"]
 
 [ext_resource type="PackedScene" uid="uid://o1l1pxkirthe" path="res://scenes/enemies/enemy.tscn" id="1_hy87s"]
 [ext_resource type="Texture2D" uid="uid://hi0erumvijca" path="res://assets/enemies/breaker_Layer 1.svg" id="2_fxrjy"]
@@ -7,7 +7,7 @@
 base_stats = Dictionary[StringName, Variant]({
 &"immunities": PackedInt64Array(5),
 &"max_health": 30.0,
-&"speed": 1.7
+&"speed": 2.0
 })
 
 [node name="Sprite" type="Sprite2D" parent="." index="0"]

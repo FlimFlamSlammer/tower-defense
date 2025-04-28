@@ -160,13 +160,16 @@ func handle_path_data_request(immunities: Array[Globals.DamageTypes], tile_pos: 
 
 ## Clears persistent [TowerStatusEffect] from every [Tower], then runs [method SupportTower.give_status_effects] for every [SupportTower].
 func update_support_towers() -> void:
-	for tower: Tower in get_tree().get_nodes_in_group(Tower.Groups.ALL):
-		tower.clear_persistent_status_effects()
+	var cb: Callable = func() -> void:
+		for tower: Tower in get_tree().get_nodes_in_group(Tower.Groups.ALL):
+			tower.clear_persistent_status_effects()
 
-	var towers: Array[Node] = get_tree().get_nodes_in_group(Tower.Groups.SUPPORT)
-	for tower: SupportTower in towers:
-		if not tower.is_queued_for_deletion():
-			tower.give_status_effects()
+		var towers: Array[Node] = get_tree().get_nodes_in_group(Tower.Groups.SUPPORT)
+		for tower: SupportTower in towers:
+			if not tower.is_queued_for_deletion():
+				tower.give_status_effects()
+	
+	cb.call()
 
 
 # Iterates over all PathTiles and clears their next_tile property.

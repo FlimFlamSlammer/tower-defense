@@ -25,6 +25,7 @@ var money: int = 2100:
 @onready var _screen_menu_layer: ScreenMenuLayer = $ScreenMenuLayer
 @onready var _tile_controller: TileController = Globals.get_tile_controller(get_tree())
 @onready var _start_wave_button: Button = get_tree().get_nodes_in_group("start_wave_button")[-1]
+@onready var _win_menu: WinMenu = _screen_menu_layer.get_node("WinMenu")
 
 func _ready() -> void:
 	# initialize map scene
@@ -52,6 +53,11 @@ func _ready() -> void:
 		enemy.path_data_requested.connect(_tile_controller.handle_path_data_request)
 		enemy.died.connect(func() -> void:
 			if not _are_enemies_remaining() and not _spawner.spawning:
+				if _spawner.wave == _spawner.wave_data.data.size():
+					_delete_save()
+					_win_menu.open()
+					return
+
 				money += _get_wave_bonus(_spawner.wave)
 				_start_wave_button.disabled = false
 
@@ -95,7 +101,7 @@ func _are_enemies_remaining() -> bool:
 
 
 func _get_wave_bonus(wave: int) -> int:
-	return 400 + (30 * wave)
+	return 950 + (50 * wave)
 
 
 func _pause_game() -> void:
@@ -134,6 +140,7 @@ func _save_game() -> void:
 		data_array[i] = data
 
 	save_file.store_var(data_array)
+	save_file.close()
 
 
 func _load_game() -> void:
@@ -170,10 +177,19 @@ func _load_game() -> void:
 	var towers: Array[Node] = get_tree().get_nodes_in_group("towers")
 	for tower: Tower in towers:
 		tower.money_requested.connect(_handle_money_request)
+	save_file.close()
 
 
 func _reset_game() -> void:
+	_delete_save()
+	_reload_game()
+
+
+func _delete_save() -> void:
 	DirAccess.remove_absolute(Globals.SAVE_PATH.path_join("save-%s" % map_name))
+
+
+func _reload_game() -> void:
 	SceneLoader.change_scene(load(scene_file_path), func(game: GameProvider) -> void:
 		game.map_name = map_name
 	)

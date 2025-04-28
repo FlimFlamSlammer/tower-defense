@@ -25,18 +25,22 @@ func _process(delta: float) -> void:
 		super (delta)
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_collision(area: Area2D) -> void:
 	if _attached_enemy: return
+	super (area)
 
 	var enemy: Enemy = area
 
-	enemy.hit(stats.damage, stats.damage_type)
 	_attached_enemy = enemy
 	_attached_local_position = enemy.to_local(position)
 	_attached_local_rotation = rotation - enemy.rotation
 	enemy.tree_exited.connect(_explode_last)
 
 	_pulse_timer.start()
+
+
+func _destruct() -> void:
+	pass
 
 
 func _explode(area: Area2D, effect: GPUParticles2D, damage: float) -> void:
@@ -46,20 +50,27 @@ func _explode(area: Area2D, effect: GPUParticles2D, damage: float) -> void:
 		enemy.hit(damage, Globals.DamageTypes.EXPLOSION)
 
 	var new_effect: GPUParticles2D = effect.duplicate()
+
 	add_child(new_effect)
-	new_effect.emitting = true
 	new_effect.reparent(get_parent())
-	
+
+	# workaround for godot GPUParticles bug
+	# do not change; otherwise particles spawn in wrong position
+	get_tree().create_timer(10e-14).timeout.connect(new_effect.set_deferred.bind("emitting", true))
+
+	new_effect.finished.connect(new_effect.queue_free)
+
 
 func _explode_last() -> void:
 	if is_queued_for_deletion(): return
 	_explode(_blast_area, _fire_effect, stats.explosion_damage)
-	queue_free()
+	queue_free.call_deferred()
 
 
 func _pulse() -> void:
 	if _pulses_used >= _pulse_amount:
 		_explode_last()
+		return
 
 	_explode(_pulse_blast_area, _pulse_fire_effect, stats.pulse_damage)
 	_pulses_used += 1
