@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 [node name="Sharper Bolts" type="Node" parent="Upgrades/Path0" index="1"]
 script = ExtResource("4_tvbwh")
 description = "Bolts fly even faster and pierce more targets. Explosions do more damage."
-cost = 550
+cost = 600
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Giant Crossbow" type="Node" parent="Upgrades/Path0" index="2"]
@@ -43,7 +43,7 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 [node name="Improved Sensors" type="Node" parent="Upgrades/Path1" index="1"]
 script = ExtResource("4_tvbwh")
 description = "Longer range."
-cost = 550
+cost = 600
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Fuse Bolts" type="Node" parent="Upgrades/Path1" index="2"]
