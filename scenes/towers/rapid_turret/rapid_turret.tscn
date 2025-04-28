@@ -13,7 +13,7 @@ cost = 1600
 [node name="Improved Precision" type="Node" parent="Upgrades/Path0" index="0"]
 script = ExtResource("2_dhkf1")
 description = "Increases damage."
-cost = 750
+cost = 650
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Muzzle Brake" type="Node" parent="Upgrades/Path0" index="1"]
@@ -31,31 +31,31 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 [node name="Bullet Ricochet" type="Node" parent="Upgrades/Path0" index="3"]
 script = ExtResource("2_dhkf1")
 description = "Advanced bullet ricochet technology allows bullets to automatically bounce up to 5 targets!"
-cost = 50000
+cost = 20000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Engine Upgrades" type="Node" parent="Upgrades/Path1" index="0"]
 script = ExtResource("2_dhkf1")
 description = "Increases fire rate."
-cost = 700
+cost = 600
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Long-Range Sensor" type="Node" parent="Upgrades/Path1" index="1"]
 script = ExtResource("2_dhkf1")
 description = "Increases range."
-cost = 700
+cost = 600
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Quad Barrels" type="Node" parent="Upgrades/Path1" index="2"]
 script = ExtResource("2_dhkf1")
 description = "Double barrels for double bullets."
-cost = 5000
+cost = 4000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="The Shredder" type="Node" parent="Upgrades/Path1" index="3"]
 script = ExtResource("2_dhkf1")
 description = "The Shredder will obliterate everything in sight."
-cost = 40000
+cost = 30000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="MutableData" parent="." index="7" instance=ExtResource("2_7wjjk")]
