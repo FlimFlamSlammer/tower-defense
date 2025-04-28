@@ -26,6 +26,7 @@ const Groups: Dictionary[StringName, StringName] = {
 const _SELL_VALUE = 0.7
 
 @export var tower_name: StringName
+@export var description: String
 @export var targeting_options: Array[StringName] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
 @export var cost: int
 

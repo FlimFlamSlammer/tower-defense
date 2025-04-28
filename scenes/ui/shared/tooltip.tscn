@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7qtkfxj7srje"]
+
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="1_kldyb"]
+
+[node name="Label" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme = ExtResource("1_kldyb")

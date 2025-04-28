@@ -32,6 +32,7 @@ gdscript/warnings/integer_division=0
 
 window/size/viewport_width=4096
 window/size/viewport_height=2304
+window/size/mode=4
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=2
 
@@ -45,6 +46,10 @@ enemies=""
 start_wave_button=""
 pause_menu_buttons=""
 walls=""
+
+[gui]
+
+timers/tooltip_delay_sec=0.3
 
 [input]
 
@@ -75,5 +80,6 @@ pause={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=2
+textures/default_filters/use_nearest_mipmap_filter=true
+textures/default_filters/anisotropic_filtering_level=3
 anti_aliasing/quality/msaa_2d=3
