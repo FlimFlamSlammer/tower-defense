@@ -51,28 +51,7 @@ func _process(delta: float) -> void:
 				return
 
 		path_data_requested.emit(stats.immunities, next_tile, func(tile: PathTile) -> void:
-			var previous_tile: Vector2i = cur_tile
-			cur_tile = next_tile
-
-			var next_paths: Array[Vector2i] = tile.next_paths[stats.immunities as Array[Globals.DamageTypes]]
-			var alternative_paths: Array[Vector2i] = tile.alternative_next_paths[stats.immunities as Array[Globals.DamageTypes]]
-			if not alternative_paths.is_empty() \
-					and randf() < DEVIATION_CHANCE \
-					and _tiles_from_last_deviation >= MIN_TILES_FROM_LAST_DEVIATION:
-				_tiles_from_last_deviation = 0
-				var idx: int = randi() % alternative_paths.size()
-				next_tile = alternative_paths[idx]
-				if next_tile == previous_tile and alternative_paths.size() > 1:
-					idx += randi() % alternative_paths.size() - 1
-					next_tile = alternative_paths[idx]
-			else:
-				var idx: int = randi() % next_paths.size()
-				next_tile = next_paths[idx]
-				if next_tile == previous_tile and next_paths.size() > 1:
-					idx += randi() % next_paths.size() - 1
-					next_tile = next_paths[idx]
-
-
+			_advance_path(tile)
 			if progress > WALL_CHECK_PROGRESS_MIN:
 				_check_wall()
 
@@ -136,6 +115,36 @@ func get_distance_from_finish() -> float:
 	var next_tile_dist: int = next_tile_ref.distance_to_finish[stats.immunities as Array[Globals.DamageTypes]]
 
 	return cur_tile_dist * (1 - progress) + next_tile_dist * progress
+
+
+func _advance_path(tile: PathTile) -> void:
+	var previous_tile: Vector2i = cur_tile
+	cur_tile = next_tile
+
+	var next_paths: Array[Vector2i] = tile.next_paths[stats.immunities as Array[Globals.DamageTypes]]
+	var alternative_paths: Array[Vector2i] = tile.alternative_next_paths[stats.immunities as Array[Globals.DamageTypes]]
+
+	var does_next_path_go_back: bool = next_paths.size() == 1 and next_paths[0] == previous_tile
+	var does_alternative_path_go_back: bool = alternative_paths.size() == 1 and alternative_paths[0] == previous_tile
+
+	if not alternative_paths.is_empty() \
+			and not does_alternative_path_go_back \
+			and (randf() < DEVIATION_CHANCE or does_next_path_go_back) \
+			and _tiles_from_last_deviation >= MIN_TILES_FROM_LAST_DEVIATION:
+		_tiles_from_last_deviation = 0
+		var idx: int = randi() % alternative_paths.size()
+		next_tile = alternative_paths[idx]
+		if next_tile == previous_tile and alternative_paths.size() > 1:
+			idx += randi() % alternative_paths.size() - 1
+			idx %= alternative_paths.size()
+			next_tile = alternative_paths[idx]
+	else:
+		var idx: int = randi() % next_paths.size()
+		next_tile = next_paths[idx]
+		if next_tile == previous_tile and next_paths.size() > 1:
+			idx += randi() % next_paths.size() - 1
+			idx %= next_paths.size()
+			next_tile = next_paths[idx]
 
 
 func _rotate() -> void:
