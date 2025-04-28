@@ -8,7 +8,7 @@
 
 [node name="MutableData" instance=ExtResource("1_3fbxj")]
 stats = Dictionary[StringName, Variant]({
-&"attack_cost": 6,
+&"attack_cost": 8,
 &"damage": 4.0,
 &"damage_type": 2,
 &"explosion_damage": 3.0,
