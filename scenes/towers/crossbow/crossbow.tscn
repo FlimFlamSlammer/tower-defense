@@ -8,24 +8,24 @@
 [node name="Crossbow" groups=["attacking_towers"] instance=ExtResource("1_dyx6r")]
 script = ExtResource("2_adi17")
 tower_name = &"Crossbow"
-cost = 750
+cost = 650
 
 [node name="Reinforced Strings" type="Node" parent="Upgrades/Path0" index="0"]
 script = ExtResource("4_tvbwh")
 description = "Bolts fly faster and do more damage."
-cost = 400
+cost = 500
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Sharper Bolts" type="Node" parent="Upgrades/Path0" index="1"]
 script = ExtResource("4_tvbwh")
 description = "Bolts fly even faster and pierce more targets. Explosions do more damage."
-cost = 450
+cost = 550
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Giant Crossbow" type="Node" parent="Upgrades/Path0" index="2"]
 script = ExtResource("4_tvbwh")
 description = "Improves overall stats at the cost of fire rate."
-cost = 2400
+cost = 2500
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Grand Javelin" type="Node" parent="Upgrades/Path0" index="3"]
@@ -37,13 +37,13 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 [node name="High-Tech Motors" type="Node" parent="Upgrades/Path1" index="0"]
 script = ExtResource("4_tvbwh")
 description = "Faster fire rate."
-cost = 450
+cost = 500
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Improved Sensors" type="Node" parent="Upgrades/Path1" index="1"]
 script = ExtResource("4_tvbwh")
 description = "Longer range."
-cost = 400
+cost = 550
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Fuse Bolts" type="Node" parent="Upgrades/Path1" index="2"]

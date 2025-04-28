@@ -11,7 +11,7 @@ stats = Dictionary[StringName, Variant]({
 &"attack_cost": 6,
 &"damage": 4.0,
 &"damage_type": 2,
-&"explosion_damage": 2.5,
+&"explosion_damage": 3.0,
 &"fire_rate": 1.0,
 &"pierce": 1,
 &"projectile": ExtResource("2_7n5ta"),
