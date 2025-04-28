@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://umov0hl7hsyx"]
+
+[ext_resource type="PackedScene" uid="uid://bolphubyb6fu1" path="res://scenes/towers/shooting_tower.tscn" id="1_wec12"]
+[ext_resource type="Script" uid="uid://col0ystitn4jb" path="res://scripts/towers/upgrade.gd" id="2_2vm3q"]
+[ext_resource type="PackedScene" uid="uid://bek23xbitbg5w" path="res://scenes/towers/sniper_turret/mutable_data/00.tscn" id="2_ipgno"]
+
+[node name="ShootingTower" instance=ExtResource("1_wec12")]
+tower_name = &"Sniper Turret"
+cost = 1600
+
+[node name="Powerful Shots" type="Node" parent="Upgrades/Path0" index="0"]
+script = ExtResource("2_2vm3q")
+description = "Increases damage."
+cost = 650
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="More Powerful Shots" type="Node" parent="Upgrades/Path0" index="1"]
+script = ExtResource("2_2vm3q")
+description = "Increases damage."
+cost = 650
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Shrapnel Shots" type="Node" parent="Upgrades/Path0" index="2"]
+script = ExtResource("2_2vm3q")
+description = "Bullets create shrapnel behind the enemy."
+cost = 3000
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Semi-Automatic" type="Node" parent="Upgrades/Path0" index="3"]
+script = ExtResource("2_2vm3q")
+description = "Fire 3 times faster and increases damage."
+cost = 15000
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Bigger Engine" type="Node" parent="Upgrades/Path1" index="0"]
+script = ExtResource("2_2vm3q")
+description = "Increases fire rate."
+cost = 500
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Enhanced Vision" type="Node" parent="Upgrades/Path1" index="1"]
+script = ExtResource("2_2vm3q")
+description = "Better sensor = more range."
+cost = 500
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Lethal Precision" type="Node" parent="Upgrades/Path1" index="2"]
+script = ExtResource("2_2vm3q")
+description = "Longer barrel which increases damage and range significantly."
+cost = 3500
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Kaboom!" type="Node" parent="Upgrades/Path1" index="3"]
+script = ExtResource("2_2vm3q")
+description = "Bullets explode on impact."
+cost = 18000
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="MutableData" parent="." index="7" instance=ExtResource("2_ipgno")]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://deepkd7q0mmne"]
+
+[ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_s4hui"]
+[ext_resource type="PackedScene" uid="uid://cvy6grcey5qcd" path="res://scenes/projectiles/bullet.tscn" id="2_d3b1q"]
+[ext_resource type="Texture2D" uid="uid://bk4xqstyg2k51" path="res://assets/towers/sniper_turret/30/Turret.svg" id="2_s4hui"]
+
+[node name="MutableData" instance=ExtResource("1_s4hui")]
+stats = Dictionary[StringName, Variant]({
+&"attack_cost": 12,
+&"damage": 16.0,
+&"fire_rate": 0.5,
+&"pierce": 1,
+&"projectile": ExtResource("2_d3b1q"),
+&"projectile_offset": PackedVector2Array(144, 0),
+&"range": 3.5,
+&"shrapnel_amount": 3,
+&"shrapnel_damage": 6.0,
+&"shrapnel_pierce": 1
+})
+
+[node name="Pivot" type="Node2D" parent="." index="0"]
+
+[node name="Turret" type="Sprite2D" parent="Pivot" index="0"]
+position = Vector2(36, 0)
+texture = ExtResource("2_s4hui")
