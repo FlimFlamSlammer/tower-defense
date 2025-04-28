@@ -14,7 +14,7 @@ var lives: int = 100:
 		_gui.lives_display.value = str(lives)
 		lives_changed.emit(val)
 
-var money: int = 2000:
+var money: int = 2100:
 	set(val):
 		money = val
 		_gui.money_display.value = str(money)
@@ -95,7 +95,7 @@ func _are_enemies_remaining() -> bool:
 
 
 func _get_wave_bonus(wave: int) -> int:
-	return 500 + (30 * wave)
+	return 400 + (30 * wave)
 
 
 func _pause_game() -> void:
