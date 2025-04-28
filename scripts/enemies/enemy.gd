@@ -170,5 +170,5 @@ func _check_wall() -> void:
 	if wall:
 		var damage: float = minf(wall.stats.health, stats.health)
 
-		hit(damage, Globals.DamageTypes.NORMAL)
+		hit(damage, Globals.DamageTypes.WALL)
 		wall.hit(damage)

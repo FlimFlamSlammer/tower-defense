@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://g0ovc5m8wyk8"]
+
+[ext_resource type="PackedScene" uid="uid://o1l1pxkirthe" path="res://scenes/enemies/enemy.tscn" id="1_hy87s"]
+[ext_resource type="Texture2D" uid="uid://hi0erumvijca" path="res://assets/enemies/breaker_Layer 1.svg" id="2_fxrjy"]
+
+[node name="Enemy" instance=ExtResource("1_hy87s")]
+base_stats = Dictionary[StringName, Variant]({
+&"immunities": PackedInt64Array(5),
+&"max_health": 30.0,
+&"speed": 1.7
+})
+
+[node name="Sprite" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_fxrjy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(-80, -40, 12, -40, 68, 0, 12, 40, -80, 40)

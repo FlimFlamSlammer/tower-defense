@@ -233,10 +233,10 @@ func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 			atlas_coords[Vector2i.UP] = Vector2i(3, 0)
 			arrow_tile_map.set_cell(data[0], 0, atlas_coords[data[0] - data[3]])
 
-		_push_pathfinding_data(pq, data, Vector2i.UP)
-		_push_pathfinding_data(pq, data, Vector2i.DOWN)
-		_push_pathfinding_data(pq, data, Vector2i.LEFT)
-		_push_pathfinding_data(pq, data, Vector2i.RIGHT)
+		_push_pathfinding_data(pq, data, Vector2i.UP, immunities)
+		_push_pathfinding_data(pq, data, Vector2i.DOWN, immunities)
+		_push_pathfinding_data(pq, data, Vector2i.LEFT, immunities)
+		_push_pathfinding_data(pq, data, Vector2i.RIGHT, immunities)
 
 	_updated_immunities[immunities] = true
 
@@ -263,7 +263,7 @@ func _update_danger_levels(immunities: Array[Globals.DamageTypes]) -> void:
 		tower.update_danger_levels(Tower.Groups.SETUP, immunities)
 
 
-func _push_pathfinding_data(pq: PriorityQueue, data: Array, offset: Vector2i) -> void:
+func _push_pathfinding_data(pq: PriorityQueue, data: Array, offset: Vector2i, immunities: Array[Globals.DamageTypes]) -> void:
 	var new_data: Array = []
 	new_data.resize(4)
 
@@ -276,9 +276,10 @@ func _push_pathfinding_data(pq: PriorityQueue, data: Array, offset: Vector2i) ->
 	# Calculate danger level
 	new_data[1] = data[1] + (new_tile.danger_level / EXPECTED_ENEMY_SPEED)
 
-	var wall_between: Wall = get_wall_between(data[0], new_data[0])
-	if wall_between:
-		new_data[1] += wall_between.stats.health
+	if not Globals.DamageTypes.WALL in immunities:
+		var wall_between: Wall = get_wall_between(data[0], new_data[0])
+		if wall_between:
+			new_data[1] += wall_between.stats.health
 
 	# Calculate distance from finish
 	new_data[2] = data[2] + 1
