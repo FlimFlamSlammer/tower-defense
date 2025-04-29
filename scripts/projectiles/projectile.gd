@@ -28,7 +28,13 @@ func _on_collision(area: Area2D) -> void:
 	var enemy := area as Enemy
 	if enemy:
 		var pierce_damage_multiplier: float = 1.0 - ((1.0 - MIN_PIERCE_DAMAGE_RATIO) * _pierce_used / stats.pierce)
-		enemy.hit(stats.damage * pierce_damage_multiplier, stats.damage_type)
+		var armor_piercing_damage_multiplier: float = 1.0
+
+		if "armor_piercing" in stats:
+			armor_piercing_damage_multiplier = 1.0 - stats.armor_piercing
+			enemy.hit(stats.damage * pierce_damage_multiplier * stats.armor_piercing, Globals.DamageTypes.NORMAL)
+
+		enemy.hit(stats.damage * pierce_damage_multiplier * armor_piercing_damage_multiplier, stats.damage_type)
 		_pierce_used += 1
 
 		if "projectile_status_effects" in stats:
