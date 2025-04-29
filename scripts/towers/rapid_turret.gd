@@ -7,7 +7,7 @@ func _fire(target: Enemy) -> void:
 	var new_projectile: Bullet = stats.projectile.instantiate()
 
 	new_projectile.stats = stats.duplicate()
-	new_projectile.movement_dir = _mutable_data.pivot.rotation
+	new_projectile.movement_dir = _mutable_data.pivot.rotation + randf_range(-stats.spread, stats.spread)
 
 	var rotated_offset: Vector2 = stats.projectile_offset[_current_barrel].rotated(new_projectile.movement_dir)
 	new_projectile.position = position + rotated_offset
