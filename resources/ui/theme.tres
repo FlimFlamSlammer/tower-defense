@@ -1,10 +1,11 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://5os27plblg4t"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://5os27plblg4t"]
 
 [ext_resource type="StyleBox" uid="uid://1dxdk7orlgiw" path="res://resources/ui/panel_bg.tres" id="1_7ct1h"]
 [ext_resource type="StyleBox" uid="uid://bmfavrbtvpa8q" path="res://resources/ui/button_hover.tres" id="1_owntx"]
 [ext_resource type="StyleBox" uid="uid://cnq6jgcav4xgl" path="res://resources/ui/panel_1.tres" id="2_886mr"]
 [ext_resource type="StyleBox" uid="uid://c1f5t3fvnlwb1" path="res://resources/ui/button.tres" id="2_aaf3v"]
 [ext_resource type="StyleBox" uid="uid://8dbylqqoju0l" path="res://resources/ui/button_disabled.tres" id="5_owntx"]
+[ext_resource type="FontFile" uid="uid://bbcct1qigc3yh" path="res://resources/ui/OpenSans-Semibold.ttf" id="6_p5woc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b751m"]
 
@@ -13,8 +14,9 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_886mr"]
 
 [resource]
-default_font_size = 41
-/fonts/font = null
+default_font = ExtResource("6_p5woc")
+default_font_size = 40
+/fonts/font = ExtResource("6_p5woc")
 Button/styles/focus = SubResource("StyleBoxEmpty_b751m")
 Button/styles/hover = ExtResource("1_owntx")
 Button/styles/hover_pressed = ExtResource("2_aaf3v")

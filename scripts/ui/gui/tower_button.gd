@@ -17,10 +17,10 @@ func _ready() -> void:
 	
 	tower.free()
 
-func _make_custom_tooltip(for_text: String) -> Object:
-	var tooltip: Label = preload("res://scenes/ui/shared/tooltip.tscn").instantiate()
-	tooltip.text = for_text
-	return tooltip
+
+func _make_custom_tooltip(for_text: String) -> Control:
+	return Globals.make_custom_tooltip(for_text)
+
 
 func _on_button_pressed() -> void:
 	tower_button_pressed.emit(tower_scene)

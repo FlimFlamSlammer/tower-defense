@@ -46,5 +46,9 @@ var disabled: bool = false:
 @onready var _tier_indicator: VBoxContainer = %TierIndicator
 @onready var _button: Button = %Button
 
+func _make_custom_tooltip(for_text: String) -> Control:
+	return Globals.make_custom_tooltip(for_text)
+
+
 func _on_button_pressed() -> void:
 	button_pressed.emit()

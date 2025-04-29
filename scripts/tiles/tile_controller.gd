@@ -29,21 +29,17 @@ func load_map() -> void:
 func can_place_wall(pos: Vector2i, vertical: bool) -> bool:
 	var tile := tiles.get_tile(pos) as PathTile
 
-	if not tile:
-		return false
+	if not tile: return false
 
 	var adjacent: PathTile
 	if vertical:
-		if tile.east_wall:
-			return false
+		if tile.east_wall: return false
 		adjacent = tiles.get_tile(pos + Vector2i(1, 0)) as PathTile
 	else:
-		if tile.south_wall:
-			return false
+		if tile.south_wall: return false
 		adjacent = tiles.get_tile(pos + Vector2i(0, 1)) as PathTile
 
-	if not adjacent:
-		return false
+	if not adjacent: return false
 
 	return true
 
