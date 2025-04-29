@@ -32,9 +32,11 @@ var vertical: bool:
 @onready var stats: Dictionary[StringName, Variant] = base_stats.duplicate()
 @onready var _base_health: float = stats.health
 @onready var _range_animations: AnimationPlayer = $RangeAnimation
+@onready var _click_area: Control = $ClickArea
 
 func place() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 1.0)
+	_click_area.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
 func set_display_invalid() -> void: ## Changes the color to represent an invalid placement position. Use when the wall is in placement mode.

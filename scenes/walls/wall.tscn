@@ -157,6 +157,7 @@ rotation = -0.785397
 scale = Vector2(1.414, 1.414)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="RangeAnimation" type="AnimationPlayer" parent="."]
