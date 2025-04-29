@@ -1,9 +1,6 @@
 class_name GameProvider
 extends Node
 
-signal lives_changed(lives: int)
-signal money_changed(money: int)
-
 const _MAP_SCENE_DIR: String = "res://scenes/maps/"
 
 var map_name: String = "valley"
@@ -12,13 +9,11 @@ var lives: int = 100:
 	set(val):
 		lives = val
 		_gui.lives_display.value = str(lives)
-		lives_changed.emit(val)
 
 var money: int = 2100:
 	set(val):
 		money = val
 		_gui.money_display.value = str(money)
-		money_changed.emit(val)
 
 @onready var _spawner: Spawner = %Spawner
 @onready var _gui: GUIRoot = $GUILayer/GUI
@@ -70,6 +65,7 @@ func _ready() -> void:
 	)
 
 	_spawner.wave_started.connect(func() -> void:
+		_gui.wave_display.text = str(_spawner.wave)
 		_start_wave_button.disabled = true
 	)
 
@@ -86,6 +82,8 @@ func _ready() -> void:
 	lives = lives # force update lives display
 
 	_load_game()
+
+	_gui.wave_display.text = str(_spawner.wave)
 
 
 func _handle_money_request(amount: int, spend_money: bool, cb: Callable) -> void:
