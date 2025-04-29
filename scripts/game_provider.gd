@@ -74,6 +74,9 @@ func _ready() -> void:
 	_gui.tower_placed.connect(func(tower: Tower) -> void:
 		tower.money_requested.connect(_handle_money_request)
 	)
+	_gui.wall_placed.connect(func(wall: Wall) -> void:
+		wall.money_requested.connect(_handle_money_request)
+	)
 
 	_screen_menu_layer.pause_requested.connect(_pause_game)
 	_screen_menu_layer.resume_requested.connect(_resume_game)
@@ -176,9 +179,15 @@ func _load_game() -> void:
 		wall.load(wall_data)
 
 	_gui.load()
+
 	var towers: Array[Node] = get_tree().get_nodes_in_group("towers")
 	for tower: Tower in towers:
 		tower.money_requested.connect(_handle_money_request)
+
+	var walls: Array[Node] = get_tree().get_nodes_in_group("walls")
+	for wall: Wall in walls:
+		wall.money_requested.connect(_handle_money_request)
+
 	save_file.close()
 
 

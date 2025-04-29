@@ -1,9 +1,9 @@
 class_name Tower
 extends Node2D
 
-signal tower_modified() ## Emits when the tower's update function is called.
-signal tower_sold()
-signal tower_clicked() ## Emits when the Tower is clicked by the player.
+signal modified() ## Emits when the tower's update function is called.
+signal sold()
+signal clicked() ## Emits when the Tower is clicked by the player.
 signal money_requested(amount: int, spend: bool, cb: Callable) ## Emits when the tower requests an action that uses money. Call param cb to confirm the action.
 
 const Targeting: Dictionary[StringName, StringName] = {
@@ -122,14 +122,16 @@ func deselect() -> void:
 
 
 func sell() -> void:
+	money_requested.emit(-get_sell_value(), true, Utils.null_callable)
+	sold.emit()
+	queue_free()
+
+
+func get_sell_value() -> int:
 	var sell_value: float = _SELL_VALUE
 	if "sell_value" in stats:
 		sell_value *= stats.sell_value
-
-	money_requested.emit(-cost * sell_value, true, Utils.null_callable)
-
-	queue_free()
-	tower_sold.emit()
+	return floori(cost * sell_value)
 
 
 ## Applies status effects to the tower and runs any functions that depend on the tower's stats.
@@ -140,7 +142,7 @@ func update_status_effects() -> void:
 
 	update_range_circle()
 
-	if _placed: tower_modified.emit()
+	if _placed: modified.emit()
 
 
 ## Resizes the range circle based on range stat.
@@ -208,7 +210,7 @@ func upgrade_tower(path: int, cb: Callable = Utils.null_callable) -> void:
 
 		_mutable_data = new_mutable_data
 		add_child(new_mutable_data)
-		
+
 		update_status_effects()
 
 		cost += upgrade.cost
@@ -248,7 +250,7 @@ func _get_tile_danger_level_multiplier(tile: Vector2i) -> float:
 
 func _on_input_received(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
-		tower_clicked.emit()
+		clicked.emit()
 
 
 func _run_for_tiles_in_range(cb: Callable) -> void:

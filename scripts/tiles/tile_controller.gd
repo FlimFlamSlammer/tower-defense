@@ -133,9 +133,9 @@ func place_tower(pos: Vector2i, tower: Tower) -> bool:
 	tower.tile_position = pos
 	tile.tower = tower
 
-	tower.tower_modified.connect(_clear_pathfinding_data)
+	tower.modified.connect(_clear_pathfinding_data)
 	if Tower.Groups.SUPPORT in tower.get_groups():
-		tower.tower_sold.connect(update_support_towers)
+		tower.sold.connect(update_support_towers)
 
 	tower.place()
 

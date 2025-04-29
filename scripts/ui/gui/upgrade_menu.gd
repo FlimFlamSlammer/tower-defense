@@ -9,11 +9,12 @@ var _selected_tower: Tower
 @onready var _upgrade_paths: Array[Node] = %UpgradePaths.get_children()
 @onready var _tower_label: Label = %TowerLabel
 @onready var _targeting_selector: Carousel = %TargetingSelector
+@onready var _sell_button: Button = %SellButton
+@onready var _sell_price_label: Label = %SellLabel
 
 
 func close(instant: bool = false) -> void:
 	_disconnect_previous_tower()
-
 	super (instant)
 
 
@@ -27,11 +28,13 @@ func update_tower(tower: Tower) -> void:
 		var upgrade_path: UpgradePath = _upgrade_paths[i]
 		upgrade_path.button_pressed.connect(tower.upgrade_tower.bind(i))
 
-	tower.tower_modified.connect(_update)
+	tower.modified.connect(_update)
 
 	_targeting_selector.option_changed.connect(func(val: int) -> void:
 		_selected_tower.targeting = _selected_tower.targeting_options[val]
 	)
+
+	_sell_button.pressed.connect(_selected_tower.sell)
 
 	_update()
 
@@ -62,11 +65,14 @@ func _update() -> void:
 
 		upgrade_path.tier = tier
 
+	_sell_price_label.text = str(_selected_tower.get_sell_value())
+
 
 func _disconnect_previous_tower() -> void:
-	if _selected_tower and _selected_tower.tower_modified.is_connected(_update):
+	if _selected_tower and _selected_tower.modified.is_connected(_update):
 		for i in _upgrade_paths.size():
 			var upgrade_path: UpgradePath = _upgrade_paths[i]
 			upgrade_path.button_pressed.disconnect(_selected_tower.upgrade_tower)
 
-		_selected_tower.tower_modified.disconnect(_update)
+		_selected_tower.modified.disconnect(_update)
+		_sell_button.pressed.disconnect(_selected_tower.sell)

@@ -18,6 +18,7 @@ var is_tower_selector_open: bool = false
 
 @onready var _tower_menu: ClosableMenu = $TowerMenu
 @onready var _upgrade_menu: UpgradeMenu = $UpgradeMenu
+@onready var _wall_select_menu: WallSelectMenu = $WallSelectMenu
 @onready var _tile_controller: TileController = Globals.get_tile_controller(get_tree())
 @onready var _top_bar: HBoxContainer = $TopBar
 
@@ -42,6 +43,9 @@ func _ready() -> void:
 
 	_upgrade_menu.closed_position.position_inverted.x = - MENU_CLOSED_OFFSET
 	_upgrade_menu.close(true)
+
+	_wall_select_menu.closed_position.position_inverted.x = - MENU_CLOSED_OFFSET
+	_wall_select_menu.close(true)
 
 
 func _process(_delta: float) -> void:
@@ -85,22 +89,30 @@ func _unhandled_input(event: InputEvent) -> void:
 			elif selected_wall:
 				_place_selected_wall()
 		else:
-			if _upgrade_menu.is_open:
+			if _upgrade_menu.is_open or _wall_select_menu.is_open:
 				_clear_selection()
 			if _tower_menu.is_open:
 				_tower_menu.close()
 
 	elif event.is_action_pressed("sell"):
 		if _upgrade_menu.is_open:
-			_upgrade_menu.close()
 			selected_tower.sell()
+		elif _wall_select_menu.is_open:
+			selected_wall.sell()
 
 
 func load() -> void:
 	var towers: Array[Node] = get_tree().get_nodes_in_group("towers")
 
 	for tower: Tower in towers:
-		tower.tower_clicked.connect(_select_tower.bind(tower))
+		tower.clicked.connect(_select_tower.bind(tower))
+		tower.sold.connect(_upgrade_menu.close)
+
+	var walls: Array[Node] = get_tree().get_nodes_in_group("walls")
+
+	for wall: Wall in walls:
+		wall.clicked.connect(_select_wall.bind(wall))
+		wall.sold.connect(_wall_select_menu.close)
 
 
 func cancel_tower_placement() -> void:
@@ -122,7 +134,10 @@ func _place_selected_tower() -> void:
 		if _tile_controller.place_tower(placing_previous_position, selected_tower):
 			money_requested.emit(selected_tower.cost, true, Utils.null_callable)
 			tower_placed.emit(selected_tower)
-			selected_tower.tower_clicked.connect(_select_tower.bind(selected_tower))
+
+			selected_tower.clicked.connect(_select_tower.bind(selected_tower))
+			selected_tower.sold.connect(_upgrade_menu.close)
+
 			is_placing = false
 			_select_tower(selected_tower)
 			_tower_menu.open()
@@ -138,6 +153,10 @@ func _place_selected_wall() -> void:
 		if _tile_controller.place_wall(pos.pos, pos.vertical, selected_wall):
 			money_requested.emit(selected_wall.cost, true, Utils.null_callable)
 			wall_placed.emit(selected_wall)
+
+			selected_wall.clicked.connect(_select_wall.bind(selected_wall))
+			selected_wall.sold.connect(_wall_select_menu.close)
+
 			is_placing = false
 			_tower_menu.open()
 	)
@@ -177,13 +196,24 @@ func _select_tower(tower: Tower) -> void:
 	if _upgrade_menu.is_open and selected_tower == tower:
 		_clear_selection()
 	else:
-		if selected_tower != tower:
-			_clear_selection()
-
+		if _upgrade_menu.is_open or _wall_select_menu.is_open: _clear_selection()
 		selected_tower = tower
 		selected_tower.select()
 		_upgrade_menu.update_tower(tower)
 		_upgrade_menu.open()
+
+
+func _select_wall(wall: Wall) -> void:
+	if is_placing: return
+
+	if _wall_select_menu.is_open and selected_wall == wall:
+		_clear_selection()
+	else:
+		if _upgrade_menu.is_open or _wall_select_menu.is_open: _clear_selection()
+		selected_wall = wall
+		selected_wall.select()
+		_wall_select_menu.update_wall(wall)
+		_wall_select_menu.open()
 
 
 func _clear_selection() -> void:
@@ -191,5 +221,12 @@ func _clear_selection() -> void:
 		selected_tower.deselect()
 		selected_tower = null
 
+	if selected_wall:
+		selected_wall.deselect()
+		selected_wall = null
+
 	if _upgrade_menu.is_open:
 		_upgrade_menu.close()
+
+	if _wall_select_menu.is_open:
+		_wall_select_menu.close()
