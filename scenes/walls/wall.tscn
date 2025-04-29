@@ -141,7 +141,7 @@ base_stats = Dictionary[StringName, Variant]({
 })
 metadata/_custom_type_script = "uid://blo6b658ybg0o"
 
-[node name="Control" type="Control" parent="."]
+[node name="ClickArea" type="Control" parent="."]
 layout_mode = 3
 anchor_left = -0.333333
 anchor_top = 0.426471
@@ -180,4 +180,4 @@ script = ExtResource("5_2ra0q")
 thickness = 4.0
 color = Vector4(0.8, 0.8, 0.8, 0.4)
 
-[connection signal="gui_input" from="Control" to="." method="_on_input_received"]
+[connection signal="gui_input" from="ClickArea" to="." method="_on_input_received"]
