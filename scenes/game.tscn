@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsg5e6i6vt7ve"]
+[gd_scene load_steps=13 format=3 uid="uid://bsg5e6i6vt7ve"]
 
 [ext_resource type="Script" uid="uid://d2e1n6bs7jdv" path="res://scripts/game_provider.gd" id="1_gee14"]
 [ext_resource type="Script" uid="uid://bp8wugfx6tk0m" path="res://scripts/tiles/tile_controller.gd" id="3_vtaks"]
 [ext_resource type="PackedScene" uid="uid://brovx3xt83ihl" path="res://scenes/enemies/spawner/spawner.tscn" id="4_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://d8lo4dccj3kb" path="res://assets/tiles/map1/tiles_debug.svg" id="5_dinhu"]
 [ext_resource type="PackedScene" uid="uid://c3ftv6p6r1071" path="res://scenes/ui/gui/gui_root.tscn" id="6_kvuet"]
+[ext_resource type="PackedScene" uid="uid://sbno8vm40fug" path="res://scenes/ui/screen_menus/lose_menu.tscn" id="7_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://bcwmvw23oeob1" path="res://scenes/ui/screen_menus/win_menu.tscn" id="7_gee14"]
 [ext_resource type="Script" uid="uid://bjwimbxges3e" path="res://scripts/ui/screen_menus/screen_menu_layer.gd" id="7_trtic"]
 [ext_resource type="PackedScene" uid="uid://c7manlpxje4pd" path="res://scenes/ui/screen_menus/pause_menu.tscn" id="8_ir15t"]
@@ -57,12 +58,18 @@ process_mode = 3
 layer = 3
 script = ExtResource("7_trtic")
 
+[node name="LoseMenu" parent="ScreenMenuLayer" instance=ExtResource("7_0tnpc")]
+visible = false
+
 [node name="WinMenu" parent="ScreenMenuLayer" instance=ExtResource("7_gee14")]
 visible = false
 
 [node name="PauseMenu" parent="ScreenMenuLayer" instance=ExtResource("8_ir15t")]
 visible = false
 
+[connection signal="exit_requested" from="ScreenMenuLayer/LoseMenu" to="." method="_exit_game"]
+[connection signal="restart_requested" from="ScreenMenuLayer/LoseMenu" to="." method="_reset_game"]
+[connection signal="retry_requested" from="ScreenMenuLayer/LoseMenu" to="." method="_reload_game"]
 [connection signal="exit_requested" from="ScreenMenuLayer/WinMenu" to="." method="_exit_game"]
 [connection signal="restart_requested" from="ScreenMenuLayer/WinMenu" to="." method="_reset_game"]
 [connection signal="exit_requested" from="ScreenMenuLayer/PauseMenu" to="." method="_exit_game"]

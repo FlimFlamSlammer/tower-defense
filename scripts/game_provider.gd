@@ -26,6 +26,7 @@ var money: int = 2100:
 @onready var _tile_controller: TileController = Globals.get_tile_controller(get_tree())
 @onready var _start_wave_button: Button = get_tree().get_nodes_in_group("start_wave_button")[-1]
 @onready var _win_menu: WinMenu = _screen_menu_layer.get_node("WinMenu")
+@onready var _lose_menu: LoseMenu = _screen_menu_layer.get_node("LoseMenu")
 
 func _ready() -> void:
 	# initialize map scene
@@ -49,9 +50,12 @@ func _ready() -> void:
 	_spawner.enemy_spawned.connect(func(enemy: Enemy) -> void:
 		enemy.leaked.connect(func(health: float) -> void:
 			lives -= max(roundi(health), 1)
+			if lives <= 0:
+				_lose_menu.open()
 		)
 		enemy.path_data_requested.connect(_tile_controller.handle_path_data_request)
 		enemy.died.connect(func() -> void:
+			if lives <= 0: return
 			if not _are_enemies_remaining() and not _spawner.spawning:
 				if _spawner.wave == _spawner.wave_data.data.size():
 					_delete_save()

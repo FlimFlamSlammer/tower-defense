@@ -58,6 +58,7 @@ func _update() -> void:
 			upgrade_path.disabled = false
 			upgrade_path.upgrade_name = _selected_tower.upgrades.get_upgrade(i, tier + 1).name
 			upgrade_path.cost = _selected_tower.upgrades.get_upgrade(i, tier + 1).cost
+			upgrade_path.description = _selected_tower.upgrades.get_upgrade(i, tier + 1).description
 
 		upgrade_path.tier = tier
 

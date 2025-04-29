@@ -21,7 +21,6 @@ var _updated_immunities: Dictionary[Array, bool]
 
 func load_map() -> void:
 	tile_map = get_node("TileMap")
-	print(tile_map)
 	var map_data: Dictionary[StringName, Variant] = tiles.load_map(tile_map)
 	start_tile = map_data.start
 	finish_tile = map_data.finish

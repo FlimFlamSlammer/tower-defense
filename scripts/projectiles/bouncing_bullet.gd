@@ -17,7 +17,6 @@ func _on_collision(area: Area2D) -> void:
 
 	for i in range(_bounce_shape_cast.get_collision_count()):
 		var enemy: Enemy = _bounce_shape_cast.get_collider(i)
-		print(i, enemy)
 
 		var dist: float = _ray_cast.global_position.distance_squared_to(enemy.position)
 		if dist < min_dist:

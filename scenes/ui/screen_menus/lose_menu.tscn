@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://sbno8vm40fug"]
+
+[ext_resource type="PackedScene" uid="uid://bkhifmreeavwq" path="res://scenes/ui/screen_menus/screen_menu.tscn" id="1_hniav"]
+[ext_resource type="Script" uid="uid://b24acekell1e3" path="res://scripts/ui/screen_menus/lose_menu.gd" id="2_g1rbn"]
+[ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="2_xr718"]
+[ext_resource type="StyleBox" uid="uid://baihiuteq2brc" path="res://resources/ui/panel_bg_outline.tres" id="3_g1rbn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ser0d"]
+font_size = 64
+
+[node name="ScreenMenu" instance=ExtResource("1_hniav")]
+script = ExtResource("2_g1rbn")
+
+[node name="Menu" type="PanelContainer" parent="." index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_xr718")
+theme_override_styles/panel = ExtResource("3_g1rbn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu" index="0"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Menu/VBoxContainer" index="0"]
+layout_mode = 2
+text = "Defeat!"
+label_settings = SubResource("LabelSettings_ser0d")
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="Menu/VBoxContainer" index="1"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Retry Wave"
+
+[node name="RestartButton" type="Button" parent="Menu/VBoxContainer" index="2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Restart"
+
+[node name="ExitButton" type="Button" parent="Menu/VBoxContainer" index="3"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Exit
+"
+
+[connection signal="pressed" from="Menu/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

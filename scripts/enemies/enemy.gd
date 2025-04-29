@@ -6,9 +6,9 @@ const WALL_CHECK_PROGRESS_MAX = 0.7
 const DEVIATION_CHANCE = 0.3 ## Chance to use an alternative next path instead of the main path.
 const MIN_TILES_FROM_LAST_DEVIATION = 1 ## Minimum tiles moved from last deviation before able to deviate again.
 
-signal leaked(health: float)
+signal leaked(health: float) ## Called when the enemy reaches the finish tile of the map. This signal is always called before [signal died].
 signal path_data_requested(immunities: Array[Globals.DamageTypes], cb: Callable)
-signal died()
+signal died() ## Called when the enemy dies or reaches the finish tile of the map. This signal is always called after [signal leaked] if the enemy died by leaking.
 
 @export var base_stats: Dictionary[StringName, Variant]
 @export var initial_health_ratio: float = 1.0
@@ -46,8 +46,8 @@ func _process(delta: float) -> void:
 
 		if next_tile == tile_controller.finish_tile and not is_queued_for_deletion():
 				queue_free()
-				died.emit()
 				leaked.emit(stats.health)
+				died.emit()
 				return
 
 		path_data_requested.emit(stats.immunities, next_tile, func(tile: PathTile) -> void:

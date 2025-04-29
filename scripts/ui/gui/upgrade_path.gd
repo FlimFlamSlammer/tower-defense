@@ -25,6 +25,12 @@ var tier: int:
 			else:
 				panel.add_theme_stylebox_override(&"panel", PANEL_OFF)
 
+var description: String:
+	set(val):
+		description = val
+		tooltip_text = val
+		_button.tooltip_text = val
+
 var disabled: bool = false:
 	set(val):
 		disabled = val
