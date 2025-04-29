@@ -1,7 +1,7 @@
 class_name Projectile
 extends Node2D
 
-const MIN_PIERCE_DAMAGE_MULTIPLIER = 0.4
+const MIN_PIERCE_DAMAGE_MULTIPLIER = 0.25
 
 var stats: Dictionary[StringName, Variant]
 
