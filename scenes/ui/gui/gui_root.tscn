@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ch6hsd4n1vlfd" path="res://scenes/ui/gui/wall_button.tscn" id="12_4lr0w"]
 [ext_resource type="PackedScene" uid="uid://umov0hl7hsyx" path="res://scenes/towers/sniper_turret/sniper_turret.tscn" id="12_60swy"]
 [ext_resource type="Texture2D" uid="uid://bx6jxe7c1kex0" path="res://assets/towers/bullet_factory/preview.svg" id="13_ivrlk"]
-[ext_resource type="Texture2D" uid="uid://cl4tiwfxn7fij" path="res://assets/towers/sniper_turret/00/Turret.svg" id="13_p5jvc"]
+[ext_resource type="Texture2D" uid="uid://cy0kiprak6w6i" path="res://assets/towers/sniper_turret/preview.svg" id="13_p5jvc"]
 [ext_resource type="PackedScene" uid="uid://dla8smgiuc0vj" path="res://scenes/walls/wooden_wall.tscn" id="13_rv1qw"]
 [ext_resource type="Texture2D" uid="uid://x1jdj8ex5vto" path="res://assets/walls/wooden_wall.svg" id="16_tqdjj"]
 
