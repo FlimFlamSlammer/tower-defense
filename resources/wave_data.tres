@@ -21,14 +21,14 @@ data = Array[Array]([[{
 &"time": 0.0,
 &"type": ExtResource("1_66k7f")
 }], [{
-&"amount": 8,
+&"amount": 6,
 &"interval": 0.8,
 &"time": 0.0,
 &"type": ExtResource("1_66k7f")
 }, {
-&"amount": 5,
+&"amount": 4,
 &"interval": 0.6,
-&"time": 7.2,
+&"time": 5.6,
 &"type": ExtResource("1_66k7f")
 }], [{
 &"amount": 10,
@@ -51,7 +51,7 @@ data = Array[Array]([[{
 &"time": 7.0,
 &"type": ExtResource("1_66k7f")
 }, {
-&"amount": 15,
+&"amount": 12,
 &"interval": 0.5,
 &"time": 15.5,
 &"type": ExtResource("1_66k7f")
