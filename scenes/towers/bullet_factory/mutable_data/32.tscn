@@ -174,7 +174,8 @@ stat_multipliers = Dictionary[StringName, float]({
 &"damage": 1.32
 })
 stat_setters = Dictionary[StringName, Variant]({
-&"damage_type": 2
+&"armor_piercing": 0.2,
+&"damage_type": 1
 })
 priority = 8
 metadata/_custom_type_script = "uid://0afypir31y4j"

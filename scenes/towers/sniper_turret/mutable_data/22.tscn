@@ -1,13 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://hff3oya40nst"]
+[gd_scene load_steps=6 format=3 uid="uid://hff3oya40nst"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_fwgnp"]
 [ext_resource type="PackedScene" uid="uid://cvy6grcey5qcd" path="res://scenes/projectiles/bullet.tscn" id="2_4yxby"]
 [ext_resource type="Texture2D" uid="uid://dxtkslfvdvxj1" path="res://assets/towers/sniper_turret/22/Turret.svg" id="2_fwgnp"]
 
+[sub_resource type="Animation" id="Animation_v2dyu"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4fkxx"]
+_data = {
+&"RESET": SubResource("Animation_v2dyu")
+}
+
 [node name="MutableData" instance=ExtResource("1_fwgnp")]
 stats = Dictionary[StringName, Variant]({
 &"attack_cost": 8,
-&"damage": 16.0,
+&"damage": 20.0,
 &"fire_rate": 0.6,
 &"pierce": 1,
 &"projectile": ExtResource("2_4yxby"),
@@ -20,3 +28,8 @@ stats = Dictionary[StringName, Variant]({
 [node name="Turret" type="Sprite2D" parent="Pivot" index="0"]
 position = Vector2(36, 0)
 texture = ExtResource("2_fwgnp")
+
+[node name="Animations" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_4fkxx")
+}

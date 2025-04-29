@@ -51,6 +51,7 @@ stat_multipliers = Dictionary[StringName, float]({
 &"damage": 1.32
 })
 stat_setters = Dictionary[StringName, Variant]({
+&"armor_piercing": 0.2,
 &"damage_type": 1
 })
 priority = 5

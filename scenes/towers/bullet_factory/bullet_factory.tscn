@@ -9,6 +9,7 @@
 [node name="BulletFactory" groups=["supporting_towers"] instance=ExtResource("1_kfxjv")]
 script = ExtResource("2_trb26")
 tower_name = &"Bullet Factory"
+description = "Supplies bullets to towers in range."
 targeting_options = Array[StringName]([])
 cost = 3000
 
@@ -39,7 +40,7 @@ cost = 1500
 
 [node name="Armor Piercing Bullets" type="Node" parent="Upgrades/Path1" index="1"]
 script = ExtResource("3_trb26")
-description = "Bullets deal 10% more damage. This damage ignores enemy immunity."
+description = "Bullets deal even more damage, and can deal reduced damage to bulletproof enemies."
 cost = 1800
 
 [node name="Energy Bullets" type="Node" parent="Upgrades/Path1" index="2"]

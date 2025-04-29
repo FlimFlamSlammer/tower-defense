@@ -8,6 +8,7 @@
 [node name="RapidTurret" groups=["attacking_towers", "uses_bullet_towers"] instance=ExtResource("1_7oefg")]
 script = ExtResource("2_y2o04")
 tower_name = &"Rapid Turret"
+description = "High fire rate and DPS. Great for shredding bosses, but not very efficient. Requires bullets from a bullet factory."
 cost = 1600
 
 [node name="Improved Precision" type="Node" parent="Upgrades/Path0" index="0"]
