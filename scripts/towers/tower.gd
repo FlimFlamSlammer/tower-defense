@@ -39,7 +39,6 @@ var tile_position: Vector2i:
 
 var targeting: StringName = Targeting.FIRST ## The targeting option that the Tower is currently using.
 var current_upgrade: Array[int] = [0, 0]
-var selected: bool = false
 var status_effects: Dictionary[StringName, TowerStatusEffect]
 
 var _placed: bool = false
@@ -114,13 +113,11 @@ func load(data: Dictionary[StringName, Variant]) -> void:
 
 ## Marks the tower as selected, showing its range circle.
 func select() -> void:
-	selected = true
 	_range_animations.play("show_range")
 
 
 ## Marks the tower as deselected, hiding its range circle.
 func deselect() -> void:
-	selected = false
 	_range_animations.play("hide_range")
 
 
@@ -206,10 +203,13 @@ func upgrade_tower(path: int, cb: Callable = Utils.null_callable) -> void:
 		var new_mutable_data: MutableData = mutable_data_scene.instantiate()
 		new_mutable_data.name = _mutable_data.name
 
+		remove_child(_mutable_data)
 		_mutable_data.queue_free()
+
 		_mutable_data = new_mutable_data
-		add_child.call_deferred(new_mutable_data)
-		update_status_effects.call_deferred()
+		add_child(new_mutable_data)
+		
+		update_status_effects()
 
 		cost += upgrade.cost
 	)

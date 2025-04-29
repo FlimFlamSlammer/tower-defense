@@ -187,7 +187,7 @@ func _select_tower(tower: Tower) -> void:
 
 
 func _clear_selection() -> void:
-	if selected_tower and selected_tower.selected:
+	if selected_tower:
 		selected_tower.deselect()
 		selected_tower = null
 
