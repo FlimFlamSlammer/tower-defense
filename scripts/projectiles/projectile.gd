@@ -1,7 +1,7 @@
 class_name Projectile
 extends Node2D
 
-const MIN_PIERCE_DAMAGE_RATIO = 0.5
+const MIN_PIERCE_DAMAGE_MULTIPLIER = 0.4
 
 var stats: Dictionary[StringName, Variant]
 
@@ -27,7 +27,7 @@ func _on_collision(area: Area2D) -> void:
 
 	var enemy := area as Enemy
 	if enemy:
-		var pierce_damage_multiplier: float = 1.0 - ((1.0 - MIN_PIERCE_DAMAGE_RATIO) * _pierce_used / stats.pierce)
+		var pierce_damage_multiplier: float = 1.0 - ((1.0 - MIN_PIERCE_DAMAGE_MULTIPLIER) * _pierce_used / stats.pierce)
 		var armor_piercing_damage_multiplier: float = 1.0
 
 		if "armor_piercing" in stats:
@@ -35,6 +35,7 @@ func _on_collision(area: Area2D) -> void:
 			enemy.hit(stats.damage * pierce_damage_multiplier * stats.armor_piercing, Globals.DamageTypes.NORMAL)
 
 		enemy.hit(stats.damage * pierce_damage_multiplier * armor_piercing_damage_multiplier, stats.damage_type)
+		print(stats.damage * pierce_damage_multiplier * armor_piercing_damage_multiplier)
 		_pierce_used += 1
 
 		if "projectile_status_effects" in stats:
