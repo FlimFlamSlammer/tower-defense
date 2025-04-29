@@ -9,7 +9,7 @@ func _process(_delta: float) -> void:
 
 
 func _update_tile_danger_levels(group: StringName, current_danger_level: float, danger_mult: float, immunities: Array[Globals.DamageTypes]) -> float:
-	if Groups.USES_BULLET in get_groups() and not "bullets" in _status_effects:
+	if Groups.USES_BULLET in get_groups() and not "bullets" in status_effects:
 		return current_danger_level
 
 	if group == Tower.Groups.ATTACKING and not stats.damage_type in immunities:
@@ -25,7 +25,7 @@ func _fire(target: Enemy) -> void:
 
 func attempt_fire(timer: Timer, fire: Callable, attack_cost: int) -> void:
 	if not _placed or not timer.is_stopped(): return
-	if Groups.USES_BULLET in get_groups() and not "bullets" in _status_effects: return
+	if Groups.USES_BULLET in get_groups() and not "bullets" in status_effects: return
 
 	var target: Enemy = _get_target(stats.range)
 	if not target: return

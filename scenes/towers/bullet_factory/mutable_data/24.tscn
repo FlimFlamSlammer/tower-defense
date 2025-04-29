@@ -24,7 +24,7 @@ stat_setters = Dictionary[StringName, Variant]({
 &"damage_type": 2,
 &"projectile_status_effects": [NodePath("../../ProjectileStatusEffects/EnemyStatusEffect")]
 })
-priority = 15
+priority = 14
 metadata/_custom_type_script = "uid://0afypir31y4j"
 
 [node name="core" type="Sprite2D" parent="." index="1"]

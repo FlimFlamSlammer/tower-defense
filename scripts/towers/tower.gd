@@ -40,8 +40,8 @@ var tile_position: Vector2i:
 var targeting: StringName = Targeting.FIRST ## The targeting option that the Tower is currently using.
 var current_upgrade: Array[int] = [0, 0]
 var selected: bool = false
+var status_effects: Dictionary[StringName, TowerStatusEffect]
 
-var _status_effects: Dictionary[StringName, TowerStatusEffect]
 var _placed: bool = false
 
 @onready var stats: Dictionary[StringName, Variant]
@@ -138,7 +138,7 @@ func sell() -> void:
 ## Applies status effects to the tower and runs any functions that depend on the tower's stats.
 func update_status_effects() -> void:
 	stats = _mutable_data.stats.duplicate()
-	for effect: TowerStatusEffect in _status_effects.values():
+	for effect: TowerStatusEffect in status_effects.values():
 		effect.apply(stats)
 
 	update_range_circle()
@@ -153,8 +153,8 @@ func update_range_circle() -> void:
 
 ## Reparents the TowerStatusEffect to the Tower where the function was called. Use duplicate() to preserve the TowerStatusEffect.
 func apply_status_effect(effect: TowerStatusEffect, p_update: bool = true) -> bool:
-	if effect.id in _status_effects:
-		if _status_effects[effect.id].priority >= effect.priority:
+	if effect.id in status_effects:
+		if status_effects[effect.id].priority >= effect.priority:
 			effect.queue_free()
 			return false
 		else:
@@ -162,7 +162,7 @@ func apply_status_effect(effect: TowerStatusEffect, p_update: bool = true) -> bo
 
 	effect.expired.connect(remove_status_effect.bind(effect.id))
 
-	_status_effects[effect.id] = effect
+	status_effects[effect.id] = effect
 	if effect.get_parent():
 		effect.reparent(self)
 	else:
@@ -175,15 +175,15 @@ func apply_status_effect(effect: TowerStatusEffect, p_update: bool = true) -> bo
 
 
 func clear_persistent_status_effects() -> void:
-	for effect: TowerStatusEffect in _status_effects.values():
-		if effect.persistent:
-			_status_effects[effect.id].queue_free()
-			_status_effects.erase(effect.id)
+	for id: StringName in status_effects.keys():
+		if status_effects[id].persistent:
+			remove_status_effect(id)
+			print(id)
 
 
 func remove_status_effect(id: StringName, p_update: bool = true) -> void:
-	_status_effects[id].queue_free()
-	_status_effects.erase(id)
+	status_effects[id].queue_free()
+	status_effects.erase(id)
 	if p_update:
 		update_status_effects()
 

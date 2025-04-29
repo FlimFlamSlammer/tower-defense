@@ -31,6 +31,10 @@ func give_status_effects() -> void:
 				for i: int in range(effect_paths.size()):
 					if effect_paths[i] is NodePath:
 						effect_paths[i] = status_effect.get_node(effect_paths[i])
+				
+				if status_effect.id in tower.status_effects \
+						and tower.status_effects[status_effect.id].priority == status_effect.priority:
+					tower.remove_status_effect(status_effect.id)
 
 
 			if _can_affect_tower(tower, status_effect):
