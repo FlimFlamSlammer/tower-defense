@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://umov0hl7hsyx"]
+[gd_scene load_steps=5 format=3 uid="uid://umov0hl7hsyx"]
 
 [ext_resource type="PackedScene" uid="uid://bolphubyb6fu1" path="res://scenes/towers/shooting_tower.tscn" id="1_wec12"]
 [ext_resource type="Script" uid="uid://col0ystitn4jb" path="res://scripts/towers/upgrade.gd" id="2_2vm3q"]
+[ext_resource type="Script" uid="uid://djgm5vv3fgvkj" path="res://scripts/towers/sniper_turret.gd" id="2_6d0cm"]
 [ext_resource type="PackedScene" uid="uid://bek23xbitbg5w" path="res://scenes/towers/sniper_turret/mutable_data/00.tscn" id="2_ipgno"]
 
-[node name="ShootingTower" instance=ExtResource("1_wec12")]
+[node name="ShootingTower" groups=["attacking_towers", "uses_bullet_towers"] instance=ExtResource("1_wec12")]
+script = ExtResource("2_6d0cm")
 tower_name = &"Sniper Turret"
+description = "High damage and long range, but shoots slowly. Requires bullets from a bullet factory."
 cost = 1600
 
 [node name="Powerful Shots" type="Node" parent="Upgrades/Path0" index="0"]
@@ -14,7 +17,7 @@ description = "Increases damage."
 cost = 650
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
-[node name="More Powerful Shots" type="Node" parent="Upgrades/Path0" index="1"]
+[node name="Very Powerful Shots" type="Node" parent="Upgrades/Path0" index="1"]
 script = ExtResource("2_2vm3q")
 description = "Increases damage."
 cost = 650
