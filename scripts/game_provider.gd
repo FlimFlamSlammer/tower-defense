@@ -106,7 +106,7 @@ func _are_enemies_remaining() -> bool:
 
 
 func _get_wave_bonus(wave: int) -> int:
-	return 950 + (50 * wave)
+	return 940 + (60 * wave)
 
 
 func _pause_game() -> void:
