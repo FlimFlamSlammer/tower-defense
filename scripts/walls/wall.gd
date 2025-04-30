@@ -1,5 +1,5 @@
 class_name Wall
-extends Sprite2D
+extends Area2D
 
 signal sold()
 signal damaged(new_health: float)
@@ -30,12 +30,14 @@ var vertical: bool:
 		tile_position = tile_position
 
 @onready var stats: Dictionary[StringName, Variant] = base_stats.duplicate()
+
 @onready var _base_health: float = stats.health
 @onready var _range_animations: AnimationPlayer = $RangeAnimation
 @onready var _click_area: Control = $ClickArea
 
 func place() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 1.0)
+	monitorable = true
 	_click_area.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
