@@ -6,7 +6,7 @@
 [node name="Enemy" instance=ExtResource("1_hqvtq")]
 base_stats = Dictionary[StringName, Variant]({
 &"immunities": PackedInt64Array(),
-&"max_health": 18.0,
+&"max_health": 25.0,
 &"speed": 2.5
 })
 

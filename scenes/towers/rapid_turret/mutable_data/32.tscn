@@ -15,9 +15,9 @@ _data = {
 [node name="MutableData" instance=ExtResource("1_0cc1n")]
 stats = Dictionary[StringName, Variant]({
 &"attack_cost": 6,
-&"damage": 3.0,
-&"fire_rate": 5.0,
-&"pierce": 3,
+&"damage": 4.0,
+&"fire_rate": 4.0,
+&"pierce": 4,
 &"projectile": ExtResource("2_xck7k"),
 &"projectile_offset": PackedVector2Array(80, -82, 80, 82),
 &"range": 4.0,

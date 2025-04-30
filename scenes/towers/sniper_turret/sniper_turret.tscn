@@ -9,30 +9,30 @@
 script = ExtResource("2_6d0cm")
 tower_name = &"Sniper Turret"
 description = "High damage and long range, but shoots slowly. Requires bullets from a bullet factory."
-cost = 1600
+cost = 1100
 
 [node name="Powerful Shots" type="Node" parent="Upgrades/Path0" index="0"]
 script = ExtResource("2_2vm3q")
 description = "Increases damage."
-cost = 650
+cost = 850
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Very Powerful Shots" type="Node" parent="Upgrades/Path0" index="1"]
 script = ExtResource("2_2vm3q")
 description = "Increases damage."
-cost = 650
+cost = 1000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Shrapnel Shots" type="Node" parent="Upgrades/Path0" index="2"]
 script = ExtResource("2_2vm3q")
 description = "Bullets create shrapnel behind the enemy."
-cost = 3000
+cost = 2000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Semi-Automatic" type="Node" parent="Upgrades/Path0" index="3"]
 script = ExtResource("2_2vm3q")
 description = "Fire 3 times faster and increases damage."
-cost = 15000
+cost = 7500
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Bigger Engine" type="Node" parent="Upgrades/Path1" index="0"]
@@ -53,10 +53,10 @@ description = "Longer barrel which increases damage and range significantly."
 cost = 3500
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
-[node name="Kaboom!" type="Node" parent="Upgrades/Path1" index="3"]
+[node name="KABOOM!!" type="Node" parent="Upgrades/Path1" index="3"]
 script = ExtResource("2_2vm3q")
 description = "Bullets explode on impact."
-cost = 18000
+cost = 16000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="MutableData" parent="." index="7" instance=ExtResource("2_ipgno")]
