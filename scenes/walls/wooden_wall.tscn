@@ -3,7 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://du51eokmmapbp" path="res://scenes/walls/wall.tscn" id="1_j6u1p"]
 
 [node name="WoodenWall" instance=ExtResource("1_j6u1p")]
+wall_name = &"Wooden Wall"
 base_stats = Dictionary[StringName, Variant]({
-&"health": 25.0
+&"health": 30.0
 })
 cost = 150

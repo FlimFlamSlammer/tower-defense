@@ -271,10 +271,12 @@ func _push_pathfinding_data(pq: PriorityQueue, data: Array, offset: Vector2i, im
 	# Calculate danger level
 	new_data[1] = data[1] + (new_tile.danger_level / EXPECTED_ENEMY_SPEED)
 
-	if not Globals.DamageTypes.WALL in immunities:
-		var wall_between: Wall = get_wall_between(data[0], new_data[0])
-		if wall_between:
+	var wall_between: Wall = get_wall_between(data[0], new_data[0])
+	if wall_between:
+		if not Globals.DamageTypes.WALL in immunities:
 			new_data[1] += wall_between.stats.health
+		else:
+			new_data[1] -= wall_between.stats.health
 
 	# Calculate distance from finish
 	new_data[2] = data[2] + 1

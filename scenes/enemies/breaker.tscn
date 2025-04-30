@@ -1,17 +1,136 @@
-[gd_scene load_steps=3 format=3 uid="uid://dc8muahl7v4y1"]
+[gd_scene load_steps=20 format=3 uid="uid://dc8muahl7v4y1"]
 
 [ext_resource type="PackedScene" uid="uid://o1l1pxkirthe" path="res://scenes/enemies/enemy.tscn" id="1_hy87s"]
 [ext_resource type="Texture2D" uid="uid://hi0erumvijca" path="res://assets/enemies/breaker_Layer 1.svg" id="2_fxrjy"]
+[ext_resource type="Script" uid="uid://dnjgjuydtpqjs" path="res://scripts/enemies/breaker.gd" id="2_pdc8y"]
+[ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="3_fxrjy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fxrjy"]
+radius = 300.0
+
+[sub_resource type="Curve" id="Curve_pdc8y"]
+_data = [Vector2(0, 1), 0.0, -0.348636, 0, 0, Vector2(1, 0), -2.10384, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fvxf0"]
+curve = SubResource("Curve_pdc8y")
+
+[sub_resource type="Gradient" id="Gradient_vkbv8"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.76, 0.76, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fvxf0"]
+gradient = SubResource("Gradient_vkbv8")
+
+[sub_resource type="Gradient" id="Gradient_1moi1"]
+offsets = PackedFloat32Array(0, 0.722581, 1)
+colors = PackedColorArray(1, 0.996667, 0.8, 1, 1, 0.986667, 0.2, 1, 0.83, 0.818933, 0.166, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xo8pq"]
+gradient = SubResource("Gradient_1moi1")
+
+[sub_resource type="Curve" id="Curve_ktndo"]
+_limits = [1.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.428149, 0, 0, Vector2(1, 1.5), 0.522169, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xo8pq"]
+curve = SubResource("Curve_ktndo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1hn3b"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 320.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 140.0
+initial_velocity_max = 280.0
+gravity = Vector3(0, 0, 0)
+damping_min = 150.0
+damping_max = 200.0
+scale_min = 0.6
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_xo8pq")
+color_ramp = SubResource("GradientTexture1D_xo8pq")
+color_initial_ramp = SubResource("GradientTexture1D_fvxf0")
+alpha_curve = SubResource("CurveTexture_fvxf0")
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 2
+
+[sub_resource type="Curve" id="Curve_574w8"]
+_limits = [0.0, 0.4, 0.0, 1.0]
+_data = [Vector2(0, 0.4), 0.0, -0.0924412, 0, 0, Vector2(1, 0), -0.934407, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6qo1t"]
+curve = SubResource("Curve_574w8")
+
+[sub_resource type="Curve" id="Curve_u5iou"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 2.4695, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3klb1"]
+curve = SubResource("Curve_u5iou")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pdt8p"]
+lifetime_randomness = 0.8
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 256.0
+spread = 180.0
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+gravity = Vector3(0, 0, 0)
+damping_min = 400.0
+damping_max = 550.0
+scale_min = 0.65
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_3klb1")
+color = Color(0, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_6qo1t")
 
 [node name="Enemy" instance=ExtResource("1_hy87s")]
+script = ExtResource("2_pdc8y")
 base_stats = Dictionary[StringName, Variant]({
+&"damage": 100.0,
 &"immunities": PackedInt64Array(5),
-&"max_health": 30.0,
-&"speed": 2.0
+&"max_health": 25.0,
+&"speed": 3.5
 })
 
-[node name="Sprite" type="Sprite2D" parent="." index="0"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
+polygon = PackedVector2Array(-80, -40, 12, -40, 68, 0, 12, 40, -80, 40)
+
+[node name="Sprite" type="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_fxrjy")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
-polygon = PackedVector2Array(-80, -40, 12, -40, 68, 0, 12, 40, -80, 40)
+[node name="BlastArea" type="Area2D" parent="." index="2"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlastArea" index="0"]
+shape = SubResource("CircleShape2D_fxrjy")
+
+[node name="Fire" type="GPUParticles2D" parent="." index="3"]
+z_index = 20
+emitting = false
+amount = 30
+sub_emitter = NodePath("Smoke")
+texture = ExtResource("3_fxrjy")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 48
+process_material = SubResource("ParticleProcessMaterial_1hn3b")
+
+[node name="Smoke" type="GPUParticles2D" parent="Fire" index="0"]
+z_index = -1
+emitting = false
+amount = 10000
+texture = ExtResource("3_fxrjy")
+lifetime = 0.7
+explosiveness = 1.0
+fixed_fps = 48
+process_material = SubResource("ParticleProcessMaterial_pdt8p")

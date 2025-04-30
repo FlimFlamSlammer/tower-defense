@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://du51eokmmapbp"]
+[gd_scene load_steps=11 format=3 uid="uid://du51eokmmapbp"]
 
 [ext_resource type="Texture2D" uid="uid://x1jdj8ex5vto" path="res://assets/walls/wooden_wall.svg" id="1_3lk8w"]
 [ext_resource type="Script" uid="uid://blo6b658ybg0o" path="res://scripts/walls/wall.gd" id="1_bdm3b"]
 [ext_resource type="Material" uid="uid://b4s2mxmhcjh2v" path="res://resources/materials/outline.tres" id="3_q2uag"]
 [ext_resource type="Texture2D" uid="uid://mygk8i0abyo3" path="res://assets/towers/range-circle.svg" id="4_qhyk7"]
 [ext_resource type="Script" uid="uid://b5d6b7nun4ne4" path="res://scripts/utils/unscaled_outline.gd" id="5_2ra0q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2uag"]
+size = Vector2(20, 256)
 
 [sub_resource type="Animation" id="Animation_s5r7u"]
 length = 0.001
@@ -132,14 +135,22 @@ _data = {
 &"show_range": SubResource("Animation_i8o17")
 }
 
-[node name="Wall" type="Sprite2D" groups=["walls"]]
-texture = ExtResource("1_3lk8w")
+[node name="Wall" type="Area2D" groups=["walls"]]
+collision_layer = 4
+collision_mask = 0
+input_pickable = false
+monitoring = false
+monitorable = false
 script = ExtResource("1_bdm3b")
-wall_name = &"Wooden Wall"
 base_stats = Dictionary[StringName, Variant]({
-&"health": 0.0
+&"health": null
 })
-metadata/_custom_type_script = "uid://blo6b658ybg0o"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3lk8w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q2uag")
 
 [node name="ClickArea" type="Control" parent="."]
 layout_mode = 3
@@ -147,10 +158,8 @@ anchor_left = -0.333333
 anchor_top = 0.426471
 anchor_right = 1.33333
 anchor_bottom = 0.573529
-offset_left = -120.0
-offset_top = -116.0
-offset_right = -32.0
-offset_bottom = -28.0
+offset_left = -128.0
+offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.785397
