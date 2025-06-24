@@ -47,7 +47,7 @@ func _explode() -> void:
 
 	_fire_effect.emitting = true
 	_fire_effect.reparent(get_parent())
-	_fire_effect.finished.connect(_fire_effect.queue_free)
+	_fire_effect.get_child(0).finished.connect(_fire_effect.queue_free)
 
 	queue_free()
 
