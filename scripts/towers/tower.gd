@@ -123,8 +123,8 @@ func deselect() -> void:
 
 func sell() -> void:
 	money_requested.emit(-get_sell_value(), true, Utils.null_callable)
-	sold.emit()
 	queue_free()
+	sold.emit()
 
 
 func get_sell_value() -> int:
