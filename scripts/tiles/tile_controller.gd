@@ -1,7 +1,7 @@
 class_name TileController
 extends Node
 
-const EXPECTED_ENEMY_SPEED: float = 1.2 ## Assumption of enemy speed, used for pathfinding.
+const EXPECTED_ENEMY_SPEED: float = 2.0 ## Assumption of enemy speed, used for pathfinding. Lower values cause enemies to prefer going into walls.
 const ALTERNATIVE_PATH_DANGER_LEVEL_TRESHOLD: float = 2.0 ## Maximum danger level relative to optimal danger level for an alternative path to be considered.
 const ALTERNATIVE_PATH_DISTANCE_TRESHOLD: float = 1.2 ## Maximum distance level relative to optimal distance for an alternative path to be considered.
 
