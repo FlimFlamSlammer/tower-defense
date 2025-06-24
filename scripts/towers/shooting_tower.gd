@@ -54,6 +54,7 @@ func _get_target(p_range: float) -> Enemy:
 	var overlapping_areas: Array[Area2D] = _range_area.get_overlapping_areas()
 	for area in overlapping_areas:
 		var enemy := area as Enemy
+		if enemy.is_queued_for_deletion(): return
 		var enemy_value: float
 		match targeting:
 			Targeting.FIRST:
