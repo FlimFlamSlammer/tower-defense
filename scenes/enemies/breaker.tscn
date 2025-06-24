@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://dc8muahl7v4y1"]
+[gd_scene load_steps=25 format=3 uid="uid://dc8muahl7v4y1"]
 
 [ext_resource type="PackedScene" uid="uid://o1l1pxkirthe" path="res://scenes/enemies/enemy.tscn" id="1_hy87s"]
-[ext_resource type="Texture2D" uid="uid://hi0erumvijca" path="res://assets/enemies/breaker_Layer 1.svg" id="2_fxrjy"]
+[ext_resource type="Texture2D" uid="uid://hi0erumvijca" path="res://assets/enemies/breaker.svg" id="2_fxrjy"]
 [ext_resource type="Script" uid="uid://dnjgjuydtpqjs" path="res://scripts/enemies/breaker.gd" id="2_pdc8y"]
 [ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="3_fxrjy"]
+[ext_resource type="Texture2D" uid="uid://dak8kbmfyqofm" path="res://assets/enemies/breaker_light_on.svg" id="5_1moi1"]
+[ext_resource type="Texture2D" uid="uid://bh2pkxohxu06x" path="res://assets/enemies/breaker_light_off.svg" id="6_ktndo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fxrjy"]
 radius = 300.0
@@ -90,6 +92,43 @@ scale_curve = SubResource("CurveTexture_3klb1")
 color = Color(0, 0, 0, 1)
 alpha_curve = SubResource("CurveTexture_6qo1t")
 
+[sub_resource type="Animation" id="Animation_ktndo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BreakerDarkNeon:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_1moi1"]
+resource_name = "blink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BreakerDarkNeon:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1hn3b"]
+_data = {
+&"RESET": SubResource("Animation_ktndo"),
+&"blink": SubResource("Animation_1moi1")
+}
+
 [node name="Enemy" instance=ExtResource("1_hy87s")]
 script = ExtResource("2_pdc8y")
 base_stats = Dictionary[StringName, Variant]({
@@ -100,12 +139,22 @@ base_stats = Dictionary[StringName, Variant]({
 })
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
+visible = false
 polygon = PackedVector2Array(-80, -40, 12, -40, 68, 0, 12, 40, -80, 40)
 
 [node name="Sprite" type="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_fxrjy")
 
-[node name="BlastArea" type="Area2D" parent="." index="2"]
+[node name="BreakerBrightNeon" type="Sprite2D" parent="." index="2"]
+position = Vector2(8, 0)
+texture = ExtResource("6_ktndo")
+
+[node name="BreakerDarkNeon" type="Sprite2D" parent="." index="3"]
+position = Vector2(8, 0)
+texture = ExtResource("5_1moi1")
+
+[node name="BlastArea" type="Area2D" parent="." index="4"]
+visible = false
 collision_layer = 0
 collision_mask = 4
 monitorable = false
@@ -113,7 +162,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlastArea" index="0"]
 shape = SubResource("CircleShape2D_fxrjy")
 
-[node name="Fire" type="GPUParticles2D" parent="." index="3"]
+[node name="Fire" type="GPUParticles2D" parent="." index="5"]
 z_index = 20
 emitting = false
 amount = 30
@@ -134,3 +183,9 @@ lifetime = 0.7
 explosiveness = 1.0
 fixed_fps = 48
 process_material = SubResource("ParticleProcessMaterial_pdt8p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+libraries = {
+&"": SubResource("AnimationLibrary_1hn3b")
+}
+autoplay = "blink"

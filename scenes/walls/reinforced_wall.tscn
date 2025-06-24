@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg8jqcn5rfyn0"]
+
+[ext_resource type="PackedScene" uid="uid://du51eokmmapbp" path="res://scenes/walls/wall.tscn" id="1_4uik7"]
+[ext_resource type="Texture2D" uid="uid://boy7jpoigvexl" path="res://assets/walls/reinforced_wall.svg" id="2_ey8d7"]
+
+[node name="Wall" instance=ExtResource("1_4uik7")]
+wall_name = &"Reinforced Wall"
+base_stats = Dictionary[StringName, Variant]({
+&"health": 100.0
+})
+cost = 400
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_ey8d7")

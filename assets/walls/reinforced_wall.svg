@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="24"
+   height="272"
+   viewBox="0 0 24 272"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="reinforced_wall.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview22"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="3.1066176"
+     inkscape:cx="12.3929"
+     inkscape:cy="110.73136"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     transform="translate(-244,8)">
+    <path
+       style="fill:#3a3a3a;stroke:#464646;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       d="M 256,10 V 246"
+       id="path3" />
+    <circle
+       style="fill:#555555;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-3-6-1-7"
+       cx="256"
+       cy="252"
+       r="12" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-6-01"
+       cx="256"
+       cy="136"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-8-6"
+       cx="256"
+       cy="152"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-3-5"
+       cx="256"
+       cy="168"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-4-7"
+       cx="256"
+       cy="184"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-6-0-5"
+       cx="256"
+       cy="200"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-8-7-4"
+       cx="256"
+       cy="216"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-3-6-1"
+       cx="256"
+       cy="232"
+       r="8" />
+    <circle
+       style="fill:#555555;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4"
+       cx="256"
+       cy="4"
+       r="12" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-6"
+       cx="256"
+       cy="24"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-8"
+       cx="256"
+       cy="40"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-3"
+       cx="256"
+       cy="56"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-4"
+       cx="256"
+       cy="72"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-6-0"
+       cx="256"
+       cy="88"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-8-7"
+       cx="256"
+       cy="104"
+       r="8" />
+    <circle
+       style="fill:#725a30;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path4-3-6"
+       cx="256"
+       cy="120"
+       r="8" />
+  </g>
+</svg>

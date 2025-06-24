@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvy6grcey5qcd"]
+[gd_scene load_steps=11 format=3 uid="uid://cvy6grcey5qcd"]
 
 [ext_resource type="Script" uid="uid://deh2a5w8iejja" path="res://scripts/projectiles/bullet.gd" id="1_yvfy2"]
 [ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="2_48g2p"]
+[ext_resource type="PackedScene" uid="uid://dn4llo3jsfjg5" path="res://scenes/projectiles/shrapnel.tscn" id="2_k5ji7"]
 
 [sub_resource type="Curve" id="Curve_k5ji7"]
 _data = [Vector2(0, 0.797753), 0.0, 3.08547, 0, 0, Vector2(0.124464, 1), 0.0, 0.0, 0, 0]
@@ -163,6 +164,7 @@ collision_mask = 2
 collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("1_yvfy2")
+shrapnel_scene = ExtResource("2_k5ji7")
 _ray_cast = NodePath(".")
 _tracer = NodePath("Trail")
 _animation_player = NodePath("AnimationPlayer")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://lvqv7e8j8dut"]
 
 [ext_resource type="Script" uid="uid://csa5uq4xgsuff" path="res://scripts/enemies/enemy.gd" id="1_x1m33"]
-[ext_resource type="Texture2D" uid="uid://bpu5w33lh3n6g" path="res://assets/enemies/slow-car.svg" id="2_l6ml4"]
+[ext_resource type="Texture2D" uid="uid://bpu5w33lh3n6g" path="res://assets/enemies/slow_car.svg" id="2_l6ml4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rrssi"]
 size = Vector2(192, 96)

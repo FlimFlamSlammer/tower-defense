@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c3ftv6p6r1071"]
+[gd_scene load_steps=23 format=3 uid="uid://c3ftv6p6r1071"]
 
 [ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="1_8bulm"]
 [ext_resource type="Script" uid="uid://dt80n4vowgof1" path="res://scripts/ui/gui/gui_root.gd" id="1_uktbi"]
@@ -19,7 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://tiyc8osrtwll" path="res://assets/towers/sniper_turret/preview.svg" id="13_p5jvc"]
 [ext_resource type="PackedScene" uid="uid://dla8smgiuc0vj" path="res://scenes/walls/wooden_wall.tscn" id="13_rv1qw"]
 [ext_resource type="Texture2D" uid="uid://x1jdj8ex5vto" path="res://assets/walls/wooden_wall.svg" id="16_tqdjj"]
+[ext_resource type="PackedScene" uid="uid://bg8jqcn5rfyn0" path="res://scenes/walls/reinforced_wall.tscn" id="19_o0sjj"]
 [ext_resource type="PackedScene" uid="uid://f652rwx2b5b4" path="res://scenes/ui/gui/wall_select_menu.tscn" id="20_5j4uf"]
+[ext_resource type="Texture2D" uid="uid://boy7jpoigvexl" path="res://assets/walls/reinforced_wall.svg" id="20_pxpvm"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -168,6 +170,14 @@ wall_scene = ExtResource("13_rv1qw")
 texture = ExtResource("16_tqdjj")
 stretch_mode = 5
 
+[node name="WallButton2" parent="TowerMenu/Walls/Buttons" index="1" instance=ExtResource("12_4lr0w")]
+layout_mode = 2
+wall_scene = ExtResource("19_o0sjj")
+
+[node name="Texture" parent="TowerMenu/Walls/Buttons/WallButton2" index="0"]
+texture = ExtResource("20_pxpvm")
+stretch_mode = 5
+
 [node name="TowerMenuButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -216,3 +226,4 @@ metadata/_edit_use_anchors_ = true
 [editable path="TowerMenu/Production/Buttons/Bullet Factory"]
 [editable path="TowerMenu/Walls"]
 [editable path="TowerMenu/Walls/Buttons/WallButton"]
+[editable path="TowerMenu/Walls/Buttons/WallButton2"]

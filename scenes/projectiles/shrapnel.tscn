@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn4llo3jsfjg5"]
+
+[ext_resource type="Script" uid="uid://cjfxjk5g3alu6" path="res://scripts/projectiles/area_projectile.gd" id="1_u7i4x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7i4x"]
+size = Vector2(60, 8)
+
+[node name="Shrapnel" type="Area2D"]
+z_index = 9
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_u7i4x")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(56, 0)
+color = Color(1, 0.890625, 0, 1)
+polygon = PackedVector2Array(-68, -4, -8, 0, -68, 4, -88, 0)
+uv = PackedVector2Array(-31.5, 3, -30.5, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(18, 0)
+shape = SubResource("RectangleShape2D_u7i4x")
+
+[node name="ExpirationTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_collision"]
+[connection signal="timeout" from="ExpirationTimer" to="." method="queue_free"]

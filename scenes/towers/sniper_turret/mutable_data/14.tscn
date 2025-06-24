@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cax2s2sfj3j12"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_ykbmv"]
-[ext_resource type="PackedScene" uid="uid://cvy6grcey5qcd" path="res://scenes/projectiles/bullet.tscn" id="2_hxtdo"]
+[ext_resource type="PackedScene" uid="uid://cso6o20qwx2yn" path="res://scenes/projectiles/exploding_bullet.tscn" id="2_hxtdo"]
 [ext_resource type="Texture2D" uid="uid://cp2rgv55ytxtv" path="res://assets/towers/sniper_turret/14/Turret.svg" id="2_ykbmv"]
 
 [sub_resource type="Animation" id="Animation_v2dyu"]

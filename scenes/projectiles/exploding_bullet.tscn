@@ -1,0 +1,122 @@
+[gd_scene load_steps=19 format=3 uid="uid://cso6o20qwx2yn"]
+
+[ext_resource type="PackedScene" uid="uid://cvy6grcey5qcd" path="res://scenes/projectiles/bullet.tscn" id="1_2xngo"]
+[ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="2_8ev8i"]
+[ext_resource type="Script" uid="uid://dw1blnest65jf" path="res://scripts/projectiles/exploding_bullet.gd" id="2_e178w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ev8i"]
+radius = 500.0
+
+[sub_resource type="Curve" id="Curve_pqm0a"]
+_data = [Vector2(0, 1), 0.0, -0.348636, 0, 0, Vector2(1, 0), -2.10384, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uab25"]
+curve = SubResource("Curve_pqm0a")
+
+[sub_resource type="Gradient" id="Gradient_0nrx5"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.76, 0.76, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xo8pq"]
+gradient = SubResource("Gradient_0nrx5")
+
+[sub_resource type="Gradient" id="Gradient_ven61"]
+offsets = PackedFloat32Array(0, 0.722581, 1)
+colors = PackedColorArray(1, 0.996667, 0.8, 1, 1, 0.986667, 0.2, 1, 0.83, 0.818933, 0.166, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fvxf0"]
+gradient = SubResource("Gradient_ven61")
+
+[sub_resource type="Curve" id="Curve_pmxsj"]
+_limits = [1.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.428149, 0, 0, Vector2(1, 1.5), 0.522169, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6qo1t"]
+curve = SubResource("Curve_pmxsj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_52pmr"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 450.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 290.0
+gravity = Vector3(0, 0, 0)
+damping_min = 150.0
+damping_max = 200.0
+scale_min = 0.7
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_6qo1t")
+color_ramp = SubResource("GradientTexture1D_fvxf0")
+color_initial_ramp = SubResource("GradientTexture1D_xo8pq")
+alpha_curve = SubResource("CurveTexture_uab25")
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 2
+
+[sub_resource type="Curve" id="Curve_hppra"]
+_limits = [0.0, 0.4, 0.0, 1.0]
+_data = [Vector2(0, 0.4), 0.0, -0.0924412, 0, 0, Vector2(1, 0), -0.934407, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x71jw"]
+curve = SubResource("Curve_hppra")
+
+[sub_resource type="Curve" id="Curve_8cr1c"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 2.4695, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3klb1"]
+curve = SubResource("Curve_8cr1c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_okr0k"]
+lifetime_randomness = 0.8
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 300.0
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 700.0
+gravity = Vector3(0, 0, 0)
+damping_min = 400.0
+damping_max = 550.0
+scale_min = 0.85
+scale_curve = SubResource("CurveTexture_3klb1")
+color = Color(0, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_x71jw")
+
+[node name="Bullet" instance=ExtResource("1_2xngo")]
+script = ExtResource("2_e178w")
+shrapnel_scene = null
+
+[node name="BlastShapeCast" type="ShapeCast2D" parent="." index="3"]
+shape = SubResource("CircleShape2D_8ev8i")
+target_position = Vector2(0, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Fire" type="GPUParticles2D" parent="." index="4"]
+z_index = 20
+emitting = false
+amount = 100
+sub_emitter = NodePath("Smoke")
+texture = ExtResource("2_8ev8i")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 48
+process_material = SubResource("ParticleProcessMaterial_52pmr")
+
+[node name="Smoke" type="GPUParticles2D" parent="Fire" index="0"]
+z_index = -1
+emitting = false
+amount = 10000
+texture = ExtResource("2_8ev8i")
+lifetime = 0.7
+explosiveness = 1.0
+fixed_fps = 48
+process_material = SubResource("ParticleProcessMaterial_okr0k")

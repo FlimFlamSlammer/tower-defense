@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://j5wqcdx6y2ns"]
 
 [ext_resource type="PackedScene" uid="uid://o1l1pxkirthe" path="res://scenes/enemies/enemy.tscn" id="1_ar70y"]
-[ext_resource type="Texture2D" uid="uid://cv64a01wbdudg" path="res://assets/enemies/armored-car.svg" id="2_okr8b"]
+[ext_resource type="Texture2D" uid="uid://cv64a01wbdudg" path="res://assets/enemies/armored_car.svg" id="2_okr8b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iimj0"]
 size = Vector2(192, 96)

@@ -1,7 +1,7 @@
 class_name GameProvider
 extends Node
 
-const _MAP_SCENE_DIR: String = "res://scenes/maps/"
+const MAP_SCENE_DIR: String = "res://scenes/maps/"
 
 var map_name: String = "valley"
 
@@ -25,7 +25,7 @@ var money: int = 2100:
 
 func _ready() -> void:
 	# initialize map scene
-	var map_scene_path: String = _MAP_SCENE_DIR.path_join("%s.tscn" % map_name)
+	var map_scene_path: String = MAP_SCENE_DIR.path_join("%s.tscn" % map_name)
 	var map_scene: PackedScene = load(map_scene_path)
 
 	if not map_scene:

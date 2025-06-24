@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxy3pqhua6x16"]
 
 [ext_resource type="Script" uid="uid://csa5uq4xgsuff" path="res://scripts/enemies/enemy.gd" id="1_t10ux"]
-[ext_resource type="Texture2D" uid="uid://bts3yqqimgg6b" path="res://assets/enemies/fast-car.svg" id="2_c0mi0"]
+[ext_resource type="Texture2D" uid="uid://bts3yqqimgg6b" path="res://assets/enemies/fast_car.svg" id="2_c0mi0"]
 
 [node name="FastCar" type="Area2D" groups=["enemies"]]
 collision_layer = 2

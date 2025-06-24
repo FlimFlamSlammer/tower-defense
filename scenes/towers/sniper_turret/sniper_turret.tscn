@@ -32,7 +32,7 @@ metadata/_custom_type_script = "uid://col0ystitn4jb"
 [node name="Semi-Automatic" type="Node" parent="Upgrades/Path0" index="3"]
 script = ExtResource("2_2vm3q")
 description = "Fire 3 times faster and increases damage."
-cost = 7500
+cost = 14000
 metadata/_custom_type_script = "uid://col0ystitn4jb"
 
 [node name="Bigger Engine" type="Node" parent="Upgrades/Path1" index="0"]

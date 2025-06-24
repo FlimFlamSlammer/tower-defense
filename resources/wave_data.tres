@@ -97,8 +97,8 @@ data = Array[Array]([[{
 &"time": 4.0,
 &"type": ExtResource("3_m4j23")
 }], [{
-&"amount": 10,
-&"interval": 0.9,
+&"amount": 8,
+&"interval": 1.2,
 &"time": 0.0,
 &"type": ExtResource("3_m4j23")
 }, {
@@ -118,7 +118,7 @@ data = Array[Array]([[{
 &"type": ExtResource("2_mh3ks")
 }], [{
 &"amount": 4,
-&"interval": 0.5,
+&"interval": 3.0,
 &"time": 0.0,
 &"type": ExtResource("1_kdpmn")
 }, {
@@ -192,6 +192,11 @@ data = Array[Array]([[{
 &"time": 30.0,
 &"type": ExtResource("5_s7hhm")
 }], [{
+&"amount": 5,
+&"interval": 1.5,
+&"time": 0.0,
+&"type": ExtResource("1_kdpmn")
+}, {
 &"amount": 4,
 &"interval": 0.9,
 &"time": 0.0,
@@ -232,8 +237,8 @@ data = Array[Array]([[{
 &"time": 7.0,
 &"type": ExtResource("5_s7hhm")
 }], [{
-&"amount": 75,
-&"interval": 0.6,
+&"amount": 50,
+&"interval": 0.9,
 &"time": 0.0,
 &"type": ExtResource("5_s7hhm")
 }, {
