@@ -170,7 +170,7 @@ process_material = SubResource("ParticleProcessMaterial_hursv")
 script = ExtResource("2_rifxg")
 id = &"bullets"
 stat_multipliers = Dictionary[StringName, float]({
-&"attack_cost": 0.4,
+&"attack_cost": 0.25,
 &"damage": 1.2
 })
 stat_setters = Dictionary[StringName, Variant]({

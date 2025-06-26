@@ -156,7 +156,7 @@ texture = ExtResource("5_gb6bc")
 script = ExtResource("2_73tcs")
 id = &"bullets"
 stat_multipliers = Dictionary[StringName, float]({
-&"attack_cost": 0.4,
+&"attack_cost": 0.25,
 &"damage": 1.0
 })
 stat_setters = Dictionary[StringName, Variant]({
