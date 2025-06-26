@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f38uatr3irf8"
-path="res://.godot/imported/00.svg-f5c2c23d623db7c74a56fc074ccf2932.ctex"
+uid="uid://1axsnm4x1oar"
+path="res://.godot/imported/Factory.svg-d3215b47f68e8f7b3f50169d9af71866.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/raw/towers/energy_plant/00.svg"
-dest_files=["res://.godot/imported/00.svg-f5c2c23d623db7c74a56fc074ccf2932.ctex"]
+source_file="res://assets/towers/energy_plant/00/Factory.svg"
+dest_files=["res://.godot/imported/Factory.svg-d3215b47f68e8f7b3f50169d9af71866.ctex"]
 
 [params]
 

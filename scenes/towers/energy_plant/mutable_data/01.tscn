@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0aiy37qsp1ya"]
+
+[ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_okkst"]
+[ext_resource type="Texture2D" uid="uid://dbbh6of1c6pro" path="res://assets/towers/energy_plant/01/Factory.svg" id="2_okkst"]
+[ext_resource type="Script" uid="uid://0afypir31y4j" path="res://scripts/towers/tower_status_effect.gd" id="3_24vgw"]
+
+[node name="MutableData" instance=ExtResource("1_okkst")]
+stats = Dictionary[StringName, Variant]({
+&"range": 1.5
+})
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_okkst")
+
+[node name="StatusEffects" type="Node" parent="." index="1"]
+
+[node name="EnergyGiver" type="Node" parent="StatusEffects" index="0"]
+script = ExtResource("3_24vgw")
+id = &"energy"
+stat_setters = Dictionary[StringName, Variant]({
+&"damage_type": 2
+})
+metadata/_custom_type_script = "uid://0afypir31y4j"

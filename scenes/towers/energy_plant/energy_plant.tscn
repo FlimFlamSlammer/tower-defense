@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkd4pv00ecqxw"]
+
+[ext_resource type="PackedScene" uid="uid://dh66is3sfvil2" path="res://scenes/towers/support_tower.tscn" id="1_mjlxm"]
+[ext_resource type="Script" uid="uid://col0ystitn4jb" path="res://scripts/towers/upgrade.gd" id="2_vqafq"]
+[ext_resource type="PackedScene" uid="uid://cr23a4udb6un5" path="res://scenes/towers/energy_plant/mutable_data/00.tscn" id="3_q5oxo"]
+
+[node name="EnergyPlant" instance=ExtResource("1_mjlxm")]
+tower_name = &"Energy Plant"
+description = "Provides energy to towers in range."
+cost = 3000
+
+[node name="Maintenance Bridges" type="Node" parent="Upgrades/Path0" index="0"]
+script = ExtResource("2_vqafq")
+description = "Reduces energy production cost."
+cost = 800
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Turbine Efficiency" type="Node" parent="Upgrades/Path0" index="1"]
+script = ExtResource("2_vqafq")
+description = "Further reduces energy production cost."
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Nuclear Power" type="Node" parent="Upgrades/Path0" index="2"]
+script = ExtResource("2_vqafq")
+description = "Much lower energy production cost. Every few seconds, buff all nearby towers, increasing their fire rate."
+cost = 6000
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Perfect Reactor" type="Node" parent="Upgrades/Path0" index="3"]
+script = ExtResource("2_vqafq")
+description = "Nuclear buff is stronger, lasts longer and has a larger buff radius."
+cost = 12000
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Additional Generators" type="Node" parent="Upgrades/Path1" index="0"]
+script = ExtResource("2_vqafq")
+description = "Increases range."
+cost = 1500
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Improved Transformers" type="Node" parent="Upgrades/Path1" index="1"]
+script = ExtResource("2_vqafq")
+description = "Increases damage of nearby energy towers."
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Transmission Tower" type="Node" parent="Upgrades/Path1" index="2"]
+script = ExtResource("2_vqafq")
+description = "Advanced energy tech allows the distribution of energy wirelessly. Significantly increase energy distribution range."
+cost = 4000
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="Worldwide Coverage" type="Node" parent="Upgrades/Path1" index="3"]
+script = ExtResource("2_vqafq")
+description = "Improved signal transmission device allows energy to be distributed much further."
+cost = 7000
+metadata/_custom_type_script = "uid://col0ystitn4jb"
+
+[node name="RangeIndicatorSprite" parent="RangeIndicator/Scaler" index="0"]
+thickness = 4.0
+
+[node name="MutableData" parent="." index="6" instance=ExtResource("3_q5oxo")]
