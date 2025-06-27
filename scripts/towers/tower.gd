@@ -178,7 +178,6 @@ func clear_persistent_status_effects() -> void:
 	for id: StringName in status_effects.keys():
 		if status_effects[id].persistent:
 			remove_status_effect(id)
-			print(id)
 
 
 func remove_status_effect(id: StringName, p_update: bool = true) -> void:

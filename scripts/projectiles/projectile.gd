@@ -51,7 +51,6 @@ func _on_collision(area: Area2D) -> void:
 		enemy.hit(stats.damage * pierce_damage_multiplier * stats.armor_piercing, Globals.DamageTypes.NORMAL)
 
 	enemy.hit(stats.damage * pierce_damage_multiplier * armor_piercing_damage_multiplier, stats.damage_type)
-	print(stats.damage * pierce_damage_multiplier * armor_piercing_damage_multiplier)
 	_pierce_used += 1
 
 	if "projectile_status_effects" in stats:
