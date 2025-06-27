@@ -56,7 +56,7 @@ metadata/_custom_type_script = "uid://cejcja3fekjta"
 script = ExtResource("2_l8dl4")
 name = "The Shredder"
 description = "The Shredder erases everything in front of it with volumes of firepower."
-cost = 30000
+cost = 22000
 metadata/_custom_type_script = "uid://cejcja3fekjta"
 
 [resource]
