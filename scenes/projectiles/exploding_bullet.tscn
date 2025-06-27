@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dw1blnest65jf" path="res://scripts/projectiles/exploding_bullet.gd" id="2_e178w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ev8i"]
-radius = 500.0
+radius = 600.0
 
 [sub_resource type="Curve" id="Curve_pqm0a"]
 _data = [Vector2(0, 1), 0.0, -0.348636, 0, 0, Vector2(1, 0), -2.10384, 0.0, 0, 0]
@@ -39,16 +39,15 @@ curve = SubResource("Curve_pmxsj")
 lifetime_randomness = 0.5
 particle_flag_disable_z = true
 emission_shape = 1
-emission_sphere_radius = 450.0
+emission_sphere_radius = 600.0
 direction = Vector3(0, 0, 0)
 spread = 180.0
-initial_velocity_min = 150.0
-initial_velocity_max = 290.0
+initial_velocity_min = 250.0
+initial_velocity_max = 350.0
 gravity = Vector3(0, 0, 0)
 damping_min = 150.0
 damping_max = 200.0
-scale_min = 0.7
-scale_max = 0.8
+scale_max = 1.1
 scale_curve = SubResource("CurveTexture_6qo1t")
 color_ramp = SubResource("GradientTexture1D_fvxf0")
 color_initial_ramp = SubResource("GradientTexture1D_xo8pq")
@@ -76,14 +75,14 @@ curve = SubResource("Curve_8cr1c")
 lifetime_randomness = 0.8
 particle_flag_disable_z = true
 emission_shape = 1
-emission_sphere_radius = 300.0
+emission_sphere_radius = 450.0
 spread = 180.0
-initial_velocity_min = 500.0
-initial_velocity_max = 700.0
+initial_velocity_min = 650.0
+initial_velocity_max = 850.0
 gravity = Vector3(0, 0, 0)
 damping_min = 400.0
 damping_max = 550.0
-scale_min = 0.85
+scale_max = 1.15
 scale_curve = SubResource("CurveTexture_3klb1")
 color = Color(0, 0, 0, 1)
 alpha_curve = SubResource("CurveTexture_x71jw")
@@ -102,7 +101,7 @@ collide_with_bodies = false
 [node name="Fire" type="GPUParticles2D" parent="." index="4"]
 z_index = 20
 emitting = false
-amount = 100
+amount = 120
 sub_emitter = NodePath("Smoke")
 texture = ExtResource("2_8ev8i")
 lifetime = 0.4
@@ -116,7 +115,7 @@ z_index = -1
 emitting = false
 amount = 10000
 texture = ExtResource("2_8ev8i")
-lifetime = 0.7
+lifetime = 0.85
 explosiveness = 1.0
 fixed_fps = 48
 process_material = SubResource("ParticleProcessMaterial_okr0k")
