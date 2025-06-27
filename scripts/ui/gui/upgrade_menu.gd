@@ -6,7 +6,7 @@ const MAX_TIER_CROSSPATH: int = 2
 
 var _selected_tower: Tower
 
-@onready var _upgrade_paths: Array[Node] = %UpgradePaths.get_children()
+@onready var _upgrade_path_interfaces: Array[Node] = %UpgradePaths.get_children()
 @onready var _tower_label: Label = %TowerLabel
 @onready var _targeting_selector: Carousel = %TargetingSelector
 @onready var _sell_button: Button = %SellButton
@@ -24,9 +24,9 @@ func update_tower(tower: Tower) -> void:
 
 	_tower_label.text = _selected_tower.tower_name
 
-	for i in _upgrade_paths.size():
-		var upgrade_path: UpgradePath = _upgrade_paths[i]
-		upgrade_path.button_pressed.connect(tower.upgrade_tower.bind(i))
+	for i in _upgrade_path_interfaces.size():
+		var upgrade_path_interface: UpgradeMenuPath = _upgrade_path_interfaces[i]
+		upgrade_path_interface.button_pressed.connect(tower.upgrade_tower.bind(i))
 
 	tower.modified.connect(_update)
 
@@ -51,7 +51,7 @@ func _update() -> void:
 		_targeting_selector.set_option(_selected_tower.targeting_options.find(_selected_tower.targeting))
 
 	for i in _selected_tower.current_upgrade.size():
-		var upgrade_path: UpgradePath = _upgrade_paths[i]
+		var upgrade_path: UpgradeMenuPath = _upgrade_path_interfaces[i]
 		var tier: int = _selected_tower.current_upgrade[i]
 
 		if lock_other_paths and tier == MAX_TIER_CROSSPATH or tier == MAX_TIER:
@@ -70,8 +70,8 @@ func _update() -> void:
 
 func _disconnect_previous_tower() -> void:
 	if _selected_tower and _selected_tower.modified.is_connected(_update):
-		for i in _upgrade_paths.size():
-			var upgrade_path: UpgradePath = _upgrade_paths[i]
+		for i in _upgrade_path_interfaces.size():
+			var upgrade_path: UpgradeMenuPath = _upgrade_path_interfaces[i]
 			upgrade_path.button_pressed.disconnect(_selected_tower.upgrade_tower)
 
 		_selected_tower.modified.disconnect(_update)

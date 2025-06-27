@@ -30,6 +30,8 @@ const _SELL_VALUE = 0.7
 @export var targeting_options: Array[StringName] = [Targeting.FIRST, Targeting.LAST, Targeting.CLOSE, Targeting.FAR, Targeting.STRONG, Targeting.WEAK]
 @export var cost: int
 
+@export var upgrades: Upgrades
+
 var tile_controller: TileController
 
 var tile_position: Vector2i:
@@ -44,7 +46,6 @@ var status_effects: Dictionary[StringName, TowerStatusEffect]
 var _placed: bool = false
 
 @onready var stats: Dictionary[StringName, Variant]
-@onready var upgrades: Upgrades = $Upgrades
 
 @onready var _mutable_data: MutableData = $MutableData
 @onready var _range_indicator: Node2D = $RangeIndicator

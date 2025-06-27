@@ -1,4 +1,4 @@
-class_name UpgradePath
+class_name UpgradeMenuPath
 extends Container
 
 signal button_pressed()

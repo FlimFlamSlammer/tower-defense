@@ -1,0 +1,65 @@
+[gd_resource type="Resource" script_class="Upgrades" load_steps=11 format=3 uid="uid://2f8t5mpjqpkk"]
+
+[ext_resource type="Script" uid="uid://i7sacvxvlug0" path="res://scripts/towers/upgrades/upgrades.gd" id="1_htoxs"]
+[ext_resource type="Script" uid="uid://cejcja3fekjta" path="res://scripts/towers/upgrades/upgrade.gd" id="2_7h4wc"]
+
+[sub_resource type="Resource" id="Resource_htoxs"]
+script = ExtResource("2_7h4wc")
+name = "Efficient Manufacturing"
+description = "Reduces bullet price."
+cost = 800
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_7h4wc"]
+script = ExtResource("2_7h4wc")
+name = "Extended Coverage"
+description = "Increases range."
+cost = 2000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_k1uof"]
+script = ExtResource("2_7h4wc")
+name = "Big Factory"
+description = "Reduces bullet prices significantly—at the cost of pollution."
+cost = 3000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_mvkve"]
+script = ExtResource("2_7h4wc")
+name = "The Showstopper"
+description = "Bullets briefly slow down hit enemies."
+cost = 15000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_jmcwl"]
+script = ExtResource("2_7h4wc")
+name = "Titanium Bullets"
+description = "Slightly increases bullet damage."
+cost = 1200
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_a0ntb"]
+script = ExtResource("2_7h4wc")
+name = "Armor-Piercing Bullets"
+description = "Bullets deal even more damage, and can deal reduced damage to bulletproof enemies."
+cost = 1500
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_0ohud"]
+script = ExtResource("2_7h4wc")
+name = "Energy Bullets"
+description = "Replaces regular bullets with energy bullets that deal 20% more damage."
+cost = 4500
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_xqvfl"]
+script = ExtResource("2_7h4wc")
+name = "Molten Core"
+description = "Superheated energy bullets melt enemy defenses."
+cost = 15000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[resource]
+script = ExtResource("1_htoxs")
+upgrade_paths = Array[Array]([[SubResource("Resource_htoxs"), SubResource("Resource_7h4wc"), SubResource("Resource_k1uof"), SubResource("Resource_mvkve")], [SubResource("Resource_jmcwl"), SubResource("Resource_a0ntb"), SubResource("Resource_0ohud"), SubResource("Resource_xqvfl")]])
+metadata/_custom_type_script = "uid://i7sacvxvlug0"

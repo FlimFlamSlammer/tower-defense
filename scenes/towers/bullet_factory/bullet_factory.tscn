@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://uy78f1v0v425" path="res://scenes/towers/tower.tscn" id="1_kfxjv"]
 [ext_resource type="Script" uid="uid://dqncc4nykdff2" path="res://scripts/towers/bullet_factory.gd" id="2_trb26"]
-[ext_resource type="Script" uid="uid://col0ystitn4jb" path="res://scripts/towers/upgrade.gd" id="3_trb26"]
+[ext_resource type="Resource" uid="uid://2f8t5mpjqpkk" path="res://resources/upgrades/bullet_factory.tres" id="3_x8q53"]
 [ext_resource type="Texture2D" uid="uid://cms306djwk18r" path="res://assets/towers/bullet_factory/Layer 1.svg" id="4_x8q53"]
 [ext_resource type="PackedScene" uid="uid://bhtm3em6dfg1v" path="res://scenes/towers/bullet_factory/mutable_data/00.tscn" id="4_xrhpj"]
 
@@ -12,48 +12,9 @@ tower_name = &"Bullet Factory"
 description = "Supplies bullets to towers in range."
 targeting_options = Array[StringName]([])
 cost = 2500
+upgrades = ExtResource("3_x8q53")
 
-[node name="Efficient Manufacturing" type="Node" parent="Upgrades/Path0" index="0"]
-script = ExtResource("3_trb26")
-description = "Reduces bullet price."
-cost = 800
-
-[node name="Improved Coverage" type="Node" parent="Upgrades/Path0" index="1"]
-script = ExtResource("3_trb26")
-description = "Increases range."
-cost = 2300
-
-[node name="Big Factory" type="Node" parent="Upgrades/Path0" index="2"]
-script = ExtResource("3_trb26")
-description = "Reduces bullet prices significantly, at the cost of pollution."
-cost = 3000
-
-[node name="The Showstopper" type="Node" parent="Upgrades/Path0" index="3"]
-script = ExtResource("3_trb26")
-description = "Bullets briefly slow down hit enemies."
-cost = 15000
-
-[node name="Titanium Bullets" type="Node" parent="Upgrades/Path1" index="0"]
-script = ExtResource("3_trb26")
-description = "Slightly increases bullet damage."
-cost = 1200
-
-[node name="Armor Piercing Bullets" type="Node" parent="Upgrades/Path1" index="1"]
-script = ExtResource("3_trb26")
-description = "Bullets deal even more damage, and can deal reduced damage to bulletproof enemies."
-cost = 1500
-
-[node name="Energy Bullets" type="Node" parent="Upgrades/Path1" index="2"]
-script = ExtResource("3_trb26")
-description = "Replaces armor piercing bullets with plasma-coated bullets that deal 20% more damage."
-cost = 4500
-
-[node name="Molten Core" type="Node" parent="Upgrades/Path1" index="3"]
-script = ExtResource("3_trb26")
-description = "Superheated plasma bullets melt enemy defenses."
-cost = 15000
-
-[node name="Base" parent="." index="3"]
+[node name="Base" parent="." index="2"]
 texture = ExtResource("4_x8q53")
 
-[node name="MutableData" parent="." index="6" instance=ExtResource("4_xrhpj")]
+[node name="MutableData" parent="." index="5" instance=ExtResource("4_xrhpj")]

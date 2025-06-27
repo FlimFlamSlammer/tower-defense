@@ -1,0 +1,65 @@
+[gd_resource type="Resource" script_class="Upgrades" load_steps=11 format=3 uid="uid://5a5c51jy0i7a"]
+
+[ext_resource type="Script" uid="uid://i7sacvxvlug0" path="res://scripts/towers/upgrades/upgrades.gd" id="1_afe1w"]
+[ext_resource type="Script" uid="uid://cejcja3fekjta" path="res://scripts/towers/upgrades/upgrade.gd" id="2_aaswq"]
+
+[sub_resource type="Resource" id="Resource_61d87"]
+script = ExtResource("2_aaswq")
+name = "Maintenance Bridges"
+description = "Reduces energy production cost."
+cost = 800
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_dnrkb"]
+script = ExtResource("2_aaswq")
+name = "Turbine Efficiency"
+description = "Further reduces energy production cost."
+cost = 800
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_q6pdp"]
+script = ExtResource("2_aaswq")
+name = "Nuclear Power"
+description = "Much lower energy production cost. Every few seconds, buff all nearby towers, increasing their fire rate."
+cost = 6000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_o51ka"]
+script = ExtResource("2_aaswq")
+name = "Perfect Reactor"
+description = "Nuclear buff is stronger, lasts longer and has a larger buff radius."
+cost = 15000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_tgtsj"]
+script = ExtResource("2_aaswq")
+name = "Additional Generators"
+description = "Increases range."
+cost = 1500
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_x2slx"]
+script = ExtResource("2_aaswq")
+name = "Improved Transformers"
+description = "Increases energy damage."
+cost = 1000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_q3wfm"]
+script = ExtResource("2_aaswq")
+name = "Transmission Tower"
+description = "Advanced energy tech allows the distribution of energy wirelessly. Significantly increase energy distribution range."
+cost = 4000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_y4gvh"]
+script = ExtResource("2_aaswq")
+name = "Worldwide Coverage"
+description = "Improved signal transmission device allows energy to be distributed much further."
+cost = 7000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[resource]
+script = ExtResource("1_afe1w")
+upgrade_paths = Array[Array]([[SubResource("Resource_61d87"), SubResource("Resource_dnrkb"), SubResource("Resource_q6pdp"), SubResource("Resource_o51ka")], [SubResource("Resource_tgtsj"), SubResource("Resource_x2slx"), SubResource("Resource_q3wfm"), SubResource("Resource_y4gvh")]])
+metadata/_custom_type_script = "uid://i7sacvxvlug0"

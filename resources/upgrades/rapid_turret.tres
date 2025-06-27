@@ -1,0 +1,65 @@
+[gd_resource type="Resource" script_class="Upgrades" load_steps=11 format=3 uid="uid://86bo5sdqu27j"]
+
+[ext_resource type="Script" uid="uid://i7sacvxvlug0" path="res://scripts/towers/upgrades/upgrades.gd" id="1_cbb4d"]
+[ext_resource type="Script" uid="uid://cejcja3fekjta" path="res://scripts/towers/upgrades/upgrade.gd" id="2_l8dl4"]
+
+[sub_resource type="Resource" id="Resource_61d87"]
+script = ExtResource("2_l8dl4")
+name = "Improved Precision"
+description = "Increases damage."
+cost = 650
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_tgtwu"]
+script = ExtResource("2_l8dl4")
+name = "Muzzle Brake"
+description = "Reduces bullet spread."
+cost = 600
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_t0e73"]
+script = ExtResource("2_l8dl4")
+name = "Piercing Shots"
+description = "Bullet accelerator technology allows shots to pierce through enemies."
+cost = 3000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_xiv11"]
+script = ExtResource("2_l8dl4")
+name = "ABRT Device"
+description = "Automated Bullet Ricochet Targeting Device allows bullets to automatically bounce up to 5 targets!"
+cost = 20000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_dpdm7"]
+script = ExtResource("2_l8dl4")
+name = "Engine Upgrades"
+description = "Increases fire rate."
+cost = 600
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_74fmx"]
+script = ExtResource("2_l8dl4")
+name = "Long-Range Sensor"
+description = "Increases range."
+cost = 600
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_bckgh"]
+script = ExtResource("2_l8dl4")
+name = "Quad Barrels"
+description = "4 barrels = 4x firepower!"
+cost = 3000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_7m1or"]
+script = ExtResource("2_l8dl4")
+name = "The Shredder"
+description = "The Shredder erases everything in front of it with volumes of firepower."
+cost = 30000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[resource]
+script = ExtResource("1_cbb4d")
+upgrade_paths = Array[Array]([[SubResource("Resource_61d87"), SubResource("Resource_tgtwu"), SubResource("Resource_t0e73"), SubResource("Resource_xiv11")], [SubResource("Resource_dpdm7"), SubResource("Resource_74fmx"), SubResource("Resource_bckgh"), SubResource("Resource_7m1or")]])
+metadata/_custom_type_script = "uid://i7sacvxvlug0"

@@ -2,65 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://bolphubyb6fu1" path="res://scenes/towers/shooting_tower.tscn" id="1_dyx6r"]
 [ext_resource type="Script" uid="uid://d2ox3rj3b05h2" path="res://scripts/towers/crossbow.gd" id="2_adi17"]
-[ext_resource type="Script" uid="uid://col0ystitn4jb" path="res://scripts/towers/upgrade.gd" id="4_tvbwh"]
+[ext_resource type="Resource" uid="uid://bu7aebtxi82s5" path="res://resources/upgrades/crossbow.tres" id="3_e0hhy"]
 [ext_resource type="PackedScene" uid="uid://dtp2gsrpc04qt" path="res://scenes/towers/crossbow/mutable_data/00.tscn" id="5_gc0ds"]
 
 [node name="Crossbow" groups=["attacking_towers"] instance=ExtResource("1_dyx6r")]
 script = ExtResource("2_adi17")
 tower_name = &"Crossbow"
-description = "Low damage, high attack cost but cheap. Great for early-game."
+description = "Shoots bolts that pierce through enemies. Cheap, great for early-game. Doesn't requre an energy plant, but can benefit from one."
 cost = 1000
+upgrades = ExtResource("3_e0hhy")
 
-[node name="Reinforced Strings" type="Node" parent="Upgrades/Path0" index="0"]
-script = ExtResource("4_tvbwh")
-description = "Bolts fly faster and do more damage."
-cost = 400
-metadata/_custom_type_script = "uid://col0ystitn4jb"
-
-[node name="Sharper Bolts" type="Node" parent="Upgrades/Path0" index="1"]
-script = ExtResource("4_tvbwh")
-description = "Bolts fly even faster and pierce more targets. Explosions do more damage."
-cost = 500
-metadata/_custom_type_script = "uid://col0ystitn4jb"
-
-[node name="Giant Crossbow" type="Node" parent="Upgrades/Path0" index="2"]
-script = ExtResource("4_tvbwh")
-description = "Improves overall stats at the cost of fire rate."
-cost = 2500
-metadata/_custom_type_script = "uid://col0ystitn4jb"
-
-[node name="Grand Javelin" type="Node" parent="Upgrades/Path0" index="3"]
-script = ExtResource("4_tvbwh")
-description = "Grand Javelin bolts deal big damage and pierce almost anything"
-cost = 12000
-metadata/_custom_type_script = "uid://col0ystitn4jb"
-
-[node name="High-Tech Motors" type="Node" parent="Upgrades/Path1" index="0"]
-script = ExtResource("4_tvbwh")
-description = "Faster fire rate."
-cost = 350
-metadata/_custom_type_script = "uid://col0ystitn4jb"
-
-[node name="Improved Sensors" type="Node" parent="Upgrades/Path1" index="1"]
-script = ExtResource("4_tvbwh")
-description = "Longer range."
-cost = 500
-metadata/_custom_type_script = "uid://col0ystitn4jb"
-
-[node name="Fuse Bolts" type="Node" parent="Upgrades/Path1" index="2"]
-script = ExtResource("4_tvbwh")
-description = "Bolts explode shortly after hitting a target."
-cost = 3200
-metadata/_custom_type_script = "uid://col0ystitn4jb"
-
-[node name="Pulsing Shots" type="Node" parent="Upgrades/Path1" index="3"]
-script = ExtResource("4_tvbwh")
-description = "Bolts pulse multiple times after sticking to a target, before violently exploding."
-cost = 14000
-metadata/_custom_type_script = "uid://col0ystitn4jb"
-
-[node name="ClickArea" parent="." index="6"]
+[node name="ClickArea" parent="." index="5"]
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="MutableData" parent="." index="7" instance=ExtResource("5_gc0ds")]
+[node name="MutableData" parent="." index="6" instance=ExtResource("5_gc0ds")]

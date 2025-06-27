@@ -1,0 +1,65 @@
+[gd_resource type="Resource" script_class="Upgrades" load_steps=11 format=3 uid="uid://bu7aebtxi82s5"]
+
+[ext_resource type="Script" uid="uid://i7sacvxvlug0" path="res://scripts/towers/upgrades/upgrades.gd" id="1_k4sf2"]
+[ext_resource type="Script" uid="uid://cejcja3fekjta" path="res://scripts/towers/upgrades/upgrade.gd" id="2_cj302"]
+
+[sub_resource type="Resource" id="Resource_61d87"]
+script = ExtResource("2_cj302")
+name = "Reinforced Strings"
+description = "Bolts fly faster and do more damage."
+cost = 400
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_tgtwu"]
+script = ExtResource("2_cj302")
+name = "Sharper Bolts"
+description = "Bolts fly even faster and pierce more targets. Explosions do more damage."
+cost = 500
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_t0e73"]
+script = ExtResource("2_cj302")
+name = "Giant Crossbow"
+description = "Improves overall stats at the cost of fire rate."
+cost = 2500
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_xiv11"]
+script = ExtResource("2_cj302")
+name = "Grand Javelin"
+description = "Grand Javelin bolts deal big damage and pierce almost anything"
+cost = 12000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_dpdm7"]
+script = ExtResource("2_cj302")
+name = "High-Tech Motors"
+description = "Faster fire rate."
+cost = 350
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_74fmx"]
+script = ExtResource("2_cj302")
+name = "Long-Range Sensors"
+description = "Longer range."
+cost = 500
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_bckgh"]
+script = ExtResource("2_cj302")
+name = "Fuse Bolts"
+description = "Bolts explode shortly after hitting a target."
+cost = 3200
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_7m1or"]
+script = ExtResource("2_cj302")
+name = "Pulsating Bolts"
+description = "Bolts pulse multiple times after sticking to a target, before violently exploding."
+cost = 14000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[resource]
+script = ExtResource("1_k4sf2")
+upgrade_paths = Array[Array]([[SubResource("Resource_61d87"), SubResource("Resource_tgtwu"), SubResource("Resource_t0e73"), SubResource("Resource_xiv11")], [SubResource("Resource_dpdm7"), SubResource("Resource_74fmx"), SubResource("Resource_bckgh"), SubResource("Resource_7m1or")]])
+metadata/_custom_type_script = "uid://i7sacvxvlug0"
