@@ -11,7 +11,7 @@ func _on_collision(area: Area2D) -> void:
 	var min_dist: float = 2e64
 	var target: Enemy
 
-	_ray_cast.position = _ray_cast.to_local(area.position)
+	_ray_cast.position = to_local(area.global_position)
 	_bounce_shape_cast.position = _ray_cast.position
 	_bounce_shape_cast.force_shapecast_update()
 
@@ -26,6 +26,8 @@ func _on_collision(area: Area2D) -> void:
 	if target:
 		movement_dir = _ray_cast.global_position.angle_to_point(target.position)
 	else:
+		print("FUCK")
+		print(_bounce_shape_cast.get_collision_count())
 		movement_dir = randf_range(-PI, PI)
 
 	_ray_cast.global_rotation = movement_dir
