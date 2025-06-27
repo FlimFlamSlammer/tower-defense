@@ -20,7 +20,7 @@ stats = Dictionary[StringName, Variant]({
 &"pierce": 1,
 &"projectile": ExtResource("2_r8adv"),
 &"projectile_offset": PackedVector2Array(144, 0),
-&"range": 4.5
+&"range": 5.5
 })
 
 [node name="Pivot" type="Node2D" parent="." index="0"]
