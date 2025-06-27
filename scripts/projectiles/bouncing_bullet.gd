@@ -11,7 +11,8 @@ func _on_collision(area: Area2D) -> void:
 	var min_dist: float = 2e64
 	var target: Enemy
 
-	_ray_cast.position = to_local(area.global_position)
+	_ray_cast.global_position = _ray_cast.get_collision_point()
+	_tracer.add_point(_ray_cast.position)
 	_bounce_shape_cast.position = _ray_cast.position
 	_bounce_shape_cast.force_shapecast_update()
 
@@ -31,5 +32,3 @@ func _on_collision(area: Area2D) -> void:
 		movement_dir = randf_range(-PI, PI)
 
 	_ray_cast.global_rotation = movement_dir
-
-	_tracer.add_point(to_local(area.position))

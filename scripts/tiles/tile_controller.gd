@@ -5,8 +5,8 @@ const EXPECTED_ENEMY_SPEED: float = 2.0 ## Assumption of enemy speed, used for p
 const ALTERNATIVE_PATH_DANGER_LEVEL_TRESHOLD: float = 2.0 ## Maximum danger level relative to optimal danger level for an alternative path to be considered.
 const ALTERNATIVE_PATH_DISTANCE_TRESHOLD: float = 1.2 ## Maximum distance level relative to optimal distance for an alternative path to be considered.
 
-@export var first_tile: Vector2i
-@export var last_tile: Vector2i
+@export var top_left_tile: Vector2i ## The position of the top-left-most tile to be scanned by this [TileController].
+@export var bottom_right_tile: Vector2i ## The position of the bottom-right-most tile to be scanned by this [TileController].
 @export var arrow_tile_map: TileMapLayer
 
 var tile_map: TileMapLayer
@@ -16,7 +16,7 @@ var finish_tile: Vector2i
 
 var _updated_immunities: Dictionary[Array, bool]
 
-@onready var tiles := TileMatrix.new(first_tile, last_tile)
+@onready var tiles := TileMatrix.new(top_left_tile, bottom_right_tile)
 @onready var wall_tile_map: TileMapLayer = $WallMap
 
 func load_map() -> void:
@@ -166,8 +166,8 @@ func update_support_towers() -> void:
 
 # Iterates over all PathTiles and clears their next_tile property.
 func _clear_pathfinding_data() -> void:
-	for x in range(first_tile.x, last_tile.x + 1):
-		for y in range(first_tile.y, last_tile.y + 1):
+	for x in range(top_left_tile.x, bottom_right_tile.x + 1):
+		for y in range(top_left_tile.y, bottom_right_tile.y + 1):
 			var tile := tiles.get_tile(Vector2i(x, y)) as PathTile
 			if not tile:
 				continue
@@ -239,8 +239,8 @@ func _update_paths(immunities: Array[Globals.DamageTypes]) -> void:
 # Iterates over every [Tower] to calculate the danger level of every [PathTile].
 func _update_danger_levels(immunities: Array[Globals.DamageTypes]) -> void:
 	# reset current danger levels
-	for x in range(first_tile.x, last_tile.x + 1):
-		for y in range(first_tile.y, last_tile.y + 1):
+	for x in range(top_left_tile.x, bottom_right_tile.x + 1):
+		for y in range(top_left_tile.y, bottom_right_tile.y + 1):
 			var tile := tiles.get_tile(Vector2i(x, y)) as PathTile
 			if not tile:
 				continue

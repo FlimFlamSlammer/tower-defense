@@ -32,8 +32,8 @@ script = ExtResource("1_gee14")
 
 [node name="TileController" type="Node2D" parent="."]
 script = ExtResource("3_vtaks")
-first_tile = Vector2i(-1, -1)
-last_tile = Vector2i(16, 9)
+top_left_tile = Vector2i(-1, -1)
+bottom_right_tile = Vector2i(16, 9)
 
 [node name="WallMap" type="TileMapLayer" parent="TileController"]
 tile_set = SubResource("TileSet_u5sy4")
