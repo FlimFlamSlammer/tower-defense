@@ -212,9 +212,9 @@ func upgrade_tower(path: int, cb: Callable = Utils.null_callable) -> void:
 		_mutable_data = new_mutable_data
 		add_child(new_mutable_data)
 
-		update_status_effects()
-
 		cost += upgrade.cost
+
+		update_status_effects()
 	)
 
 
