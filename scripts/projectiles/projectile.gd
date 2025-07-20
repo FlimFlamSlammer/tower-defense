@@ -41,7 +41,7 @@ func _on_collision(area: Area2D) -> void:
 		return
 
 	var enemy := area as Enemy
-	if not enemy or has_exception(enemy): return
+	if not enemy or has_exception(enemy) or enemy.is_queued_for_deletion(): return
 
 	var pierce_damage_multiplier: float = 1.0 - ((1.0 - MIN_PIERCE_DAMAGE_MULTIPLIER) * _pierce_used / stats.pierce)
 
