@@ -30,9 +30,6 @@ libraries = {
 }
 
 [node name="Pivot" type="Node2D" parent="." index="1"]
-rotation = -1.57079
 
 [node name="Turret" type="Sprite2D" parent="Pivot" index="0"]
-position = Vector2(0.000148773, 24)
-rotation = 1.5708
 texture = ExtResource("3_sporl")

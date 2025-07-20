@@ -16,13 +16,13 @@ _data = {
 stats = Dictionary[StringName, Variant]({
 &"attack_cost": 12,
 &"damage": 30.0,
-&"fire_rate": 1.95,
+&"fire_rate": 1.8,
 &"pierce": 1,
 &"projectile": ExtResource("2_jw3iy"),
 &"projectile_offset": PackedVector2Array(144, 0),
 &"range": 5.5,
 &"shrapnel_amount": 4,
-&"shrapnel_damage": 9.0,
+&"shrapnel_damage": 8.0,
 &"shrapnel_pierce": 1
 })
 
