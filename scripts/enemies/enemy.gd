@@ -22,6 +22,9 @@ var tile_controller: TileController
 var _status_effects: Dictionary[StringName, EnemyStatusEffect]
 var _tiles_from_last_deviation: int = 4096
 
+@onready var hit_sound: AudioStreamPlayer2D = %HitSound
+@onready var die_sound: AudioStreamPlayer2D = %DieSound
+
 func _ready() -> void:
 	base_stats.resistance = 1.0
 	stats = base_stats.duplicate()
@@ -63,15 +66,22 @@ func _process(delta: float) -> void:
 	position = lerp(cur_tile_local_position, next_tile_local_position, progress)
 
 
-func hit(damage: float, type: Globals.DamageTypes) -> bool:
-	if type in stats.immunities:
+func hit(damage: float, type: Globals.DamageTypes, armor_piercing: float = 0.0) -> bool:
+	if type in stats.immunities and is_zero_approx(armor_piercing):
 		return false
 
-	stats.health -= damage / stats.resistance
+	stats.health -= damage / stats.resistance * (armor_piercing if type in stats.immunities else 1.0)
+
 	if stats.health <= 0.0:
 		hide()
+		die_sound.reparent(get_parent())
+		die_sound.play()
+		die_sound.finished.connect(die_sound.queue_free)
+
 		queue_free()
 		died.emit()
+	else:
+		hit_sound.play()
 
 	return true
 
