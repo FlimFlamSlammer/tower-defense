@@ -22,8 +22,8 @@ var tile_controller: TileController
 var _status_effects: Dictionary[StringName, EnemyStatusEffect]
 var _tiles_from_last_deviation: int = 4096
 
-@onready var hit_sound: AudioStreamPlayer2D = %HitSound
-@onready var die_sound: AudioStreamPlayer2D = %DieSound
+@onready var _hit_sound: AudioStreamPlayer2D = %HitSound
+@onready var _die_sound: AudioStreamPlayer2D = %DieSound
 
 func _ready() -> void:
 	base_stats.resistance = 1.0
@@ -67,21 +67,22 @@ func _process(delta: float) -> void:
 
 
 func hit(damage: float, type: Globals.DamageTypes, armor_piercing: float = 0.0) -> bool:
-	if type in stats.immunities and is_zero_approx(armor_piercing):
+	if type in stats.immunities and is_zero_approx(armor_piercing) or is_queued_for_deletion():
 		return false
 
 	stats.health -= damage / stats.resistance * (armor_piercing if type in stats.immunities else 1.0)
 
 	if stats.health <= 0.0:
 		hide()
-		die_sound.reparent(get_parent())
-		die_sound.play()
-		die_sound.finished.connect(die_sound.queue_free)
+
+		_die_sound.reparent(get_parent())
+		_die_sound.play()
+		_die_sound.finished.connect(_die_sound.queue_free)
 
 		queue_free()
 		died.emit()
 	else:
-		hit_sound.play()
+		_hit_sound.play()
 
 	return true
 
