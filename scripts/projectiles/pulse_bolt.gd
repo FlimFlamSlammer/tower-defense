@@ -49,22 +49,19 @@ func _explode(area: Area2D, effect: GPUParticles2D, damage: float) -> void:
 	for enemy: Enemy in enemies:
 		enemy.hit(damage, Globals.DamageTypes.EXPLOSION)
 
-	var new_effect: GPUParticles2D = effect.duplicate()
+	var backup_effect: GPUParticles2D = effect.duplicate()
+	add_child(backup_effect)
 
-	add_child(new_effect)
-	new_effect.reparent(get_parent())
+	effect.emitting = true
+	effect.reparent(get_parent())
 
-	# workaround for godot GPUParticles bug
-	# do not change; otherwise particles spawn in wrong position
-	get_tree().create_timer(10e-14).timeout.connect(new_effect.set_deferred.bind("emitting", true))
-
-	new_effect.finished.connect(new_effect.queue_free)
+	effect.get_child(0).finished.connect(effect.queue_free)
 
 
 func _explode_last() -> void:
 	if is_queued_for_deletion(): return
 	_explode(_blast_area, _fire_effect, stats.explosion_damage)
-	queue_free.call_deferred()
+	queue_free()
 
 
 func _pulse() -> void:

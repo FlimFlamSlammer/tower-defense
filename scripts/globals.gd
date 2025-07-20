@@ -4,7 +4,7 @@ extends Object
 const SAVE_PATH: String = "user://"
 const MAIN_MENU_SCENE_PATH: String = "res://scenes/map_select.tscn"
 
-enum DamageTypes {NORMAL = 0, SHARP = 1, ENERGY = 2, EXPLOSION = 3, ELECTRIC = 4, WALL = 5}
+enum DamageTypes {TRUE = 0, SHARP = 1, ENERGY = 2, EXPLOSION = 3, ELECTRIC = 4, WALL = 5}
 
 
 static func get_tile_controller(scene_tree: SceneTree) -> TileController:

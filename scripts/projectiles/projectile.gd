@@ -13,13 +13,13 @@ var _exceptions: Dictionary[Enemy, bool]
 func _ready() -> void:
 	rotation = movement_dir
 
-	if "projectile_status_effects" in stats:
-		var status_effects: Array[Variant] = stats.projectile_status_effects.duplicate()
+	if "attack_status_effects" in stats:
+		var status_effects: Array[Variant] = stats.attack_status_effects.duplicate()
 		for i in range(status_effects.size()):
 			status_effects[i] = status_effects[i].duplicate()
 			add_child(status_effects[i])
 
-		stats.projectile_status_effects = status_effects
+		stats.attack_status_effects = status_effects
 
 
 func add_exception(enemy: Enemy) -> void:
@@ -44,17 +44,12 @@ func _on_collision(area: Area2D) -> void:
 	if not enemy or has_exception(enemy): return
 
 	var pierce_damage_multiplier: float = 1.0 - ((1.0 - MIN_PIERCE_DAMAGE_MULTIPLIER) * _pierce_used / stats.pierce)
-	var armor_piercing_damage_multiplier: float = 1.0
 
-	if "armor_piercing" in stats:
-		armor_piercing_damage_multiplier = 1.0 - stats.armor_piercing
-		enemy.hit(stats.damage * pierce_damage_multiplier * stats.armor_piercing, Globals.DamageTypes.NORMAL)
-
-	enemy.hit(stats.damage * pierce_damage_multiplier * armor_piercing_damage_multiplier, stats.damage_type)
+	enemy.hit(stats.damage * pierce_damage_multiplier, stats.damage_type, stats.armor_piercing if "armor_piercing" in stats else 0.0)
 	_pierce_used += 1
 
-	if "projectile_status_effects" in stats:
-		var status_effects: Array[Variant] = stats.projectile_status_effects
+	if "attack_status_effects" in stats:
+		var status_effects: Array[Variant] = stats.attack_status_effects
 		for effect: EnemyStatusEffect in status_effects:
 			if _pierce_used == stats.pierce:
 				enemy.apply_status_effect(effect)

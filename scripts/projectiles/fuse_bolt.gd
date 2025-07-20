@@ -35,7 +35,7 @@ func _on_collision(area: Area2D) -> void:
 
 func _destruct() -> void:
 	pass
-	
+
 
 func _explode() -> void:
 	if is_queued_for_deletion(): return

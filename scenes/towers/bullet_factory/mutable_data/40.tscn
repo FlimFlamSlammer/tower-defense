@@ -254,7 +254,7 @@ stat_multipliers = Dictionary[StringName, float]({
 })
 stat_setters = Dictionary[StringName, Variant]({
 &"damage_type": 1,
-&"projectile_status_effects": [NodePath("../../ProjectileStatusEffects/EnemyStatusEffect")]
+&"attack_status_effects": [NodePath("../../ProjectileStatusEffects/EnemyStatusEffect")]
 })
 priority = 11
 metadata/_custom_type_script = "uid://0afypir31y4j"
