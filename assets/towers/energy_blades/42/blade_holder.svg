@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="334.70425"
+   height="290.93164"
+   viewBox="0 0 334.70425 290.93164"
+   version="1.1"
+   id="SVGRoot"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs132" />
+  <g
+     id="g150"
+     style="display:inline"
+     transform="translate(-984.64787,-537.06834)">
+    <g
+       id="g147"
+       transform="translate(1024,-4.0922466e-5)"
+       style="stroke-width:1">
+      <rect
+         style="display:inline;fill:#30bac7;fill-opacity:1;stroke-width:8;stroke-linecap:round;stroke-linejoin:round"
+         id="rect142"
+         width="24"
+         height="83.999954"
+         x="116"
+         y="744.00006"
+         rx="4"
+         ry="4.0000415" />
+      <rect
+         style="fill:#3acedc;fill-opacity:1;stroke-width:8;stroke-linecap:round;stroke-linejoin:round"
+         id="rect143"
+         width="32"
+         height="55.999954"
+         x="112"
+         y="692.00006"
+         rx="4.0000038"
+         ry="4.0000038" />
+      <rect
+         style="display:inline;fill:#30bac7;fill-opacity:1;stroke-width:8;stroke-linecap:round;stroke-linejoin:round"
+         id="rect144"
+         width="24"
+         height="83.999954"
+         x="116"
+         y="744.00006"
+         rx="4"
+         ry="4.0000415"
+         transform="rotate(120,128,640.00005)" />
+      <rect
+         style="display:inline;fill:#3acedc;fill-opacity:1;stroke-width:8;stroke-linecap:round;stroke-linejoin:round"
+         id="rect145"
+         width="32"
+         height="55.999954"
+         x="112"
+         y="692.00006"
+         rx="4.0000038"
+         ry="4.0000038"
+         transform="rotate(120,128,640.00005)" />
+      <rect
+         style="display:inline;fill:#30bac7;fill-opacity:1;stroke-width:8;stroke-linecap:round;stroke-linejoin:round"
+         id="rect146"
+         width="24"
+         height="83.999954"
+         x="116"
+         y="744.00006"
+         rx="4"
+         ry="4.0000415"
+         transform="rotate(-120,128,640.00005)" />
+      <rect
+         style="display:inline;fill:#3acedc;fill-opacity:1;stroke-width:8;stroke-linecap:round;stroke-linejoin:round"
+         id="rect147"
+         width="32"
+         height="55.999954"
+         x="112"
+         y="692.00006"
+         rx="4.0000038"
+         ry="4.0000038"
+         transform="rotate(-120,128,640.00005)" />
+    </g>
+  </g>
+</svg>

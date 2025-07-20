@@ -1,0 +1,65 @@
+[gd_resource type="Resource" script_class="Upgrades" load_steps=11 format=3 uid="uid://clh5w5w123fok"]
+
+[ext_resource type="Script" uid="uid://i7sacvxvlug0" path="res://scripts/towers/upgrades/upgrades.gd" id="1_axddu"]
+[ext_resource type="Script" uid="uid://cejcja3fekjta" path="res://scripts/towers/upgrades/upgrade.gd" id="2_cwmdk"]
+
+[sub_resource type="Resource" id="Resource_tgtwu"]
+script = ExtResource("2_cwmdk")
+name = "Speed Module"
+description = "Faster acceleration and max speed."
+cost = 800
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_61d87"]
+script = ExtResource("2_cwmdk")
+name = "Better Lubrication"
+description = "Faster acceleration and max speed, reduced speed loss."
+cost = 1000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_t0e73"]
+script = ExtResource("2_cwmdk")
+name = "Tri-Blade"
+description = "Install an extra blade for increased lethality. Also increases repair speed."
+cost = 3500
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_xiv11"]
+script = ExtResource("2_cwmdk")
+name = "Overheat"
+description = "Spin significantly faster and deal more damage as the blades spin faster."
+cost = 30000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_dpdm7"]
+script = ExtResource("2_cwmdk")
+name = "Longer Blades"
+description = "Increases range."
+cost = 500
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_74fmx"]
+script = ExtResource("2_cwmdk")
+name = "Reinforced Blades"
+description = "Increases range and durability."
+cost = 750
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_bckgh"]
+script = ExtResource("2_cwmdk")
+name = "Flamethrower"
+description = "Replaces fragile blades with flamethrowers that can temporarily weaken enemies."
+cost = 3500
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[sub_resource type="Resource" id="Resource_7m1or"]
+script = ExtResource("2_cwmdk")
+name = "Ring of Fire"
+description = "Engulf nearby enemies in flames, leaving nothing behind."
+cost = 25000
+metadata/_custom_type_script = "uid://cejcja3fekjta"
+
+[resource]
+script = ExtResource("1_axddu")
+upgrade_paths = Array[Array]([[SubResource("Resource_tgtwu"), SubResource("Resource_61d87"), SubResource("Resource_t0e73"), SubResource("Resource_xiv11")], [SubResource("Resource_dpdm7"), SubResource("Resource_74fmx"), SubResource("Resource_bckgh"), SubResource("Resource_7m1or")]])
+metadata/_custom_type_script = "uid://i7sacvxvlug0"

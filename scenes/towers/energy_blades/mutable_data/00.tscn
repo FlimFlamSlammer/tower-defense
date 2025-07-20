@@ -1,0 +1,110 @@
+[gd_scene load_steps=13 format=3 uid="uid://du04sghp4jpq1"]
+
+[ext_resource type="PackedScene" uid="uid://cr7vmajdyjqa5" path="res://scenes/towers/mutable_data.tscn" id="1_bd8jq"]
+[ext_resource type="Texture2D" uid="uid://ljp4dn3u2ula" path="res://assets/towers/attacking_base.svg" id="2_in4kb"]
+[ext_resource type="Texture2D" uid="uid://bnu0jexl5knnx" path="res://assets/towers/energy_blades/00/base_ring.svg" id="3_0otw2"]
+[ext_resource type="Texture2D" uid="uid://58u2wjumbqss" path="res://assets/towers/energy_blades/00/blade.svg" id="4_kb1uq"]
+[ext_resource type="Script" uid="uid://c5815tovd7w7a" path="res://addons/trail_2d/trail_2d.gd" id="5_0otw2"]
+[ext_resource type="Texture2D" uid="uid://cyxfbqdtb7k4j" path="res://assets/towers/energy_blades/00/blade_holder.svg" id="5_2vw8n"]
+[ext_resource type="Texture2D" uid="uid://c1oylyrx7ueur" path="res://assets/towers/energy_blades/00/cover.svg" id="6_a6pkl"]
+[ext_resource type="Script" uid="uid://gvq0u3lmth7w" path="res://scripts/towers/types/energy_blades/collider_pivot.gd" id="6_in4kb"]
+
+[sub_resource type="Gradient" id="Gradient_kb1uq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_0otw2"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.940594, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kb1uq"]
+gradient = SubResource("Gradient_0otw2")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bd8jq"]
+size = Vector2(16, 188)
+
+[node name="MutableData" instance=ExtResource("1_bd8jq")]
+stats = Dictionary[StringName, Variant]({
+&"attack_cost": 1.0,
+&"blade_durability": 5,
+&"blade_repair_cost": 5,
+&"blade_repair_speed": 30.0,
+&"damage": 3.0,
+&"damage_type": 0,
+&"heat_cost": 0.5,
+&"heat_gain": 1.0,
+&"heat_loss": 1.0,
+&"max_heat": 10.0,
+&"range": 1.25
+})
+
+[node name="AttackingBase" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_in4kb")
+
+[node name="BaseRing" type="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_0otw2")
+
+[node name="Pivot" type="Node2D" parent="." index="2"]
+
+[node name="Blades" type="Node2D" parent="Pivot" index="0"]
+
+[node name="0" type="Sprite2D" parent="Pivot/Blades" index="0"]
+position = Vector2(0, 224)
+texture = ExtResource("4_kb1uq")
+
+[node name="Trail2D" type="Line2D" parent="Pivot/Blades/0" index="0"]
+modulate = Color(1, 0.65, 0.65, 1)
+z_index = 10
+position = Vector2(0, 16)
+width = 160.0
+gradient = SubResource("Gradient_kb1uq")
+texture = SubResource("GradientTexture2D_kb1uq")
+texture_mode = 2
+script = ExtResource("5_0otw2")
+lifetime = 0.05
+metadata/_custom_type_script = "uid://c5815tovd7w7a"
+
+[node name="1" type="Sprite2D" parent="Pivot/Blades" index="1"]
+position = Vector2(0, -224)
+rotation = 3.14159
+texture = ExtResource("4_kb1uq")
+
+[node name="Trail2D" type="Line2D" parent="Pivot/Blades/1" index="0"]
+modulate = Color(1, 0.65, 0.65, 1)
+z_index = 10
+position = Vector2(0, 16)
+width = 160.0
+gradient = SubResource("Gradient_kb1uq")
+texture = SubResource("GradientTexture2D_kb1uq")
+texture_mode = 2
+script = ExtResource("5_0otw2")
+lifetime = 0.05
+metadata/_custom_type_script = "uid://c5815tovd7w7a"
+
+[node name="BladeHolder" type="Sprite2D" parent="Pivot" index="1"]
+texture = ExtResource("5_2vw8n")
+
+[node name="Colliders" type="Node2D" parent="." index="3"]
+script = ExtResource("6_in4kb")
+
+[node name="0" type="Area2D" parent="Colliders" index="0"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/0" index="0"]
+position = Vector2(0, 226)
+shape = SubResource("RectangleShape2D_bd8jq")
+
+[node name="1" type="Area2D" parent="Colliders" index="1"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/1" index="0"]
+position = Vector2(0, -226)
+shape = SubResource("RectangleShape2D_bd8jq")
+
+[node name="Cover" type="Sprite2D" parent="." index="4"]
+texture = ExtResource("6_a6pkl")

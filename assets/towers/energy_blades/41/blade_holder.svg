@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="265.4223"
+   height="230.9317"
+   viewBox="0 0 265.4223 230.9317"
+   version="1.1"
+   id="SVGRoot"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs132" />
+  <g
+     id="g132"
+     style="display:inline"
+     transform="translate(-1019.2889,-301.0683)">
+    <g
+       id="g129"
+       style="display:inline;stroke-width:1.75594"
+       transform="matrix(1,0,0,0.32432433,1024,359.45946)">
+      <rect
+         style="display:inline;fill:#35c5d2;fill-opacity:1;stroke-width:14.0476;stroke-linecap:round;stroke-linejoin:round"
+         id="rect127"
+         width="24.000008"
+         height="296"
+         x="116"
+         y="236"
+         rx="4.0000038"
+         ry="12.333322" />
+      <rect
+         style="display:inline;fill:#35c5d2;fill-opacity:1;stroke-width:14.0476;stroke-linecap:round;stroke-linejoin:round"
+         id="rect128"
+         width="24.000008"
+         height="296"
+         x="116"
+         y="236"
+         rx="4.0000038"
+         ry="12.333322"
+         transform="matrix(-0.5,2.6702449,-0.28087311,-0.50000002,213.25274,-228.29135)" />
+      <rect
+         style="display:inline;fill:#35c5d2;fill-opacity:1;stroke-width:14.0476;stroke-linecap:round;stroke-linejoin:round"
+         id="rect129"
+         width="24.000008"
+         height="296"
+         x="116"
+         y="236"
+         rx="4.0000038"
+         ry="12.333322"
+         transform="matrix(-0.5,-2.6702449,0.28087311,-0.49999998,170.74727,455.29137)" />
+    </g>
+  </g>
+</svg>

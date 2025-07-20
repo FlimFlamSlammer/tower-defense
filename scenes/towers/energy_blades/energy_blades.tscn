@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0rgounk13u8"]
+
+[ext_resource type="PackedScene" uid="uid://uy78f1v0v425" path="res://scenes/towers/tower.tscn" id="1_lsbpr"]
+[ext_resource type="Script" uid="uid://bg0y5je3hqjd4" path="res://scripts/towers/types/energy_blades.gd" id="2_ebkpl"]
+[ext_resource type="PackedScene" uid="uid://du04sghp4jpq1" path="res://scenes/towers/energy_blades/mutable_data/00.tscn" id="2_x2t1i"]
+[ext_resource type="Resource" uid="uid://clh5w5w123fok" path="res://resources/upgrades/energy_blades.tres" id="3_5nyqw"]
+
+[node name="EnergyBlades" groups=["uses_energy_towers"] instance=ExtResource("1_lsbpr")]
+script = ExtResource("2_ebkpl")
+tower_name = &"Energy Blades"
+description = "Create self-repairing energy blades that spin faster over time. Requires an energy plant to spin and repair blades."
+targeting_options = Array[StringName]([&"Clockwise", &"Reverse"])
+cost = 2000
+upgrades = ExtResource("3_5nyqw")
+
+[node name="MutableData" parent="." index="5" instance=ExtResource("2_x2t1i")]

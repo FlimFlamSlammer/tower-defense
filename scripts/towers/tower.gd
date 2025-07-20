@@ -21,6 +21,7 @@ const Groups: Dictionary[StringName, StringName] = {
 	SETUP = "setup_towers",
 	SUPPORT = "supporting_towers",
 	USES_BULLET = "uses_bullet_towers",
+	USES_ENERGY = "uses_energy_towers",
 }
 
 const _SELL_VALUE = 0.7
@@ -236,6 +237,16 @@ func set_display_invalid() -> void:
 ## Changes the color to represent a valid placement position. Use when the tower is in placement mode.
 func set_display_valid() -> void:
 	modulate = Color(1.0, 1.0, 1.0, 0.4)
+
+
+func damage_enemy(enemy: Enemy, damage: float) -> void:
+	var damage_type: Globals.DamageTypes = stats.damage_type
+
+	var armor_piercing: float = 0.0
+	if "armor_piercing" in stats:
+		armor_piercing = stats.armor_piercing
+
+	enemy.hit(damage, damage_type, armor_piercing)
 
 
 func _get_tile_danger_level_multiplier(tile: Vector2i) -> float:

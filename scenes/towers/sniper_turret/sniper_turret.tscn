@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://umov0hl7hsyx"]
 
 [ext_resource type="PackedScene" uid="uid://bolphubyb6fu1" path="res://scenes/towers/shooting_tower.tscn" id="1_wec12"]
-[ext_resource type="Script" uid="uid://djgm5vv3fgvkj" path="res://scripts/towers/sniper_turret.gd" id="2_6d0cm"]
+[ext_resource type="Script" uid="uid://djgm5vv3fgvkj" path="res://scripts/towers/types/sniper_turret.gd" id="2_6d0cm"]
 [ext_resource type="PackedScene" uid="uid://bek23xbitbg5w" path="res://scenes/towers/sniper_turret/mutable_data/00.tscn" id="2_ipgno"]
 [ext_resource type="Resource" uid="uid://dhg51n2oe8ek1" path="res://resources/upgrades/sniper_turret.tres" id="3_2vm3q"]
 

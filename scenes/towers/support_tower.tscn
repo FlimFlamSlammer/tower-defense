@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cms306djwk18r" path="res://assets/towers/bullet_factory/Layer 1.svg" id="2_sy16f"]
 
 [node name="SupportTower" groups=["supporting_towers"] instance=ExtResource("1_c6o4i")]
+z_index = 8
 
-[node name="Base" parent="." index="3"]
+[node name="Base" parent="." index="2"]
 texture = ExtResource("2_sy16f")

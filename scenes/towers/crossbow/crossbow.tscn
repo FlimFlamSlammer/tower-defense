@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://l6rhoi3yb5xc"]
 
 [ext_resource type="PackedScene" uid="uid://bolphubyb6fu1" path="res://scenes/towers/shooting_tower.tscn" id="1_dyx6r"]
-[ext_resource type="Script" uid="uid://d2ox3rj3b05h2" path="res://scripts/towers/crossbow.gd" id="2_adi17"]
+[ext_resource type="Script" uid="uid://d2ox3rj3b05h2" path="res://scripts/towers/types/crossbow.gd" id="2_adi17"]
 [ext_resource type="Resource" uid="uid://bu7aebtxi82s5" path="res://resources/upgrades/crossbow.tres" id="3_e0hhy"]
 [ext_resource type="PackedScene" uid="uid://dtp2gsrpc04qt" path="res://scenes/towers/crossbow/mutable_data/00.tscn" id="5_gc0ds"]
 

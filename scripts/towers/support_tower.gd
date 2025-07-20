@@ -30,8 +30,8 @@ func give_status_effects() -> void:
 		var tower_changed: bool = false
 
 		for status_effect: TowerStatusEffect in status_effects_to_give:
-			if "projectile_status_effects" in status_effect.stat_setters:
-				var effect_paths: Array = status_effect.stat_setters.projectile_status_effects
+			if "attack_status_effects" in status_effect.stat_setters:
+				var effect_paths: Array = status_effect.stat_setters.attack_status_effects
 
 				for i: int in range(effect_paths.size()):
 					if effect_paths[i] is NodePath:

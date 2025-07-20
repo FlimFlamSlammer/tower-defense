@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bolphubyb6fu1" path="res://scenes/towers/shooting_tower.tscn" id="1_7oefg"]
 [ext_resource type="PackedScene" uid="uid://cfukt8cysv520" path="res://scenes/towers/rapid_turret/mutable_data/00.tscn" id="2_7wjjk"]
-[ext_resource type="Script" uid="uid://dsafattdrgd1a" path="res://scripts/towers/rapid_turret.gd" id="2_y2o04"]
+[ext_resource type="Script" uid="uid://dsafattdrgd1a" path="res://scripts/towers/types/rapid_turret.gd" id="2_y2o04"]
 [ext_resource type="Resource" uid="uid://86bo5sdqu27j" path="res://resources/upgrades/rapid_turret.tres" id="3_y2o04"]
 
 [node name="RapidTurret" groups=["attacking_towers", "uses_bullet_towers"] instance=ExtResource("1_7oefg")]

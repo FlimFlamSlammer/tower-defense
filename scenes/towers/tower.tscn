@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://uy78f1v0v425"]
 
 [ext_resource type="Script" uid="uid://b14bl5g2fycmp" path="res://scripts/towers/tower.gd" id="1_0jldc"]
-[ext_resource type="Texture2D" uid="uid://ljp4dn3u2ula" path="res://assets/towers/crossbow/base.svg" id="1_5hrty"]
+[ext_resource type="Texture2D" uid="uid://ljp4dn3u2ula" path="res://assets/towers/attacking_base.svg" id="1_5hrty"]
 [ext_resource type="Texture2D" uid="uid://mygk8i0abyo3" path="res://assets/towers/range-circle.svg" id="2_bemr7"]
 [ext_resource type="Material" uid="uid://b4s2mxmhcjh2v" path="res://resources/materials/outline.tres" id="2_o25nu"]
 [ext_resource type="Script" uid="uid://b5d6b7nun4ne4" path="res://scripts/utils/unscaled_outline.gd" id="3_8ghdo"]

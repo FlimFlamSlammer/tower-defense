@@ -23,5 +23,5 @@ stat_multipliers = Dictionary[StringName, float]({
 stat_setters = Dictionary[StringName, Variant]({
 &"damage_type": 2
 })
-priority = 1
+priority = 2
 metadata/_custom_type_script = "uid://0afypir31y4j"

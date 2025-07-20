@@ -20,7 +20,11 @@ func _apply_tick(stats: Dictionary) -> void:
 
 func apply(stats: Dictionary) -> void:
 	for key: StringName in stat_multipliers.keys():
-		stats[key] *= stat_multipliers[key]
+		var new_value: float = stats[key] * stat_multipliers[key]
+		if stats[key] is int:
+			new_value = ceili(new_value)
+
+		stats[key] = new_value
 
 	for key: StringName in stat_setters.keys():
 		stats[key] = stat_setters[key]
