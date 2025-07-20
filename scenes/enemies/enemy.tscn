@@ -60,6 +60,6 @@ max_polyphony = 5
 [node name="DieSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_smbsv")
-volume_db = 4.0
+volume_db = 3.0
 max_distance = 5000.0
 attenuation = 1e-05

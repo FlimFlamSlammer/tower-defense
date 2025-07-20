@@ -4,6 +4,8 @@ extends Bullet
 @onready var _fire_effect: GPUParticles2D = $Fire
 @onready var _blast_shape_cast: ShapeCast2D = $BlastShapeCast
 
+@onready var _explosion_sound: AudioStreamPlayer2D = $ExplosionSound
+
 func _on_collision(area: Area2D) -> void:
 	super (area)
 
@@ -22,4 +24,9 @@ func _explode() -> void:
 	_fire_effect.position = to_local(_last_pos)
 	_fire_effect.emitting = true
 	_fire_effect.reparent(get_parent())
-	_fire_effect.get_child(0).finished.connect(_fire_effect.queue_free)
+	_fire_effect.get_node("ExpirationTimer").start()
+
+	_explosion_sound.position = to_local(_last_pos)
+	_explosion_sound.reparent(get_parent())
+	_explosion_sound.finished.connect(_explosion_sound.queue_free)
+	_explosion_sound.play()

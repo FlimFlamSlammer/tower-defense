@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://ci20pb3sg6lt5"]
+[gd_scene load_steps=20 format=3 uid="uid://ci20pb3sg6lt5"]
 
 [ext_resource type="Script" uid="uid://dkv1d7bffa3xf" path="res://scripts/projectiles/fuse_bolt.gd" id="1_ohsdw"]
 [ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="2_uab25"]
+[ext_resource type="PackedScene" uid="uid://eqcol4fs35uh" path="res://scenes/audio/explosion_sound.tscn" id="3_xo8pq"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ejeda"]
 b = Vector2(144, 0)
@@ -159,7 +160,13 @@ explosiveness = 1.0
 fixed_fps = 48
 process_material = SubResource("ParticleProcessMaterial_uab25")
 
+[node name="ExpirationTimer" type="Timer" parent="Fire"]
+one_shot = true
+
+[node name="ExplosionSound" parent="." instance=ExtResource("3_xo8pq")]
+
 [connection signal="area_entered" from="." to="." method="_on_collision"]
 [connection signal="timeout" from="Fuse" to="." method="_explode"]
 [connection signal="timeout" from="ExitTower" to="." method="_set_z_index"]
 [connection signal="timeout" from="ExpirationTimer" to="." method="queue_free"]
+[connection signal="timeout" from="Fire/ExpirationTimer" to="Fire" method="queue_free"]

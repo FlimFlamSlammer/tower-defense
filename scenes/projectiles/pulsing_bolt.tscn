@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://dgpvpgukg8v46"]
+[gd_scene load_steps=25 format=3 uid="uid://dgpvpgukg8v46"]
 
 [ext_resource type="Script" uid="uid://ddqhmqvc7viif" path="res://scripts/projectiles/pulse_bolt.gd" id="1_3vopy"]
 [ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="2_q0e7i"]
+[ext_resource type="PackedScene" uid="uid://eqcol4fs35uh" path="res://scenes/audio/explosion_sound.tscn" id="3_j31ok"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_j31ok"]
 b = Vector2(144, 0)
@@ -216,6 +217,9 @@ explosiveness = 1.0
 fixed_fps = 48
 process_material = SubResource("ParticleProcessMaterial_pjd4x")
 
+[node name="ExpirationTimer" type="Timer" parent="PulseFire"]
+one_shot = true
+
 [node name="Fire" type="GPUParticles2D" parent="."]
 z_index = 20
 position = Vector2(102, 0)
@@ -239,7 +243,19 @@ explosiveness = 1.0
 fixed_fps = 48
 process_material = SubResource("ParticleProcessMaterial_fcubg")
 
+[node name="ExpirationTimer" type="Timer" parent="Fire"]
+one_shot = true
+
+[node name="PulseSound" parent="." instance=ExtResource("3_j31ok")]
+volume_db = -6.0
+pitch_scale = 2.0
+max_polyphony = 2
+
+[node name="ExplosionSound" parent="." instance=ExtResource("3_j31ok")]
+
 [connection signal="area_entered" from="." to="." method="_on_collision"]
 [connection signal="timeout" from="PulseTimer" to="." method="_pulse"]
 [connection signal="timeout" from="ExitTower" to="." method="_set_z_index"]
 [connection signal="timeout" from="ExpirationTimer" to="." method="queue_free"]
+[connection signal="timeout" from="PulseFire/ExpirationTimer" to="PulseFire" method="queue_free"]
+[connection signal="timeout" from="Fire/ExpirationTimer" to="Fire" method="queue_free"]

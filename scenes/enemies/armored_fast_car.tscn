@@ -13,5 +13,5 @@ base_stats = Dictionary[StringName, Variant]({
 [node name="Sprite" type="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_kvjt1")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+[node name="Collider" type="CollisionPolygon2D" parent="." index="1"]
 polygon = PackedVector2Array(-100, -40, 12, -40, 108, 0, 12, 40, -100, 40)

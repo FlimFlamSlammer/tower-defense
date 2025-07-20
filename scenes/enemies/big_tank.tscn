@@ -10,7 +10,7 @@ base_stats = Dictionary[StringName, Variant]({
 &"speed": 0.45
 })
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
+[node name="Collider" type="CollisionPolygon2D" parent="." index="0"]
 polygon = PackedVector2Array(0, -64, 128, -32, 128, 32, 0, 64, -128, 32, -128, -32)
 
 [node name="Sprite" type="Sprite2D" parent="." index="1"]

@@ -5,7 +5,7 @@
 
 [node name="Enemy" instance=ExtResource("1_o2lwj")]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+[node name="Collider" type="CollisionPolygon2D" parent="." index="1"]
 polygon = PackedVector2Array(0, -64, 128, -32, 128, 32, 0, 64, -128, 32, -128, -32)
 
 [node name="Sprite" type="Sprite2D" parent="." index="2"]

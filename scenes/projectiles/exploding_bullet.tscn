@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://cso6o20qwx2yn"]
+[gd_scene load_steps=20 format=3 uid="uid://cso6o20qwx2yn"]
 
 [ext_resource type="PackedScene" uid="uid://cvy6grcey5qcd" path="res://scenes/projectiles/bullet.tscn" id="1_2xngo"]
 [ext_resource type="Texture2D" uid="uid://bdhke8tyeuxnh" path="res://assets/circle_generic.svg" id="2_8ev8i"]
 [ext_resource type="Script" uid="uid://dw1blnest65jf" path="res://scripts/projectiles/exploding_bullet.gd" id="2_e178w"]
+[ext_resource type="PackedScene" uid="uid://eqcol4fs35uh" path="res://scenes/audio/explosion_sound.tscn" id="4_e178w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ev8i"]
 radius = 600.0
@@ -119,3 +120,10 @@ lifetime = 0.85
 explosiveness = 1.0
 fixed_fps = 48
 process_material = SubResource("ParticleProcessMaterial_okr0k")
+
+[node name="ExpirationTimer" type="Timer" parent="Fire" index="1"]
+one_shot = true
+
+[node name="ExplosionSound" parent="." index="5" instance=ExtResource("4_e178w")]
+
+[connection signal="timeout" from="Fire/ExpirationTimer" to="Fire" method="queue_free"]

@@ -17,6 +17,9 @@ var _pulses_used: int = 0
 @onready var _pulse_blast_area: Area2D = $PulseBlastArea
 @onready var _pulse_timer: Timer = $PulseTimer
 
+@onready var _pulse_sound: AudioStreamPlayer2D = $PulseSound
+@onready var _explosion_sound: AudioStreamPlayer2D = $ExplosionSound
+
 func _process(delta: float) -> void:
 	if _attached_enemy:
 		position = _attached_enemy.to_global(_attached_local_position)
@@ -43,19 +46,20 @@ func _destruct() -> void:
 	pass
 
 
-func _explode(area: Area2D, effect: GPUParticles2D, damage: float) -> void:
+func _explode(area: Area2D, effect: GPUParticles2D, damage: float) -> GPUParticles2D:
 	var enemies: Array[Area2D] = area.get_overlapping_areas()
 
 	for enemy: Enemy in enemies:
 		enemy.hit(damage, Globals.DamageTypes.EXPLOSION)
 
 	var backup_effect: GPUParticles2D = effect.duplicate()
-	add_child(backup_effect)
 
 	effect.emitting = true
 	effect.reparent(get_parent())
+	effect.get_node("ExpirationTimer").start()
 
-	effect.get_child(0).finished.connect(effect.queue_free)
+	add_child.call_deferred(backup_effect)
+	return backup_effect
 
 
 func _explode_last() -> void:
@@ -67,9 +71,13 @@ func _explode_last() -> void:
 func _pulse() -> void:
 	if _pulses_used >= _pulse_amount:
 		_explode_last()
+		_explosion_sound.reparent(get_parent())
+		_explosion_sound.play()
+		_explosion_sound.finished.connect(_explosion_sound.queue_free)
 		return
 
-	_explode(_pulse_blast_area, _pulse_fire_effect, stats.pulse_damage)
+	_pulse_fire_effect = _explode(_pulse_blast_area, _pulse_fire_effect, stats.pulse_damage)
+	_pulse_sound.play()
 	_pulses_used += 1
 
 

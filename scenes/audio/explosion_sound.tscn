@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3 uid="uid://eqcol4fs35uh"]
+
+[ext_resource type="AudioStream" uid="uid://dk4lad415wpnv" path="res://assets/audio/explosion/Boom1.wav" id="1_li7bt"]
+[ext_resource type="AudioStream" uid="uid://dof86ja5x1rdl" path="res://assets/audio/explosion/Boom2.wav" id="2_cpm2e"]
+[ext_resource type="AudioStream" uid="uid://dqqsn6gnm581f" path="res://assets/audio/explosion/Boom3.wav" id="3_tkj70"]
+[ext_resource type="AudioStream" uid="uid://c3r1uxeqr0lv" path="res://assets/audio/explosion/Boom4.wav" id="4_k37m4"]
+[ext_resource type="AudioStream" uid="uid://wku0p5qxdplh" path="res://assets/audio/explosion/Boom5.wav" id="5_8p15w"]
+[ext_resource type="AudioStream" uid="uid://fqkubfsip8vg" path="res://assets/audio/explosion/Boom6.wav" id="6_nvrh5"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_aj6qq"]
+playback_mode = 1
+streams_count = 6
+stream_0/stream = ExtResource("1_li7bt")
+stream_1/stream = ExtResource("2_cpm2e")
+stream_2/stream = ExtResource("3_tkj70")
+stream_3/stream = ExtResource("4_k37m4")
+stream_4/stream = ExtResource("5_8p15w")
+stream_5/stream = ExtResource("6_nvrh5")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamRandomizer_aj6qq")
+volume_db = -1.0
+pitch_scale = 1.4
+max_distance = 4000.0
+attenuation = 1e-05

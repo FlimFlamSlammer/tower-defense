@@ -10,6 +10,7 @@ var _attached_local_rotation: float
 @onready var _fire_effect: GPUParticles2D = $Fire
 @onready var _blast_area: Area2D = $BlastArea
 @onready var _fuse: Timer = $Fuse
+@onready var _explosion_sound: AudioStreamPlayer2D = $ExplosionSound
 
 func _process(delta: float) -> void:
 	if _attached_enemy:
@@ -47,7 +48,11 @@ func _explode() -> void:
 
 	_fire_effect.emitting = true
 	_fire_effect.reparent(get_parent())
-	_fire_effect.get_child(0).finished.connect(_fire_effect.queue_free)
+	_fire_effect.get_node("ExpirationTimer").start()
+
+	_explosion_sound.reparent(get_parent())
+	_explosion_sound.play()
+	_explosion_sound.finished.connect(_explosion_sound.queue_free)
 
 	queue_free()
 
