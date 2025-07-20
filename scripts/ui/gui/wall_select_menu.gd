@@ -24,7 +24,10 @@ func update_wall(wall: Wall) -> void:
 	_update()
 
 
-func _update() -> void:
+func _update(health: float = INF) -> void:
+	if health == 0:
+		close()
+
 	_sell_price_label.text = str(_selected_wall.get_sell_value())
 
 
