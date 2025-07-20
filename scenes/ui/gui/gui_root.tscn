@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3ftv6p6r1071"]
+[gd_scene load_steps=26 format=3 uid="uid://c3ftv6p6r1071"]
 
 [ext_resource type="Theme" uid="uid://5os27plblg4t" path="res://resources/ui/theme.tres" id="1_8bulm"]
 [ext_resource type="Script" uid="uid://dt80n4vowgof1" path="res://scripts/ui/gui/gui_root.gd" id="1_uktbi"]
@@ -18,6 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://bx6jxe7c1kex0" path="res://assets/towers/bullet_factory/preview.svg" id="13_ivrlk"]
 [ext_resource type="Texture2D" uid="uid://tiyc8osrtwll" path="res://assets/towers/sniper_turret/preview.svg" id="13_p5jvc"]
 [ext_resource type="PackedScene" uid="uid://dla8smgiuc0vj" path="res://scenes/walls/wooden_wall.tscn" id="13_rv1qw"]
+[ext_resource type="Texture2D" uid="uid://f38uatr3irf8" path="res://assets/raw/towers/energy_plant/00.svg" id="14_b1jen"]
+[ext_resource type="PackedScene" uid="uid://c0rgounk13u8" path="res://scenes/towers/energy_blades/energy_blades.tscn" id="14_cq3tr"]
+[ext_resource type="PackedScene" uid="uid://dkd4pv00ecqxw" path="res://scenes/towers/energy_plant/energy_plant.tscn" id="14_nwh21"]
 [ext_resource type="Texture2D" uid="uid://x1jdj8ex5vto" path="res://assets/walls/wooden_wall.svg" id="16_tqdjj"]
 [ext_resource type="PackedScene" uid="uid://bg8jqcn5rfyn0" path="res://scenes/walls/reinforced_wall.tscn" id="19_o0sjj"]
 [ext_resource type="PackedScene" uid="uid://f652rwx2b5b4" path="res://scenes/ui/gui/wall_select_menu.tscn" id="20_5j4uf"]
@@ -145,6 +148,10 @@ tower_scene = ExtResource("12_60swy")
 [node name="Texture" parent="TowerMenu/Offense/Buttons/Sniper Turret" index="0"]
 texture = ExtResource("13_p5jvc")
 
+[node name="Energy Blades" parent="TowerMenu/Offense/Buttons" index="3" instance=ExtResource("2_k2ell")]
+layout_mode = 2
+tower_scene = ExtResource("14_cq3tr")
+
 [node name="Production" parent="TowerMenu" instance=ExtResource("2_astdl")]
 visible = false
 layout_mode = 2
@@ -156,6 +163,13 @@ tower_scene = ExtResource("11_kayra")
 
 [node name="Texture" parent="TowerMenu/Production/Buttons/Bullet Factory" index="0"]
 texture = ExtResource("13_ivrlk")
+
+[node name="Energy Plant" parent="TowerMenu/Production/Buttons" index="1" instance=ExtResource("2_k2ell")]
+layout_mode = 2
+tower_scene = ExtResource("14_nwh21")
+
+[node name="Texture" parent="TowerMenu/Production/Buttons/Energy Plant" index="0"]
+texture = ExtResource("14_b1jen")
 
 [node name="Walls" parent="TowerMenu" instance=ExtResource("2_astdl")]
 visible = false
@@ -224,6 +238,7 @@ metadata/_edit_use_anchors_ = true
 [editable path="TowerMenu/Offense/Buttons/Sniper Turret"]
 [editable path="TowerMenu/Production"]
 [editable path="TowerMenu/Production/Buttons/Bullet Factory"]
+[editable path="TowerMenu/Production/Buttons/Energy Plant"]
 [editable path="TowerMenu/Walls"]
 [editable path="TowerMenu/Walls/Buttons/WallButton"]
 [editable path="TowerMenu/Walls/Buttons/WallButton2"]
