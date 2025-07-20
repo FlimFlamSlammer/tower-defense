@@ -35,7 +35,7 @@ func _destruct() -> void:
 	_ray_cast.enabled = false
 	if _tracer:
 		if _last_normal == Vector2.ZERO:
-			_tracer.add_point(to_local(Vector2.RIGHT.rotated(_ray_cast.global_rotation) * 8192))
+			_tracer.add_point(Vector2.RIGHT * 8192)
 		else:
 			_tracer.add_point(to_local(_last_pos))
 
