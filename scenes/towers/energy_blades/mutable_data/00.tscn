@@ -18,8 +18,10 @@ offsets = PackedFloat32Array(0, 0.940594, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_kb1uq"]
+resource_local_to_scene = true
 gradient = SubResource("Gradient_0otw2")
-fill_to = Vector2(0, 1)
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bd8jq"]
 size = Vector2(16, 188)
@@ -61,6 +63,7 @@ width = 160.0
 gradient = SubResource("Gradient_kb1uq")
 texture = SubResource("GradientTexture2D_kb1uq")
 texture_mode = 2
+joint_mode = 2
 script = ExtResource("5_0otw2")
 lifetime = 0.05
 metadata/_custom_type_script = "uid://c5815tovd7w7a"

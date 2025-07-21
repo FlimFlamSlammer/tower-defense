@@ -15,13 +15,15 @@ func _process(delta: float) -> void:
 	if not _placed: return
 
 	if ("energy" in status_effects):
-		heat -= stats.heat_loss * delta
+		var heat_dir: int = 1 if targeting == "Clockwise" else -1
+
+		heat -= sign(heat) * stats.heat_loss * delta
 		if enemy_in_range(stats.range):
 			var initial_heat: float = heat
-			heat += (stats.heat_gain + stats.heat_loss) * delta
-			heat = minf(stats.max_heat, heat)
+			heat += (stats.heat_gain + stats.heat_loss) * delta * heat_dir
+			heat = sign(heat) * minf(abs(stats.max_heat), abs(heat))
 
-			var delta_heat: float = heat - initial_heat
+			var delta_heat: float = abs(heat - initial_heat)
 			_attack_cost_buffer += delta_heat * stats.heat_cost
 			money_requested.emit(ceili(_attack_cost_buffer), true, func(success: bool) -> void:
 				if not success:
@@ -29,12 +31,12 @@ func _process(delta: float) -> void:
 					return
 				_attack_cost_buffer -= ceilf(_attack_cost_buffer)
 			)
-		heat = maxf(heat, 0.0)
+		heat = heat_dir * maxf(heat * heat_dir, 0.0)
 
 		_repair_blades(delta)
 
 	_mutable_data.pivot.rotation += TAU * heat * delta
-	_collider_pivot.update_rotation(_mutable_data.pivot.rotation, true)
+	_collider_pivot.update_rotation(_mutable_data.pivot.rotation, TAU * heat * delta)
 
 
 func update_status_effects() -> void:
@@ -46,13 +48,39 @@ func save() -> Dictionary[StringName, Variant]:
 	for i in range(_blade_durabilities.size()):
 		_repair_blade(i, stats.blade_repair_cost)
 		_show_blade(i)
-	
+
 	heat = 0.0
 	_mutable_data.pivot.rotation = 0.0
-	_collider_pivot.update_rotation(_mutable_data.pivot.rotation, true)
+	_collider_pivot.update_rotation(_mutable_data.pivot.rotation, 0)
 
 
 	return super ()
+
+
+func load(data: Dictionary[StringName, Variant]) -> void:
+	super (data)
+	if targeting == "Reverse":
+		pass
+
+
+func _on_targeting_changed() -> void:
+	_set_blade_trail_direction(targeting == "Clockwise")
+
+
+func _set_blade_trail_direction(dir: bool) -> void:
+	if not _mutable_data.is_node_ready():
+		await _mutable_data.ready
+
+	var blades: Array[Node] = _mutable_data.pivot.get_node("Blades").get_children()
+
+	for blade: Node in blades:
+		var trail_gradient: GradientTexture2D = blade.get_node("Trail2D").texture
+		if dir:
+			trail_gradient.fill_from = Vector2(0, 0)
+			trail_gradient.fill_to = Vector2(0, 1)
+		else:
+			trail_gradient.fill_from = Vector2(0, 1)
+			trail_gradient.fill_to = Vector2(0, 0)
 
 
 func _initialize_blades() -> void:
@@ -73,7 +101,7 @@ func _initialize_blades() -> void:
 
 
 func _on_blade_hit(area: Area2D, index: int) -> void:
-	if _blade_durabilities[index] <= 0 or heat < 0.5: return
+	if _blade_durabilities[index] <= 0 or abs(heat) < 0.5: return
 
 	_blade_durabilities[index] -= 1
 	damage_enemy(area, stats.damage)
@@ -109,7 +137,7 @@ func _repair_blade(blade_index: int, repair_amount: int) -> bool:
 		if not success:
 			succeeded[0] = false
 			return
-			
+
 		_blade_durabilities[blade_index] += repair_amount
 		_blade_repair_progresses[blade_index] -= repair_amount
 	)

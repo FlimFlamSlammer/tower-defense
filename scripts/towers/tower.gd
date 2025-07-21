@@ -40,7 +40,12 @@ var tile_position: Vector2i:
 		tile_position = val
 		position = tile_controller.tile_map.map_to_local(val)
 
-var targeting: StringName = Targeting.FIRST ## The targeting option that the Tower is currently using.
+var targeting: StringName = Targeting.FIRST: ## The targeting option that the Tower is currently using.
+	set(val):
+		if targeting != val:
+			targeting = val
+			_on_targeting_changed()
+
 var current_upgrade: Array[int] = [0, 0]
 var status_effects: Dictionary[StringName, TowerStatusEffect]
 
@@ -294,3 +299,7 @@ func _get_current_mutable_data_scene() -> PackedScene:
 	var mutable_data_directory: String = self.scene_file_path.get_base_dir().path_join("mutable_data")
 	var mutable_data_path: String = mutable_data_directory.path_join("%s%s.tscn" % current_upgrade)
 	return load(mutable_data_path)
+
+
+func _on_targeting_changed() -> void:
+	pass
