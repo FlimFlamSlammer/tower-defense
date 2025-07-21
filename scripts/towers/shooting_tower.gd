@@ -19,6 +19,12 @@ func _update_tile_danger_levels(group: StringName, current_danger_level: float, 
 	return current_danger_level
 
 
+func save() -> Dictionary[StringName, Variant]:
+	_attack_timer.stop()
+
+	return super ()
+
+
 func _fire(target: Enemy) -> void:
 	pass
 

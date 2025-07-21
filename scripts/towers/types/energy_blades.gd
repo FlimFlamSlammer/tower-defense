@@ -46,6 +46,11 @@ func save() -> Dictionary[StringName, Variant]:
 	for i in range(_blade_durabilities.size()):
 		_repair_blade(i, stats.blade_repair_cost)
 		_show_blade(i)
+	
+	heat = 0.0
+	_mutable_data.pivot.rotation = 0.0
+	_collider_pivot.update_rotation(_mutable_data.pivot.rotation, true)
+
 
 	return super ()
 
