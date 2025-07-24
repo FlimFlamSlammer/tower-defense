@@ -134,7 +134,7 @@ script = ExtResource("2_pdc8y")
 base_stats = Dictionary[StringName, Variant]({
 &"damage": 100.0,
 &"immunities": PackedInt64Array(5),
-&"max_health": 25.0,
+&"max_health": 20.0,
 &"speed": 3.5
 })
 
