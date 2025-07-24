@@ -44,6 +44,11 @@ func update_status_effects() -> void:
 	_initialize_blades()
 
 
+func place() -> void:
+	super ()
+	_show_blade_trails()
+
+
 func save() -> Dictionary[StringName, Variant]:
 	for i in range(_blade_durabilities.size()):
 		_repair_blade(i, stats.blade_repair_cost)
@@ -57,14 +62,19 @@ func save() -> Dictionary[StringName, Variant]:
 	return super ()
 
 
-func load(data: Dictionary[StringName, Variant]) -> void:
-	super (data)
-	if targeting == "Reverse":
-		pass
-
-
 func _on_targeting_changed() -> void:
 	_set_blade_trail_direction(targeting == "Clockwise")
+
+
+func _show_blade_trails() -> void:
+	if not _mutable_data.is_node_ready():
+		await _mutable_data.ready
+
+	var blades: Array[Node] = _mutable_data.pivot.get_node("Blades").get_children()
+
+	for blade: Node in blades:
+		var trail: Trail2D = blade.get_node("Trail2D")
+		trail.emitting = true
 
 
 func _set_blade_trail_direction(dir: bool) -> void:

@@ -66,6 +66,7 @@ texture_mode = 2
 joint_mode = 2
 script = ExtResource("5_0otw2")
 lifetime = 0.05
+emitting = false
 metadata/_custom_type_script = "uid://c5815tovd7w7a"
 
 [node name="1" type="Sprite2D" parent="Pivot/Blades" index="1"]
@@ -83,6 +84,7 @@ texture = SubResource("GradientTexture2D_kb1uq")
 texture_mode = 2
 script = ExtResource("5_0otw2")
 lifetime = 0.05
+emitting = false
 metadata/_custom_type_script = "uid://c5815tovd7w7a"
 
 [node name="BladeHolder" type="Sprite2D" parent="Pivot" index="1"]
