@@ -4,6 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://bts3yqqimgg6b" path="res://assets/enemies/fast_car.svg" id="2_c0mi0"]
 
 [node name="Enemy" instance=ExtResource("1_c0mi0")]
+base_stats = Dictionary[StringName, Variant]({
+&"immunities": PackedInt64Array(),
+&"max_health": 7.0,
+&"speed": 1.7
+})
 
 [node name="Sprite" type="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_c0mi0")
