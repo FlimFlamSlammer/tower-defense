@@ -40,7 +40,7 @@ var tile_position: Vector2i:
 		tile_position = val
 		position = tile_controller.tile_map.map_to_local(val)
 
-var targeting: StringName = Targeting.FIRST: ## The targeting option that the Tower is currently using.
+var targeting: StringName = Targeting.FIRST: ## The targeting option that the [Tower] is currently using.
 	set(val):
 		if targeting != val:
 			targeting = val
