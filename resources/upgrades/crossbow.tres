@@ -28,7 +28,7 @@ metadata/_custom_type_script = "uid://cejcja3fekjta"
 script = ExtResource("2_cj302")
 name = "Grand Javelin"
 description = "Grand Javelin bolts deal big damage and pierce almost anything"
-cost = 12000
+cost = 13000
 metadata/_custom_type_script = "uid://cejcja3fekjta"
 
 [sub_resource type="Resource" id="Resource_dpdm7"]
