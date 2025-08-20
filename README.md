@@ -1,6 +1,6 @@
 ## Tower Defense (very creative name)
 A tower defense game with some quirks:
-- Towers require resources to attack;
+- Towers require resources (bullets, energy, etc) to attack;
 - Money can be converted into resources by certain towers;
 - Enemies will try to find the least dangerous path;
 - Players can use walls to redirect the enemies' path.
