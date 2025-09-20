@@ -9,7 +9,7 @@ A tower defense game with some quirks:
 The game is not finished and new content is being added over time. As of writing this, the following have been added:
 - 5 maps,
 - 4 towers,
-- 2 walls,
+- 2 wall types,
 - 2 resource types,
 - 20 waves,
 - 7 enemy types.
