@@ -25,4 +25,4 @@ Enemies also have some randomness built into their pathfinding algorithm, just f
 
 ## Getting the Game
 You can download a build from the releases page. These builds have been tested and should not contain any glaring issues. However, as this is a work-in-progress, do not expect a bug-free experience.  
-If you want to try out the latest changes, you can download the source code and import it using the [Godot Engine](https://godotengine.org/).
+If you want to try out the latest changes, you can clone this repository and import it using the [Godot Engine](https://godotengine.org/).
