@@ -21,7 +21,7 @@ For example:
 - Tanks will charge into turrets as they are immune to bullets;
 - Breakers will try to look for walls to explode.
 
-Enemies also have some randomness built into their pathfinding algorithm, just for fun. :)
+Enemies also have some randomness built into their pathfinding algorithm, just for fun :)
 
 ## Getting the Game
 You can download a build from the releases page. These builds have been tested and should not contain any glaring issues. However, as this is a work-in-progress, do not expect a bug-free experience.  
